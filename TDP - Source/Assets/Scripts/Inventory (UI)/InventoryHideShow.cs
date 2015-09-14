@@ -2,8 +2,8 @@
 /*
  * Author: Makiah Bennett
  * Created 14 September 2015
- * Last edited: 11 September 2015
- *  
+ * Last edited: 14 September 2015
+ * 
  * This script hides and shows the inventory when the 'm' key is pressed.  
  * 
  * 
