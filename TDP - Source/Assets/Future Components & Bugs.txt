@@ -1,0 +1,21 @@
+COMPONENTS, BUGS, AND IDEAS
+
+FIXES TO BE MADE
+ - After the initial jump animation is complete, the arm rotates backwards on returning to the walk animation, or the double jump animation.  
+ - Trees are a bit off of the ground, so a few quick refinements could be made to place the points in contact with the ground.  
+ - The ground-checking code casts a line from the player position to the groundCheck position.  This should be re-written to cast from a point some
+   distance on the x-axis to the right, to another point some distance to the left.  
+ - Resize weapon images so the cursor images are not too large.  
+   
+COOL NEW FEATURE IDEAS
+ - Skeletons!!!
+ - Zombies!!!
+ - User Interface!!!
+ - Day/Night Cycle!!!
+ - Crafting!!!
+ - Villages!!!
+ - Stackable Resources (Customizably)
+ - Drops that follow the player.  
+ 
+Skeleton AI
+ - Same skeletal structure as the player, but different sprites.  Walk animations are the same, as are jump and shooting, but script controls the animations differently.  
