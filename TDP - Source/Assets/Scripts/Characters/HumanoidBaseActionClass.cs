@@ -49,6 +49,8 @@ public abstract class HumanoidBaseActionClass : SusceptibleToDamage {
 	
 	protected Animator anim;
 	protected Rigidbody2D rb2d;
+
+	public string characterName;
 	
 	
 	//private PlayerCostumeManager mainPlayerCostumeManager;

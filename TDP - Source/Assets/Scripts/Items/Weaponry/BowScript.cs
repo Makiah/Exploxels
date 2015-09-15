@@ -33,13 +33,34 @@ public class BowScript : ItemBase {
 
 	void ShootArrow() {
 
-		float preHeading = attachedCharacterInput.GetFacingDirection() == 1 ? 0 : 180;
+		float preHeading = attachedCharacterInput.GetFacingDirection () == 1 ? 0 : 180;
 
-		GameObject instantiatedArrow = (GameObject) (Instantiate (arrow, transform.position, Quaternion.identity));
-		if (attachedCharacterInput.GetFacingDirection () == 1)
-			instantiatedArrow.GetComponent <ProjectileScript> ().SetProjectileParametersWithAutomaticThresholdAndDeviation (8, preHeading, 30, 20);
-		else 
-			instantiatedArrow.GetComponent <ProjectileScript> ().SetProjectileParametersWithAutomaticThresholdAndDeviation (8, preHeading, 30, 20);
+		//Apparently there is some issue with the bow's position when attached to the player object, because it is always (0, 0, 0).  This fixes it.  
+		GameObject instantiatedArrow = (GameObject)(Instantiate (arrow, attachedCharacterInput.gameObject.transform.position + new Vector3(1.2f, 0, 0) * attachedCharacterInput.GetFacingDirection(), Quaternion.identity));
+
+		ProjectileScript instantiatedArrowScript = instantiatedArrow.GetComponent <ProjectileScript> ();
+
+		Vector3 positionToFireToward;
+		float accuracy;
+
+		if (attachedCharacterInput.characterName != "Player") {
+			positionToFireToward = GameObject.Find("PlayerReferenceObject").transform.position;
+			accuracy = 30;
+		} else {
+			Vector3 shootDirection;
+			shootDirection = Input.mousePosition;
+			shootDirection.z = 0.0f;
+			shootDirection = Camera.main.ScreenToWorldPoint(shootDirection);
+			shootDirection = shootDirection-transform.position;
+			positionToFireToward = shootDirection;
+			Debug.Log("Cursor position is " + positionToFireToward);
+			accuracy = 0;
+		}
+
+		Debug.Log ("Preheading was " + preHeading);
+
+		instantiatedArrowScript.SetProjectileParametersWithAutomaticThresholdAndDeviation (positionToFireToward, 10, preHeading, 30, accuracy);
+
 	}
 
 }

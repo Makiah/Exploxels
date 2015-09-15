@@ -56,18 +56,12 @@ public class SwordScript : ItemBase {
 			Debug.DrawLine (actualStartRaycastParameter, actualEndRaycastParameter, Color.green, 3f);
 		}
 
-		Debug.Log ("Drew line with distance of " + Vector2.Distance (actualStartRaycastParameter, actualEndRaycastParameter));
-
 		if (linecastResult.Length != 0) {
 			if (linecastResult [0].collider != null) {
 				Debug.Log ("Sword hit collider with name of " + linecastResult [0].collider.gameObject.name + ".");
 				if (linecastResult [0].collider.gameObject.GetComponent <SusceptibleToDamage> () != null) {
 					linecastResult [0].collider.gameObject.GetComponent <SusceptibleToDamage> ().YouHaveBeenAttacked ();
-				} else {
-					Debug.Log ("Sword could not attack collider with no SusceptibleToDamage script attached");
 				}
-			} else {
-				Debug.Log ("Sword did not hit a collider.");
 			}
 		}
 	}

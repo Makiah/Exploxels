@@ -9,7 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 475308}
   - 212: {fileID: 21290800}
-  - 114: {fileID: 11492922}
+  - 114: {fileID: 11456848}
   m_Layer: 0
   m_Name: WoodenBow
   m_TagString: Untagged
@@ -29,7 +29,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11492922
+--- !u!114 &11456848
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -40,6 +40,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b29e9d6136624946a8c7f4d7e454830, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  arrow: {fileID: 136198, guid: c9e0ae39e6b54488da89e8e90dce1631, type: 2}
 --- !u!212 &21290800
 SpriteRenderer:
   m_ObjectHideFlags: 1
