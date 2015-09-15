@@ -32,10 +32,6 @@ public class SwordScript : ItemBase {
 		AttemptToAttackAfterCompletedAnimation ();
 	}
 	
-	public override void OnEnvironmentInfluenced(DropsItems itemInfluenced) {
-		
-	}
-	
 	void AttemptToAttackAfterCompletedAnimation () {
 		attachedCharacterInput.ActionsAfterAnimation += AttackEnemyInFocus;
 	}
@@ -54,7 +50,11 @@ public class SwordScript : ItemBase {
 
 		RaycastHit2D[] linecastResult = Physics2D.LinecastAll (actualStartRaycastParameter, actualEndRaycastParameter, 1 << LayerMask.NameToLayer (lookForItemsOnLayer));
 
-		Debug.DrawLine (actualStartRaycastParameter, actualEndRaycastParameter, Color.red, 3f);
+		if (lookForItemsOnLayer == "Player") {
+			Debug.DrawLine (actualStartRaycastParameter, actualEndRaycastParameter, Color.red, 3f);
+		} else {
+			Debug.DrawLine (actualStartRaycastParameter, actualEndRaycastParameter, Color.green, 3f);
+		}
 
 		Debug.Log ("Drew line with distance of " + Vector2.Distance (actualStartRaycastParameter, actualEndRaycastParameter));
 
@@ -70,8 +70,6 @@ public class SwordScript : ItemBase {
 				Debug.Log ("Sword did not hit a collider.");
 			}
 		}
-		
-		attachedCharacterInput.ActionsAfterAnimation -= AttackEnemyInFocus;
 	}
 
 }

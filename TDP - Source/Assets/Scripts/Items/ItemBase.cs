@@ -30,8 +30,6 @@ public abstract class ItemBase : MonoBehaviour {
 
 	public abstract Dictionary <string, string> GetPossibleActionsForItem ();
 	public abstract void InfluenceEnvironment(string actionKey);
-	//Just as a side note, enemies and environment items (rocks and trees) share the same enemy base class.  
-	public abstract void OnEnvironmentInfluenced(DropsItems influencedItem);
 
 	public void ChangeLayerToCheckForItemsOn(string newLayer) {
 		lookForItemsOnLayer = newLayer;

@@ -30,10 +30,6 @@ public class HatchetScript : ItemBase {
 		AttemptToChopATreeAfterCompletedAnimation ();
 	}
 
-	public override void OnEnvironmentInfluenced(DropsItems itemInfluenced) {
-		
-	}
-
 	void AttemptToChopATreeAfterCompletedAnimation () {
 		attachedCharacterInput.ActionsAfterAnimation += ChopTreeInFocus;
 	}

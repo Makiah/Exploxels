@@ -15,17 +15,28 @@ using System.Collections.Generic;
 
 public class BowScript : ItemBase {
 
+	public GameObject arrow;
+
 	public override Dictionary <string, string> GetPossibleActionsForItem () {
 		possibleMoves = new Dictionary<string, string> ();
 		possibleMoves.Add ("ShootBow", "MouseButtonDown0");
 		return possibleMoves;
 	}
-	
+
 	public override void InfluenceEnvironment(string actionKey) {
-
+		AttemptToAttackAfterCompletedAnimation ();
+	}
+	
+	void AttemptToAttackAfterCompletedAnimation () {
+		attachedCharacterInput.ActionsAfterAnimation += ShootArrow;
 	}
 
-	public override void OnEnvironmentInfluenced(DropsItems itemInfluenced) {
-		
+	void ShootArrow() {
+		GameObject instantiatedArrow = (GameObject) (Instantiate (arrow, transform.position, Quaternion.identity));
+		if (attachedCharacterInput.GetFacingDirection () == 1)
+			instantiatedArrow.GetComponent <ProjectileScript> ().SetProjectileParametersWithAutomaticHeading (8);
+		else 
+			instantiatedArrow.GetComponent <ProjectileScript> ().SetProjectileParametersWithAutomaticHeading (8);
 	}
+
 }

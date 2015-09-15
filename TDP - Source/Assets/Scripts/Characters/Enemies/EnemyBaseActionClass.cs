@@ -75,7 +75,7 @@ public abstract class EnemyBaseActionClass : HumanoidBaseActionClass {
 							rb2d.velocity = new Vector2(0, rb2d.velocity.y);
 							anim.SetFloat("Speed", 0);
 							Attack ();
-							yield return new WaitForSeconds(2f);
+							yield return new WaitForSeconds(2.5f);
 						}
 					} else {
 						if (distanceFromRightPointX <= ignorePlayerMovementThreshold) {
@@ -83,7 +83,7 @@ public abstract class EnemyBaseActionClass : HumanoidBaseActionClass {
 							rb2d.velocity = new Vector2(0, rb2d.velocity.y);
 							anim.SetFloat("Speed", 0);
 							Attack ();
-							yield return new WaitForSeconds(2f);
+							yield return new WaitForSeconds(2.5f);
 						}
 					}
 				}

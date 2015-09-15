@@ -162,6 +162,7 @@ public abstract class HumanoidBaseActionClass : SusceptibleToDamage {
 		if (ActionsAfterAnimation != null) {
 			ActionsAfterAnimation ();
 		}
+		ActionsAfterAnimation = null;
 		currentlyInAttackAnimation = false;
 	}
 }

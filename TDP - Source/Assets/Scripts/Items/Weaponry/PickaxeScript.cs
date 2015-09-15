@@ -25,7 +25,4 @@ public class PickaxeScript : ItemBase {
 
 	}
 
-	public override void OnEnvironmentInfluenced(DropsItems itemInfluenced) {
-		
-	}
 }
