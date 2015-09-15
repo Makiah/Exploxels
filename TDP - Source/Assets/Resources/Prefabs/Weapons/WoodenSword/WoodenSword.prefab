@@ -40,6 +40,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0acbee6b38af10f4aa3ddc9ad4e8b204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  swordPowerAttack: 2
 --- !u!212 &21271012
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -96,6 +97,14 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: swordPower
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: swordPowerAttack
       value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []

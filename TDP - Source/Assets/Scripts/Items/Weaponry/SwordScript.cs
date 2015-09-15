@@ -21,6 +21,8 @@ public class SwordScript : ItemBase {
 	private float enemyWithinAreaBoundsFloat = .8f;
 	private float distToEnemyFloatLength = 1.3f;
 
+	public float swordPowerAttack;
+
 	public override Dictionary <string, string> GetPossibleActionsForItem () {
 		possibleMoves = new Dictionary<string, string> ();
 		possibleMoves.Add ("Stab", "MouseButtonDown0");
@@ -58,9 +60,8 @@ public class SwordScript : ItemBase {
 
 		if (linecastResult.Length != 0) {
 			if (linecastResult [0].collider != null) {
-				Debug.Log ("Sword hit collider with name of " + linecastResult [0].collider.gameObject.name + ".");
-				if (linecastResult [0].collider.gameObject.GetComponent <SusceptibleToDamage> () != null) {
-					linecastResult [0].collider.gameObject.GetComponent <SusceptibleToDamage> ().YouHaveBeenAttacked ();
+				if (linecastResult [0].collider.gameObject.GetComponent <CharacterHealthController> () != null) {
+					linecastResult [0].collider.gameObject.GetComponent <CharacterHealthController> ().YouHaveBeenAttacked (swordPowerAttack);
 				}
 			}
 		}

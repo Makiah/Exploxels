@@ -516,12 +516,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50cb8745b0340c64582414bc3107f939, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitsUntilDeath: 3
   maxSpeed: 0
   moveForce: 7
   jumpForce: 10
   wallJumpForce: 0
   groundedOffset: 0
+  characterName: 
   playerViewableThreshold: 50
   remainDistanceFromPlayer: 7
   ignorePlayerMovementThreshold: 2
@@ -538,6 +538,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   arrow: {fileID: 136198, guid: c9e0ae39e6b54488da89e8e90dce1631, type: 2}
+  attackPowerStrength: 1
 --- !u!212 &21217738
 SpriteRenderer:
   m_ObjectHideFlags: 1

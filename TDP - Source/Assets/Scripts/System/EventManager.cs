@@ -32,7 +32,9 @@ public class EventManager : MonoBehaviour {
 	public static event LevelItemCreation CreateTerrainItems;
 
 	public static event BaseInitialization InitializeEnemies;
+	public static event BaseInitialization EnemyHealthBarInitialization;
 
+	//Includes player UI stuff (health bar).  
 	public static event BaseInitialization InitializePlayer;
 
 	public delegate void PlayerCostumeSetup(Race costumeParamsSent);
@@ -58,6 +60,10 @@ public class EventManager : MonoBehaviour {
 		Transform[] initializedMaze = InitializeTerrain ();
 		CreateTerrainItems (initializedMaze);
 		InitializeEnemies ();
+		if (EnemyHealthBarInitialization != null) 
+			EnemyHealthBarInitialization ();
+		else 
+			Debug.Log ("Enemy Health Bar Initialization was null");
 
 		//Normally, the UI would occur now, and we would get costume parameters from that.  
 

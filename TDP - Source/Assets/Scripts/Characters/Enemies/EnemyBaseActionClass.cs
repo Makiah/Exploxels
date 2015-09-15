@@ -25,12 +25,20 @@ public abstract class EnemyBaseActionClass : HumanoidBaseActionClass {
 	//What is the maximum difference in Y values the enemies must have to attack?
 	public float maxYValueSeparation;
 
+	public bool enemyHealthBarInitialized = false;
+	private bool enemyHealthBarCreated = false;
+
 	//The player transform
 	protected Transform player;
 
 	protected virtual IEnumerator BasicEnemyControl() {
 		while (true) {
 			if (Vector3.Distance(transform.position, player.transform.position) <= playerViewableThreshold) {
+
+				if (enemyHealthBarInitialized == true && enemyHealthBarCreated == false) {
+					GetComponent <CharacterHealthController> ().SetHealthBarActivation(true);
+					enemyHealthBarCreated = true;
+				}
 				
 				float distanceFromLeftPointX = Mathf.Abs(transform.position.x - (player.transform.position.x - remainDistanceFromPlayer));
 				float distanceFromRightPointX = Mathf.Abs(transform.position.x - (player.transform.position.x + remainDistanceFromPlayer));
@@ -91,6 +99,10 @@ public abstract class EnemyBaseActionClass : HumanoidBaseActionClass {
 			} else {
 				anim.SetFloat("Speed", 0);
 				rb2d.velocity = new Vector3(0, rb2d.velocity.y, 0);
+				if (enemyHealthBarCreated) {
+					GetComponent <CharacterHealthController> ().SetHealthBarActivation(false);
+					enemyHealthBarCreated = false;
+				}
 				yield return null;
 			}
 			

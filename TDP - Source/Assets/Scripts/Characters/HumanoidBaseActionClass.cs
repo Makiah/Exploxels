@@ -16,7 +16,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public abstract class HumanoidBaseActionClass : SusceptibleToDamage {
+public abstract class HumanoidBaseActionClass : MonoBehaviour {
 
 	/********************************************** INITIALIZATION ******************************************************/
 	
@@ -50,6 +50,8 @@ public abstract class HumanoidBaseActionClass : SusceptibleToDamage {
 	protected Animator anim;
 	protected Rigidbody2D rb2d;
 
+	//Only meant for bow script, a more elegant solution could be used later.  
+	[HideInInspector]
 	public string characterName;
 	
 	

@@ -16,6 +16,7 @@ using System.Collections.Generic;
 public class BowScript : ItemBase {
 
 	public GameObject arrow;
+	public float attackPowerStrength;
 
 	public override Dictionary <string, string> GetPossibleActionsForItem () {
 		possibleMoves = new Dictionary<string, string> ();
@@ -53,13 +54,10 @@ public class BowScript : ItemBase {
 			shootDirection = Camera.main.ScreenToWorldPoint(shootDirection);
 			shootDirection = shootDirection-transform.position;
 			positionToFireToward = shootDirection;
-			Debug.Log("Cursor position is " + positionToFireToward);
 			accuracy = 0;
 		}
 
-		Debug.Log ("Preheading was " + preHeading);
-
-		instantiatedArrowScript.SetProjectileParametersWithAutomaticThresholdAndDeviation (positionToFireToward, 10, preHeading, 30, accuracy);
+		instantiatedArrowScript.InitializeProjectileWithThresholdAndDeviation (positionToFireToward, 10, preHeading, 30, accuracy, attackPowerStrength);
 
 	}
 

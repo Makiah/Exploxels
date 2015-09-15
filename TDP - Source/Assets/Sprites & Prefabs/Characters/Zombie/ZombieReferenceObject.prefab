@@ -86,7 +86,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 451134}
   - 212: {fileID: 21221226}
-  - 114: {fileID: 11450314}
+  - 114: {fileID: 11417178}
   m_Layer: 0
   m_Name: WoodenSword
   m_TagString: Untagged
@@ -505,7 +505,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &11450314
+--- !u!114 &11417178
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -516,6 +516,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0acbee6b38af10f4aa3ddc9ad4e8b204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  swordPowerAttack: 2
 --- !u!114 &11468580
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -527,7 +528,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6910188288a144370bc93798bcfdd723, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitsUntilDeath: 3
   maxSpeed: 0
   moveForce: 5
   jumpForce: 10

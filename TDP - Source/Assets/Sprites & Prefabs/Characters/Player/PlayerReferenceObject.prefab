@@ -123,6 +123,7 @@ GameObject:
   - 61: {fileID: 6196290}
   - 114: {fileID: 11470282}
   - 114: {fileID: 11424282}
+  - 114: {fileID: 11481398}
   m_Layer: 11
   m_Name: PlayerReferenceObject
   m_TagString: Untagged
@@ -605,12 +606,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1cc0690221d6a4303983df374c932964, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitsUntilDeath: 3
   maxSpeed: 5
   moveForce: 150
   jumpForce: 10
   wallJumpForce: 30
   groundedOffset: .229000002
+  characterName: 
+--- !u!114 &11481398
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 172182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9562ffae49bb8448d93d3f407b1dda6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifePoints: 10
+  healthPanelPrefab: {fileID: 141444, guid: 7c8a7812d8e79435b9b33b3c82f4aa5a, type: 2}
 --- !u!124 &12433794
 Behaviour:
   m_ObjectHideFlags: 1
