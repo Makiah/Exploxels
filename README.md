@@ -1,15 +1,10 @@
 # README #
 
-This repository manages the version control of the Three Doors Project.  I am working to create this item in Unity, so the main language is C#.  
+## What is Three Doors? ###
+Three Doors is a 2D, Voxel Game made using the Unity3D game engine, and assets from Kenney.nl.  The concept of the game is similar to Magicite, Terraria, and Minecraft in many respects, yet what makes the project the most interesting is the concept, and the broad things you will be able to do in the final project.  NOTE: MINING WILL NEVER BE A FEATURE!!!
 
 ### What is this repository for? ###
-
-Description - Three Doors is a 2D, voxel game, based off of the assets on the kenney.nl webpage.  It is still a work in progress, but 
-many new features have been added.  
-Version - 0.5
+This repository is used as a great way to keep track of code changes, new ideas, and revert unnecessary "updates, all with the power of Git.  The code is powered mainly by SmartGit, a great GUI for Windows, Mac, and (Thankfully) Linux.  
 
 ### How do I get set up? ###
-
-Summary of set up
-Open the project file in Unity (at least 5.2.0) and edit project files.  Once complete, use SmartGit to stage the changes (all with CTRL + A) 
-and commit.
+When starting the project for the first time, it may take a while to open.  This is due to Unity having to generate new Library and Temp folders, as well as MonoDevelop generating new .sln builds.  This is not necessary for the final product, so .gitignore ignores any new additions.  
