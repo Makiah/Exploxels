@@ -332,11 +332,11 @@ MonoBehaviour:
     headingNecessary: 0
     requiredHeading: 0
   - elementReference: {fileID: 172888, guid: f9d3c8ae910c048ba8ec6f3845b566c9, type: 2}
-    probabilityOfInstantiation: 4
+    probabilityOfInstantiation: 6
     headingNecessary: 0
     requiredHeading: 0
   - elementReference: {fileID: 156718, guid: c2ea16a9671dea64180a3eadd53b416a, type: 2}
-    probabilityOfInstantiation: 4
+    probabilityOfInstantiation: 6
     headingNecessary: 0
     requiredHeading: 0
 --- !u!1001 &956919088
