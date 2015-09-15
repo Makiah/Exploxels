@@ -200,7 +200,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 401714}
   - 212: {fileID: 21241202}
-  - 114: {fileID: 11448570}
+  - 114: {fileID: 11494552}
   m_Layer: 0
   m_Name: WoodenBow
   m_TagString: Untagged
@@ -526,7 +526,7 @@ MonoBehaviour:
   remainDistanceFromPlayer: 7
   ignorePlayerMovementThreshold: 2
   maxYValueSeparation: 10
---- !u!114 &11448570
+--- !u!114 &11494552
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -537,6 +537,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b29e9d6136624946a8c7f4d7e454830, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  arrow: {fileID: 136198, guid: c9e0ae39e6b54488da89e8e90dce1631, type: 2}
 --- !u!212 &21217738
 SpriteRenderer:
   m_ObjectHideFlags: 1

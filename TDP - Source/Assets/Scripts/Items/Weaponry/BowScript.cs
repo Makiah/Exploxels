@@ -32,11 +32,14 @@ public class BowScript : ItemBase {
 	}
 
 	void ShootArrow() {
+
+		float preHeading = attachedCharacterInput.GetFacingDirection() == 1 ? 0 : 180;
+
 		GameObject instantiatedArrow = (GameObject) (Instantiate (arrow, transform.position, Quaternion.identity));
 		if (attachedCharacterInput.GetFacingDirection () == 1)
-			instantiatedArrow.GetComponent <ProjectileScript> ().SetProjectileParametersWithAutomaticHeading (8);
+			instantiatedArrow.GetComponent <ProjectileScript> ().SetProjectileParametersWithAutomaticThresholdAndDeviation (8, preHeading, 30, 20);
 		else 
-			instantiatedArrow.GetComponent <ProjectileScript> ().SetProjectileParametersWithAutomaticHeading (8);
+			instantiatedArrow.GetComponent <ProjectileScript> ().SetProjectileParametersWithAutomaticThresholdAndDeviation (8, preHeading, 30, 20);
 	}
 
 }
