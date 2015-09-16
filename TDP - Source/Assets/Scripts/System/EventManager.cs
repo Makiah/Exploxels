@@ -21,6 +21,7 @@ public class EventManager : MonoBehaviour {
 	public delegate SlotScript[,] InventorySlotInitialization ();
 	public static event InventorySlotInitialization CreateInventorySlots;
 
+	public static event BaseInitialization EnableHealthBars;
 	public static event BaseInitialization ReferenceUIChildren;
 
 	public static event BaseInitialization ReferenceLocalClasses;
@@ -32,7 +33,6 @@ public class EventManager : MonoBehaviour {
 	public static event LevelItemCreation CreateTerrainItems;
 
 	public static event BaseInitialization InitializeEnemies;
-	public static event BaseInitialization EnemyHealthBarInitialization;
 
 	//Includes player UI stuff (health bar).  
 	public static event BaseInitialization InitializePlayer;
@@ -56,14 +56,12 @@ public class EventManager : MonoBehaviour {
 		//Reference general classes
 		ReferenceLocalClasses ();
 
+		EnableHealthBars ();
+
 		//Create level
 		Transform[] initializedMaze = InitializeTerrain ();
 		CreateTerrainItems (initializedMaze);
 		InitializeEnemies ();
-		if (EnemyHealthBarInitialization != null) 
-			EnemyHealthBarInitialization ();
-		else 
-			Debug.Log ("Enemy Health Bar Initialization was null");
 
 		//Normally, the UI would occur now, and we would get costume parameters from that.  
 

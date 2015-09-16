@@ -46,6 +46,8 @@ public class ZombieAction : EnemyBaseActionClass {
 		OnRefreshCurrentWeaponMoves (zombieSword);
 		zombieSword.SetAttachedCharacterInput (this);
 		zombieSword.ChangeLayerToCheckForItemsOn ("Player");
+
+		remainDistanceFromPlayer = Random.Range (remainDistanceFromPlayer - 1, remainDistanceFromPlayer + 2);
 	}
 
 	protected override void Attack() {

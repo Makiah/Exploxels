@@ -32,56 +32,44 @@ public class CharacterHealthController : MonoBehaviour {
 	/************************* HEALTH MANAGER *************************/
 	
 	public float lifePoints = 10f;
+	protected float currentHealth;
 
-	public GameObject healthPanelPrefab;
-	protected GameObject createdHealthPanelPrefab;
-	protected Image characterHealthPanelImage;
-	protected Slider characterHealthBar;
-
-	protected Transform gameUI;
+	protected UIHealthController uiHealthController;
+	protected HealthPanelReference healthPanelReference;
+	protected Sprite characterHeadSprite;
 
 	public void YouHaveBeenAttacked(float lifePointDeduction) {
 		Debug.Log ("Attack received " + lifePointDeduction);
-		lifePoints -= lifePointDeduction;
-		UpdateHealthBar ();
+		currentHealth -= lifePointDeduction;
+		if (healthPanelReference != null) 
+			healthPanelReference.Update (currentHealth);
 		if (lifePoints <= 0) {
-			Destroy (createdHealthPanelPrefab);
+			healthPanelReference.Reset();
 			Destroy (this.gameObject);
 		}
 	}
 
 	//Look into initializing this once the player comes into activation distance.  
 	protected virtual void InitializeHealthBar() {
+		currentHealth = lifePoints;
 		//Create panel
-		gameUI = GameObject.Find ("Inventory (UI)").transform; 
-		RectTransform healthPanelPrefabProperties = healthPanelPrefab.GetComponent <RectTransform> ();
-		createdHealthPanelPrefab = (GameObject)(Instantiate (healthPanelPrefab, Vector3.zero, Quaternion.identity));
-		createdHealthPanelPrefab.transform.SetParent (gameUI, false);
-		createdHealthPanelPrefab.GetComponent <RectTransform> ().anchoredPosition = healthPanelPrefabProperties.anchoredPosition;
-		createdHealthPanelPrefab.GetComponent <RectTransform> ().sizeDelta = healthPanelPrefabProperties.sizeDelta;
-		createdHealthPanelPrefab.transform.SetParent (gameUI, false);
+		uiHealthController = GameObject.Find ("Inventory (UI)").transform.FindChild ("Health Controller").gameObject.GetComponent <UIHealthController> (); 
+		healthPanelReference = uiHealthController.GetEnemyHealthPanelReference (this);
 		//Initialize icon
-		Sprite characterHeadSprite = transform.GetChild (0).GetChild (0).FindChild ("Head").GetComponent <SpriteRenderer> ().sprite;
-		characterHealthPanelImage = createdHealthPanelPrefab.transform.FindChild ("Icon").GetComponent <Image> ();
-		characterHealthPanelImage.sprite = characterHeadSprite;
-		//Initialize health bar
-		characterHealthBar = createdHealthPanelPrefab.transform.FindChild ("Health Bar").GetComponent <Slider> ();
-		characterHealthBar.maxValue = lifePoints;
-		characterHealthBar.value = lifePoints;
-		//So that they do not show up all at once.  
-		createdHealthPanelPrefab.SetActive (false);
+		characterHeadSprite = transform.GetChild (0).GetChild (0).FindChild ("Head").GetComponent <SpriteRenderer> ().sprite;
 
-		if (GetComponent <EnemyBaseActionClass> () != null) {
-			GetComponent <EnemyBaseActionClass>().enemyHealthBarInitialized = true;
+		if (healthPanelReference != null) {
+			healthPanelReference.Add(characterHeadSprite, lifePoints, currentHealth);
+			if (GetComponent <EnemyBaseActionClass> () != null) {
+				GetComponent <EnemyBaseActionClass> ().enemyHealthBarInitialized = true;
+			}
 		}
 	}
 
-	public void SetHealthBarActivation(bool activation) {
-		createdHealthPanelPrefab.SetActive (activation);
+	public void HealthBarNowAvailable(HealthPanelReference healthPanel) {
+		healthPanelReference.Add (characterHeadSprite, lifePoints, currentHealth);
+		if (GetComponent <EnemyBaseActionClass> () != null) {
+			GetComponent <EnemyBaseActionClass> ().enemyHealthBarInitialized = true;
+		}
 	}
-
-	void UpdateHealthBar() {
-		characterHealthBar.value = lifePoints;
-	}
-
 }

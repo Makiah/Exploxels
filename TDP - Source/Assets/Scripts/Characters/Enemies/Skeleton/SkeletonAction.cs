@@ -44,6 +44,8 @@ public class SkeletonAction : EnemyBaseActionClass {
 		ItemBase skeletonBow = characterSpriteObject.FindChild ("Hands").FindChild ("HoldingHand").FindChild ("HoldingItem").GetChild(0).GetComponent <ItemBase> ();
 		OnRefreshCurrentWeaponMoves (skeletonBow);
 		skeletonBow.SetAttachedCharacterInput (this);
+
+		remainDistanceFromPlayer = Random.Range (remainDistanceFromPlayer - 2, remainDistanceFromPlayer + 3);
 	}
 	
 	protected override void Attack() {
