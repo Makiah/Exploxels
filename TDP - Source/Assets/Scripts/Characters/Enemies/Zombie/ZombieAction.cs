@@ -37,10 +37,7 @@ public class ZombieAction : EnemyBaseActionClass {
 		rb2d = GetComponent <Rigidbody2D> ();
 		groundCheck = characterSpriteObject.FindChild ("GroundCheck");
 
-		player = GameObject.Find ("PlayerReferenceObject").transform;
-
-		StartCoroutine ("CheckCharacterPhysics");
-		StartCoroutine ("BasicEnemyControl");
+		player = GameObject.Find ("ManagementFrameworks").transform.FindChild ("GameVariables").gameObject.GetComponent <VariableManagement> ().GetPlayerReference ().transform;
 
 		ItemBase zombieSword = characterSpriteObject.FindChild ("Hands").FindChild ("HoldingHand").FindChild ("HoldingItem").GetChild(0).GetComponent <ItemBase> ();
 		OnRefreshCurrentWeaponMoves (zombieSword);
@@ -48,6 +45,9 @@ public class ZombieAction : EnemyBaseActionClass {
 		zombieSword.ChangeLayerToCheckForItemsOn ("Player");
 
 		remainDistanceFromPlayer = Random.Range (remainDistanceFromPlayer - 1, remainDistanceFromPlayer + 2);
+
+		StartCoroutine ("CheckCharacterPhysics");
+		StartCoroutine ("BasicEnemyControl");
 	}
 
 	protected override void Attack() {

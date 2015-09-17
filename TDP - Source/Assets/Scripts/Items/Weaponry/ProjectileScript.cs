@@ -25,7 +25,11 @@ public class ProjectileScript : MonoBehaviour {
 
 	private float arrowPower;
 
+	GameObject playerObject;
+
 	public void InitializeProjectileWithThresholdAndDeviation(Vector3 positionToFireToward, float velocity, float currentHeading, float headingThreshold, float maxRandomDeviation, float ctorArrowPower) {
+		playerObject = GameObject.Find ("ManagementFrameworks").transform.FindChild ("GameVariables").gameObject.GetComponent <VariableManagement> ().GetPlayerReference ();
+
 		//Set physics of the projectile.  
 		rb2d = GetComponent <Rigidbody2D> ();
 		//Returned in radians.  
@@ -59,7 +63,7 @@ public class ProjectileScript : MonoBehaviour {
 
 	IEnumerator DestroyIfDistanceFromPlayer() {
 		while (true) {
-			if (Vector3.Distance (transform.position, GameObject.Find ("PlayerReferenceObject").transform.position) >= destroyIfDistanceFromPlayer) {
+			if (Vector3.Distance (transform.position, playerObject.transform.position) >= destroyIfDistanceFromPlayer) {
 				Destroy (this.gameObject);
 			}
 			yield return null;

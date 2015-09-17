@@ -624,7 +624,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifePoints: 10
-  healthPanelPrefab: {fileID: 141444, guid: 7c8a7812d8e79435b9b33b3c82f4aa5a, type: 2}
 --- !u!124 &12433794
 Behaviour:
   m_ObjectHideFlags: 1

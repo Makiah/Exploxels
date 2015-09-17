@@ -18,11 +18,11 @@ public class DropHandler : MonoBehaviour {
 	/************************************************** INITIALIZATION **************************************************/
 
 	void OnEnable() {
-		EventManager.InitializePickupSystem += InitializeSystem;
+		EventManager.InitializePlayerDropSystem += InitializeSystem;
 	}
 
 	void OnDisable() {
-		EventManager.InitializePickupSystem -= InitializeSystem;
+		EventManager.InitializePlayerDropSystem -= InitializeSystem;
 	}
 
 

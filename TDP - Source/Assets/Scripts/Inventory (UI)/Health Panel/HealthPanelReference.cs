@@ -56,7 +56,7 @@ public class HealthPanelReference {
 		Debug.Log("Set panel to " + image.name);
 		occupied = true;
 		panel.SetActive (true);
-		Debug.Log ("Panel was added");
+		Debug.Log ("Panel was added of " + image.name);
 	}
 
 	public void Update(float currentHealth) {

@@ -34,6 +34,8 @@ public class BowScript : ItemBase {
 
 	void ShootArrow() {
 
+		GameObject playerObject = GameObject.Find ("ManagementFrameworks").transform.FindChild ("GameVariables").gameObject.GetComponent <VariableManagement> ().GetPlayerReference ();
+
 		float preHeading = attachedCharacterInput.GetFacingDirection () == 1 ? 0 : 180;
 
 		//Apparently there is some issue with the bow's position when attached to the player object, because it is always (0, 0, 0).  This fixes it.  
@@ -45,7 +47,7 @@ public class BowScript : ItemBase {
 		float accuracy;
 
 		if (attachedCharacterInput.characterName != "Player") {
-			positionToFireToward = GameObject.Find("PlayerReferenceObject").transform.position;
+			positionToFireToward = playerObject.transform.position;
 			accuracy = 30;
 		} else {
 			Vector3 shootDirection;

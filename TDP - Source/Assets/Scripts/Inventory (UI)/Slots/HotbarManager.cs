@@ -20,19 +20,20 @@ public class HotbarManager : MonoBehaviour {
 	/************************************************** INITIALIZATION **************************************************/
 
 	void OnEnable() {
-		EventManager.ReferenceUIChildren += ReferenceObjects;
 		EventManager.InitializeHotbarItems += AssignInitialHotbarItems;
 	}
 
 	void OnDisable() {
-		EventManager.ReferenceUIChildren -= ReferenceObjects;
 		EventManager.InitializeHotbarItems -= AssignInitialHotbarItems;
 	}
 
 
 	/************************************************** HOTBAR MANAGEMENT **************************************************/
 
+
+	GameObject playerObject;
 	PlayerCostumeManager playerCostumeManager;
+
 
 	HotbarSlotScript[] hotbarSlots; 
 
@@ -41,17 +42,17 @@ public class HotbarManager : MonoBehaviour {
 	int currentlyActiveSlot;
 	int previouslyActiveSlot;
 
-	void ReferenceObjects() {
-		playerCostumeManager = GameObject.Find ("PlayerReferenceObject").transform.FindChild ("FlippingItem").FindChild ("Player").GetComponent <PlayerCostumeManager>();
+	void AssignInitialHotbarItems(Race race) {
+
+		playerObject = GameObject.Find ("ManagementFrameworks").transform.FindChild ("GameVariables").gameObject.GetComponent <VariableManagement> ().GetPlayerReference ();
+		Debug.Log (playerObject.name);
+		playerCostumeManager = playerObject.transform.FindChild ("FlippingItem").FindChild ("Player").GetComponent <PlayerCostumeManager>();
 		hotbarSlots = new HotbarSlotScript[transform.childCount];
 		for (int i = 0; i < transform.childCount; i++) {
 			hotbarSlots[i] = transform.GetChild(i).GetComponent <HotbarSlotScript> ();
 			hotbarSlots[i].masterHotbarManager = this;
 		}
 		StartCoroutine ("CheckForActiveItemKey");
-	}
-
-	void AssignInitialHotbarItems(Race race) {
 
 		if (race.initialObjects != null) {
 			for (int i = 0; i < race.initialObjects.Length; i++) {
@@ -69,7 +70,7 @@ public class HotbarManager : MonoBehaviour {
 
 	IEnumerator CheckForActiveItemKey() {
 		while (true) {
-			if (GameObject.Find ("PlayerReferenceObject").GetComponent <PlayerAction> ().CheckCurrentAttackAnimationState () != true) {
+			if (playerObject.GetComponent <PlayerAction> ().CheckCurrentAttackAnimationState () != true) {
 				if (Input.GetKeyDown (KeyCode.Alpha1)) {
 					if (previouslyActiveSlot != 0) {
 						currentlyActiveSlot = 0;

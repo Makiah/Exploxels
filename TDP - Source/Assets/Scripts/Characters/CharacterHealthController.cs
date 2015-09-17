@@ -22,11 +22,11 @@ public class CharacterHealthController : MonoBehaviour {
 	/************************* INITIALIZATION *************************/
 
 	protected virtual void OnEnable() {
-		EventManager.InitializeEnemies += InitializeHealthBar;
+		EventManager.InitializeEnemyHealthControllers += InitializeHealthBar;
 	}
 
 	protected virtual void OnDisable() {
-		EventManager.InitializeEnemies -= InitializeHealthBar;
+		EventManager.InitializeEnemyHealthControllers -= InitializeHealthBar;
 	}
 
 	/************************* HEALTH MANAGER *************************/
@@ -43,8 +43,8 @@ public class CharacterHealthController : MonoBehaviour {
 		currentHealth -= lifePointDeduction;
 		if (healthPanelReference != null) 
 			healthPanelReference.Update (currentHealth);
-		if (lifePoints <= 0) {
-			healthPanelReference.Reset();
+		if (currentHealth <= 0) {
+			DisableHealthPanel();
 			Destroy (this.gameObject);
 		}
 	}
@@ -54,22 +54,29 @@ public class CharacterHealthController : MonoBehaviour {
 		currentHealth = lifePoints;
 		//Create panel
 		uiHealthController = GameObject.Find ("Inventory (UI)").transform.FindChild ("Health Controller").gameObject.GetComponent <UIHealthController> (); 
-		healthPanelReference = uiHealthController.GetEnemyHealthPanelReference (this);
+		//Debug.Log (uiHealthController.gameObject.name);
 		//Initialize icon
 		characterHeadSprite = transform.GetChild (0).GetChild (0).FindChild ("Head").GetComponent <SpriteRenderer> ().sprite;
-
-		if (healthPanelReference != null) {
-			healthPanelReference.Add(characterHeadSprite, lifePoints, currentHealth);
-			if (GetComponent <EnemyBaseActionClass> () != null) {
-				GetComponent <EnemyBaseActionClass> ().enemyHealthBarInitialized = true;
-			}
-		}
 	}
 
-	public void HealthBarNowAvailable(HealthPanelReference healthPanel) {
+	public void OnThisEnemyActivated() {
+		healthPanelReference = uiHealthController.GetEnemyHealthPanelReference (this);
 		healthPanelReference.Add (characterHeadSprite, lifePoints, currentHealth);
-		if (GetComponent <EnemyBaseActionClass> () != null) {
-			GetComponent <EnemyBaseActionClass> ().enemyHealthBarInitialized = true;
-		}
 	}
+
+	public void OnThisEnemyDeActivated() {
+		DisableHealthPanel ();
+	}
+
+	public void HealthPanelNewlyAvailable(HealthPanelReference healthPanel) {
+		healthPanelReference = healthPanel;
+		healthPanelReference.Add (characterHeadSprite, lifePoints, currentHealth);
+	}
+
+	public void DisableHealthPanel() {
+		healthPanelReference.Reset ();
+		healthPanelReference = null;
+	}
+
+
 }

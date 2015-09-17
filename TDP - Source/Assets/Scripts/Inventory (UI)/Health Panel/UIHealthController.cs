@@ -1,4 +1,4 @@
-﻿
+
 /*
  * Author: Makiah Bennett
  * Created 9/15
@@ -19,11 +19,11 @@ using System.Collections.Generic;
 public class UIHealthController : MonoBehaviour {
 
 	void OnEnable() {
-		EventManager.EnableHealthBars += InitializeHealthControllers;
+		EventManager.InitializeUIHealthController += InitializeUIHealthController;
 	}
 
 	void OnDisable() {
-		EventManager.EnableHealthBars -= InitializeHealthControllers;
+		EventManager.InitializeUIHealthController -= InitializeUIHealthController;
 	}
 
 
@@ -31,7 +31,7 @@ public class UIHealthController : MonoBehaviour {
 
 	List <CharacterHealthController> pendingHealthControllerList = new List<CharacterHealthController>();
 
-	void InitializeHealthControllers() {
+	void InitializeUIHealthController() {
 		playerHealthPanel = new HealthPanelReference(transform.FindChild("Player Health Controller").FindChild("HealthPanelPlayer").transform, this);
 		enemyHealthPanel1 = new HealthPanelReference(transform.FindChild("Enemy Health Controller").FindChild("HealthPanel1").transform, this);
 		enemyHealthPanel2 = new HealthPanelReference(transform.FindChild("Enemy Health Controller").FindChild("HealthPanel2").transform, this);
@@ -53,14 +53,14 @@ public class UIHealthController : MonoBehaviour {
 	public void OnHealthPanelReset() {
 		if (pendingHealthControllerList.Count > 0) {
 			if (pendingHealthControllerList [0] != null) {
-				pendingHealthControllerList [0].HealthBarNowAvailable (GetBestAvailableEnemyHealthPanelReference (pendingHealthControllerList [0]));
+				pendingHealthControllerList [0].HealthPanelNewlyAvailable (GetBestAvailableEnemyHealthPanelReference (pendingHealthControllerList [0]));
 				pendingHealthControllerList.RemoveAt (0);
 			}
 		}
 	}
 
 	HealthPanelReference GetBestAvailableEnemyHealthPanelReference(CharacterHealthController someHealthController) {
-		//Debug.Log (someHealthController.gameObject.name + " is accessing the script");
+		Debug.Log (someHealthController.gameObject.name + " is accessing the uihealthcontroller");
 		if (enemyHealthPanel1.IsEmpty ())
 			return enemyHealthPanel1;
 		else if (enemyHealthPanel2.IsEmpty ())

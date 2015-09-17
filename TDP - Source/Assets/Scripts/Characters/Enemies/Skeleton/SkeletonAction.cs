@@ -36,20 +36,21 @@ public class SkeletonAction : EnemyBaseActionClass {
 		rb2d = GetComponent <Rigidbody2D> ();
 		groundCheck = characterSpriteObject.FindChild ("GroundCheck");
 
-		player = GameObject.Find ("PlayerReferenceObject").transform;
-
-		StartCoroutine ("CheckCharacterPhysics");
-		StartCoroutine ("BasicEnemyControl");
+		player = GameObject.Find ("ManagementFrameworks").transform.FindChild ("GameVariables").gameObject.GetComponent <VariableManagement> ().GetPlayerReference ().transform;
 
 		ItemBase skeletonBow = characterSpriteObject.FindChild ("Hands").FindChild ("HoldingHand").FindChild ("HoldingItem").GetChild(0).GetComponent <ItemBase> ();
 		OnRefreshCurrentWeaponMoves (skeletonBow);
 		skeletonBow.SetAttachedCharacterInput (this);
 
 		remainDistanceFromPlayer = Random.Range (remainDistanceFromPlayer - 2, remainDistanceFromPlayer + 3);
+
+		StartCoroutine ("CheckCharacterPhysics");
+		StartCoroutine ("BasicEnemyControl");
 	}
 	
 	protected override void Attack() {
 		AttackAction ("ShootBow");
+		Debug.Log ("Shot bow");
 	}
 
 }

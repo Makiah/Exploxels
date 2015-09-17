@@ -15,9 +15,7 @@ public class PlayerHealthController : CharacterHealthController {
 		//Initialize icon
 		characterHeadSprite = transform.GetChild (0).GetChild (0).FindChild ("Head").GetComponent <SpriteRenderer> ().sprite;
 
-		if (healthPanelReference != null) {
-			healthPanelReference.Add (characterHeadSprite, lifePoints, currentHealth);
-		}
+		healthPanelReference.Add (characterHeadSprite, lifePoints, currentHealth);
 
 	}
 }

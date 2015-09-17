@@ -36,6 +36,7 @@ public class PlayerAction : HumanoidBaseActionClass {
 
 	}
 
+
 	protected override IEnumerator CheckCharacterPhysics() {
 		while (true) {
 			grounded = Physics2D.Linecast (groundCheck.position, transform.position, 1 << LayerMask.NameToLayer ("Ground"));
