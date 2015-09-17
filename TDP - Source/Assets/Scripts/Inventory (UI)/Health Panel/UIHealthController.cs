@@ -51,9 +51,11 @@ public class UIHealthController : MonoBehaviour {
 	}
 
 	public void OnHealthPanelReset() {
+		Debug.Log ("OnHealthPanelReset called");
 		if (pendingHealthControllerList.Count > 0) {
 			if (pendingHealthControllerList [0] != null) {
 				pendingHealthControllerList [0].HealthPanelNewlyAvailable (GetBestAvailableEnemyHealthPanelReference (pendingHealthControllerList [0]));
+				Debug.Log(pendingHealthControllerList[0].gameObject.name + " has been given a health panel");
 				pendingHealthControllerList.RemoveAt (0);
 			}
 		}

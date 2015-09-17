@@ -61,7 +61,8 @@ public class CharacterHealthController : MonoBehaviour {
 
 	public void OnThisEnemyActivated() {
 		healthPanelReference = uiHealthController.GetEnemyHealthPanelReference (this);
-		healthPanelReference.Add (characterHeadSprite, lifePoints, currentHealth);
+		if (healthPanelReference != null)
+			healthPanelReference.Add (characterHeadSprite, lifePoints, currentHealth);
 	}
 
 	public void OnThisEnemyDeActivated() {
@@ -74,8 +75,11 @@ public class CharacterHealthController : MonoBehaviour {
 	}
 
 	public void DisableHealthPanel() {
-		healthPanelReference.Reset ();
-		healthPanelReference = null;
+		//Enemies try to disable health panel even if they do not have one.  
+		if (healthPanelReference != null) {
+			healthPanelReference.Reset ();
+			healthPanelReference = null;
+		}
 	}
 
 
