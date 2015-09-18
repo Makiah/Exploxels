@@ -26,7 +26,7 @@ public class DropsItems : MonoBehaviour {
 							GameObject instantiatedDrop = (GameObject) (Instantiate (drops [i].dropReference.inGamePrefab, transform.position, Quaternion.identity));
 							instantiatedDrop.AddComponent <DroppedItemProperties> ();
 							instantiatedDrop.GetComponent <DroppedItemProperties> ().localResourceReference = drops[i].dropReference;
-							Debug.Log ("Instantiated drops");
+							Debug.Log ("Instantiated drops: " + instantiatedDrop.gameObject.name);
 						} else {
 							Debug.Log("DropReference was null!!!");
 						}

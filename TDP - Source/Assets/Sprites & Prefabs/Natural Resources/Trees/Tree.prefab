@@ -271,9 +271,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   treeTypes:
-  - baseTreeSprite: {fileID: 21300000, guid: 24d6ec173ca71445ea10d5cb4a8d9ec2, type: 3}
-    trunkTreeSprite: {fileID: 21300000, guid: 7694a7710be8e459cbd6105166fcedc2, type: 3}
-    topTreeSprite: {fileID: 21300000, guid: f097a81e8e7114e14a976241171cd466, type: 3}
+  - baseTreeSprite: {fileID: 21300000, guid: a08d0fce3f9201b47b5226944168f7d0, type: 3}
+    trunkTreeSprite: {fileID: 21300000, guid: d019d5590c1a6534d9571a494331c5d0, type: 3}
+    topTreeSprite: {fileID: 21300000, guid: 2fe2c16e2846dbf4cb1cd5d3b659db39, type: 3}
   treeType: 0
 --- !u!212 &21225450
 SpriteRenderer:
@@ -449,12 +449,12 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: treeTypes.Array.data[0].baseTreeSprite
       value: 
-      objectReference: {fileID: 21300000, guid: 0ef060bda606c98419065a9a1b913be0,
+      objectReference: {fileID: 21300000, guid: a08d0fce3f9201b47b5226944168f7d0,
         type: 3}
     - target: {fileID: 0}
       propertyPath: treeTypes.Array.data[0].topTreeSprite
       value: 
-      objectReference: {fileID: 21300000, guid: 5a1710872c1e602488873164a04320a1,
+      objectReference: {fileID: 21300000, guid: 2fe2c16e2846dbf4cb1cd5d3b659db39,
         type: 3}
     - target: {fileID: 0}
       propertyPath: m_SortingLayerID
@@ -472,6 +472,11 @@ Prefab:
       propertyPath: m_Size.x
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: treeTypes.Array.data[0].trunkTreeSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: d019d5590c1a6534d9571a494331c5d0,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 178818}

@@ -41,7 +41,6 @@ public class DropHandler : MonoBehaviour {
 			Vector3 endPoint = gameObject.transform.position - new Vector3(0, .75f, 0) + new Vector3(5, 0, 0) * gameObject.GetComponent <PlayerAction> ().GetFacingDirection();
 
 			RaycastHit2D linecastResult = Physics2D.Linecast(startPoint, endPoint, 1 << LayerMask.NameToLayer ("Drops"));
-			//Debug.DrawLine(startPoint, endPoint);
 
 			if (linecastResult.collider != null) {
 				Debug.Log ("ItemCheck hit collider with name of " + linecastResult.collider.gameObject.name + ".");
