@@ -32,6 +32,8 @@ public class InventoryHideShow : MonoBehaviour {
 
 	void CheckForHideShow() {
 		inventory = transform.FindChild ("Inventory").gameObject;
+		//Start off with the inventory hidden.  
+		inventory.SetActive (false);
 		StartCoroutine ("ListenForHideShow");
 	}
 

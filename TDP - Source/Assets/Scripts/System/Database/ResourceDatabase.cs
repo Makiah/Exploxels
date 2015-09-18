@@ -39,6 +39,7 @@ public class ResourceDatabase : MonoBehaviour {
 
 		//Crafting materials
 		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.CraftingMaterial, "Wood", "A vital material for any player", 0, "Items/Wood", "Items/UIWood"));
+		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.CraftingMaterial, "Rock", "Useful for crafting arrow tips", 1, "Items/Rock", "Items/UIRock"));
 
 		string[] minecrafterHeads = {"MinecrafterHead1"};
 		ResourceReference[] minecrafterInitialItems = {

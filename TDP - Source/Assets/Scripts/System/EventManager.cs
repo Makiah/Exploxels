@@ -52,7 +52,7 @@ public class EventManager : MonoBehaviour {
 	void Start() {
 		ItemDatabaseInitialization(); //Used with ResourceDatabase
 		SlotScript[,] createdUISlots = CreateInventorySlots (); // Used with PanelLayout
-		CreateHotbarSlots ();
+		CreateHotbarSlots (); //Used with HotbarPanelLayout (Otherwise createdUISlots gets the hotbarslots return).  
 		InitializeSlots (); //Used with SlotScript
 		EnableUIHideShow (); //Used with InventoryHideShow
 		InitializeUIHealthController(); //Used for UIHealthController
@@ -66,15 +66,15 @@ public class EventManager : MonoBehaviour {
 		Race minecrafter = ResourceDatabase.GetRaceByParameter ("Minecrafter"); //Purpose: Get race from ResourceDatabase.  Requirements: Database initialized.  
 		minecrafter.SetHeadVariation (0);   
 		CreatePlayer(); //Used for CreateLevelItems (Instantiating player)
-		CreatePlayerReference ();
+		CreatePlayerReference (); //Used for CreateLevelItems
 		InitializeCostume(minecrafter);//Used for PlayerCostumeManager
-		InitializeHotbarItems (minecrafter);
-		InitializePlayer ();
+		InitializeHotbarItems (minecrafter); //Used for initializing the HotbarManager.  
+		InitializePlayer (); //Used for initializing the player.  
 		InitializePlayerDropSystem(createdUISlots); //Used for DropHandler
 
 		//Initialize the enemies.  
-		CreateTerrainItems(initializedMaze);
-		InitializeEnemyHealthControllers ();
+		CreateTerrainItems(initializedMaze); //Used for instantiating the enemies and trees.  
+		InitializeEnemyHealthControllers (); //Used for initializing CharacterHealthController.  
 		InitializeEnemies(); //Used for all enemies (requires player being instantiated).  
 
 		Debug.Log("Completed");

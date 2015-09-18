@@ -18,8 +18,8 @@ using System.Collections.Generic;
 
 public class SwordScript : ItemBase {
 
-	private float enemyWithinAreaBoundsFloat = .8f;
-	private float distToEnemyFloatLength = 1.3f;
+	private float enemyWithinAreaBounds = 1.2f;
+	private float distToEnemyLength = 2f;
 
 	public float swordPowerAttack;
 
@@ -39,8 +39,8 @@ public class SwordScript : ItemBase {
 	}
 	
 	void AttackEnemyInFocus () {
-		Vector3 enemyWithinAreaVectorBound = new Vector3 (enemyWithinAreaBoundsFloat, 0, 0);
-		Vector3 distToEnemyVectorLength = new Vector3 (distToEnemyFloatLength, 0, 0);
+		Vector3 enemyWithinAreaVectorBound = new Vector3 (enemyWithinAreaBounds, 0, 0);
+		Vector3 distToEnemyVectorLength = new Vector3 (distToEnemyLength, 0, 0);
 		
 		int playerFacingDirection = attachedCharacterInput.GetFacingDirection ();
 		

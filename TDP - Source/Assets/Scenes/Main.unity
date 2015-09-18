@@ -615,8 +615,8 @@ GameObject:
   - 224: {fileID: 447189625}
   - 222: {fileID: 447189624}
   - 114: {fileID: 447189623}
-  - 114: {fileID: 447189622}
   - 114: {fileID: 447189621}
+  - 114: {fileID: 447189622}
   m_Layer: 5
   m_Name: Hotbar
   m_TagString: Untagged
@@ -639,13 +639,12 @@ MonoBehaviour:
 --- !u!114 &447189622
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11474770, guid: d2b5588b2840e4aa9b08b781c0f2d87d,
-    type: 2}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 447189620}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 44c8284def91e9746b955c27eb728190, type: 3}
+  m_Script: {fileID: 11500000, guid: d54976651218d4ff88a6936accbb2005, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   slotPrefab: {fileID: 109724, guid: 0a47c42b4bb6e684dba3751cbb0eb082, type: 2}
@@ -1284,6 +1283,10 @@ MonoBehaviour:
     requiredHeading: 0
   - elementReference: {fileID: 172888, guid: f9d3c8ae910c048ba8ec6f3845b566c9, type: 2}
     probabilityOfInstantiation: 6
+    headingNecessary: 0
+    requiredHeading: 0
+  - elementReference: {fileID: 125046, guid: 6506a1d1e1eca4d5f8dc9e7c7e27db16, type: 2}
+    probabilityOfInstantiation: 2
     headingNecessary: 0
     requiredHeading: 0
   - elementReference: {fileID: 156718, guid: c2ea16a9671dea64180a3eadd53b416a, type: 2}
