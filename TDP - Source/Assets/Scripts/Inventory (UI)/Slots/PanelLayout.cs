@@ -15,19 +15,19 @@ using System.Collections;
 
 public class PanelLayout : MonoBehaviour {
 
-	void OnEnable () {
+	protected virtual void OnEnable () {
 		EventManager.CreateInventorySlots += InitializeSlots;
 	}
 
-	void OnDisable () {
+	protected virtual void OnDisable () {
 		EventManager.CreateInventorySlots -= InitializeSlots;
 	}
 
 	public GameObject slotPrefab;
 
-	private Vector2 inventoryPanelSize, slotPanelSize;
+	protected Vector2 inventoryPanelSize, slotPanelSize;
 
-	SlotScript[,] InitializeSlots() {
+	protected SlotScript[,] InitializeSlots() {
 
 		// Get sizes of the inventory panel and the slot prefab.  
 		inventoryPanelSize = GetComponent <RectTransform> ().sizeDelta;

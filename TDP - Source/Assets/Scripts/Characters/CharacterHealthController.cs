@@ -44,8 +44,7 @@ public class CharacterHealthController : MonoBehaviour {
 		if (healthPanelReference != null) 
 			healthPanelReference.Update (currentHealth);
 		if (currentHealth <= 0) {
-			DisableHealthPanel();
-			Destroy (this.gameObject);
+			OnDeath();
 		}
 	}
 
@@ -80,6 +79,11 @@ public class CharacterHealthController : MonoBehaviour {
 			healthPanelReference.Reset ();
 			healthPanelReference = null;
 		}
+	}
+
+	protected virtual void OnDeath() {
+		DisableHealthPanel();
+		Destroy (this.gameObject);
 	}
 
 

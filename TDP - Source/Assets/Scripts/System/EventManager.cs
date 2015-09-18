@@ -20,6 +20,7 @@ public class EventManager : MonoBehaviour {
 
 	public delegate SlotScript[,] InventorySlotInitialization ();
 	public static event InventorySlotInitialization CreateInventorySlots;
+	public static event InventorySlotInitialization CreateHotbarSlots;
 
 	public static event BaseInitialization InitializeSlots;
 
@@ -51,6 +52,7 @@ public class EventManager : MonoBehaviour {
 	void Start() {
 		ItemDatabaseInitialization(); //Used with ResourceDatabase
 		SlotScript[,] createdUISlots = CreateInventorySlots (); // Used with PanelLayout
+		CreateHotbarSlots ();
 		InitializeSlots (); //Used with SlotScript
 		EnableUIHideShow (); //Used with InventoryHideShow
 		InitializeUIHealthController(); //Used for UIHealthController
