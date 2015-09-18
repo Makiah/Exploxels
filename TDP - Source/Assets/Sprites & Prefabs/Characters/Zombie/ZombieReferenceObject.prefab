@@ -86,7 +86,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 451134}
   - 212: {fileID: 21221226}
-  - 114: {fileID: 11450314}
+  - 114: {fileID: 11417178}
   m_Layer: 0
   m_Name: WoodenSword
   m_TagString: Untagged
@@ -154,6 +154,7 @@ GameObject:
   - 61: {fileID: 6185780}
   - 61: {fileID: 6171612}
   - 114: {fileID: 11468580}
+  - 114: {fileID: 11498274}
   m_Layer: 9
   m_Name: ZombieReferenceObject
   m_TagString: Untagged
@@ -497,7 +498,7 @@ Animator:
   m_GameObject: {fileID: 179510}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 86c5d312b1bc1484181e24504cdff5fd, type: 2}
+  m_Controller: {fileID: 9100000, guid: 242c5ee2c5b96c246ab237f1b81ed245, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -505,7 +506,7 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &11450314
+--- !u!114 &11417178
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -516,6 +517,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0acbee6b38af10f4aa3ddc9ad4e8b204, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  swordPowerAttack: 2
 --- !u!114 &11468580
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -527,16 +529,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6910188288a144370bc93798bcfdd723, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitsUntilDeath: 3
   maxSpeed: 0
   moveForce: 5
   jumpForce: 10
   wallJumpForce: 0
   groundedOffset: 0
+  characterName: 
   playerViewableThreshold: 50
   remainDistanceFromPlayer: 1.25
   ignorePlayerMovementThreshold: .75
   maxYValueSeparation: 5
+  enemyHealthBarInitialized: 0
+--- !u!114 &11498274
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 172888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7a9b9e9cffdf4fc19ab7383909402de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifePoints: 10
+  healthPanelPrefab: {fileID: 193180, guid: c142d1c850423402ba972e4b47497d05, type: 2}
 --- !u!212 &21207382
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -754,6 +770,10 @@ Prefab:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: healthPanelPrefab
+      value: 
+      objectReference: {fileID: 193180, guid: c142d1c850423402ba972e4b47497d05, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 172888}

@@ -20,56 +20,66 @@ public class EventManager : MonoBehaviour {
 
 	public delegate SlotScript[,] InventorySlotInitialization ();
 	public static event InventorySlotInitialization CreateInventorySlots;
+	public static event InventorySlotInitialization CreateHotbarSlots;
 
-	public static event BaseInitialization ReferenceUIChildren;
-
-	public static event BaseInitialization ReferenceLocalClasses;
-
-	public delegate Transform[] TerrainInitialization ();
-	public static event TerrainInitialization InitializeTerrain;
-
-	public delegate void LevelItemCreation(Transform[] mazeSegments);
-	public static event LevelItemCreation CreateTerrainItems;
-
-	public static event BaseInitialization InitializeEnemies;
-
-	public static event BaseInitialization InitializePlayer;
-
-	public delegate void PlayerCostumeSetup(Race costumeParamsSent);
-	public static event PlayerCostumeSetup InitializeCostume;
-	public static event PlayerCostumeSetup InitializeHotbarItems;
-
-	//Multi-dimensional array to store rows and columns.  
-	public delegate void InitializePlayerInventoryScripts(SlotScript[,] uiSlots);
-	public static event InitializePlayerInventoryScripts InitializePickupSystem;
+	public static event BaseInitialization InitializeSlots;
 
 	public static event BaseInitialization EnableUIHideShow;
 
+	public static event BaseInitialization InitializeUIHealthController;
+
+	public delegate Transform[] TerrainInitialization();
+	public static event TerrainInitialization InitializeTerrain;
+
+	public static event BaseInitialization CreatePlayer;
+	public static event BaseInitialization CreatePlayerReference;
+
+	public static event BaseInitialization InitializePlayer; //Use for initializing CostumeManager and PlayerAction, as well as the PlayerHealthController.  
+
+	public delegate void InitializeDropSystem(SlotScript[,] inventorySlots);
+	public static event InitializeDropSystem InitializePlayerDropSystem;
+
+	public delegate void InitializePlayerCostume(Race playerRace);
+	public static event InitializePlayerCostume InitializeCostume;
+	public static event InitializePlayerCostume InitializeHotbarItems;
+
+	public delegate void TerrainCreation (Transform[] maze);
+	public static event TerrainCreation CreateTerrainItems;
+
+	public static event BaseInitialization InitializeEnemyHealthControllers;
+	public static event BaseInitialization InitializeEnemies;
+
 	void Start() {
-		//UI Stuff
-		ItemDatabaseInitialization ();
-		SlotScript[,] createdUISlots = CreateInventorySlots ();
-		ReferenceUIChildren ();
+		ItemDatabaseInitialization(); //Used with ResourceDatabase
+		SlotScript[,] createdUISlots = CreateInventorySlots (); // Used with PanelLayout
+		CreateHotbarSlots (); //Used with HotbarPanelLayout (Otherwise createdUISlots gets the hotbarslots return).  
+		InitializeSlots (); //Used with SlotScript
+		EnableUIHideShow (); //Used with InventoryHideShow
+		InitializeUIHealthController(); //Used for UIHealthController
 
-		//Reference general classes
-		ReferenceLocalClasses ();
+		//Show UI
 
-		//Create level
-		Transform[] initializedMaze = InitializeTerrain ();
-		CreateTerrainItems (initializedMaze);
-		InitializeEnemies ();
+		//Lay out the level
+		Transform[] initializedMaze = InitializeTerrain(); //Used with LevelLayout
 
-		//Normally, the UI would occur now, and we would get costume parameters from that.  
+		//Instantiate the player and initialize costumeManager
+		Race minecrafter = ResourceDatabase.GetRaceByParameter ("Minecrafter"); //Purpose: Get race from ResourceDatabase.  Requirements: Database initialized.  
+		minecrafter.SetHeadVariation (0);   
+		CreatePlayer(); //Used for CreateLevelItems (Instantiating player)
+		CreatePlayerReference (); //Used for CreateLevelItems
+		InitializeCostume(minecrafter);//Used for PlayerCostumeManager
+		InitializeHotbarItems (minecrafter); //Used for initializing the HotbarManager.  
+		InitializePlayer (); //Used for initializing the player.  
+		InitializePlayerDropSystem(createdUISlots); //Used for DropHandler
 
-		//Create the player costume
-		Race minecrafter = ResourceDatabase.GetRaceByParameter ("Minecrafter");
-		minecrafter.SetHeadVariation (0);
-		InitializePlayer ();
-		InitializeCostume (minecrafter);
-		InitializeHotbarItems (minecrafter);
+		//Initialize the enemies.  
+		CreateTerrainItems(initializedMaze); //Used for instantiating the enemies and trees.  
+		InitializeEnemyHealthControllers (); //Used for initializing CharacterHealthController.  
+		InitializeEnemies(); //Used for all enemies (requires player being instantiated).  
 
-		InitializePickupSystem (createdUISlots);
-		EnableUIHideShow ();
+		Debug.Log("Completed");
+		 
+		  
 	}
 
 }

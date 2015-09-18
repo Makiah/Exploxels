@@ -19,12 +19,10 @@ public class PlayerCostumeManager : MonoBehaviour {
 	/************************************************** INITIALIZATION **************************************************/
 
 	void OnEnable() {
-		EventManager.ReferenceLocalClasses += SetReferences;
 		EventManager.InitializeCostume += InitializePlayerCostume;
 	}
 	
 	void OnDisable() {
-		EventManager.ReferenceLocalClasses -= SetReferences;
 		EventManager.InitializeCostume -= InitializePlayerCostume;
 	}
 
@@ -42,12 +40,8 @@ public class PlayerCostumeManager : MonoBehaviour {
 	//The prefab of the item will be childed to this object.  
 	private Transform holdingItem;
 
-	void SetReferences() {
-		mainPlayerAction = transform.parent.parent.gameObject.GetComponent <HumanoidBaseActionClass> ();
-	}
-
 	void InitializePlayerCostume(Race race) {
-
+		mainPlayerAction = transform.parent.parent.gameObject.GetComponent <HumanoidBaseActionClass> ();
 		//Just setting up the basic race costume.  
 		body = transform.FindChild("Body").GetComponent <SpriteRenderer> ();
 		head = transform.FindChild ("Head").GetComponent <SpriteRenderer> ();
@@ -69,8 +63,10 @@ public class PlayerCostumeManager : MonoBehaviour {
 	//Called by HotbarManager when a new hotbar item is selected.
 	public void UpdatePlayerItem(GameObject prefabSelectedInHotbar) {
 
+		Debug.Log (holdingItem.name);
+
 		//Deletes the previous item that had existed before this new item.  
-		if (holdingItem.childCount != 0) {
+		if (holdingItem.childCount != 0 && holdingItem != null) {
 			Destroy (holdingItem.GetChild (0).gameObject);
 		}
 

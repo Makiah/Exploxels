@@ -50,4 +50,14 @@ public class ScriptingUtilities : MonoBehaviour {
 		return false;
 	}
 
+	public static float DegreesToRadians (float degrees) {
+		float toReturn = degrees * (float)(Mathf.PI / 180f);
+		return toReturn;
+	}
+
+	public static float RadiansToDegrees (float radians) {
+		float toReturn = radians * (float)(180f / Mathf.PI);
+		return toReturn;
+	}
+
 }

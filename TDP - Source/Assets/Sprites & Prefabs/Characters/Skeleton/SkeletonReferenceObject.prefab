@@ -106,6 +106,7 @@ GameObject:
   - 61: {fileID: 6163312}
   - 61: {fileID: 6116574}
   - 114: {fileID: 11444366}
+  - 114: {fileID: 11439164}
   m_Layer: 9
   m_Name: SkeletonReferenceObject
   m_TagString: Untagged
@@ -200,7 +201,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 401714}
   - 212: {fileID: 21241202}
-  - 114: {fileID: 11448570}
+  - 114: {fileID: 11494552}
   m_Layer: 0
   m_Name: WoodenBow
   m_TagString: Untagged
@@ -505,6 +506,19 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11439164
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 156718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7a9b9e9cffdf4fc19ab7383909402de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifePoints: 10
+  healthPanelPrefab: {fileID: 193180, guid: c142d1c850423402ba972e4b47497d05, type: 2}
 --- !u!114 &11444366
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -516,17 +530,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 50cb8745b0340c64582414bc3107f939, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hitsUntilDeath: 3
   maxSpeed: 0
   moveForce: 7
   jumpForce: 10
   wallJumpForce: 0
   groundedOffset: 0
+  characterName: 
   playerViewableThreshold: 50
   remainDistanceFromPlayer: 7
   ignorePlayerMovementThreshold: 2
   maxYValueSeparation: 10
---- !u!114 &11448570
+  enemyHealthBarInitialized: 0
+--- !u!114 &11494552
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -537,6 +552,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b29e9d6136624946a8c7f4d7e454830, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  arrow: {fileID: 136198, guid: c9e0ae39e6b54488da89e8e90dce1631, type: 2}
+  attackPowerStrength: 1
 --- !u!212 &21217738
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -766,6 +783,10 @@ Prefab:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: healthPanelPrefab
+      value: 
+      objectReference: {fileID: 193180, guid: c142d1c850423402ba972e4b47497d05, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 156718}

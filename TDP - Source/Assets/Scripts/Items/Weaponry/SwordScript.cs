@@ -18,8 +18,10 @@ using System.Collections.Generic;
 
 public class SwordScript : ItemBase {
 
-	private float enemyWithinAreaBoundsFloat = .8f;
-	private float distToEnemyFloatLength = 1.3f;
+	private float enemyWithinAreaBounds = 1.2f;
+	private float distToEnemyLength = 2f;
+
+	public float swordPowerAttack;
 
 	public override Dictionary <string, string> GetPossibleActionsForItem () {
 		possibleMoves = new Dictionary<string, string> ();
@@ -32,17 +34,13 @@ public class SwordScript : ItemBase {
 		AttemptToAttackAfterCompletedAnimation ();
 	}
 	
-	public override void OnEnvironmentInfluenced(DropsItems itemInfluenced) {
-		
-	}
-	
 	void AttemptToAttackAfterCompletedAnimation () {
 		attachedCharacterInput.ActionsAfterAnimation += AttackEnemyInFocus;
 	}
 	
 	void AttackEnemyInFocus () {
-		Vector3 enemyWithinAreaVectorBound = new Vector3 (enemyWithinAreaBoundsFloat, 0, 0);
-		Vector3 distToEnemyVectorLength = new Vector3 (distToEnemyFloatLength, 0, 0);
+		Vector3 enemyWithinAreaVectorBound = new Vector3 (enemyWithinAreaBounds, 0, 0);
+		Vector3 distToEnemyVectorLength = new Vector3 (distToEnemyLength, 0, 0);
 		
 		int playerFacingDirection = attachedCharacterInput.GetFacingDirection ();
 		
@@ -54,24 +52,19 @@ public class SwordScript : ItemBase {
 
 		RaycastHit2D[] linecastResult = Physics2D.LinecastAll (actualStartRaycastParameter, actualEndRaycastParameter, 1 << LayerMask.NameToLayer (lookForItemsOnLayer));
 
-		Debug.DrawLine (actualStartRaycastParameter, actualEndRaycastParameter, Color.red, 3f);
-
-		Debug.Log ("Drew line with distance of " + Vector2.Distance (actualStartRaycastParameter, actualEndRaycastParameter));
+		if (lookForItemsOnLayer == "Player") {
+			Debug.DrawLine (actualStartRaycastParameter, actualEndRaycastParameter, Color.red, 3f);
+		} else {
+			Debug.DrawLine (actualStartRaycastParameter, actualEndRaycastParameter, Color.green, 3f);
+		}
 
 		if (linecastResult.Length != 0) {
 			if (linecastResult [0].collider != null) {
-				Debug.Log ("Sword hit collider with name of " + linecastResult [0].collider.gameObject.name + ".");
-				if (linecastResult [0].collider.gameObject.GetComponent <SusceptibleToDamage> () != null) {
-					linecastResult [0].collider.gameObject.GetComponent <SusceptibleToDamage> ().YouHaveBeenAttacked ();
-				} else {
-					Debug.Log ("Sword could not attack collider with no SusceptibleToDamage script attached");
+				if (linecastResult [0].collider.gameObject.GetComponent <CharacterHealthController> () != null) {
+					linecastResult [0].collider.gameObject.GetComponent <CharacterHealthController> ().YouHaveBeenAttacked (swordPowerAttack);
 				}
-			} else {
-				Debug.Log ("Sword did not hit a collider.");
 			}
 		}
-		
-		attachedCharacterInput.ActionsAfterAnimation -= AttackEnemyInFocus;
 	}
 
 }

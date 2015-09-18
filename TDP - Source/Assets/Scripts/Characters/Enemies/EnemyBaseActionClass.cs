@@ -25,12 +25,19 @@ public abstract class EnemyBaseActionClass : HumanoidBaseActionClass {
 	//What is the maximum difference in Y values the enemies must have to attack?
 	public float maxYValueSeparation;
 
+	bool controllerActivated = false;
+
 	//The player transform
 	protected Transform player;
 
 	protected virtual IEnumerator BasicEnemyControl() {
 		while (true) {
 			if (Vector3.Distance(transform.position, player.transform.position) <= playerViewableThreshold) {
+
+				if (!controllerActivated) {
+					GetComponent <CharacterHealthController> ().OnThisEnemyActivated();
+					controllerActivated = true;
+				}
 				
 				float distanceFromLeftPointX = Mathf.Abs(transform.position.x - (player.transform.position.x - remainDistanceFromPlayer));
 				float distanceFromRightPointX = Mathf.Abs(transform.position.x - (player.transform.position.x + remainDistanceFromPlayer));
@@ -75,7 +82,7 @@ public abstract class EnemyBaseActionClass : HumanoidBaseActionClass {
 							rb2d.velocity = new Vector2(0, rb2d.velocity.y);
 							anim.SetFloat("Speed", 0);
 							Attack ();
-							yield return new WaitForSeconds(2f);
+							yield return new WaitForSeconds(2.5f);
 						}
 					} else {
 						if (distanceFromRightPointX <= ignorePlayerMovementThreshold) {
@@ -83,7 +90,7 @@ public abstract class EnemyBaseActionClass : HumanoidBaseActionClass {
 							rb2d.velocity = new Vector2(0, rb2d.velocity.y);
 							anim.SetFloat("Speed", 0);
 							Attack ();
-							yield return new WaitForSeconds(2f);
+							yield return new WaitForSeconds(2.5f);
 						}
 					}
 				}
@@ -91,6 +98,10 @@ public abstract class EnemyBaseActionClass : HumanoidBaseActionClass {
 			} else {
 				anim.SetFloat("Speed", 0);
 				rb2d.velocity = new Vector3(0, rb2d.velocity.y, 0);
+				if (controllerActivated) {
+					GetComponent <CharacterHealthController> ().OnThisEnemyDeActivated();
+					controllerActivated = false;
+				}
 				yield return null;
 			}
 			

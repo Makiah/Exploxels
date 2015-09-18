@@ -17,13 +17,23 @@ public class CreateLevelItems : MonoBehaviour {
 
 	void OnEnable() {
 		EventManager.CreateTerrainItems += CreateTerrainItems;
+		EventManager.CreatePlayer += InstantiatePlayer;
 	}
 	
 	void OnDisable() {
 		EventManager.CreateTerrainItems -= CreateTerrainItems;
+		EventManager.CreatePlayer -= InstantiatePlayer;
 	}
 
+
+	public GameObject playerToInstantiate;
+	public Vector3 pointToInstantiatePlayerAt;
 	public EnemyReferenceClass[] initialGameElements;
+
+	void InstantiatePlayer() {
+		Instantiate (playerToInstantiate, pointToInstantiatePlayerAt, Quaternion.identity);
+		Debug.Log ("Instantiated Player");
+	}
 
 	void CreateTerrainItems (Transform[] mazeSegments) {
 

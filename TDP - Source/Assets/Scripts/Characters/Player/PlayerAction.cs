@@ -27,12 +27,15 @@ public class PlayerAction : HumanoidBaseActionClass {
 		wallCheck = characterSpriteObject.FindChild ("WallCheck");
 
 		//mainPlayerCostumeManager = transform.FindChild ("FlippingItem").FindChild ("Player").gameObject.GetComponent <PlayerCostumeManager> ();
-		
+
+		characterName = "Player";
+
 		StartCoroutine ("CheckForWeaponInput");
 		StartCoroutine ("CheckCharacterPhysics");
 		StartCoroutine ("ListenForArrowMovement");
 
 	}
+
 
 	protected override IEnumerator CheckCharacterPhysics() {
 		while (true) {

@@ -102,8 +102,4 @@ public class LevelLayout : MonoBehaviour {
 
 	}
 
-	float DegreesToRadians(int degreeValue) {
-		return degreeValue * (Mathf.PI / 180);
-	}
-
 }
