@@ -39,6 +39,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Backgrounds
+    uniqueID: 3940305695
+    locked: 0
+  - name: Terrain
+    uniqueID: 459935887
+    locked: 0
   - name: Trees and Rocks
     uniqueID: 2488917345
     locked: 0
