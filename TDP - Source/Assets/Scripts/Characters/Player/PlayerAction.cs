@@ -85,6 +85,8 @@ public class PlayerAction : HumanoidBaseActionClass {
 			if (h < 0 && facingRight) 
 				Flip ();
 
+			GameObject.Find("Background").GetComponent <BackgroundScroller> ().Movement(rb2d.velocity.x / maxSpeed);
+
 			yield return new WaitForFixedUpdate();
 
 		}

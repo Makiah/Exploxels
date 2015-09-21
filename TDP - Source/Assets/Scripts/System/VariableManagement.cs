@@ -4,6 +4,8 @@ using System.Collections;
 public class VariableManagement : MonoBehaviour {
 
 	GameObject playerObject;
+	GameObject mainCamera;
+	float levelLengthX;
 
 	void OnEnable() {
 		EventManager.CreatePlayerReference += SetPlayerReference;
@@ -15,10 +17,23 @@ public class VariableManagement : MonoBehaviour {
 
 	void SetPlayerReference() {
 		playerObject = GameObject.Find ("PlayerReferenceObject(Clone)");
-		Debug.Log (playerObject.name);
+		mainCamera = playerObject.transform.FindChild ("Main Camera").gameObject;
 	}
 
 	public GameObject GetPlayerReference() {
 		return playerObject;
+	}
+
+	public GameObject GetMainCameraReference() {
+		return mainCamera;
+	}
+
+	public void SetLevelLengthX(float value) {
+		levelLengthX = value;
+	}
+
+	public float GetLevelLengthX () {
+		Debug.Log("Returned " + levelLengthX + " as level length");
+		return levelLengthX;
 	}
 }

@@ -63,6 +63,10 @@ public class LevelLayout : MonoBehaviour {
 		GameObject instantiatedEndPoint = LayTerrainAsset (transferSegments.startSegment, new Vector3 (currentXPosition, 0, 0), Quaternion.identity, parentMaze);
 		instantiatedEndPoint.transform.localScale = new Vector3 (-1, 1, 1);
 
+		float levelLengthX = instantiatedEndPoint.transform.position.x - instantiatedStartPoint.transform.position.x;
+
+		GameObject.Find ("ManagementFrameworks").transform.FindChild ("GameVariables").GetComponent <VariableManagement> ().SetLevelLengthX (levelLengthX);
+
 		return createdMaze;
 	}
 

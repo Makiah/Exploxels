@@ -73,16 +73,15 @@ public class EventManager : MonoBehaviour {
 		InitializeHotbarItems (minecrafter); //Used for initializing the HotbarManager.  
 		InitializePlayer (); //Used for initializing the HumanoidBaseReferenceClass.  
 		InitializePlayerDropSystem(createdUISlots); //Used for DropHandler
-		//InitializeBackgroundScroller (); //Initialize the BackgroundScroller class.  
+		InitializeBackgroundScroller (); //Initialize the BackgroundScroller class.  
 
 		//Initialize the enemies.  
 		CreateTerrainItems(initializedMaze); //Used for instantiating the enemies and trees.  
 		InitializeEnemyHealthControllers (); //Used for initializing CharacterHealthController.  
 		InitializeEnemies(); //Used for all enemies (requires player being instantiated).  
 
-		Debug.Log("Completed");
-		 
-		  
+		Debug.Log("Completed EventManager");
+
 	}
 
 }

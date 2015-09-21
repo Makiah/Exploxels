@@ -13,35 +13,33 @@ public class BackgroundScroller : MonoBehaviour {
 
 	public float scrollSpeed;
 
-	float pos;
+	public Sprite[] segments;
 
-	Transform mainCamera;
-	Transform backgroundImage;
+	public GameObject backgroundPanel;
 
-	Vector3 previousCameraPosition;
-	float backgroundImageAnchorPosX = 0f;
 
 	void InitializeBackgroundElements() {
-		mainCamera = transform.parent;
-		backgroundImage = transform.GetChild (0);
-
-		SpriteRenderer[] backgroundImages = new SpriteRenderer[transform.childCount];
-		for (int i = 0; i < transform.childCount; i++) {
-			backgroundImages[i] = transform.GetChild(i).GetComponent <SpriteRenderer> ();
+		VariableManagement variableManagement = GameObject.Find ("ManagementFrameworks").transform.FindChild ("GameVariables").GetComponent <VariableManagement> ();
+		float terrainXLength = variableManagement.GetLevelLengthX ();
+		float backgroundXLength = terrainXLength * (scrollSpeed * 10);
+		int maxBackgroundSegments = (int) (backgroundXLength / segments[0].bounds.size.x + 1);
+		for (int i = 0; i < maxBackgroundSegments; i++) {
+			GameObject createdPanel = (GameObject) (Instantiate(backgroundPanel, Vector3.zero, Quaternion.identity));
+			createdPanel.transform.SetParent(transform);
+			createdPanel.transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
+			createdPanel.transform.localPosition = new Vector3(10.24f * createdPanel.transform.localScale.x * i, 0, 0);
+			createdPanel.GetComponent <SpriteRenderer> ().sprite = ChooseRandomBackgroundTile();
 		}
-
-		StartCoroutine ("ScrollBackground");
-
+		transform.SetParent(variableManagement.GetPlayerReference().transform.FindChild("Main Camera"));
 	}
 
-	IEnumerator ScrollBackground() {
-		while (true) {
-			pos += scrollSpeed;
-			if (pos > 1.0f) 
-				pos -=1.0f;
+	Sprite ChooseRandomBackgroundTile() {
+		return segments[Random.Range(0, segments.Length)];
+	}
 
-			yield return null;
-		}
+	public void Movement(float h) {
+		Debug.Log ("Horizontal movement for background = " + h);
+		transform.localPosition += new Vector3 (-1 * h * scrollSpeed, 0, 0);
 	}
 
 }
