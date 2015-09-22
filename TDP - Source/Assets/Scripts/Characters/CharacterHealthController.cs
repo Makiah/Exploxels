@@ -53,7 +53,6 @@ public class CharacterHealthController : MonoBehaviour {
 		currentHealth = lifePoints;
 		//Create panel
 		uiHealthController = GameObject.Find ("Inventory (UI)").transform.FindChild ("Health Controller").gameObject.GetComponent <UIHealthController> (); 
-		//Debug.Log (uiHealthController.gameObject.name);
 		//Initialize icon
 		characterHeadSprite = transform.GetChild (0).GetChild (0).FindChild ("Head").GetComponent <SpriteRenderer> ().sprite;
 	}
@@ -71,19 +70,26 @@ public class CharacterHealthController : MonoBehaviour {
 	public void HealthPanelNewlyAvailable(HealthPanelReference healthPanel) {
 		healthPanelReference = healthPanel;
 		healthPanelReference.Add (characterHeadSprite, lifePoints, currentHealth);
+		Debug.Log ("Health panel is newly available for " + gameObject.name);
 	}
 
 	public void DisableHealthPanel() {
-		//Enemies try to disable health panel even if they do not have one.  
 		if (healthPanelReference != null) {
+			Debug.Log (gameObject.name + " is clearing the health panel");
 			healthPanelReference.Reset ();
 			healthPanelReference = null;
+		} else {
+			Debug.Log("No health panel reference was set, so " + gameObject.name + " did not clear the health panel.");
 		}
 	}
 
 	protected virtual void OnDeath() {
 		DisableHealthPanel();
 		Destroy (this.gameObject);
+	}
+
+	public bool GetHealthPanelState() {
+		return healthPanelReference == null ? false : true;
 	}
 
 

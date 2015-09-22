@@ -43,6 +43,7 @@ public class EventManager : MonoBehaviour {
 	public static event InitializePlayerCostume InitializeCostume;
 	public static event InitializePlayerCostume InitializeHotbarItems;
 
+	public static event BaseInitialization InitializeCameraFunctions;
 	public static event BaseInitialization InitializeBackgroundScroller;
 
 	public delegate void TerrainCreation (Transform[] maze);
@@ -73,6 +74,7 @@ public class EventManager : MonoBehaviour {
 		InitializeHotbarItems (minecrafter); //Used for initializing the HotbarManager.  
 		InitializePlayer (); //Used for initializing the HumanoidBaseReferenceClass.  
 		InitializePlayerDropSystem(createdUISlots); //Used for DropHandler
+		InitializeCameraFunctions (); // Used for camera controller.  
 		InitializeBackgroundScroller (); //Initialize the BackgroundScroller class.  
 
 		//Initialize the enemies.  

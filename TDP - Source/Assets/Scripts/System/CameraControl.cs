@@ -14,26 +14,50 @@ using System.Collections;
 
 public class CameraControl : MonoBehaviour {
 
-	public bool enable;
+	void OnEnable() {
+		EventManager.InitializeCameraFunctions += EnableCameraFunctions;
+	}
+
+	void OnDisable() {
+		EventManager.InitializeCameraFunctions -= EnableCameraFunctions;
+	}
+
+	bool enable = false;
 	public Transform playerTransform;
 	public float moveSpeed;
 
-	void Update() {
 
-		Vector3 mousePosition = Camera.main.ScreenToWorldPoint (Input.mousePosition);
-		Vector3 optimalCameraPosition = (playerTransform.position + mousePosition) / 2 + new Vector3(0, 0, -10);
+	void EnableCameraFunctions() {
+		StartCoroutine ("ListenForCameraFunctionEnable");
+		StartCoroutine ("MouseControl");
+	}
 
-		//The Screen point is remaining constant, yet the world point is changing as the object moves.  
-
-		if (enable) {
-
-			float speed = moveSpeed * Time.deltaTime * Mathf.Abs(transform.position.magnitude - optimalCameraPosition.magnitude);
-
-			transform.position = Vector3.MoveTowards(transform.position, optimalCameraPosition, speed);
-
+	IEnumerator ListenForCameraFunctionEnable() {
+		while (true) {
+			if (Input.GetKeyDown (KeyCode.C)) {
+				enable = !enable;
+			}
+			yield return null;
 		}
+	}
 
-			
+	IEnumerator MouseControl() {
+		while (true) {
+			//The Screen point is remaining constant, yet the world point is changing as the object moves.  
+
+			if (enable) {
+
+				Vector3 mousePosition = Camera.main.ScreenToWorldPoint (Input.mousePosition);
+				Vector3 optimalCameraPosition = (playerTransform.position + mousePosition) / 2 + new Vector3 (0, 0, -10);
+
+				float speed = moveSpeed * Time.deltaTime * Mathf.Abs (transform.position.magnitude - optimalCameraPosition.magnitude);
+
+				transform.position = Vector3.MoveTowards (transform.position, optimalCameraPosition, speed);
+
+			}
+
+			yield return null;
+		}
 	}
 
 }

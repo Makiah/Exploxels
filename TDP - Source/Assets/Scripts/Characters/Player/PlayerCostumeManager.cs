@@ -63,8 +63,6 @@ public class PlayerCostumeManager : MonoBehaviour {
 	//Called by HotbarManager when a new hotbar item is selected.
 	public void UpdatePlayerItem(GameObject prefabSelectedInHotbar) {
 
-		Debug.Log (holdingItem.name);
-
 		//Deletes the previous item that had existed before this new item.  
 		if (holdingItem.childCount != 0 && holdingItem != null) {
 			Destroy (holdingItem.GetChild (0).gameObject);

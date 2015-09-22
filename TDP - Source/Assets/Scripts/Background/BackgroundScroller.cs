@@ -37,8 +37,8 @@ public class BackgroundScroller : MonoBehaviour {
 		return segments[Random.Range(0, segments.Length)];
 	}
 
+	/// Called by player on each frame (FixedUpdate).  
 	public void Movement(float h) {
-		Debug.Log ("Horizontal movement for background = " + h);
 		transform.localPosition += new Vector3 (-1 * h * scrollSpeed, 0, 0);
 	}
 

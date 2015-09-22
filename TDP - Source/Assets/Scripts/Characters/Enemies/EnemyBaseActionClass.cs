@@ -34,6 +34,7 @@ public abstract class EnemyBaseActionClass : HumanoidBaseActionClass {
 		while (true) {
 			if (Vector3.Distance(transform.position, player.transform.position) <= playerViewableThreshold) {
 
+				//Active character health controller.  
 				if (!controllerActivated) {
 					GetComponent <CharacterHealthController> ().OnThisEnemyActivated();
 					controllerActivated = true;
@@ -98,7 +99,8 @@ public abstract class EnemyBaseActionClass : HumanoidBaseActionClass {
 			} else {
 				anim.SetFloat("Speed", 0);
 				rb2d.velocity = new Vector3(0, rb2d.velocity.y, 0);
-				if (controllerActivated) {
+				//De-activate health controller.  
+				if (controllerActivated || GetComponent <CharacterHealthController> ().GetHealthPanelState() == false) {
 					GetComponent <CharacterHealthController> ().OnThisEnemyDeActivated();
 					controllerActivated = false;
 				}
