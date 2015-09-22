@@ -100,7 +100,7 @@ public abstract class EnemyBaseActionClass : HumanoidBaseActionClass {
 				anim.SetFloat("Speed", 0);
 				rb2d.velocity = new Vector3(0, rb2d.velocity.y, 0);
 				//De-activate health controller.  
-				if (controllerActivated || GetComponent <CharacterHealthController> ().GetHealthPanelState() == false) {
+				if (controllerActivated || GetComponent <CharacterHealthController> ().GetHealthPanelState() == true) {
 					GetComponent <CharacterHealthController> ().OnThisEnemyDeActivated();
 					controllerActivated = false;
 				}

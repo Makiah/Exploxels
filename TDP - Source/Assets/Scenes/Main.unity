@@ -321,50 +321,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d2b5588b2840e4aa9b08b781c0f2d87d, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &1735686021
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1735686022}
-  - 114: {fileID: 1735686023}
-  m_Layer: 11
-  m_Name: Background
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1735686022
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1735686021}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2, y: 4, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
---- !u!114 &1735686023
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1735686021}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 580846d870cc566498629fc296b7f13c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  scrollSpeed: .00999999978
-  segments:
-  - {fileID: 21300000, guid: 9a9c769c91d144199ab7f6f33093346b, type: 3}
-  - {fileID: 21300000, guid: 620ab2ddeaa9d4e24acee7d600ab9126, type: 3}
-  backgroundPanel: {fileID: 192248, guid: 8140a623291c047229a4a39a46953bba, type: 2}
 --- !u!1001 &1959371190
 Prefab:
   m_ObjectHideFlags: 0

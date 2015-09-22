@@ -30,7 +30,6 @@ public class BackgroundScroller : MonoBehaviour {
 			createdPanel.transform.localPosition = new Vector3(10.24f * createdPanel.transform.localScale.x * i, 0, 0);
 			createdPanel.GetComponent <SpriteRenderer> ().sprite = ChooseRandomBackgroundTile();
 		}
-		transform.SetParent(variableManagement.GetPlayerReference().transform.FindChild("Main Camera"));
 	}
 
 	Sprite ChooseRandomBackgroundTile() {

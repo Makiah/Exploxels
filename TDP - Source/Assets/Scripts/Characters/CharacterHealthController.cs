@@ -78,8 +78,6 @@ public class CharacterHealthController : MonoBehaviour {
 			Debug.Log (gameObject.name + " is clearing the health panel");
 			healthPanelReference.Reset ();
 			healthPanelReference = null;
-		} else {
-			Debug.Log("No health panel reference was set, so " + gameObject.name + " did not clear the health panel.");
 		}
 	}
 
