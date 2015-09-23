@@ -17,11 +17,11 @@ using System.Collections.Generic;
 public class ResourceDatabase : MonoBehaviour {
 
 	void OnEnable() {
-		EventManager.ItemDatabaseInitialization += InitializeDatabase;
+		UIEventManager.InitializeResourceDatabase += InitializeDatabase;
 	}
 
 	void OnDisable() {
-		EventManager.ItemDatabaseInitialization -= InitializeDatabase;
+		UIEventManager.InitializeResourceDatabase -= InitializeDatabase;
 	}
 
 	public static List <ResourceReference> masterItemList = new List<ResourceReference> ();
@@ -30,6 +30,9 @@ public class ResourceDatabase : MonoBehaviour {
 	public static List <Race> gameRaces = new List <Race> ();
 	
 	void InitializeDatabase() {
+
+		DontDestroyOnLoad (this.gameObject);
+
 		/******************************************* ITEMS *******************************************/
 		//Tools
 		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.GameTool, "Wooden Sword", "A weak sword, but useful for survival.", 0, "Weapons/WoodenSword/WoodenSword"));
@@ -41,14 +44,19 @@ public class ResourceDatabase : MonoBehaviour {
 		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.CraftingMaterial, "Wood", "A vital material for any player", 0, "Items/Wood", "Items/UIWood"));
 		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.CraftingMaterial, "Rock", "Useful for crafting arrow tips", 1, "Items/Rock", "Items/UIRock"));
 
-		string[] minecrafterHeads = {"MinecrafterHead1"};
-		ResourceReference[] minecrafterInitialItems = {
+		string[] minecrafterMaleHeads = {"MinecrafterMaleHead1"};
+		ResourceReference[] minecrafterMaleInitialItems = {
 			GetItemByParameter ("Wooden Sword"), 
 			GetItemByParameter ("Wooden Hatchet"), 
-			GetItemByParameter ("Wooden Pickaxe"), 
-			GetItemByParameter ("Wooden Bow")
 		};
-		gameRaces.Add (new Race ("Races/Minecrafter/", minecrafterHeads, "Minecrafter", 0, minecrafterInitialItems));
+		gameRaces.Add (new Race ("Races/MinecrafterMale/", minecrafterMaleHeads, "MinecrafterMale", 0, minecrafterMaleInitialItems));
+
+		string[] minecrafterFemaleHeads = {"MinecrafterFemaleHead1"};
+		ResourceReference[] minecrafterFemaleInitialItems = {
+			GetItemByParameter ("Wooden Bow"), 
+			GetItemByParameter ("Wooden Pickaxe"), 
+		};
+		gameRaces.Add (new Race ("Races/MinecrafterFemale/", minecrafterFemaleHeads, "MinecrafterFemale", 0, minecrafterFemaleInitialItems));
 
 		/******************************************* COMBINATIONS *******************************************/
 		masterItemCombinationList.Add(new ItemCombination (new UISlotContentReference[] {

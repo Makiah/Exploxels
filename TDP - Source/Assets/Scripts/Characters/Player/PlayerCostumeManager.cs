@@ -19,11 +19,11 @@ public class PlayerCostumeManager : MonoBehaviour {
 	/************************************************** INITIALIZATION **************************************************/
 
 	void OnEnable() {
-		EventManager.InitializeCostume += InitializePlayerCostume;
+		LevelEventManager.InitializeCostume += InitializePlayerCostume;
 	}
 	
 	void OnDisable() {
-		EventManager.InitializeCostume -= InitializePlayerCostume;
+		LevelEventManager.InitializeCostume -= InitializePlayerCostume;
 	}
 
 

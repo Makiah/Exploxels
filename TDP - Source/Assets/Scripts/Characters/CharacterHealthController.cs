@@ -1,4 +1,4 @@
-﻿
+
 /*
  * Author: Makiah Bennett
  * Created 14 September 2015
@@ -22,11 +22,11 @@ public class CharacterHealthController : MonoBehaviour {
 	/************************* INITIALIZATION *************************/
 
 	protected virtual void OnEnable() {
-		EventManager.InitializeEnemyHealthControllers += InitializeHealthBar;
+		LevelEventManager.InitializeEnemyHealthControllers += InitializeHealthBar;
 	}
 
 	protected virtual void OnDisable() {
-		EventManager.InitializeEnemyHealthControllers -= InitializeHealthBar;
+		LevelEventManager.InitializeEnemyHealthControllers -= InitializeHealthBar;
 	}
 
 	/************************* HEALTH MANAGER *************************/
@@ -70,12 +70,10 @@ public class CharacterHealthController : MonoBehaviour {
 	public void HealthPanelNewlyAvailable(HealthPanelReference healthPanel) {
 		healthPanelReference = healthPanel;
 		healthPanelReference.Add (characterHeadSprite, lifePoints, currentHealth);
-		Debug.Log ("Health panel is newly available for " + gameObject.name);
 	}
 
 	public void DisableHealthPanel() {
 		if (healthPanelReference != null) {
-			Debug.Log (gameObject.name + " is clearing the health panel");
 			healthPanelReference.Reset ();
 			healthPanelReference = null;
 		}

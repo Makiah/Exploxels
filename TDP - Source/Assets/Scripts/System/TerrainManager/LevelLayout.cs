@@ -1,4 +1,4 @@
-﻿
+
 /*
  * Author: Makiah Bennett
  * Last edited: 11 September 2015
@@ -23,11 +23,11 @@ public class LevelLayout : MonoBehaviour {
 
 	/*************************** INITIALIZATION ***************************/
 	void OnEnable() {
-		EventManager.InitializeTerrain += InitializeTerrain;
+		LevelEventManager.InitializeTerrain += InitializeTerrain;
 	}
 	
 	void OnDisable() {
-		EventManager.InitializeTerrain -= InitializeTerrain;
+		LevelEventManager.InitializeTerrain -= InitializeTerrain;
 	}
 
 	/*************************** SCRIPT ***************************/

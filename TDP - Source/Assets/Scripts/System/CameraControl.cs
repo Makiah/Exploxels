@@ -1,4 +1,4 @@
-﻿
+
 /*
  * Author: Makiah Bennett
  * Last edited: 11 September 2015
@@ -15,11 +15,11 @@ using System.Collections;
 public class CameraControl : MonoBehaviour {
 
 	void OnEnable() {
-		EventManager.InitializeCameraFunctions += EnableCameraFunctions;
+		LevelEventManager.InitializeCameraFunctions += EnableCameraFunctions;
 	}
 
 	void OnDisable() {
-		EventManager.InitializeCameraFunctions -= EnableCameraFunctions;
+		LevelEventManager.InitializeCameraFunctions -= EnableCameraFunctions;
 	}
 
 	bool enable = false;

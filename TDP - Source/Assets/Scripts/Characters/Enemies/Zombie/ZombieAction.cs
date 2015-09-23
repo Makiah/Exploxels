@@ -1,4 +1,4 @@
-﻿
+
 /*
  * Author: Makiah Bennett
  * Created 13 September 2015
@@ -21,11 +21,11 @@ public class ZombieAction : EnemyBaseActionClass {
 	/******************************************** INITIALIZATION *******************************************/
 
 	protected override void OnEnable() {
-		EventManager.InitializeEnemies += SetReferences;
+		LevelEventManager.InitializeEnemies += SetReferences;
 	}
 
 	protected override void OnDisable() {
-		EventManager.InitializeEnemies -= SetReferences;
+		LevelEventManager.InitializeEnemies -= SetReferences;
 	}
 	
 

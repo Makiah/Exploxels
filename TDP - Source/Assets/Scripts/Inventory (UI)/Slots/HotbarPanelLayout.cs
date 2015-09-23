@@ -1,14 +1,14 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class HotbarPanelLayout : PanelLayout {
 
 	protected override void OnEnable() {
-		EventManager.CreateHotbarSlots += InitializeSlots;
+		LevelEventManager.CreateHotbarSlots += InitializeSlots;
 	}
 
 	protected override void OnDisable() {
-		EventManager.CreateHotbarSlots -= InitializeSlots;
+		LevelEventManager.CreateHotbarSlots -= InitializeSlots;
 	}
 
 }

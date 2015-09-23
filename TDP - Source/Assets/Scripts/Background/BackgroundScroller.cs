@@ -1,14 +1,14 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class BackgroundScroller : MonoBehaviour {
 
 	void OnEnable() {
-		EventManager.InitializeBackgroundScroller += InitializeBackgroundElements;
+		LevelEventManager.InitializeBackgroundScroller += InitializeBackgroundElements;
 	}
 
 	void OnDisable() {
-		EventManager.InitializeBackgroundScroller -= InitializeBackgroundElements;
+		LevelEventManager.InitializeBackgroundScroller -= InitializeBackgroundElements;
 	}
 
 	public float scrollSpeed;

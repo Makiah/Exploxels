@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class VariableManagement : MonoBehaviour {
@@ -8,11 +8,11 @@ public class VariableManagement : MonoBehaviour {
 	float levelLengthX;
 
 	void OnEnable() {
-		EventManager.CreatePlayerReference += SetPlayerReference;
+		LevelEventManager.CreatePlayerReference += SetPlayerReference;
 	}
 
 	void OnDisable() {
-		EventManager.CreatePlayerReference -= SetPlayerReference;
+		LevelEventManager.CreatePlayerReference -= SetPlayerReference;
 	}
 
 	void SetPlayerReference() {

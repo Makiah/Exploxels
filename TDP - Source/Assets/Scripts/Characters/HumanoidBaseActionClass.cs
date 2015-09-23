@@ -1,4 +1,4 @@
-﻿
+
 /*
  * Author: Makiah Bennett
  * Last edited: 14 September 2015
@@ -21,11 +21,11 @@ public abstract class HumanoidBaseActionClass : MonoBehaviour {
 	/********************************************** INITIALIZATION ******************************************************/
 	
 	protected virtual void OnEnable() {
-		EventManager.InitializePlayer += SetReferences;
+		LevelEventManager.InitializePlayer += SetReferences;
 	}
 	
 	protected virtual void OnDisable() {
-		EventManager.InitializePlayer -= SetReferences;
+		LevelEventManager.InitializePlayer -= SetReferences;
 	}
 	
 	

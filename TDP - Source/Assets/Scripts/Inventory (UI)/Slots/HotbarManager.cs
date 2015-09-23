@@ -20,11 +20,11 @@ public class HotbarManager : MonoBehaviour {
 	/************************************************** INITIALIZATION **************************************************/
 
 	void OnEnable() {
-		EventManager.InitializeHotbarItems += AssignInitialHotbarItems;
+		LevelEventManager.InitializeHotbarItems += AssignInitialHotbarItems;
 	}
 
 	void OnDisable() {
-		EventManager.InitializeHotbarItems -= AssignInitialHotbarItems;
+		LevelEventManager.InitializeHotbarItems -= AssignInitialHotbarItems;
 	}
 
 

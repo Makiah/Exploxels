@@ -1,14 +1,14 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class OreScript : DropsItems {
 
 	void OnEnable() {
-		EventManager.InitializeEnemies += ReferenceOreComponents;
+		LevelEventManager.InitializeEnemies += ReferenceOreComponents;
 	}
 	
 	void OnDisable() {
-		EventManager.InitializeEnemies -= ReferenceOreComponents;
+		LevelEventManager.InitializeEnemies -= ReferenceOreComponents;
 	}
 
 	public int hitsUntilDrop = 2;

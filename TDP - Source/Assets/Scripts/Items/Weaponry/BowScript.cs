@@ -59,7 +59,7 @@ public class BowScript : ItemBase {
 			accuracy = 0;
 		}
 
-		instantiatedArrowScript.InitializeProjectileWithThresholdAndDeviation (positionToFireToward, 10, preHeading, 30, accuracy, attackPowerStrength);
+		instantiatedArrowScript.InitializeProjectileWithThresholdAndDeviation (positionToFireToward, 12, preHeading, 30, accuracy, attackPowerStrength);
 
 	}
 

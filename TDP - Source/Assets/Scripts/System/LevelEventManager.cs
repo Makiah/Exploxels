@@ -13,10 +13,9 @@
 using UnityEngine;
 using System.Collections;
 
-public class EventManager : MonoBehaviour {
+public class LevelEventManager : MonoBehaviour {
 
 	public delegate void BaseInitialization();
-	public static event BaseInitialization ItemDatabaseInitialization;
 
 	public delegate SlotScript[,] InventorySlotInitialization ();
 	public static event InventorySlotInitialization CreateInventorySlots;
@@ -53,25 +52,30 @@ public class EventManager : MonoBehaviour {
 	public static event BaseInitialization InitializeEnemies;
 
 	void Start() {
-		ItemDatabaseInitialization(); //Used with ResourceDatabase
+
+		//Inventory UI Initialization
 		SlotScript[,] createdUISlots = CreateInventorySlots (); // Used with PanelLayout
 		CreateHotbarSlots (); //Used with HotbarPanelLayout (Otherwise createdUISlots gets the hotbarslots return).  
 		InitializeSlots (); //Used with SlotScript
 		EnableUIHideShow (); //Used with InventoryHideShow
 		InitializeUIHealthController(); //Used for UIHealthController
 
-		//Show UI
-
 		//Lay out the level
 		Transform[] initializedMaze = InitializeTerrain(); //Used with LevelLayout
 
 		//Instantiate the player and initialize costumeManager
-		Race minecrafter = ResourceDatabase.GetRaceByParameter ("Minecrafter"); //Purpose: Get race from ResourceDatabase.  Requirements: Database initialized.  
-		minecrafter.SetHeadVariation (0);   
+		bool useAltRace = GameObject.Find ("UI Data").GetComponent <UIData> ().chosenRace == 0 ? true : false;
+		Race raceToUse;
+		//Purpose: Get race from ResourceDatabase.  Requirements: Database initialized.
+		if (useAltRace) 
+			raceToUse = ResourceDatabase.GetRaceByParameter ("MinecrafterFemale");
+		else 
+			raceToUse = ResourceDatabase.GetRaceByParameter ("MinecrafterMale");  
+		raceToUse.SetHeadVariation (0);   
 		CreatePlayer(); //Used for CreateLevelItems (Instantiating player)
 		CreatePlayerReference (); //Used for CreateLevelItems
-		InitializeCostume(minecrafter);//Used for PlayerCostumeManager
-		InitializeHotbarItems (minecrafter); //Used for initializing the HotbarManager.  
+		InitializeCostume(raceToUse);//Used for PlayerCostumeManager
+		InitializeHotbarItems (raceToUse); //Used for initializing the HotbarManager.  
 		InitializePlayer (); //Used for initializing the HumanoidBaseReferenceClass.  
 		InitializePlayerDropSystem(createdUISlots); //Used for DropHandler
 		InitializeCameraFunctions (); // Used for camera controller.  

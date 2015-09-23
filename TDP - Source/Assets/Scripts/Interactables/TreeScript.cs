@@ -17,11 +17,11 @@ public class TreeScript : DropsItems {
 	/**************************************** INITIALIZATION ****************************************/
 
 	void OnEnable() {
-		EventManager.InitializeEnemies += ReferenceSegments;
+		LevelEventManager.InitializeEnemies += ReferenceSegments;
 	}
 
 	void OnDisable() {
-		EventManager.InitializeEnemies -= ReferenceSegments;
+		LevelEventManager.InitializeEnemies -= ReferenceSegments;
 	}
 
 

@@ -1,4 +1,4 @@
-﻿
+
 /*
  * Author: Makiah Bennett
  * Last edited: 11 September 2015
@@ -16,13 +16,13 @@ using System.Collections;
 public class CreateLevelItems : MonoBehaviour {
 
 	void OnEnable() {
-		EventManager.CreateTerrainItems += CreateTerrainItems;
-		EventManager.CreatePlayer += InstantiatePlayer;
+		LevelEventManager.CreateTerrainItems += CreateTerrainItems;
+		LevelEventManager.CreatePlayer += InstantiatePlayer;
 	}
 	
 	void OnDisable() {
-		EventManager.CreateTerrainItems -= CreateTerrainItems;
-		EventManager.CreatePlayer -= InstantiatePlayer;
+		LevelEventManager.CreateTerrainItems -= CreateTerrainItems;
+		LevelEventManager.CreatePlayer -= InstantiatePlayer;
 	}
 
 

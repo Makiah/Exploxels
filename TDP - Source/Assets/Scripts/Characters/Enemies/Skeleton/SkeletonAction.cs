@@ -1,4 +1,4 @@
-﻿
+
 /*
  * Author: Makiah Bennett
  * Last edited: 13 September 2015
@@ -20,11 +20,11 @@ public class SkeletonAction : EnemyBaseActionClass {
 	/******************************************** INITIALIZATION *******************************************/
 
 	protected override void OnEnable() {
-		EventManager.InitializeEnemies += SetReferences;
+		LevelEventManager.InitializeEnemies += SetReferences;
 	}
 
 	protected override void OnDisable() {
-		EventManager.InitializeEnemies -= SetReferences;
+		LevelEventManager.InitializeEnemies -= SetReferences;
 	}
 	
 

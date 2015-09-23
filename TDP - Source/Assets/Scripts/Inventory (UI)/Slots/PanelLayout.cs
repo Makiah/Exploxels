@@ -1,4 +1,4 @@
-﻿
+
 /*
  * Author: Makiah Bennett
  * Last edited: 11 September 2015
@@ -16,11 +16,11 @@ using System.Collections;
 public class PanelLayout : MonoBehaviour {
 
 	protected virtual void OnEnable () {
-		EventManager.CreateInventorySlots += InitializeSlots;
+		LevelEventManager.CreateInventorySlots += InitializeSlots;
 	}
 
 	protected virtual void OnDisable () {
-		EventManager.CreateInventorySlots -= InitializeSlots;
+		LevelEventManager.CreateInventorySlots -= InitializeSlots;
 	}
 
 	public GameObject slotPrefab;

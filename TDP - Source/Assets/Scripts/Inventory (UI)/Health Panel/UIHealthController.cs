@@ -19,11 +19,11 @@ using System.Collections.Generic;
 public class UIHealthController : MonoBehaviour {
 
 	void OnEnable() {
-		EventManager.InitializeUIHealthController += InitializeUIHealthController;
+		LevelEventManager.InitializeUIHealthController += InitializeUIHealthController;
 	}
 
 	void OnDisable() {
-		EventManager.InitializeUIHealthController -= InitializeUIHealthController;
+		LevelEventManager.InitializeUIHealthController -= InitializeUIHealthController;
 	}
 
 
