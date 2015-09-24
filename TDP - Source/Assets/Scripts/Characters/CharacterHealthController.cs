@@ -31,7 +31,7 @@ public class CharacterHealthController : MonoBehaviour {
 
 	/************************* HEALTH MANAGER *************************/
 	
-	public float lifePoints = 10f;
+	public float lifePoints;
 	protected float currentHealth;
 
 	protected UIHealthController uiHealthController;
@@ -50,6 +50,7 @@ public class CharacterHealthController : MonoBehaviour {
 
 	//Look into initializing this once the player comes into activation distance.  
 	protected virtual void InitializeHealthBar() {
+		lifePoints = 3f;
 		currentHealth = lifePoints;
 		//Create panel
 		uiHealthController = GameObject.Find ("Inventory (UI)").transform.FindChild ("Health Controller").gameObject.GetComponent <UIHealthController> (); 

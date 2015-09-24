@@ -56,7 +56,7 @@ public class ResourceDatabase : MonoBehaviour {
 			GetItemByParameter ("Wooden Bow"), 
 			GetItemByParameter ("Wooden Pickaxe"), 
 		};
-		gameRaces.Add (new Race ("Races/MinecrafterFemale/", minecrafterFemaleHeads, "MinecrafterFemale", 0, minecrafterFemaleInitialItems));
+		gameRaces.Add (new Race ("Races/MinecrafterFemale/", minecrafterFemaleHeads, "MinecrafterFemale", 1, minecrafterFemaleInitialItems));
 
 		/******************************************* COMBINATIONS *******************************************/
 		masterItemCombinationList.Add(new ItemCombination (new UISlotContentReference[] {
@@ -103,6 +103,14 @@ public class ResourceDatabase : MonoBehaviour {
 		}
 		
 		return null;
+	}
+
+	public static int GetNumberOfItemsInGame() {
+		return masterItemList.Count;
+	}
+
+	public static int GetNumberOfRacesInGame() {
+		return gameRaces.Count;
 	}
 
 }

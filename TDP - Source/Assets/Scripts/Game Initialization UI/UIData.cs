@@ -16,23 +16,17 @@ public class UIData : MonoBehaviour {
 	public int chosenRace;
 
 	GameObject gameUI;
-	InputField inputField;
+	ProfileSwitcher profileSwitcher;
 
 	public void InitializeUIElements() {
 		DontDestroyOnLoad (this.gameObject);
 		gameUI = GameObject.Find ("Game Initialization UI");
-		inputField = gameUI.transform.FindChild ("InputField").gameObject.GetComponent <InputField> ();
+		profileSwitcher = gameUI.transform.FindChild ("Profile Switcher").gameObject.GetComponent <ProfileSwitcher> ();
 	}
 
 	public void OnButtonPress() {
-		chosenRace = QueryTextField (inputField.text);
+		chosenRace = profileSwitcher.currentRace;
 		Application.LoadLevel (1);
-	}
-
-	int QueryTextField(string someNumber) {
-		int outVal;
-		int.TryParse (someNumber, out outVal);
-		return outVal;
 	}
 
 }

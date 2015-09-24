@@ -64,7 +64,7 @@ public class LevelEventManager : MonoBehaviour {
 		Transform[] initializedMaze = InitializeTerrain(); //Used with LevelLayout
 
 		//Instantiate the player and initialize costumeManager
-		bool useAltRace = GameObject.Find ("UI Data").GetComponent <UIData> ().chosenRace == 0 ? true : false;
+		bool useAltRace = GameObject.Find ("UI Data").GetComponent <UIData> ().chosenRace == 1 ? true : false;
 		Race raceToUse;
 		//Purpose: Get race from ResourceDatabase.  Requirements: Database initialized.
 		if (useAltRace) 

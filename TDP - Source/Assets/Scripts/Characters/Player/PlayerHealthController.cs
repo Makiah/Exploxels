@@ -22,6 +22,7 @@ public class PlayerHealthController : CharacterHealthController {
 	/************************* HEALTH MANAGER *************************/
 	
 	protected override void InitializeHealthBar() {
+		lifePoints = 10f;
 		currentHealth = lifePoints;
 		//Create panel
 		uiHealthController = GameObject.Find ("Inventory (UI)").transform.FindChild ("Health Controller").gameObject.GetComponent <UIHealthController> (); 

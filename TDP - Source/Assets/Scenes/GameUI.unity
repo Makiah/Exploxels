@@ -127,7 +127,7 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 607113843f9e74d2ea6af2dda5e0027d, type: 2}
   m_IsPrefabParent: 0
---- !u!1001 &251753901
+--- !u!1001 &258255849
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -164,7 +164,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 22461312, guid: 3d25469c67b2440b39bbae200e50652b, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 22461312, guid: 3d25469c67b2440b39bbae200e50652b, type: 2}
       propertyPath: m_AnchoredPosition.x
@@ -210,6 +210,11 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 741018796}
+    - target: {fileID: 11417140, guid: 3d25469c67b2440b39bbae200e50652b, type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 620ab2ddeaa9d4e24acee7d600ab9126,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3d25469c67b2440b39bbae200e50652b, type: 2}
   m_IsPrefabParent: 0
