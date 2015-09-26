@@ -168,20 +168,40 @@ MonoBehaviour:
   playerToInstantiate: {fileID: 172182, guid: c7d744bf7cde3a948aded2b45bbc2264, type: 2}
   pointToInstantiatePlayerAt: {x: 4.17999983, y: 4.17999983, z: 0}
   initialGameElements:
-  - elementReference: {fileID: 125046, guid: 6506a1d1e1eca4d5f8dc9e7c7e27db16, type: 2}
+  - elementReference: {fileID: 185688, guid: 5924714cab1d44ef2bd7e037cffdf22f, type: 2}
     probabilityOfInstantiation: 2
     headingNecessary: 0
     requiredHeading: 0
   - elementReference: {fileID: 178818, guid: b93cc74f47786d941bc438f0f74f7171, type: 2}
-    probabilityOfInstantiation: 2
+    probabilityOfInstantiation: 1
     headingNecessary: 0
     requiredHeading: 0
   - elementReference: {fileID: 156718, guid: c2ea16a9671dea64180a3eadd53b416a, type: 2}
-    probabilityOfInstantiation: 3
+    probabilityOfInstantiation: 6
     headingNecessary: 0
     requiredHeading: 0
   - elementReference: {fileID: 172888, guid: f9d3c8ae910c048ba8ec6f3845b566c9, type: 2}
+    probabilityOfInstantiation: 6
+    headingNecessary: 0
+    requiredHeading: 0
+  - elementReference: {fileID: 185688, guid: 9ca9a3a6e77d64c0b8e1bc8430975bbf, type: 2}
     probabilityOfInstantiation: 3
+    headingNecessary: 0
+    requiredHeading: 0
+  - elementReference: {fileID: 185688, guid: 1eeb07594afe64accb15eb6a6a45fd4c, type: 2}
+    probabilityOfInstantiation: 4
+    headingNecessary: 0
+    requiredHeading: 0
+  - elementReference: {fileID: 185688, guid: 7d5a2cdd34e0648e294bf73b7915d771, type: 2}
+    probabilityOfInstantiation: 5
+    headingNecessary: 0
+    requiredHeading: 0
+  - elementReference: {fileID: 185688, guid: 40ee4a814545440af98d87bc379b0e19, type: 2}
+    probabilityOfInstantiation: 7
+    headingNecessary: 0
+    requiredHeading: 0
+  - elementReference: {fileID: 185688, guid: bd12a06d595864b7dbde19f711e40e23, type: 2}
+    probabilityOfInstantiation: 6
     headingNecessary: 0
     requiredHeading: 0
 --- !u!114 &11460264
@@ -219,7 +239,55 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: initialGameElements.Array.size
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: initialGameElements.Array.data[4].elementReference
+      value: 
+      objectReference: {fileID: 185688, guid: 9ca9a3a6e77d64c0b8e1bc8430975bbf, type: 2}
+    - target: {fileID: 0}
+      propertyPath: initialGameElements.Array.data[4].probabilityOfInstantiation
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: initialGameElements.Array.data[5].elementReference
+      value: 
+      objectReference: {fileID: 185688, guid: 1eeb07594afe64accb15eb6a6a45fd4c, type: 2}
+    - target: {fileID: 0}
+      propertyPath: initialGameElements.Array.data[5].probabilityOfInstantiation
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: initialGameElements.Array.data[6].elementReference
+      value: 
+      objectReference: {fileID: 185688, guid: 7d5a2cdd34e0648e294bf73b7915d771, type: 2}
+    - target: {fileID: 0}
+      propertyPath: initialGameElements.Array.data[6].probabilityOfInstantiation
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: initialGameElements.Array.data[7].elementReference
+      value: 
+      objectReference: {fileID: 185688, guid: 40ee4a814545440af98d87bc379b0e19, type: 2}
+    - target: {fileID: 0}
+      propertyPath: initialGameElements.Array.data[8].elementReference
+      value: 
+      objectReference: {fileID: 185688, guid: bd12a06d595864b7dbde19f711e40e23, type: 2}
+    - target: {fileID: 0}
+      propertyPath: initialGameElements.Array.data[8].probabilityOfInstantiation
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: initialGameElements.Array.data[7].probabilityOfInstantiation
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: initialGameElements.Array.data[1].probabilityOfInstantiation
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 135008}

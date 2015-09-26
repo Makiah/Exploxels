@@ -25,8 +25,6 @@ public abstract class EnemyBaseActionClass : HumanoidBaseActionClass {
 	//What is the maximum difference in Y values the enemies must have to attack?
 	public float maxYValueSeparation;
 
-	bool controllerActivated = false;
-
 	//The player transform
 	protected Transform player;
 
@@ -35,9 +33,8 @@ public abstract class EnemyBaseActionClass : HumanoidBaseActionClass {
 			if (Vector3.Distance(transform.position, player.transform.position) <= playerViewableThreshold) {
 
 				//Active character health controller.  
-				if (!controllerActivated) {
+				if (GetComponent <CharacterHealthController> ().GetHealthPanelState() == false) {
 					GetComponent <CharacterHealthController> ().OnThisEnemyActivated();
-					controllerActivated = true;
 				}
 				
 				float distanceFromLeftPointX = Mathf.Abs(transform.position.x - (player.transform.position.x - remainDistanceFromPlayer));
@@ -100,9 +97,8 @@ public abstract class EnemyBaseActionClass : HumanoidBaseActionClass {
 				anim.SetFloat("Speed", 0);
 				rb2d.velocity = new Vector3(0, rb2d.velocity.y, 0);
 				//De-activate health controller.  
-				if (controllerActivated || GetComponent <CharacterHealthController> ().GetHealthPanelState() == true) {
+				if (GetComponent <CharacterHealthController> ().GetHealthPanelState() == true) {
 					GetComponent <CharacterHealthController> ().OnThisEnemyDeActivated();
-					controllerActivated = false;
 				}
 				yield return null;
 			}
