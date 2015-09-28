@@ -1,7 +1,7 @@
 
 /*
  * Author: Makiah Bennett
- * Last edited: 11 September 2015
+ * Last edited: 27 September 2015
  * 
  * The ResourceDatabase controls the items that are used during the game, by defining the items beforehand during the 
  * InitializeDatabase part of the EventManager script. 
@@ -41,8 +41,10 @@ public class ResourceDatabase : MonoBehaviour {
 		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.GameTool, "Wooden Bow", "A weak bow, useful for long range attacks.", 3, "Weapons/Wooden/WoodenBow/WoodenBow"));
 		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.GameTool, "Diamond Sword", "A strong monster-chopping sword.", 4, "Weapons/Diamond/DiamondSword/DiamondSword"));
 
-		//Crafting materials
+		//Crafting materialsi
 		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.CraftingMaterial, "Wood", "A vital material for any player", 0, "Items/Wood/Wood", "Items/Wood/UIWood"));
+		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.CraftingMaterial, "Wood Plank", "A vital wood refinement", 1, "Items/Wood/WoodPlank", "Items/Wood/UIWoodPlank"));
+
 
 		//Ores
 		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.Ore, "Coal", "Useful for crafting arrow tips", 0, "Items/Ores/Coal/Coal", "Items/Ores/Coal/UICoal"));
@@ -73,14 +75,14 @@ public class ResourceDatabase : MonoBehaviour {
 		/******************************************* COMBINATIONS *******************************************/
 		//Wooden Sword
 		masterItemCombinationList.Add(new ItemCombination (new UISlotContentReference[] {
-			new UISlotContentReference(ResourceDatabase.GetItemByParameter ("Wood"), 2),
+			new UISlotContentReference(ResourceDatabase.GetItemByParameter ("Wood"), 1),
 			new UISlotContentReference(ResourceDatabase.GetItemByParameter ("Wood"), 1)
 		}, 
-		new UISlotContentReference(ResourceDatabase.GetItemByParameter ("Wooden Sword"), 1)));
+		new UISlotContentReference(ResourceDatabase.GetItemByParameter ("Wood Plank"), 1)));
 
 		//Diamond Sword
 		masterItemCombinationList.Add(new ItemCombination(new UISlotContentReference[] {
-			new UISlotContentReference(ResourceDatabase.GetItemByParameter("Wood"), 3), 
+			new UISlotContentReference(ResourceDatabase.GetItemByParameter("Wood Plank"), 3), 
 			new UISlotContentReference(ResourceDatabase.GetItemByParameter("Diamond"), 2)
 		},
 		new UISlotContentReference(ResourceDatabase.GetItemByParameter("Diamond Sword"), 1)));

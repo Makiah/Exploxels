@@ -1,7 +1,7 @@
 
 /*
  * Author: Makiah Bennett
- * Last edited: 11 September 2015
+ * Last edited: 27 September 2015
  * 
  * CreateLevelItems manages the enemies of the game, and instantiates them at pre-set points in each variation.  
  * This is done through the EnemyReferenceClass probability indicators, which are defined in this class.  
@@ -28,6 +28,8 @@ public class CreateLevelItems : MonoBehaviour {
 
 	public GameObject playerToInstantiate;
 	public Vector3 pointToInstantiatePlayerAt;
+
+	public int probabilityToInstantiateNullElement;
 	public EnemyReferenceClass[] initialGameElements;
 
 	void InstantiatePlayer() {
@@ -48,30 +50,30 @@ public class CreateLevelItems : MonoBehaviour {
 					Transform[] enemyItemPoints = ScriptingUtilities.ParseChildrenFromTransform (enemyItemsTransform);
 						
 					foreach (Transform enemyItemPoint in enemyItemPoints) {
-							
-						bool instantiationPossible = true;
 
-						EnemyReferenceClass chosenElement = initialGameElements [Random.Range (0, initialGameElements.Length)];
+						EnemyReferenceClass chosenElement = ChooseElement();
 
-						if (chosenElement.headingNecessary) {
-							if (mazeSegments [i].transform.rotation.eulerAngles.z == chosenElement.requiredHeading) {
-								instantiationPossible = true;
-							} else {
-								instantiationPossible = false;
-							}
-						}
-
-						if (Random.Range (0, chosenElement.probabilityOfInstantiation) == 0 && instantiationPossible) {
+						if (chosenElement != null) {
 							GameObject createdElement = (GameObject)(Instantiate (chosenElement.elementReference, enemyItemPoint.position + chosenElement.elementReference.transform.localPosition, Quaternion.identity));
 							createdElement.transform.SetParent (enemyItemPoint);
 						}
-
 					}
-
 				}
 			}
 		}
+	}
 
+	EnemyReferenceClass ChooseElement() {
+		if (Random.Range (0, probabilityToInstantiateNullElement) == 0) {
+			while (true) {
+				EnemyReferenceClass chosenItem = initialGameElements [Random.Range (0, initialGameElements.Length)];
+				if (Random.Range (0, chosenItem.probabilityOfInstantiation) == 0) {
+					return chosenItem;
+				}
+			}
+		} else {
+			return null;
+		}
 	}
 
 }

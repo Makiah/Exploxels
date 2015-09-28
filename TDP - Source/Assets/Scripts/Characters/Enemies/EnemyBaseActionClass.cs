@@ -14,7 +14,18 @@
 using UnityEngine;
 using System.Collections;
 
-public abstract class EnemyBaseActionClass : HumanoidBaseActionClass {
+public abstract class EnemyBaseActionClass : CharacterBaseActionClass {
+
+	/******************************************** INITIALIZATION *******************************************/
+	
+	protected override void OnEnable() {
+		LevelEventManager.InitializeEnemies += SetReferences;
+	}
+	
+	protected override void OnDisable() {
+		LevelEventManager.InitializeEnemies -= SetReferences;
+	}
+
 
 	//The maximum distance that the player can be away from the enemy for it to activate.  
 	public float playerViewableThreshold;
@@ -27,6 +38,14 @@ public abstract class EnemyBaseActionClass : HumanoidBaseActionClass {
 
 	//The player transform
 	protected Transform player;
+
+	protected override void SetReferences() {
+		player = GameObject.Find ("ManagementFrameworks").transform.FindChild ("GameVariables").gameObject.GetComponent <VariableManagement> ().GetPlayerReference ().transform;
+
+		base.SetReferences ();
+
+		StartCoroutine ("BasicEnemyControl");
+	}
 
 	protected virtual IEnumerator BasicEnemyControl() {
 		while (true) {

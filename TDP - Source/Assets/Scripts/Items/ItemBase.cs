@@ -18,11 +18,11 @@ using System.Collections.Generic;
 //later added, this class makes more sense.  
 public abstract class ItemBase : MonoBehaviour {
 
-	protected HumanoidBaseActionClass attachedCharacterInput;
+	protected CharacterBaseActionClass attachedCharacterInput;
 
 	protected string lookForItemsOnLayer = "Enemies";
 
-	public void SetAttachedCharacterInput(HumanoidBaseActionClass ctorCharacterInput) {
+	public void SetAttachedCharacterInput(CharacterBaseActionClass ctorCharacterInput) {
 		attachedCharacterInput = ctorCharacterInput;
 	}
 

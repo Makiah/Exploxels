@@ -1,7 +1,7 @@
 
 /*
  * Author: Makiah Bennett
- * Last edited: 11 September 2015
+ * Last edited: 27 September 2015
  * 
  * This script manages the entire path the game takes.  Each event is static, so it only belongs to this class.  Each OnEnable() and OnDsiable() 
  * assigns and de-assigns events to this class.  

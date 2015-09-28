@@ -1,9 +1,11 @@
 
 /*
  * Author: Makiah Bennett
- * Last edited: 14 September 2015
+ * Last edited: 27 September 2015
  * 
  * 9/14 - Renamed to HumanoidBaseActionClass.  
+ * 
+ * 9/27 - Maybe this could be a class for all characters (including quadripedal characters), seeing as how there is nothing specifically humanoid.  
  * 
  * This script is the base class for all characters in the game (such as the skeleton, the player, zombies, etc.).  It controls movement, maxSpeed, 
  * moveForce, wall jumping, etc.  Almost all of the methods are overridable, and accessible by child classes.  
@@ -16,7 +18,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public abstract class HumanoidBaseActionClass : MonoBehaviour {
+public abstract class CharacterBaseActionClass : MonoBehaviour {
 
 	/********************************************** INITIALIZATION ******************************************************/
 	
@@ -58,14 +60,11 @@ public abstract class HumanoidBaseActionClass : MonoBehaviour {
 	//private PlayerCostumeManager mainPlayerCostumeManager;
 	
 	protected virtual void SetReferences() {
-		characterSpriteObject = transform.FindChild("FlippingItem").FindChild ("Character");
 		anim = characterSpriteObject.GetComponent <Animator> ();
 		rb2d = GetComponent <Rigidbody2D> ();
 		groundCheck = characterSpriteObject.FindChild ("GroundCheck");
 
 		maxSpeedInitial = maxSpeed;
-		
-		//mainPlayerCostumeManager = transform.FindChild ("FlippingItem").FindChild ("Player").gameObject.GetComponent <PlayerCostumeManager> ();
 		
 		StartCoroutine ("CheckCharacterPhysics");
 	}
