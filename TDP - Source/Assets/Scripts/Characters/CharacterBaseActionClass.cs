@@ -168,4 +168,6 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 		ActionsAfterAnimation = null;
 		currentlyInAttackAnimation = false;
 	}
+
+
 }

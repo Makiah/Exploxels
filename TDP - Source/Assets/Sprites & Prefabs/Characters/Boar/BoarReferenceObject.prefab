@@ -58,7 +58,8 @@ GameObject:
   - 50: {fileID: 5035646}
   - 61: {fileID: 6199756}
   - 114: {fileID: 11442226}
-  m_Layer: 11
+  - 114: {fileID: 11487284}
+  m_Layer: 9
   m_Name: BoarReferenceObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -74,7 +75,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 455824}
   - 95: {fileID: 9571138}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Boar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -122,7 +123,7 @@ GameObject:
   - 4: {fileID: 488918}
   - 212: {fileID: 21259416}
   m_Layer: 0
-  m_Name: BoarTail
+  m_Name: Tail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -151,7 +152,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 447778}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: GroundCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -168,7 +169,7 @@ GameObject:
   - 4: {fileID: 482032}
   - 212: {fileID: 21253566}
   m_Layer: 0
-  m_Name: BoarBody
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -184,7 +185,7 @@ GameObject:
   - 4: {fileID: 439596}
   - 212: {fileID: 21256434}
   m_Layer: 0
-  m_Name: BoarHead
+  m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -214,7 +215,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 484406}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: FlippingItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -279,8 +280,8 @@ Transform:
   m_LocalPosition: {x: .432000011, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 482032}
-  m_RootOrder: 0
+  m_Father: {fileID: 455824}
+  m_RootOrder: 1
 --- !u!4 &447778
 Transform:
   m_ObjectHideFlags: 1
@@ -288,11 +289,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 172322}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalPosition: {x: 0, y: -.74000001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 455824}
-  m_RootOrder: 1
+  m_RootOrder: 4
 --- !u!4 &455824
 Transform:
   m_ObjectHideFlags: 1
@@ -304,6 +305,9 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 482032}
+  - {fileID: 439596}
+  - {fileID: 488918}
+  - {fileID: 462252}
   - {fileID: 447778}
   m_Father: {fileID: 484406}
   m_RootOrder: 0
@@ -319,8 +323,8 @@ Transform:
   m_Children:
   - {fileID: 464722}
   - {fileID: 479532}
-  m_Father: {fileID: 482032}
-  m_RootOrder: 2
+  m_Father: {fileID: 455824}
+  m_RootOrder: 3
 --- !u!4 &464722
 Transform:
   m_ObjectHideFlags: 1
@@ -371,10 +375,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 439596}
-  - {fileID: 488918}
-  - {fileID: 462252}
+  m_Children: []
   m_Father: {fileID: 455824}
   m_RootOrder: 0
 --- !u!4 &484406
@@ -400,8 +401,8 @@ Transform:
   m_LocalPosition: {x: -.432000011, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 482032}
-  m_RootOrder: 1
+  m_Father: {fileID: 455824}
+  m_RootOrder: 2
 --- !u!50 &5035646
 Rigidbody2D:
   serializedVersion: 2
@@ -461,7 +462,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 5
   moveForce: 4
-  jumpForce: 5
+  jumpForce: 8
   wallJumpForce: 0
   groundedOffset: 0
   characterName: 
@@ -469,6 +470,18 @@ MonoBehaviour:
   remainDistanceFromPlayer: 3
   ignorePlayerMovementThreshold: 5
   maxYValueSeparation: 0
+--- !u!114 &11487284
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 146722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c7a9b9e9cffdf4fc19ab7383909402de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifePoints: 3
 --- !u!212 &21216420
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -668,7 +681,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: jumpForce
-      value: 5
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: remainDistanceFromPlayer
@@ -694,6 +707,14 @@ Prefab:
       propertyPath: m_Controller
       value: 
       objectReference: {fileID: 9100000, guid: b67c220e57edf4817a4ec512000d3020, type: 2}
+    - target: {fileID: 0}
+      propertyPath: lifePoints
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 146722}

@@ -38,6 +38,5 @@ public class ZombieAction : EnemyBaseActionClass {
 	protected override void Attack() {
 		AttackAction ("Stab");
 	}
-	
 
 }
