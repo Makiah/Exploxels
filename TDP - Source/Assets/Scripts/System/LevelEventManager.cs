@@ -27,7 +27,7 @@ public class LevelEventManager : MonoBehaviour {
 
 	public static event BaseInitialization InitializeUIHealthController;
 
-	public delegate Transform[] TerrainInitialization();
+	public delegate TerrainReferenceClass TerrainInitialization();
 	public static event TerrainInitialization InitializeTerrain;
 
 	public static event BaseInitialization CreatePlayer;
@@ -45,7 +45,7 @@ public class LevelEventManager : MonoBehaviour {
 	public static event BaseInitialization InitializeCameraFunctions;
 	public static event BaseInitialization InitializeBackgroundScroller;
 
-	public delegate void TerrainCreation (Transform[] maze);
+	public delegate void TerrainCreation (TerrainReferenceClass maze);
 	public static event TerrainCreation CreateTerrainItems;
 
 	public static event BaseInitialization InitializeEnemyHealthControllers;
@@ -61,7 +61,7 @@ public class LevelEventManager : MonoBehaviour {
 		InitializeUIHealthController(); //Used for UIHealthController
 
 		//Lay out the level
-		Transform[] initializedMaze = InitializeTerrain(); //Used with LevelLayout
+		TerrainReferenceClass initializedMaze = InitializeTerrain(); //Used with LevelLayout
 
 		//Instantiate the player and initialize costumeManager
 		bool useAltRace = GameObject.Find ("UI Data").GetComponent <UIData> ().chosenRace == 1 ? true : false;

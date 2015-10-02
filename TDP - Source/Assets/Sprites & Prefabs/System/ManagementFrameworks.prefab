@@ -213,10 +213,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transferSegments:
     startSegment: {fileID: 146430, guid: f92db09ae2b5943b7a44cc76f9a981c3, type: 2}
-    variations:
-    - {fileID: 134192, guid: aedb669fec37e42aaacbb8d47771e50f, type: 2}
-    - {fileID: 102654, guid: 4e0492980029147978c0f2cfb4295b3d, type: 2}
-    - {fileID: 112102, guid: caa4793e6079f411d976858e219b1ce7, type: 2}
+    l1Variations:
+    - {fileID: 192088, guid: 9b9a9191858bc4f52bfbb1af9b53c3d3, type: 2}
+    - {fileID: 118018, guid: 7bf4af12d483441ccac7bacdd679027c, type: 2}
+    - {fileID: 116842, guid: 22f9ab5335f2641d18d9e048b4edeee4, type: 2}
+    l2Variations:
+    - {fileID: 105292, guid: b1fcf907a06444383add4afc40e36704, type: 2}
+    l3Variations:
+    - {fileID: 125090, guid: 67fa3b74ef9fa48edb553c048d2f447d, type: 2}
   levelLength: 7
 --- !u!1001 &100100000
 Prefab:
@@ -228,6 +232,18 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: initialGameElements.Array.size
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: transferSegments.l1Variations.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: transferSegments.l2Variations.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: transferSegments.l3Variations.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: initialGameElements.Array.data[4].elementReference
@@ -276,6 +292,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: probabilityToInstantiateNullElement
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

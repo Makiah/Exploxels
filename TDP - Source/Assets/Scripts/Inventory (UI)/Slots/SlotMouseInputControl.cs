@@ -155,7 +155,6 @@ public class SlotMouseInputControl : MonoBehaviour {
 
 		if (assignToANewValue) {
 			cursorTexture = itemInControlByMouse.uiSlotContent.itemIcon.texture;
-			Debug.Log ("Used default item icon texture for mouse cursor");
 			cursorHotspot = new Vector2 (cursorTexture.width / 2f, cursorTexture.height / 2f);
 		} else {
 			cursorHotspot = Vector2.zero;

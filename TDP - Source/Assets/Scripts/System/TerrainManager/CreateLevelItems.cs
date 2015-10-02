@@ -37,13 +37,13 @@ public class CreateLevelItems : MonoBehaviour {
 		Debug.Log ("Instantiated Player");
 	}
 
-	void CreateTerrainItems (Transform[] mazeSegments) {
+	void CreateTerrainItems (TerrainReferenceClass mazeSegments) {
 
-		for (int i = 0; i < mazeSegments.Length; i++) {
+		for (int i = 0; i < mazeSegments.layer1.Length; i++) {
 
-			if (mazeSegments[i].FindChild("Points") != null) {
+			if (mazeSegments.layer1[i].FindChild("Points") != null) {
 
-				Transform enemyItemsTransform = mazeSegments [i].FindChild ("Points").FindChild ("EnemyItems");
+				Transform enemyItemsTransform = mazeSegments.layer1[i].FindChild ("Points").FindChild ("EnemyItems");
 
 				if (enemyItemsTransform.childCount != 0) {
 						
@@ -59,6 +59,8 @@ public class CreateLevelItems : MonoBehaviour {
 						}
 					}
 				}
+			} else {
+				Debug.Log("Did not find points upon which to instantiate enemies on increment " + i + " with variation name " + mazeSegments.layer1[i].gameObject.name);
 			}
 		}
 	}
