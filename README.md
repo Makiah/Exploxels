@@ -1,6 +1,6 @@
 # PROJECT SUMMARY #
 
-## What is Three Doors? ###
+## What is Three Doors? (Possibly consider renaming to Exploxels) ###
 ### TECHNICAL ###
 Three Doors is a 2D, Voxel Game made using the Unity3D game engine, and assets from Kenney.NL.  The concept of the game is similar to Magicite, Terraria, and Minecraft in many respects, yet what makes the project the most interesting is the concept, and the broad things you will be able to do in the final project.  NOTE: MINING WILL NEVER BE A FEATURE!!!
 ### GAMEPLAY SUMMARY ###
