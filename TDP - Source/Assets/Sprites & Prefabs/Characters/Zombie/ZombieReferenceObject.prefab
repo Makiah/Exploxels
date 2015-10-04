@@ -535,11 +535,10 @@ MonoBehaviour:
   wallJumpForce: 0
   groundedOffset: 0
   characterName: 
-  playerViewableThreshold: 50
+  playerViewableThreshold: 25
   remainDistanceFromPlayer: 1.25
   ignorePlayerMovementThreshold: .75
   maxYValueSeparation: 5
-  enemyHealthBarInitialized: 0
 --- !u!114 &11498274
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -551,8 +550,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7a9b9e9cffdf4fc19ab7383909402de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifePoints: 10
-  healthPanelPrefab: {fileID: 193180, guid: c142d1c850423402ba972e4b47497d05, type: 2}
+  lifePoints: 5
+  distanceUntilHealthBarActive: 5
 --- !u!212 &21207382
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -744,7 +743,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: playerViewableThreshold
-      value: 50
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: remainDistanceFromPlayer
@@ -774,6 +773,14 @@ Prefab:
       propertyPath: healthPanelPrefab
       value: 
       objectReference: {fileID: 193180, guid: c142d1c850423402ba972e4b47497d05, type: 2}
+    - target: {fileID: 0}
+      propertyPath: lifePoints
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: distanceUntilHealthBarActive
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 172888}

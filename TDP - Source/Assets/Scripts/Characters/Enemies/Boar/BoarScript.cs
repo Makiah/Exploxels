@@ -14,7 +14,6 @@ using System.Collections;
 public class BoarScript : EnemyBaseActionClass {
 
 	protected override void SetReferences() {
-		Debug.Log ("Boar completed");
 		characterSpriteObject = transform.FindChild("FlippingItem").FindChild ("Boar");
 		base.SetReferences ();
 	}

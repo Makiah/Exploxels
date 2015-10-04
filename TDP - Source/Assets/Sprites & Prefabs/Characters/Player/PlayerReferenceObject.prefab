@@ -668,6 +668,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifePoints: 10
+  distanceUntilHealthBarActive: 0
 --- !u!124 &12433794
 Behaviour:
   m_ObjectHideFlags: 1

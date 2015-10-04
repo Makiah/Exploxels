@@ -38,9 +38,9 @@ public class PlayerHealthController : CharacterHealthController {
 		Debug.Log ("Player OnDeath called");
 		healthPanelReference.Clear ();
 		//Note: Application.Quit() does not work for the Web Player or the Unity Editor.  
-		//Application.Quit ();
+		Application.Quit ();
 		//The following does work for the editor.  
-		UnityEditor.EditorApplication.isPlaying = false;
+		//UnityEditor.EditorApplication.isPlaying = false;
 		Destroy (this.gameObject);
 	}
 }

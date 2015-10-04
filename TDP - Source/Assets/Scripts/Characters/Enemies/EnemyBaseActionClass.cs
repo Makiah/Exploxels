@@ -26,7 +26,6 @@ public abstract class EnemyBaseActionClass : CharacterBaseActionClass {
 		LevelEventManager.InitializeEnemies -= SetReferences;
 	}
 
-
 	//The maximum distance that the player can be away from the enemy for it to activate.  
 	public float playerViewableThreshold;
 	//The safe distance to stay away from the player.  
@@ -40,7 +39,7 @@ public abstract class EnemyBaseActionClass : CharacterBaseActionClass {
 	protected Transform player;
 
 	protected override void SetReferences() {
-		player = GameObject.Find ("ManagementFrameworks").transform.FindChild ("GameVariables").gameObject.GetComponent <VariableManagement> ().GetPlayerReference ().transform;
+		player = VariableManagement.GetPlayerReference ().transform;
 
 		base.SetReferences ();
 
@@ -50,11 +49,6 @@ public abstract class EnemyBaseActionClass : CharacterBaseActionClass {
 	protected virtual IEnumerator BasicEnemyControl() {
 		while (true) {
 			if (Vector3.Distance(transform.position, player.transform.position) <= playerViewableThreshold) {
-
-				//Active character health controller.  
-				if (GetComponent <CharacterHealthController> ().GetHealthPanelState() == false) {
-					GetComponent <CharacterHealthController> ().OnThisEnemyActivated();
-				}
 				
 				float distanceFromLeftPointX = Mathf.Abs(transform.position.x - (player.transform.position.x - remainDistanceFromPlayer));
 				float distanceFromRightPointX = Mathf.Abs(transform.position.x - (player.transform.position.x + remainDistanceFromPlayer));
@@ -115,10 +109,7 @@ public abstract class EnemyBaseActionClass : CharacterBaseActionClass {
 			} else {
 				anim.SetFloat("Speed", 0);
 				rb2d.velocity = new Vector3(0, rb2d.velocity.y, 0);
-				//De-activate health controller.  
-				if (GetComponent <CharacterHealthController> ().GetHealthPanelState() == true) {
-					GetComponent <CharacterHealthController> ().OnThisEnemyDeActivated();
-				}
+			
 				yield return null;
 			}
 			

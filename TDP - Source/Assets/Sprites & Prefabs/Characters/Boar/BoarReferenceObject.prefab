@@ -59,6 +59,7 @@ GameObject:
   - 61: {fileID: 6199756}
   - 114: {fileID: 11442226}
   - 114: {fileID: 11487284}
+  - 61: {fileID: 6135524}
   m_Layer: 9
   m_Name: BoarReferenceObject
   m_TagString: Untagged
@@ -419,6 +420,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!61 &6135524
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 146722}
+  m_Enabled: 1
+  m_Material: {fileID: 6200000, guid: 43753284af9654601a12a7c61978d601, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: .230000019, y: .410199642}
+  serializedVersion: 2
+  m_Size: {x: 1.6099999, y: .1817379}
 --- !u!61 &6199756
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -466,9 +480,9 @@ MonoBehaviour:
   wallJumpForce: 0
   groundedOffset: 0
   characterName: 
-  playerViewableThreshold: 50
-  remainDistanceFromPlayer: 3
-  ignorePlayerMovementThreshold: 5
+  playerViewableThreshold: 25
+  remainDistanceFromPlayer: 8
+  ignorePlayerMovementThreshold: 7
   maxYValueSeparation: 0
 --- !u!114 &11487284
 MonoBehaviour:
@@ -482,6 +496,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lifePoints: 3
+  distanceUntilHealthBarActive: 5
 --- !u!212 &21216420
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -685,15 +700,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: remainDistanceFromPlayer
-      value: 3
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: ignorePlayerMovementThreshold
-      value: 5
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: playerViewableThreshold
-      value: 50
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: maxSpeed
@@ -714,6 +729,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Layer
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: distanceUntilHealthBarActive
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

@@ -38,6 +38,38 @@ public class CharacterHealthController : MonoBehaviour {
 	protected HealthPanelReference healthPanelReference;
 	protected Sprite characterHeadSprite;
 
+	//The player transform
+	protected Transform player;
+
+	[SerializeField]
+	private float distanceUntilHealthBarActive;
+
+	//Look into initializing this once the player comes into activation distance.  
+	protected virtual void InitializeHealthBar() {
+		player = VariableManagement.GetPlayerReference ().transform;
+		currentHealth = lifePoints;
+		//Create panel
+		uiHealthController = GameObject.Find ("Inventory (UI)").transform.FindChild ("Health Controller").gameObject.GetComponent <UIHealthController> (); 
+		//Initialize icon
+		characterHeadSprite = transform.GetChild (0).GetChild (0).FindChild ("Head").GetComponent <SpriteRenderer> ().sprite;
+
+		StartCoroutine ("ControlHealthBarState");
+	}
+
+	IEnumerator ControlHealthBarState() {
+		while (true) {
+			if (Vector3.Distance(transform.position, player.position) <= distanceUntilHealthBarActive && GetHealthPanelState() == false) {
+				Debug.Log("Player entered radius");
+				OnThisEnemyActivated();
+			} else if (Vector3.Distance(transform.position, player.position) > distanceUntilHealthBarActive && GetHealthPanelState() == true) {
+				Debug.Log("Player exited radius");
+				OnThisEnemyDeActivated();
+			}
+
+			yield return null;
+		}
+	}
+
 	public void YouHaveBeenAttacked(float lifePointDeduction) {
 		Debug.Log ("Attack received " + lifePointDeduction);
 		currentHealth -= lifePointDeduction;
@@ -48,22 +80,13 @@ public class CharacterHealthController : MonoBehaviour {
 		}
 	}
 
-	//Look into initializing this once the player comes into activation distance.  
-	protected virtual void InitializeHealthBar() {
-		currentHealth = lifePoints;
-		//Create panel
-		uiHealthController = GameObject.Find ("Inventory (UI)").transform.FindChild ("Health Controller").gameObject.GetComponent <UIHealthController> (); 
-		//Initialize icon
-		characterHeadSprite = transform.GetChild (0).GetChild (0).FindChild ("Head").GetComponent <SpriteRenderer> ().sprite;
-	}
-
-	public void OnThisEnemyActivated() {
+	void OnThisEnemyActivated() {
 		healthPanelReference = uiHealthController.GetEnemyHealthPanelReference (this);
 		if (healthPanelReference != null)
 			healthPanelReference.Add (characterHeadSprite, lifePoints, currentHealth);
 	}
 
-	public void OnThisEnemyDeActivated() {
+	void OnThisEnemyDeActivated() {
 		DisableHealthPanel ();
 	}
 
@@ -80,6 +103,7 @@ public class CharacterHealthController : MonoBehaviour {
 	}
 
 	protected virtual void OnDeath() {
+		StopCoroutine ("ControlHealthBarState");
 		DisableHealthPanel();
 		Destroy (this.gameObject);
 	}

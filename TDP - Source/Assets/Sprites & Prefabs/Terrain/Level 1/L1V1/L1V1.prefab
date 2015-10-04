@@ -883,7 +883,8 @@ EdgeCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   m_Points:
-  - {x: 10.2410641, y: -31.9177475}
+  - {x: 31.9826736, y: -31.9924278}
+  - {x: 10.2491627, y: -31.9880333}
   - {x: 10.2772913, y: -24.2885075}
   - {x: 8.97153854, y: -24.3054504}
   - {x: 9.00847054, y: -21.7880821}
@@ -1059,11 +1060,12 @@ EdgeCollider2D:
   - {x: 1.26643014, y: -20.4492283}
   - {x: 1.29893386, y: -21.7398148}
   - {x: 2.54958344, y: -21.7755775}
-  - {x: 2.56225038, y: -29.4348717}
-  - {x: 3.7685008, y: -29.4421654}
-  - {x: 3.83214569, y: -30.6935005}
-  - {x: 5.14086008, y: -30.6750908}
-  - {x: 5.12127972, y: -31.9804783}
+  - {x: 2.56225038, y: -29.4454174}
+  - {x: 3.85847664, y: -29.4527111}
+  - {x: 3.83691239, y: -30.7125664}
+  - {x: 5.12179327, y: -30.7084579}
+  - {x: 5.11998081, y: -32.0059357}
+  - {x: -32.0001488, y: -31.990015}
 --- !u!212 &21201458
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -1074,7 +1076,7 @@ SpriteRenderer:
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000e000000000000000, type: 0}
+  - {fileID: 2100000, guid: e454f5127eda748efb16894d8530fcd8, type: 2}
   m_SubsetIndices: 
   m_StaticBatchRoot: {fileID: 0}
   m_UseLightProbes: 0
@@ -1109,6 +1111,10 @@ Prefab:
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e454f5127eda748efb16894d8530fcd8, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 192088}

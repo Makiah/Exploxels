@@ -44,7 +44,7 @@ public class HotbarManager : MonoBehaviour {
 
 	void AssignInitialHotbarItems(Race race) {
 
-		playerObject = GameObject.Find ("ManagementFrameworks").transform.FindChild ("GameVariables").gameObject.GetComponent <VariableManagement> ().GetPlayerReference ();
+		playerObject = VariableManagement.GetPlayerReference ();
 		playerCostumeManager = playerObject.transform.FindChild ("FlippingItem").FindChild ("Player").GetComponent <PlayerCostumeManager>();
 		hotbarSlots = new HotbarSlotScript[transform.childCount];
 		for (int i = 0; i < transform.childCount; i++) {

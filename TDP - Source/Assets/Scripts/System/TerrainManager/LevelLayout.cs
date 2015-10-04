@@ -49,7 +49,7 @@ public class LevelLayout : MonoBehaviour {
 
 		//For all levelLength values
 		for (int i = 0; i < levelLength; i ++) {
-			//Halfwidth and currentX position are used for all variations.  
+			//Half-Width and currentX position are used for all variations.  
 			GameObject chosenObjectLayer1 = ChooseRandomObjectFromArray(transferSegments.l1Variations);
 			float halfWidth = GetSpriteSizeFromGameObject(chosenObjectLayer1).x / 2f;
 			currentXPosition += halfWidth;
@@ -61,14 +61,14 @@ public class LevelLayout : MonoBehaviour {
 			createdMaze.layer1[i] = instantiatedObjectLayer1.transform;
 			//Layer 2
 			GameObject chosenObjectLayer2 = ChooseRandomObjectFromArray(transferSegments.l2Variations);
-			Vector3 pointToInstantiateLayer2Object = new Vector3(currentXPosition, - (GetSpriteSizeFromGameObject(chosenObjectLayer1).y + GetSpriteSizeFromGameObject(chosenObjectLayer2).y), 0);
+			Vector3 pointToInstantiateLayer2Object = new Vector3(currentXPosition, - (GetSpriteSizeFromGameObject(chosenObjectLayer1).y / 2f + GetSpriteSizeFromGameObject(chosenObjectLayer2).y / 2f), 0);
 			GameObject instantiatedObjectLayer2 = LayTerrainAsset(chosenObjectLayer2, pointToInstantiateLayer2Object, Quaternion.identity, parentMaze);
 			if (Random.Range(0, 2) == 1)
 				instantiatedObjectLayer2.transform.localScale = new Vector3(-1, 1, 1);
 			createdMaze.layer2[i] = instantiatedObjectLayer2.transform;
 			//Layer 3
 			GameObject chosenObjectLayer3 = ChooseRandomObjectFromArray (transferSegments.l3Variations);
-			Vector3 pointToInstantiateLayer3Object = new Vector3(currentXPosition, instantiatedObjectLayer2.transform.position.y - (GetSpriteSizeFromGameObject(chosenObjectLayer2).y + GetSpriteSizeFromGameObject(chosenObjectLayer3).y), 0); 
+			Vector3 pointToInstantiateLayer3Object = new Vector3(currentXPosition, instantiatedObjectLayer2.transform.position.y - (GetSpriteSizeFromGameObject(chosenObjectLayer2).y / 2f + GetSpriteSizeFromGameObject(chosenObjectLayer3).y / 2f), 0); 
 			GameObject instantiatedObjectLayer3 = LayTerrainAsset(chosenObjectLayer3, pointToInstantiateLayer3Object, Quaternion.identity, parentMaze);
 			if (Random.Range(0, 2) == 1) 
 				instantiatedObjectLayer3.transform.localScale = new Vector3(-1, 1, 1);

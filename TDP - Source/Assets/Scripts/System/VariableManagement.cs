@@ -3,8 +3,8 @@ using System.Collections;
 
 public class VariableManagement : MonoBehaviour {
 
-	GameObject playerObject;
-	GameObject mainCamera;
+	static GameObject playerObject;
+	static GameObject mainCamera;
 	float levelLengthX;
 
 	void OnEnable() {
@@ -20,11 +20,11 @@ public class VariableManagement : MonoBehaviour {
 		mainCamera = playerObject.transform.FindChild ("Main Camera").gameObject;
 	}
 
-	public GameObject GetPlayerReference() {
+	public static GameObject GetPlayerReference() {
 		return playerObject;
 	}
 
-	public GameObject GetMainCameraReference() {
+	public static GameObject GetMainCameraReference() {
 		return mainCamera;
 	}
 

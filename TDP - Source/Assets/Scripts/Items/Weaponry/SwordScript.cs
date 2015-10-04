@@ -31,7 +31,8 @@ public class SwordScript : ItemBase {
 	}
 
 	public override void InfluenceEnvironment(string actionKey) {
-		AttemptToAttackAfterCompletedAnimation ();
+		AttackEnemyInFocus ();
+		//AttemptToAttackAfterCompletedAnimation ();
 	}
 	
 	void AttemptToAttackAfterCompletedAnimation () {

@@ -692,7 +692,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: PlayerOverheadSlice
-  m_Speed: 1.39999998
+  m_Speed: 1.79999995
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 110106710}
@@ -772,7 +772,7 @@ AnimatorState:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_Name: PlayerStab
-  m_Speed: 1.60000002
+  m_Speed: 2
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 110150352}
