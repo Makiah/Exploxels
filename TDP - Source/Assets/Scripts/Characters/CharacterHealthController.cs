@@ -52,17 +52,17 @@ public class CharacterHealthController : MonoBehaviour {
 		uiHealthController = GameObject.Find ("Inventory (UI)").transform.FindChild ("Health Controller").gameObject.GetComponent <UIHealthController> (); 
 		//Initialize icon
 		characterHeadSprite = transform.GetChild (0).GetChild (0).FindChild ("Head").GetComponent <SpriteRenderer> ().sprite;
-
+		//Start the coroutine that manages the active state of the health bar item.  
 		StartCoroutine ("ControlHealthBarState");
 	}
 
+	// This coroutine controls the health bar controller.  
 	IEnumerator ControlHealthBarState() {
 		while (true) {
-			if (Vector3.Distance(transform.position, player.position) <= distanceUntilHealthBarActive && GetHealthPanelState() == false) {
+			if (Vector3.Distance(transform.position, player.position) <= distanceUntilHealthBarActive && healthPanelReference == null) {
 				Debug.Log("Player entered radius");
 				OnThisEnemyActivated();
-			} else if (Vector3.Distance(transform.position, player.position) > distanceUntilHealthBarActive && GetHealthPanelState() == true) {
-				Debug.Log("Player exited radius");
+			} else if (Vector3.Distance(transform.position, player.position) > distanceUntilHealthBarActive && healthPanelReference != null) {
 				OnThisEnemyDeActivated();
 			}
 
@@ -70,6 +70,7 @@ public class CharacterHealthController : MonoBehaviour {
 		}
 	}
 
+	// On player/enemy attacked.  
 	public void YouHaveBeenAttacked(float lifePointDeduction) {
 		Debug.Log ("Attack received " + lifePointDeduction);
 		currentHealth -= lifePointDeduction;
@@ -80,21 +81,25 @@ public class CharacterHealthController : MonoBehaviour {
 		}
 	}
 
+	// Called when player enters radius of the character health controller.  
 	void OnThisEnemyActivated() {
 		healthPanelReference = uiHealthController.GetEnemyHealthPanelReference (this);
 		if (healthPanelReference != null)
 			healthPanelReference.Add (characterHeadSprite, lifePoints, currentHealth);
 	}
 
+	//Called when the player exits the radius of the character health controller.  
 	void OnThisEnemyDeActivated() {
 		DisableHealthPanel ();
 	}
 
+	//Called by the HealthController when this object has a health panel available to use.  
 	public void HealthPanelNewlyAvailable(HealthPanelReference healthPanel) {
 		healthPanelReference = healthPanel;
 		healthPanelReference.Add (characterHeadSprite, lifePoints, currentHealth);
 	}
 
+	//Called when the object is de-activated, or on death.  
 	public void DisableHealthPanel() {
 		if (healthPanelReference != null) {
 			healthPanelReference.Reset ();
@@ -102,14 +107,11 @@ public class CharacterHealthController : MonoBehaviour {
 		}
 	}
 
+	//Called when some object dies.  (currentHealth < 0)
 	protected virtual void OnDeath() {
 		StopCoroutine ("ControlHealthBarState");
 		DisableHealthPanel();
 		Destroy (this.gameObject);
-	}
-
-	public bool GetHealthPanelState() {
-		return healthPanelReference == null ? false : true;
 	}
 
 

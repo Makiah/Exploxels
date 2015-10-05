@@ -31,15 +31,17 @@ public class SwordScript : ItemBase {
 	}
 
 	public override void InfluenceEnvironment(string actionKey) {
+		//StartCoroutine ("AttackEnemyInFocus");
 		AttackEnemyInFocus ();
 		//AttemptToAttackAfterCompletedAnimation ();
 	}
 	
 	void AttemptToAttackAfterCompletedAnimation () {
-		attachedCharacterInput.ActionsAfterAnimation += AttackEnemyInFocus;
+		//attachedCharacterInput.ActionsAfterAnimation += AttackEnemyInFocus;
 	}
 	
 	void AttackEnemyInFocus () {
+
 		Vector3 enemyWithinAreaVectorBound = new Vector3 (enemyWithinAreaBounds, 0, 0);
 		Vector3 distToEnemyVectorLength = new Vector3 (distToEnemyLength, 0, 0);
 		
