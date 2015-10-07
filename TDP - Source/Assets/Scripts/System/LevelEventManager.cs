@@ -33,6 +33,8 @@ public class LevelEventManager : MonoBehaviour {
 	public static event BaseInitialization CreatePlayer;
 	public static event BaseInitialization CreatePlayerReference;
 
+	public static event BaseInitialization InitializeLightingSystem;
+
 	public static event BaseInitialization InitializePlayer; //Use for initializing CostumeManager and PlayerAction, as well as the PlayerHealthController.  
 
 	public delegate void InitializeDropSystem(SlotScript[,] inventorySlots);
@@ -74,6 +76,7 @@ public class LevelEventManager : MonoBehaviour {
 		raceToUse.SetHeadVariation (0);   
 		CreatePlayer(); //Used for CreateLevelItems (Instantiating player)
 		CreatePlayerReference (); //Used for CreateLevelItems
+		InitializeLightingSystem (); //Used for LightingManager.  
 		InitializeCostume(raceToUse);//Used for PlayerCostumeManager
 		InitializeHotbarItems (raceToUse); //Used for initializing the HotbarManager.  
 		InitializePlayer (); //Used for initializing the HumanoidBaseReferenceClass.  
