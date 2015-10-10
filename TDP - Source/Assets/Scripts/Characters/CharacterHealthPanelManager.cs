@@ -17,7 +17,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 
-public class CharacterHealthController : MonoBehaviour {
+public class CharacterHealthPanelManager : MonoBehaviour {
 
 	/************************* INITIALIZATION *************************/
 
@@ -35,21 +35,21 @@ public class CharacterHealthController : MonoBehaviour {
 	protected float currentHealth;
 
 	protected UIHealthController uiHealthController;
-	protected HealthPanelReference healthPanelReference;
+	HealthPanelReference healthPanelReference;
 	protected Sprite characterHeadSprite;
 
 	//The player transform
 	protected Transform player;
 
 	[SerializeField]
-	private float distanceUntilHealthBarActive;
+	float distanceUntilHealthBarActive;
 
 	//Look into initializing this once the player comes into activation distance.  
 	protected virtual void InitializeHealthBar() {
 		player = VariableManagement.GetPlayerReference ().transform;
 		currentHealth = lifePoints;
 		//Create panel
-		uiHealthController = GameObject.Find ("Inventory (UI)").transform.FindChild ("Health Controller").gameObject.GetComponent <UIHealthController> (); 
+		uiHealthController = VariableManagement.GetLevelUIReference().transform.FindChild ("Health Controller").gameObject.GetComponent <UIHealthController> (); 
 		//Initialize icon
 		characterHeadSprite = transform.GetChild (0).GetChild (0).FindChild ("Head").GetComponent <SpriteRenderer> ().sprite;
 		//Start the coroutine that manages the active state of the health bar item.  
@@ -71,11 +71,11 @@ public class CharacterHealthController : MonoBehaviour {
 	}
 
 	// On player/enemy attacked.  
-	public void YouHaveBeenAttacked(float lifePointDeduction) {
+	public virtual void YouHaveBeenAttacked(float lifePointDeduction) {
 		Debug.Log ("Attack received " + lifePointDeduction);
 		currentHealth -= lifePointDeduction;
 		if (healthPanelReference != null) 
-			healthPanelReference.Update (currentHealth);
+			healthPanelReference.UpdateHealth (currentHealth);
 		if (currentHealth <= 0) {
 			OnDeath();
 		}
@@ -85,7 +85,7 @@ public class CharacterHealthController : MonoBehaviour {
 	void OnThisEnemyActivated() {
 		healthPanelReference = uiHealthController.GetEnemyHealthPanelReference (this);
 		if (healthPanelReference != null)
-			healthPanelReference.Add (characterHeadSprite, lifePoints, currentHealth);
+			healthPanelReference.InitializePanel (characterHeadSprite, lifePoints, currentHealth);
 	}
 
 	//Called when the player exits the radius of the character health controller.  
@@ -96,7 +96,7 @@ public class CharacterHealthController : MonoBehaviour {
 	//Called by the HealthController when this object has a health panel available to use.  
 	public void HealthPanelNewlyAvailable(HealthPanelReference healthPanel) {
 		healthPanelReference = healthPanel;
-		healthPanelReference.Add (characterHeadSprite, lifePoints, currentHealth);
+		healthPanelReference.InitializePanel (characterHeadSprite, lifePoints, currentHealth);
 	}
 
 	//Called when the object is de-activated, or on death.  
@@ -111,6 +111,7 @@ public class CharacterHealthController : MonoBehaviour {
 	protected virtual void OnDeath() {
 		StopCoroutine ("ControlHealthBarState");
 		DisableHealthPanel();
+		GetComponent <EnemyExpDropper> ().OnEnemyDeath ();
 		Destroy (this.gameObject);
 	}
 

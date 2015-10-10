@@ -54,6 +54,9 @@ public class ResourceDatabase : MonoBehaviour {
 		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.Ore, "Ruby", "A nice red gem", 4, "Items/Ores/Ruby/Ruby", "Items/Ores/Ruby/UIRuby"));
 		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.Ore, "Silver", "A good material for strong weapons", 5, "Items/Ores/Silver/Silver", "Items/Ores/Silver/UISilver"));
 
+		//Other 
+		masterItemList.Add (new ResourceReference(ResourceReference.ItemType.Other, "ExpNodule", "", 0, "Items/Other/ExpNodule"));
+
 		/******************************************* RACES *******************************************/
 		//Male Minecrafter
 		string[] minecrafterMaleHeads = {"MinecrafterMaleHead1"};

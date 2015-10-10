@@ -53,20 +53,26 @@ public class DropHandler : MonoBehaviour {
 	}
 
 	public void PickupItem(GameObject item) {
-		UISlotContentReference pendingObject = new UISlotContentReference (item.GetComponent <DroppedItemProperties> ().localResourceReference, 1);
-		SlotScript bestAvailableSlot = AttemptToStackOnBestAvailableSlot (slotArray, pendingObject);
+		if (!(item.CompareTag ("ExpNodule"))) {
 
-		if (bestAvailableSlot != null) {
-			bestAvailableSlot.ModifyCurrentItemStack (1);
-			Debug.Log("Assigned " + item.GetComponent <DroppedItemProperties> ().localResourceReference.itemScreenName + " to best available slot.");
-			Destroy (item);
-		} else {
-			Debug.Log("Could not stack item: Attempting null slot");
-			bestAvailableSlot = AttemptToPlaceOnBestAvailableNullSlot(slotArray);
+			UISlotContentReference pendingObject = new UISlotContentReference (item.GetComponent <DroppedItemProperties> ().localResourceReference, 1);
+			SlotScript bestAvailableSlot = AttemptToStackOnBestAvailableSlot (slotArray, pendingObject);
+
 			if (bestAvailableSlot != null) {
-				bestAvailableSlot.AssignNewItem(pendingObject);
+				bestAvailableSlot.ModifyCurrentItemStack (1);
+				Debug.Log ("Assigned " + item.GetComponent <DroppedItemProperties> ().localResourceReference.itemScreenName + " to best available slot.");
 				Destroy (item);
+			} else {
+				Debug.Log ("Could not stack item: Attempting null slot");
+				bestAvailableSlot = AttemptToPlaceOnBestAvailableNullSlot (slotArray);
+				if (bestAvailableSlot != null) {
+					bestAvailableSlot.AssignNewItem (pendingObject);
+					Destroy (item);
+				}
 			}
+		} else {
+			GetComponent <PlayerHealthPanelManager> ().OnExperienceNodulePickedUp(1);
+			Destroy(item);
 		}
 	}
 

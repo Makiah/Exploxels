@@ -168,28 +168,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerToInstantiate: {fileID: 172182, guid: c7d744bf7cde3a948aded2b45bbc2264, type: 2}
   pointToInstantiatePlayerAt: {x: 4.17999983, y: 4.17999983, z: 0}
-  probabilityToInstantiateNullElement: 2
+  probabilityToInstantiateNullElement: 0
   initialGameElements:
   - elementReference: {fileID: 185688, guid: 5924714cab1d44ef2bd7e037cffdf22f, type: 2}
-    probabilityOfInstantiation: 2
-  - elementReference: {fileID: 178818, guid: b93cc74f47786d941bc438f0f74f7171, type: 2}
-    probabilityOfInstantiation: 1
-  - elementReference: {fileID: 156718, guid: c2ea16a9671dea64180a3eadd53b416a, type: 2}
-    probabilityOfInstantiation: 6
-  - elementReference: {fileID: 172888, guid: f9d3c8ae910c048ba8ec6f3845b566c9, type: 2}
-    probabilityOfInstantiation: 6
-  - elementReference: {fileID: 185688, guid: 9ca9a3a6e77d64c0b8e1bc8430975bbf, type: 2}
-    probabilityOfInstantiation: 3
-  - elementReference: {fileID: 185688, guid: 1eeb07594afe64accb15eb6a6a45fd4c, type: 2}
-    probabilityOfInstantiation: 4
-  - elementReference: {fileID: 185688, guid: 7d5a2cdd34e0648e294bf73b7915d771, type: 2}
-    probabilityOfInstantiation: 5
-  - elementReference: {fileID: 185688, guid: 40ee4a814545440af98d87bc379b0e19, type: 2}
     probabilityOfInstantiation: 7
+  - elementReference: {fileID: 178818, guid: b93cc74f47786d941bc438f0f74f7171, type: 2}
+    probabilityOfInstantiation: 0
+  - elementReference: {fileID: 156718, guid: c2ea16a9671dea64180a3eadd53b416a, type: 2}
+    probabilityOfInstantiation: 8
+  - elementReference: {fileID: 172888, guid: f9d3c8ae910c048ba8ec6f3845b566c9, type: 2}
+    probabilityOfInstantiation: 9
+  - elementReference: {fileID: 185688, guid: 9ca9a3a6e77d64c0b8e1bc8430975bbf, type: 2}
+    probabilityOfInstantiation: 10
+  - elementReference: {fileID: 185688, guid: 1eeb07594afe64accb15eb6a6a45fd4c, type: 2}
+    probabilityOfInstantiation: 11
+  - elementReference: {fileID: 185688, guid: 7d5a2cdd34e0648e294bf73b7915d771, type: 2}
+    probabilityOfInstantiation: 12
+  - elementReference: {fileID: 185688, guid: 40ee4a814545440af98d87bc379b0e19, type: 2}
+    probabilityOfInstantiation: 9
   - elementReference: {fileID: 146722, guid: 569939a30e8ba4a44a4bceb3c1b96da0, type: 2}
-    probabilityOfInstantiation: 2
+    probabilityOfInstantiation: 13
   - elementReference: {fileID: 185688, guid: bd12a06d595864b7dbde19f711e40e23, type: 2}
-    probabilityOfInstantiation: 6
+    probabilityOfInstantiation: 14
 --- !u!114 &11460264
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -263,7 +263,7 @@ Prefab:
       objectReference: {fileID: 185688, guid: 9ca9a3a6e77d64c0b8e1bc8430975bbf, type: 2}
     - target: {fileID: 0}
       propertyPath: initialGameElements.Array.data[4].probabilityOfInstantiation
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: initialGameElements.Array.data[5].elementReference
@@ -271,7 +271,7 @@ Prefab:
       objectReference: {fileID: 185688, guid: 1eeb07594afe64accb15eb6a6a45fd4c, type: 2}
     - target: {fileID: 0}
       propertyPath: initialGameElements.Array.data[5].probabilityOfInstantiation
-      value: 4
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: initialGameElements.Array.data[6].elementReference
@@ -279,7 +279,7 @@ Prefab:
       objectReference: {fileID: 185688, guid: 7d5a2cdd34e0648e294bf73b7915d771, type: 2}
     - target: {fileID: 0}
       propertyPath: initialGameElements.Array.data[6].probabilityOfInstantiation
-      value: 5
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: initialGameElements.Array.data[7].elementReference
@@ -291,23 +291,39 @@ Prefab:
       objectReference: {fileID: 146722, guid: 569939a30e8ba4a44a4bceb3c1b96da0, type: 2}
     - target: {fileID: 0}
       propertyPath: initialGameElements.Array.data[8].probabilityOfInstantiation
-      value: 2
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: initialGameElements.Array.data[7].probabilityOfInstantiation
-      value: 7
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: initialGameElements.Array.data[1].probabilityOfInstantiation
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: probabilityToInstantiateNullElement
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: initialGameElements.Array.data[0].probabilityOfInstantiation
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: initialGameElements.Array.data[9].probabilityOfInstantiation
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: initialGameElements.Array.data[2].probabilityOfInstantiation
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: initialGameElements.Array.data[3].probabilityOfInstantiation
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

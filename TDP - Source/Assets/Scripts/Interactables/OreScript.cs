@@ -3,14 +3,6 @@ using System.Collections;
 
 public class OreScript : DropsItems {
 
-	void OnEnable() {
-		LevelEventManager.InitializeEnemies += ReferenceOreComponents;
-	}
-	
-	void OnDisable() {
-		LevelEventManager.InitializeEnemies -= ReferenceOreComponents;
-	}
-
 	public int typeOfOre;
 
 	public Sprite[] possibleImages;
@@ -20,14 +12,17 @@ public class OreScript : DropsItems {
 	public int hitsUntilDrop = 2;
 	private int currentHits;
 
-	void ReferenceOreComponents() {
+	protected override void MakeReferences() {
+		base.MakeReferences ();
+
+		experienceToDrop = 1;
 
 		attachedSpriteRenderer = GetComponent <SpriteRenderer> ();
 
 		if (possibleImages.Length != 0) {
 			attachedSpriteRenderer.sprite = possibleImages [Random.Range (0, possibleImages.Length)];
 		} else {
-			Debug.LogError("No attached image sprites on " + gameObject.name);
+			Debug.LogError("No attached image sprites on " + gameObject.name + " (OreScript)");
 			Destroy(gameObject);
 		}
 

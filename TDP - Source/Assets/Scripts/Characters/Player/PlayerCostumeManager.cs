@@ -73,7 +73,7 @@ public class PlayerCostumeManager : MonoBehaviour {
 			GameObject createdItem = (GameObject)Instantiate (prefabSelectedInHotbar);
 			createdItem.transform.SetParent (holdingItem);
 			createdItem.transform.localPosition = Vector2.zero; 
-			createdItem.transform.localScale = new Vector3(transform.parent.localScale.x * createdItem.transform.localScale.x, transform.parent.localScale.y * createdItem.transform.localScale.y, 0);//transform.parent.localScale * createdItem.transform.localScale;
+			createdItem.transform.localScale = new Vector3(transform.parent.localScale.x * createdItem.transform.localScale.x, transform.parent.localScale.y * createdItem.transform.localScale.y, 1);//transform.parent.localScale * createdItem.transform.localScale;
 			createdItem.transform.localRotation = transform.parent.localRotation;
 
 			if (prefabSelectedInHotbar.GetComponent <ItemBase> () != null) {

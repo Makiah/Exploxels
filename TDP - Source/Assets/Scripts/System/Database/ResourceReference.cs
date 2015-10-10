@@ -29,7 +29,8 @@ public class ResourceReference {
 	public enum ItemType {
 		GameTool, 
 		CraftingMaterial, 
-		Ore
+		Ore, 
+		Other
 	}
 	
 	public ResourceReference (ItemType ctorItemType, string ctorItemScreenName, string ctorItemDescription, int ctorLocalGroupID, string localPath) {

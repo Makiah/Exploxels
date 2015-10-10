@@ -154,7 +154,8 @@ GameObject:
   - 61: {fileID: 6185780}
   - 61: {fileID: 6171612}
   - 114: {fileID: 11468580}
-  - 114: {fileID: 11498274}
+  - 114: {fileID: 11417328}
+  - 114: {fileID: 11473110}
   m_Layer: 9
   m_Name: ZombieReferenceObject
   m_TagString: Untagged
@@ -518,6 +519,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   swordPowerAttack: 2
+--- !u!114 &11417328
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 172888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04e59b25dc0924eea83e62e582ee087d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifePoints: 5
+  distanceUntilHealthBarActive: 5
 --- !u!114 &11468580
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -530,7 +544,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 0
-  moveForce: 5
+  moveForce: 8
   jumpForce: 10
   wallJumpForce: 0
   groundedOffset: 0
@@ -539,7 +553,7 @@ MonoBehaviour:
   remainDistanceFromPlayer: 1.25
   ignorePlayerMovementThreshold: .75
   maxYValueSeparation: 5
---- !u!114 &11498274
+--- !u!114 &11473110
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -547,11 +561,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 172888}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7a9b9e9cffdf4fc19ab7383909402de, type: 3}
+  m_Script: {fileID: 11500000, guid: 7ceaf70bf23794906884454f081f6837, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifePoints: 5
-  distanceUntilHealthBarActive: 5
+  experienceToDrop: 3
 --- !u!212 &21207382
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -751,7 +764,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: moveForce
-      value: 5
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: ignorePlayerMovementThreshold
@@ -780,6 +793,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: distanceUntilHealthBarActive
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: experienceToDrop
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

@@ -1,4 +1,4 @@
-﻿
+
 /*
  * Author: Makiah Bennett
  * Created 14 September 2015
@@ -72,16 +72,17 @@ public class ProjectileScript : MonoBehaviour {
 
 	void OnTriggerEnter2D (Collider2D externalTrigger) {
 
-		if (externalTrigger.gameObject.GetComponent <CharacterHealthController> () != null && notificationSent == false) {
-			externalTrigger.gameObject.GetComponent <CharacterHealthController> ().YouHaveBeenAttacked (arrowPower);
+		if (externalTrigger.gameObject.GetComponent <CharacterHealthPanelManager> () != null && notificationSent == false) {
+			externalTrigger.gameObject.GetComponent <CharacterHealthPanelManager> ().YouHaveBeenAttacked (arrowPower);
 			notificationSent = true;
+			Destroy(this.gameObject);
 		}
 
 	}
 
-	void OnTriggerExit2D () {
-		if (notificationSent) 
-			notificationSent = false;
-	}
+//	void OnTriggerExit2D () {
+//		if (notificationSent) 
+//			notificationSent = false;
+//	}
 
 }

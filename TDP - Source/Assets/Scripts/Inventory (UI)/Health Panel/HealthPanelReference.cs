@@ -16,30 +16,34 @@ using UnityEngine.UI;
 
 public class HealthPanelReference {
 
-	GameObject panel;
-	Image headIcon;
-	Slider healthBar;
+	protected GameObject panel;
+	protected Image headIcon;
+	protected Slider healthBar;
+	protected Image healthBarFillImage;
 
 	bool occupied = false;
 
-	UIHealthController masterController;
+	protected UIHealthController masterController;
 
 	public HealthPanelReference(Transform objectToReference, UIHealthController ctorMasterController) {
 		panel = objectToReference.gameObject;
 		headIcon = objectToReference.FindChild ("Icon").gameObject.GetComponent <Image> ();
 		healthBar = objectToReference.FindChild ("Health Bar").gameObject.GetComponent <Slider> ();
 		masterController = ctorMasterController;
+		healthBarFillImage = healthBar.gameObject.transform.FindChild ("Fill Area").FindChild ("Fill").GetComponent <Image> ();
 	}
 
 	public bool IsEmpty() {
 		return !occupied;
 	}
 
+	//Called when a panel is reset (i.e. OnDeath()).  
 	public void Reset() {
 		Clear ();
 		masterController.OnHealthPanelReset ();
 	}
 
+	//Called when a panel is cleared.  
 	public void Clear() {
 		headIcon.sprite = null;
 		healthBar.maxValue = 1;
@@ -49,21 +53,32 @@ public class HealthPanelReference {
 		Debug.Log ("Panel was cleared");
 	}
 
-	public void Add(Sprite image, float totalHealth, float currentHealth) {
+	//Called by CharacterHealthPanelManager when it is given a panel.  
+	public void InitializePanel(Sprite image, float totalHealth, float currentHealth) {
 		headIcon.sprite = image;
 		healthBar.maxValue = totalHealth;
 		healthBar.value = currentHealth;
-		Debug.Log("Set panel to " + image.name);
 		occupied = true;
 		panel.SetActive (true);
-		Debug.Log ("Panel was added of " + image.name);
+		UpdateColor ();
 	}
 
-	public void Update(float currentHealth) {
-		if (headIcon.sprite != null) 
+	//Used when a potion is added or object is attacked (called by CharacterHealthPanelManager).  
+	public virtual void UpdateHealth(float currentHealth) {
+		if (headIcon.sprite != null) {
 			healthBar.value = currentHealth;
+			UpdateColor();
+		}
 		else
 			Debug.Log ("Cannot update empty health panel");
+	}
+
+	protected void UpdateColor() {
+		if (healthBar.value / healthBar.maxValue < 0.4f) {
+			healthBarFillImage.color = new Color (1, 0, 0);
+		} else {
+			healthBarFillImage.color = new Color(0, 1, 0);
+		}
 	}
 
 }

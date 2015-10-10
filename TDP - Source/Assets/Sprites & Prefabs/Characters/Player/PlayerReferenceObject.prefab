@@ -155,7 +155,7 @@ GameObject:
   - 61: {fileID: 6196290}
   - 114: {fileID: 11470282}
   - 114: {fileID: 11424282}
-  - 114: {fileID: 11481398}
+  - 114: {fileID: 11413802}
   m_Layer: 11
   m_Name: PlayerReferenceObject
   m_TagString: Untagged
@@ -649,6 +649,19 @@ Light:
   m_ShadowRadius: 0
   m_ShadowAngle: 0
   m_AreaSize: {x: 1, y: 1}
+--- !u!114 &11413802
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 172182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 99928b598cc344b1e8dbaaf36036f356, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifePoints: 10
+  distanceUntilHealthBarActive: 0
 --- !u!114 &11424282
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -717,19 +730,6 @@ MonoBehaviour:
   wallJumpForce: 30
   groundedOffset: .229000002
   characterName: 
---- !u!114 &11481398
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 172182}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9562ffae49bb8448d93d3f407b1dda6e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lifePoints: 10
-  distanceUntilHealthBarActive: 0
 --- !u!124 &12433794
 Behaviour:
   m_ObjectHideFlags: 1
@@ -935,6 +935,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Range
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: lifePoints
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

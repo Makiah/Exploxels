@@ -23,8 +23,9 @@ public class LightingManager : MonoBehaviour {
 	//Note: Color declarations must be normalized (all parameters between 0 and 1).  
 	IEnumerator ManageInGameLighting() {
 		while (true) {
-			Color desiredColor = new Color(1f + Mathf.Clamp(player.transform.position.y / 100f, -1f, 0), 1f + Mathf.Clamp(player.transform.position.y / 100f, -1f, 0), 1f + Mathf.Clamp(player.transform.position.y / 100f, -1f, 0));
-			RenderSettings.ambientSkyColor = desiredColor;
+			//Lighting calculations.  
+			float desiredIntensity = 1f / (Mathf.Sqrt(Mathf.Abs (Mathf.Clamp(player.transform.position.y / 8f, -2500, -1))));
+			gameObject.GetComponent <Light> ().intensity = desiredIntensity;
 			yield return null;
 		}
 	}

@@ -31,13 +31,11 @@ public class SwordScript : ItemBase {
 	}
 
 	public override void InfluenceEnvironment(string actionKey) {
-		//StartCoroutine ("AttackEnemyInFocus");
-		AttackEnemyInFocus ();
-		//AttemptToAttackAfterCompletedAnimation ();
+		AttemptToAttackAfterCompletedAnimation ();
 	}
 	
 	void AttemptToAttackAfterCompletedAnimation () {
-		//attachedCharacterInput.ActionsAfterAnimation += AttackEnemyInFocus;
+		attachedCharacterInput.ActionsAfterAnimation += AttackEnemyInFocus;
 	}
 	
 	void AttackEnemyInFocus () {
@@ -63,8 +61,8 @@ public class SwordScript : ItemBase {
 
 		if (linecastResult.Length != 0) {
 			if (linecastResult [0].collider != null) {
-				if (linecastResult [0].collider.gameObject.GetComponent <CharacterHealthController> () != null) {
-					linecastResult [0].collider.gameObject.GetComponent <CharacterHealthController> ().YouHaveBeenAttacked (swordPowerAttack);
+				if (linecastResult [0].collider.gameObject.GetComponent <CharacterHealthPanelManager> () != null) {
+					linecastResult [0].collider.gameObject.GetComponent <CharacterHealthPanelManager> ().YouHaveBeenAttacked (swordPowerAttack);
 				}
 			}
 		}

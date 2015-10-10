@@ -26,13 +26,13 @@ public class UIHealthController : MonoBehaviour {
 		LevelEventManager.InitializeUIHealthController -= InitializeUIHealthController;
 	}
 
+	PlayerHealthPanelReference playerHealthPanel;
+	HealthPanelReference enemyHealthPanel1, enemyHealthPanel2, enemyHealthPanel3;
 
-	HealthPanelReference playerHealthPanel, enemyHealthPanel1, enemyHealthPanel2, enemyHealthPanel3;
-
-	List <CharacterHealthController> pendingHealthControllerList = new List<CharacterHealthController>();
+	List <CharacterHealthPanelManager> pendingHealthControllerList = new List<CharacterHealthPanelManager>();
 
 	void InitializeUIHealthController() {
-		playerHealthPanel = new HealthPanelReference(transform.FindChild("Player Health Controller").FindChild("HealthPanelPlayer").transform, this);
+		playerHealthPanel = new PlayerHealthPanelReference(transform.FindChild("Player Health Controller").FindChild("HealthPanelPlayer").transform, this);
 		enemyHealthPanel1 = new HealthPanelReference(transform.FindChild("Enemy Health Controller").FindChild("HealthPanel1").transform, this);
 		enemyHealthPanel2 = new HealthPanelReference(transform.FindChild("Enemy Health Controller").FindChild("HealthPanel2").transform, this);
 		enemyHealthPanel3 = new HealthPanelReference(transform.FindChild("Enemy Health Controller").FindChild("HealthPanel3").transform, this);
@@ -42,11 +42,11 @@ public class UIHealthController : MonoBehaviour {
 		enemyHealthPanel3.Clear ();
 	}
 
-	public HealthPanelReference GetEnemyHealthPanelReference(CharacterHealthController someHealthController) {
+	public HealthPanelReference GetEnemyHealthPanelReference(CharacterHealthPanelManager someHealthController) {
 		return GetBestAvailableEnemyHealthPanelReference (someHealthController);
 	}
 
-	public HealthPanelReference GetPlayerHealthPanelReference () {
+	public PlayerHealthPanelReference GetPlayerHealthPanelReference () {
 		return playerHealthPanel;
 	}
 
@@ -61,7 +61,7 @@ public class UIHealthController : MonoBehaviour {
 		}
 	}
 
-	HealthPanelReference GetBestAvailableEnemyHealthPanelReference(CharacterHealthController someHealthController) {
+	HealthPanelReference GetBestAvailableEnemyHealthPanelReference(CharacterHealthPanelManager someHealthController) {
 		Debug.Log (someHealthController.gameObject.name + " is accessing the uihealthcontroller");
 		if (enemyHealthPanel1.IsEmpty ())
 			return enemyHealthPanel1;

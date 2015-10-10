@@ -3,21 +3,23 @@ using System.Collections;
 
 public class VariableManagement : MonoBehaviour {
 
-	static GameObject playerObject;
-	static GameObject mainCamera;
-	float levelLengthX;
-
 	void OnEnable() {
 		LevelEventManager.CreatePlayerReference += SetPlayerReference;
 	}
-
+	
 	void OnDisable() {
 		LevelEventManager.CreatePlayerReference -= SetPlayerReference;
 	}
 
+	static GameObject playerObject;
+	static GameObject mainCamera;
+	static GameObject levelUI;
+	float levelLengthX;
+	
 	void SetPlayerReference() {
 		playerObject = GameObject.Find ("PlayerReferenceObject(Clone)");
 		mainCamera = playerObject.transform.FindChild ("Main Camera").gameObject;
+		levelUI = GameObject.Find ("UI");
 	}
 
 	public static GameObject GetPlayerReference() {
@@ -26,6 +28,10 @@ public class VariableManagement : MonoBehaviour {
 
 	public static GameObject GetMainCameraReference() {
 		return mainCamera;
+	}
+
+	public static GameObject GetLevelUIReference() {
+		return levelUI;
 	}
 
 	public void SetLevelLengthX(float value) {
