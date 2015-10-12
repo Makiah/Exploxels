@@ -48,14 +48,12 @@ public class PlayerHealthPanelManager : CharacterHealthPanelManager {
 
 	//Called by PlayerDropHandler.  
 	public void OnExperienceNodulePickedUp(int expValue) {
-		Debug.Log ("On ExperienceNodulePickedUp (PlayerHealthPanelManager)");
 		currentExp += expValue;
 		//Done in case the experience level is incremented past the maximum.  
 		currentExp = playerHealthPanelReference.UpdateExperience (currentExp);
 	}
 
 	public override void YouHaveBeenAttacked(float lifePointDeduction) {
-		Debug.Log ("Attack received on player health panel manager" + lifePointDeduction);
 		currentHealth -= lifePointDeduction;
 		if (playerHealthPanelReference != null) 
 			playerHealthPanelReference.UpdateHealth (currentHealth);
@@ -65,7 +63,6 @@ public class PlayerHealthPanelManager : CharacterHealthPanelManager {
 	}
 
 	protected override void OnDeath() {
-		Debug.Log ("Player OnDeath called (PlayerHealthPanelManager)");
 		playerHealthPanelReference.Clear ();
 		//Note: Application.Quit() does not work for the Web Player or the Unity Editor.  
 		//Application.Quit ();

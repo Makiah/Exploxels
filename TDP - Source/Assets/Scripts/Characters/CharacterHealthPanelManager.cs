@@ -72,7 +72,6 @@ public class CharacterHealthPanelManager : MonoBehaviour {
 
 	// On player/enemy attacked.  
 	public virtual void YouHaveBeenAttacked(float lifePointDeduction) {
-		Debug.Log ("Attack received " + lifePointDeduction);
 		currentHealth -= lifePointDeduction;
 		if (healthPanelReference != null) 
 			healthPanelReference.UpdateHealth (currentHealth);

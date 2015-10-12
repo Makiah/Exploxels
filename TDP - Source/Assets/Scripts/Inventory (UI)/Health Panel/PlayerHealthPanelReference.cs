@@ -37,7 +37,6 @@ public class PlayerHealthPanelReference : HealthPanelReference {
 			return valueForNextSlider;
 		} else {
 			experienceSlider.value = currentExp;
-			Debug.Log ("Set experience to " + currentExp);
 			return currentExp;
 		}
 	}

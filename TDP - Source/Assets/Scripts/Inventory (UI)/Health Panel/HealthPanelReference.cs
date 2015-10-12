@@ -74,7 +74,7 @@ public class HealthPanelReference : MonoBehaviour {
 			UpdateColor();
 		}
 		else
-			Debug.Log ("Cannot update empty health panel");
+			Debug.LogError ("Cannot update empty health panel");
 	}
 
 	protected void UpdateColor() {

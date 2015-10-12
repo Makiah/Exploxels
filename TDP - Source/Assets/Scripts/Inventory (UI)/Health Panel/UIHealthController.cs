@@ -49,7 +49,6 @@ public class UIHealthController : MonoBehaviour {
 	}
 
 	HealthPanelReference GetBestAvailableEnemyHealthPanelReference(CharacterHealthPanelManager someHealthController) {
-		Debug.Log (someHealthController.gameObject.name + " is accessing the uihealthcontroller");
 		if (enemyHealthPanel1.IsEmpty ())
 			return enemyHealthPanel1;
 		else if (enemyHealthPanel2.IsEmpty ())
