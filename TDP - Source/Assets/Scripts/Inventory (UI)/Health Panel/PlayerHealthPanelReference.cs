@@ -10,22 +10,21 @@ public class PlayerHealthPanelReference : HealthPanelReference {
 	int maxExpValue = 10;
 	int currentLevel = 1;
 
-	//The inherited base constructor is required, otherwise the constructor does not work.  
-	public PlayerHealthPanelReference(Transform objectToReference, UIHealthController ctorMasterController) : base(objectToReference, ctorMasterController) {
-		panel = objectToReference.gameObject;
-		headIcon = objectToReference.FindChild ("Icon").gameObject.GetComponent <Image> ();
-		healthBar = objectToReference.FindChild ("Health Bar").gameObject.GetComponent <Slider> ();
-		playerName = objectToReference.FindChild ("Name").gameObject.GetComponent <Text> ();
-		playerLevel = objectToReference.FindChild ("PlayerLevel").gameObject.GetComponent <Text> ();
-		masterController = ctorMasterController;
+	//The method that initializes the values of the health panel.  
+	protected override void InitializeHealthPanelReference() {
+		base.InitializeHealthPanelReference ();
 
+		//Additional components of the panel
+		playerName = transform.FindChild ("Name").gameObject.GetComponent <Text> ();
+		playerLevel = transform.FindChild ("PlayerLevel").gameObject.GetComponent <Text> ();
+		//Set panel initial values.  
 		playerName.text = GameObject.Find ("UI Data").GetComponent <UIData> ().specifiedPlayerName;
-		experienceSlider = objectToReference.FindChild ("Experience Indicator").gameObject.GetComponent <Slider> ();
+		experienceSlider = transform.FindChild ("Experience Indicator").gameObject.GetComponent <Slider> ();
 		experienceSlider.maxValue = maxExpValue;
 		experienceSlider.value = 0;
 	}
 
-
+	//The method that controls the values of the experience bar.  
 	public int UpdateExperience (int currentExp) {
 		if (currentExp >= experienceSlider.maxValue) {
 			int valueForNextSlider = currentExp - (int) experienceSlider.maxValue;

@@ -26,6 +26,7 @@ public class LevelEventManager : MonoBehaviour {
 	public static event BaseInitialization EnableUIHideShow;
 
 	public static event BaseInitialization InitializeUIHealthController;
+	public static event BaseInitialization InitializeHealthPanels;
 
 	public delegate TerrainReferenceClass TerrainInitialization();
 	public static event TerrainInitialization InitializeTerrain;
@@ -61,6 +62,7 @@ public class LevelEventManager : MonoBehaviour {
 		InitializeSlots (); //Used with SlotScript
 		EnableUIHideShow (); //Used with InventoryHideShow
 		InitializeUIHealthController(); //Used for UIHealthController
+		InitializeHealthPanels (); //Used for HealthPanelReference and PlayerHealthPanelReference.  
 
 		//Lay out the level
 		TerrainReferenceClass initializedMaze = InitializeTerrain(); //Used with LevelLayout

@@ -29,17 +29,17 @@ public class UIHealthController : MonoBehaviour {
 	PlayerHealthPanelReference playerHealthPanel;
 	HealthPanelReference enemyHealthPanel1, enemyHealthPanel2, enemyHealthPanel3;
 
+	public static UIHealthController reference;
+
 	List <CharacterHealthPanelManager> pendingHealthControllerList = new List<CharacterHealthPanelManager>();
 
 	void InitializeUIHealthController() {
-		playerHealthPanel = new PlayerHealthPanelReference(transform.FindChild("Player Health Controller").FindChild("HealthPanelPlayer").transform, this);
-		enemyHealthPanel1 = new HealthPanelReference(transform.FindChild("Enemy Health Controller").FindChild("HealthPanel1").transform, this);
-		enemyHealthPanel2 = new HealthPanelReference(transform.FindChild("Enemy Health Controller").FindChild("HealthPanel2").transform, this);
-		enemyHealthPanel3 = new HealthPanelReference(transform.FindChild("Enemy Health Controller").FindChild("HealthPanel3").transform, this);
-		playerHealthPanel.Clear ();
-		enemyHealthPanel1.Clear ();
-		enemyHealthPanel2.Clear ();
-		enemyHealthPanel3.Clear ();
+		playerHealthPanel = transform.FindChild ("Player Health Controller").FindChild ("HealthPanelPlayer").GetComponent <PlayerHealthPanelReference> ();
+		enemyHealthPanel1 = transform.FindChild ("Enemy Health Controller").FindChild ("HealthPanel1").GetComponent <HealthPanelReference> ();
+		enemyHealthPanel2 = transform.FindChild("Enemy Health Controller").FindChild("HealthPanel2").GetComponent <HealthPanelReference> ();
+		enemyHealthPanel3 = transform.FindChild ("Enemy Health Controller").FindChild ("HealthPanel3").GetComponent <HealthPanelReference> ();	
+
+		reference = this;
 	}
 
 	public HealthPanelReference GetEnemyHealthPanelReference(CharacterHealthPanelManager someHealthController) {

@@ -14,7 +14,15 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 
-public class HealthPanelReference {
+public class HealthPanelReference : MonoBehaviour {
+
+	protected void OnEnable() {
+		LevelEventManager.InitializeHealthPanels += InitializeHealthPanelReference;
+	}
+
+	protected void OnDisable() {
+		LevelEventManager.InitializeHealthPanels -= InitializeHealthPanelReference;
+	}
 
 	protected GameObject panel;
 	protected Image headIcon;
@@ -25,12 +33,15 @@ public class HealthPanelReference {
 
 	protected UIHealthController masterController;
 
-	public HealthPanelReference(Transform objectToReference, UIHealthController ctorMasterController) {
-		panel = objectToReference.gameObject;
-		headIcon = objectToReference.FindChild ("Icon").gameObject.GetComponent <Image> ();
-		healthBar = objectToReference.FindChild ("Health Bar").gameObject.GetComponent <Slider> ();
-		masterController = ctorMasterController;
-		healthBarFillImage = healthBar.gameObject.transform.FindChild ("Fill Area").FindChild ("Fill").GetComponent <Image> ();
+	protected virtual void InitializeHealthPanelReference() {
+		//Setting basic component references.  
+		panel = gameObject;
+		headIcon = transform.FindChild ("Icon").gameObject.GetComponent <Image> ();
+		healthBar = transform.FindChild ("Health Bar").gameObject.GetComponent <Slider> ();
+		masterController = UIHealthController.reference;
+		healthBarFillImage = healthBar.transform.FindChild ("Fill Area").FindChild ("Fill").GetComponent <Image> ();
+		//Make sure that the panels do not have any initial value.  
+		Clear ();
 	}
 
 	public bool IsEmpty() {
@@ -64,8 +75,8 @@ public class HealthPanelReference {
 	}
 
 	//Used when a potion is added or object is attacked (called by CharacterHealthPanelManager).  
-	public virtual void UpdateHealth(float currentHealth) {
-		if (headIcon.sprite != null) {
+	public void UpdateHealth(float currentHealth) {
+		if (occupied) {
 			healthBar.value = currentHealth;
 			UpdateColor();
 		}

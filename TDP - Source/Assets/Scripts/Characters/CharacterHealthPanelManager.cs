@@ -63,6 +63,7 @@ public class CharacterHealthPanelManager : MonoBehaviour {
 				Debug.Log("Player entered radius");
 				OnThisEnemyActivated();
 			} else if (Vector3.Distance(transform.position, player.position) > distanceUntilHealthBarActive && healthPanelReference != null) {
+				Debug.Log("Player exited radius");
 				OnThisEnemyDeActivated();
 			}
 
@@ -110,7 +111,7 @@ public class CharacterHealthPanelManager : MonoBehaviour {
 	//Called when some object dies.  (currentHealth < 0)
 	protected virtual void OnDeath() {
 		StopCoroutine ("ControlHealthBarState");
-		DisableHealthPanel();
+		OnThisEnemyDeActivated();
 		GetComponent <EnemyExpDropper> ().OnEnemyDeath ();
 		Destroy (this.gameObject);
 	}
