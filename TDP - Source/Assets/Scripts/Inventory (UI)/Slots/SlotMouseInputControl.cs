@@ -47,10 +47,12 @@ public class SlotMouseInputControl : MonoBehaviour {
 			pendingCombinationIngredient1 = ingredient;
 			assigner1 = assigner;
 			assigner1.SetCombinationPending();
-			Debug.Log("Added ingredient: " + pendingCombinationIngredient1.uiSlotContent.itemScreenName);
+			Debug.Log("Added ingredient 1: " + pendingCombinationIngredient1.uiSlotContent.itemScreenName);
 		} else {
 			pendingCombinationIngredient2 = ingredient;
 			assigner2 = assigner;
+
+			Debug.Log("Added ingredient 2: " + pendingCombinationIngredient2.uiSlotContent.itemScreenName);
 
 			ManageCombination();
 
@@ -70,30 +72,36 @@ public class SlotMouseInputControl : MonoBehaviour {
 		assigner2 = null;
 	}
 
+	//Called from the public AddIngredient function.  
 	void ManageCombination() {
 		// Check the createdIngredientArray to see whether the ResourceReference components match.  
 		ResourceReference[] createdIngredientResourceReferenceArray = {
 			pendingCombinationIngredient1.uiSlotContent,
 			pendingCombinationIngredient2.uiSlotContent
 		};
+
+		//For every combination in the database.  
 		for (int i = 0; i < ResourceDatabase.masterItemCombinationList.Count; i++) {
-			
+			//Convert the two database ingredients in use into an array.  
 			ResourceReference[] combinationDatabaseItemRequirements = {
 				ResourceDatabase.masterItemCombinationList[i].ingredients[0].uiSlotContent, 
 				ResourceDatabase.masterItemCombinationList[i].ingredients[1].uiSlotContent
 			};
-			
+
+			//Check whether the local and database arrays are equal.  
 			if (ScriptingUtilities.CheckArraysForEquality(createdIngredientResourceReferenceArray, combinationDatabaseItemRequirements)) {
-				//Determine whether the stacks contain the correct amount of item.  
+				//Create an integer array that defines the stack of each local item.  
 				int[] createdIngredientStackArray = {
 					pendingCombinationIngredient1.stack, 
 					pendingCombinationIngredient2.stack
 				};
+				//Create an integer array that defines the stack of each database ingredient.  
 				int[] combinationDatabaseStackRequirements = {
 					ResourceDatabase.masterItemCombinationList[i].ingredients[0].stack, 
 					ResourceDatabase.masterItemCombinationList[i].ingredients[1].stack
 				};
 
+				//Determine whether the stacks satisfy the minimum requirement.  
 				if (
 					createdIngredientStackArray[0] >= combinationDatabaseStackRequirements[0] && createdIngredientStackArray[1] >= combinationDatabaseStackRequirements[1]
 				    ) {
@@ -113,15 +121,14 @@ public class SlotMouseInputControl : MonoBehaviour {
 					return;
 				} else {
 					Debug.LogError("Stack did not satisfy the minimum number required.");
-					ResetPendingCombinationSequence();
 					return;
 				}
 			}
 
-			if (i == ResourceDatabase.masterItemCombinationList.Count - 1) 
+			if (i == ResourceDatabase.masterItemCombinationList.Count - 1) {
 				Debug.LogError("Combination ingredients not found");
-
-			ResetPendingCombinationSequence();
+				ResetPendingCombinationSequence();
+			}
 
 		}
 	}
@@ -131,20 +138,16 @@ public class SlotMouseInputControl : MonoBehaviour {
 		int maxStackOfElement0 = ((actualStackOfIngredients[0] - actualStackOfIngredients[0] % ingredientBaseStack[0]) / (ingredientBaseStack[0]));
 		int maxStackOfElement1 = ((actualStackOfIngredients[1] - actualStackOfIngredients[1] % ingredientBaseStack[1]) / (ingredientBaseStack[1]));
 
-
-		Debug.Log ("Max stack of element 0: " + maxStackOfElement0);
-		
-		Debug.Log ("Max stack of element 1: " + maxStackOfElement1);
-
 		if (maxStackOfElement0 <= maxStackOfElement1) {
-			Debug.Log("Max was " + maxStackOfElement0);
+			Debug.Log("Max of element 0 was " + maxStackOfElement0);
 			return maxStackOfElement0;
 		} else {
-			Debug.Log("Max was " + maxStackOfElement1);
+			Debug.Log("Max of element 1 was " + maxStackOfElement1);
 			return maxStackOfElement1;
 		}
 	}
-	
+
+	//Used for setting mouse cursor textures.  
 	void SetCursorTexture(bool assignToANewValue) {
 		Texture2D cursorTexture;
 
@@ -152,7 +155,6 @@ public class SlotMouseInputControl : MonoBehaviour {
 
 		if (assignToANewValue) {
 			cursorTexture = itemInControlByMouse.uiSlotContent.itemIcon.texture;
-			Debug.Log ("Used default item icon texture for mouse cursor");
 			cursorHotspot = new Vector2 (cursorTexture.width / 2f, cursorTexture.height / 2f);
 		} else {
 			cursorHotspot = Vector2.zero;

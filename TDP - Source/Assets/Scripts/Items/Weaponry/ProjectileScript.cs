@@ -1,4 +1,4 @@
-﻿
+
 /*
  * Author: Makiah Bennett
  * Created 14 September 2015
@@ -28,7 +28,7 @@ public class ProjectileScript : MonoBehaviour {
 	GameObject playerObject;
 
 	public void InitializeProjectileWithThresholdAndDeviation(Vector3 positionToFireToward, float velocity, float currentHeading, float headingThreshold, float maxRandomDeviation, float ctorArrowPower) {
-		playerObject = GameObject.Find ("ManagementFrameworks").transform.FindChild ("GameVariables").gameObject.GetComponent <VariableManagement> ().GetPlayerReference ();
+		playerObject = VariableManagement.GetPlayerReference ();
 
 		//Set physics of the projectile.  
 		rb2d = GetComponent <Rigidbody2D> ();
@@ -72,16 +72,17 @@ public class ProjectileScript : MonoBehaviour {
 
 	void OnTriggerEnter2D (Collider2D externalTrigger) {
 
-		if (externalTrigger.gameObject.GetComponent <CharacterHealthController> () != null && notificationSent == false) {
-			externalTrigger.gameObject.GetComponent <CharacterHealthController> ().YouHaveBeenAttacked (arrowPower);
+		if (externalTrigger.gameObject.GetComponent <CharacterHealthPanelManager> () != null && notificationSent == false) {
+			externalTrigger.gameObject.GetComponent <CharacterHealthPanelManager> ().YouHaveBeenAttacked (arrowPower);
 			notificationSent = true;
+			Destroy(this.gameObject);
 		}
 
 	}
 
-	void OnTriggerExit2D () {
-		if (notificationSent) 
-			notificationSent = false;
-	}
+//	void OnTriggerExit2D () {
+//		if (notificationSent) 
+//			notificationSent = false;
+//	}
 
 }

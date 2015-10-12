@@ -19,17 +19,17 @@ public class PlayerCostumeManager : MonoBehaviour {
 	/************************************************** INITIALIZATION **************************************************/
 
 	void OnEnable() {
-		EventManager.InitializeCostume += InitializePlayerCostume;
+		LevelEventManager.InitializeCostume += InitializePlayerCostume;
 	}
 	
 	void OnDisable() {
-		EventManager.InitializeCostume -= InitializePlayerCostume;
+		LevelEventManager.InitializeCostume -= InitializePlayerCostume;
 	}
 
 
 	/************************************************ COSTUME MANAGEMENT ************************************************/
 
-	private HumanoidBaseActionClass mainPlayerAction;
+	private CharacterBaseActionClass mainPlayerAction;
 
 	private SpriteRenderer head;
 	private SpriteRenderer body;
@@ -41,7 +41,7 @@ public class PlayerCostumeManager : MonoBehaviour {
 	private Transform holdingItem;
 
 	void InitializePlayerCostume(Race race) {
-		mainPlayerAction = transform.parent.parent.gameObject.GetComponent <HumanoidBaseActionClass> ();
+		mainPlayerAction = transform.parent.parent.gameObject.GetComponent <CharacterBaseActionClass> ();
 		//Just setting up the basic race costume.  
 		body = transform.FindChild("Body").GetComponent <SpriteRenderer> ();
 		head = transform.FindChild ("Head").GetComponent <SpriteRenderer> ();
@@ -63,8 +63,6 @@ public class PlayerCostumeManager : MonoBehaviour {
 	//Called by HotbarManager when a new hotbar item is selected.
 	public void UpdatePlayerItem(GameObject prefabSelectedInHotbar) {
 
-		Debug.Log (holdingItem.name);
-
 		//Deletes the previous item that had existed before this new item.  
 		if (holdingItem.childCount != 0 && holdingItem != null) {
 			Destroy (holdingItem.GetChild (0).gameObject);
@@ -75,7 +73,7 @@ public class PlayerCostumeManager : MonoBehaviour {
 			GameObject createdItem = (GameObject)Instantiate (prefabSelectedInHotbar);
 			createdItem.transform.SetParent (holdingItem);
 			createdItem.transform.localPosition = Vector2.zero; 
-			createdItem.transform.localScale = new Vector3(transform.parent.localScale.x * createdItem.transform.localScale.x, transform.parent.localScale.y * createdItem.transform.localScale.y, 0);//transform.parent.localScale * createdItem.transform.localScale;
+			createdItem.transform.localScale = new Vector3(transform.parent.localScale.x * createdItem.transform.localScale.x, transform.parent.localScale.y * createdItem.transform.localScale.y, 1);//transform.parent.localScale * createdItem.transform.localScale;
 			createdItem.transform.localRotation = transform.parent.localRotation;
 
 			if (prefabSelectedInHotbar.GetComponent <ItemBase> () != null) {

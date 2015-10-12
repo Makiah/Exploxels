@@ -33,7 +33,7 @@ public class ScriptingUtilities : MonoBehaviour {
 			return false;
 		
 		for (int i = 0; i < arrayA.Length; i++) {
-			if (!arrayA[i].Equals(arrayB[i]) && !arrayA[arrayA.Length - (i + 1)].Equals(arrayB[i])) 
+			if (!arrayA[i].Equals(arrayB[i])) 
 				return false;
 		}
 		

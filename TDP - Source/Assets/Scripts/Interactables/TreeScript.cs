@@ -14,17 +14,6 @@ using System.Collections;
 
 public class TreeScript : DropsItems {
 
-	/**************************************** INITIALIZATION ****************************************/
-
-	void OnEnable() {
-		EventManager.InitializeEnemies += ReferenceSegments;
-	}
-
-	void OnDisable() {
-		EventManager.InitializeEnemies -= ReferenceSegments;
-	}
-
-
 	/**************************************** SCRIPT ****************************************/
 
 	[System.Serializable]
@@ -39,7 +28,7 @@ public class TreeScript : DropsItems {
 	private SpriteRenderer top, segment1, segment2, segment3, segment4, segment5;
 	private int currentlyActiveSegments;
 
-	void ReferenceSegments() {
+	protected override void MakeReferences() {
 		DropReferenceClass woodDrop = new DropReferenceClass (ResourceDatabase.GetItemByParameter ("Wood"), 1, 1, 1);
 		drops = new DropReferenceClass[]{woodDrop};
 

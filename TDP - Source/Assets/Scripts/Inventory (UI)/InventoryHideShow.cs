@@ -1,4 +1,4 @@
-﻿
+
 /*
  * Author: Makiah Bennett
  * Created 14 September 2015
@@ -18,11 +18,11 @@ public class InventoryHideShow : MonoBehaviour {
 	/************************************************** INITIALIZATION **************************************************/
 	
 	void OnEnable() {
-		EventManager.EnableUIHideShow += CheckForHideShow;
+		LevelEventManager.EnableUIHideShow += CheckForHideShow;
 	}
 	
 	void OnDisable() {
-		EventManager.EnableUIHideShow -= CheckForHideShow;
+		LevelEventManager.EnableUIHideShow -= CheckForHideShow;
 	}
 	
 	

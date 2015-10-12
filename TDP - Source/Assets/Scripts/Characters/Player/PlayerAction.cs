@@ -14,24 +14,19 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class PlayerAction : HumanoidBaseActionClass {
+public class PlayerAction : CharacterBaseActionClass {
 
 	private bool touchingWall;
 	private Transform wallCheck;
 
 	protected override void SetReferences() {
 		characterSpriteObject = transform.FindChild("FlippingItem").FindChild ("Player");
-		anim = characterSpriteObject.GetComponent <Animator> ();
-		rb2d = GetComponent <Rigidbody2D> ();
-		groundCheck = characterSpriteObject.FindChild ("GroundCheck");
 		wallCheck = characterSpriteObject.FindChild ("WallCheck");
-
-		//mainPlayerCostumeManager = transform.FindChild ("FlippingItem").FindChild ("Player").gameObject.GetComponent <PlayerCostumeManager> ();
-
 		characterName = "Player";
 
+		base.SetReferences ();
+
 		StartCoroutine ("CheckForWeaponInput");
-		StartCoroutine ("CheckCharacterPhysics");
 		StartCoroutine ("ListenForArrowMovement");
 
 	}
@@ -84,6 +79,8 @@ public class PlayerAction : HumanoidBaseActionClass {
 		
 			if (h < 0 && facingRight) 
 				Flip ();
+
+			GameObject.Find("Background").GetComponent <BackgroundScroller> ().Movement(rb2d.velocity.x / maxSpeed);
 
 			yield return new WaitForFixedUpdate();
 

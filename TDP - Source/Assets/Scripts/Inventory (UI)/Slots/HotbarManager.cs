@@ -20,11 +20,11 @@ public class HotbarManager : MonoBehaviour {
 	/************************************************** INITIALIZATION **************************************************/
 
 	void OnEnable() {
-		EventManager.InitializeHotbarItems += AssignInitialHotbarItems;
+		LevelEventManager.InitializeHotbarItems += AssignInitialHotbarItems;
 	}
 
 	void OnDisable() {
-		EventManager.InitializeHotbarItems -= AssignInitialHotbarItems;
+		LevelEventManager.InitializeHotbarItems -= AssignInitialHotbarItems;
 	}
 
 
@@ -44,8 +44,7 @@ public class HotbarManager : MonoBehaviour {
 
 	void AssignInitialHotbarItems(Race race) {
 
-		playerObject = GameObject.Find ("ManagementFrameworks").transform.FindChild ("GameVariables").gameObject.GetComponent <VariableManagement> ().GetPlayerReference ();
-		Debug.Log (playerObject.name);
+		playerObject = VariableManagement.GetPlayerReference ();
 		playerCostumeManager = playerObject.transform.FindChild ("FlippingItem").FindChild ("Player").GetComponent <PlayerCostumeManager>();
 		hotbarSlots = new HotbarSlotScript[transform.childCount];
 		for (int i = 0; i < transform.childCount; i++) {

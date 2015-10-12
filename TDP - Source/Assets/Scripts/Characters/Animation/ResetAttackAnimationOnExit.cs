@@ -1,4 +1,4 @@
-﻿
+
 /*
  * Author: Makiah Bennett
  * Last edited: 14 September 2015
@@ -29,7 +29,7 @@ public class ResetAttackAnimationOnExit : StateMachineBehaviour {
 
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
 	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
-		animator.gameObject.transform.parent.parent.gameObject.GetComponent <HumanoidBaseActionClass> ().ResetCurrentAttackAnimationState ();
+		animator.gameObject.transform.parent.parent.gameObject.GetComponent <CharacterBaseActionClass> ().ResetCurrentAttackAnimationState ();
 	}
 
 	// OnStateMove is called right after Animator.OnAnimatorMove(). Code that processes and affects root motion should be implemented here

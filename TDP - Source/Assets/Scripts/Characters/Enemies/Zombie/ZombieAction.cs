@@ -1,8 +1,8 @@
-﻿
+
 /*
  * Author: Makiah Bennett
- * Created 13 September 2015
- * Last edited: 13 September 2015
+ * Created 27 September 2015
+ * Last edited: 27 September 2015
  * 
  * 9/13 - Added EnemyActionBaseClass as base, created new SetReferences, gave sword.  
  * 
@@ -17,27 +17,12 @@ using System.Collections;
 using System.Collections.Generic;
 
 public class ZombieAction : EnemyBaseActionClass {
-
-	/******************************************** INITIALIZATION *******************************************/
-
-	protected override void OnEnable() {
-		EventManager.InitializeEnemies += SetReferences;
-	}
-
-	protected override void OnDisable() {
-		EventManager.InitializeEnemies -= SetReferences;
-	}
 	
+	/********************************************* ZOMBIE AI *********************************************/
 
-	/********************************************* SKELETON AI *********************************************/
-
+	//Only for the custom properties of the zombie.  
 	protected override void SetReferences() {
 		characterSpriteObject = transform.FindChild("FlippingItem").FindChild ("Zombie");
-		anim = characterSpriteObject.GetComponent <Animator> ();
-		rb2d = GetComponent <Rigidbody2D> ();
-		groundCheck = characterSpriteObject.FindChild ("GroundCheck");
-
-		player = GameObject.Find ("ManagementFrameworks").transform.FindChild ("GameVariables").gameObject.GetComponent <VariableManagement> ().GetPlayerReference ().transform;
 
 		ItemBase zombieSword = characterSpriteObject.FindChild ("Hands").FindChild ("HoldingHand").FindChild ("HoldingItem").GetChild(0).GetComponent <ItemBase> ();
 		OnRefreshCurrentWeaponMoves (zombieSword);
@@ -46,13 +31,12 @@ public class ZombieAction : EnemyBaseActionClass {
 
 		remainDistanceFromPlayer = Random.Range (remainDistanceFromPlayer - 1, remainDistanceFromPlayer + 2);
 
-		StartCoroutine ("CheckCharacterPhysics");
-		StartCoroutine ("BasicEnemyControl");
+		//Refers to the EnemyBaseActionClass SetReferences, not the CharacterBaseActionClass SetReferences.  
+		base.SetReferences ();
 	}
 
 	protected override void Attack() {
 		AttackAction ("Stab");
 	}
-	
 
 }

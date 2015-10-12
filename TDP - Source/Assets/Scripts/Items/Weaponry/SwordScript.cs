@@ -39,6 +39,7 @@ public class SwordScript : ItemBase {
 	}
 	
 	void AttackEnemyInFocus () {
+
 		Vector3 enemyWithinAreaVectorBound = new Vector3 (enemyWithinAreaBounds, 0, 0);
 		Vector3 distToEnemyVectorLength = new Vector3 (distToEnemyLength, 0, 0);
 		
@@ -60,8 +61,8 @@ public class SwordScript : ItemBase {
 
 		if (linecastResult.Length != 0) {
 			if (linecastResult [0].collider != null) {
-				if (linecastResult [0].collider.gameObject.GetComponent <CharacterHealthController> () != null) {
-					linecastResult [0].collider.gameObject.GetComponent <CharacterHealthController> ().YouHaveBeenAttacked (swordPowerAttack);
+				if (linecastResult [0].collider.gameObject.GetComponent <CharacterHealthPanelManager> () != null) {
+					linecastResult [0].collider.gameObject.GetComponent <CharacterHealthPanelManager> ().YouHaveBeenAttacked (swordPowerAttack);
 				}
 			}
 		}

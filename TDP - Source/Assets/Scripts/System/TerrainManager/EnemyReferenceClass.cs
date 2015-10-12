@@ -18,7 +18,5 @@ public class EnemyReferenceClass {
 
 	public GameObject elementReference;
 	public int probabilityOfInstantiation;
-	public bool headingNecessary;
-	public int requiredHeading;
 
 }
