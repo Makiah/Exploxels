@@ -48,12 +48,6 @@ public class HealthPanelReference : MonoBehaviour {
 		return !occupied;
 	}
 
-	//Called when a panel is reset (i.e. OnDeath()).  
-	public void Reset() {
-		Clear ();
-		masterController.OnHealthPanelReset ();
-	}
-
 	//Called when a panel is cleared.  
 	public void Clear() {
 		headIcon.sprite = null;
@@ -61,7 +55,6 @@ public class HealthPanelReference : MonoBehaviour {
 		healthBar.value = 0;
 		occupied = false;
 		panel.SetActive (false);
-		Debug.Log ("Panel was cleared");
 	}
 
 	//Called by CharacterHealthPanelManager when it is given a panel.  

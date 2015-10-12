@@ -30,8 +30,8 @@ public class CharacterHealthPanelManager : MonoBehaviour {
 	}
 
 	/************************* HEALTH MANAGER *************************/
-	
-	public float lifePoints;
+
+	[SerializeField] protected float lifePoints;
 	protected float currentHealth;
 
 	protected UIHealthController uiHealthController;
@@ -41,8 +41,7 @@ public class CharacterHealthPanelManager : MonoBehaviour {
 	//The player transform
 	protected Transform player;
 
-	[SerializeField]
-	float distanceUntilHealthBarActive;
+	[SerializeField] float distanceUntilHealthBarActive;
 
 	//Look into initializing this once the player comes into activation distance.  
 	protected virtual void InitializeHealthBar() {
@@ -103,7 +102,7 @@ public class CharacterHealthPanelManager : MonoBehaviour {
 	//Called when the object is de-activated, or on death.  
 	public void DisableHealthPanel() {
 		if (healthPanelReference != null) {
-			healthPanelReference.Reset ();
+			healthPanelReference.Clear ();
 			healthPanelReference = null;
 		}
 	}

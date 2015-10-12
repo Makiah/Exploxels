@@ -66,7 +66,7 @@ public class PlayerHealthPanelManager : CharacterHealthPanelManager {
 
 	protected override void OnDeath() {
 		Debug.Log ("Player OnDeath called (PlayerHealthPanelManager)");
-		playerHealthPanelReference.Reset ();
+		playerHealthPanelReference.Clear ();
 		//Note: Application.Quit() does not work for the Web Player or the Unity Editor.  
 		//Application.Quit ();
 		//The following does work for the editor.  

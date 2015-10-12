@@ -29,9 +29,7 @@ public class UIHealthController : MonoBehaviour {
 	PlayerHealthPanelReference playerHealthPanel;
 	HealthPanelReference enemyHealthPanel1, enemyHealthPanel2, enemyHealthPanel3;
 
-	public static UIHealthController reference;
-
-	List <CharacterHealthPanelManager> pendingHealthControllerList = new List<CharacterHealthPanelManager>();
+	public static UIHealthController reference; 
 
 	void InitializeUIHealthController() {
 		playerHealthPanel = transform.FindChild ("Player Health Controller").FindChild ("HealthPanelPlayer").GetComponent <PlayerHealthPanelReference> ();
@@ -50,17 +48,6 @@ public class UIHealthController : MonoBehaviour {
 		return playerHealthPanel;
 	}
 
-	public void OnHealthPanelReset() {
-		Debug.Log ("OnHealthPanelReset called");
-		if (pendingHealthControllerList.Count > 0) {
-			if (pendingHealthControllerList [0] != null) {
-				pendingHealthControllerList [0].HealthPanelNewlyAvailable (GetBestAvailableEnemyHealthPanelReference (pendingHealthControllerList [0]));
-				Debug.Log(pendingHealthControllerList[0].gameObject.name + " has been given a health panel");
-				pendingHealthControllerList.RemoveAt (0);
-			}
-		}
-	}
-
 	HealthPanelReference GetBestAvailableEnemyHealthPanelReference(CharacterHealthPanelManager someHealthController) {
 		Debug.Log (someHealthController.gameObject.name + " is accessing the uihealthcontroller");
 		if (enemyHealthPanel1.IsEmpty ())
@@ -70,8 +57,6 @@ public class UIHealthController : MonoBehaviour {
 		else if (enemyHealthPanel3.IsEmpty ())
 			return enemyHealthPanel3;
 		else {
-			Debug.Log ("No available enemy health panel, adding to waiting list");
-			pendingHealthControllerList.Add(someHealthController);
 			return null;
 		}
 	}
