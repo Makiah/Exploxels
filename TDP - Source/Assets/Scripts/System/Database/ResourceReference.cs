@@ -40,7 +40,11 @@ public class ResourceReference {
 		localGroupID = ctorLocalGroupID;
 		inGamePrefab = Resources.Load ("Prefabs/" + localPath) as GameObject;
 		holdingPrefab = inGamePrefab;
-		itemIcon = inGamePrefab.GetComponent <SpriteRenderer> ().sprite;
+		if (! (ctorItemType == ItemType.Other)) {
+			itemIcon = inGamePrefab.GetComponent <SpriteRenderer> ().sprite;
+		} else {
+			itemIcon = null;
+		}
 	}
 
 	public ResourceReference (ItemType ctorItemType, string ctorItemScreenName, string ctorItemDescription, int ctorLocalGroupID, string localPath, string customUIPrefabPath) {

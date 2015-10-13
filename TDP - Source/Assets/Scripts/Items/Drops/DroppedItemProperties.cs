@@ -17,6 +17,24 @@ using System.Collections;
 
 public class DroppedItemProperties : MonoBehaviour {
 
-	public ResourceReference localResourceReference;
+	public bool working = false;
+
+	[HideInInspector] public ResourceReference localResourceReference;
+	private Transform player;
+
+
+	public void Initialize() {
+		player = VariableManagement.GetPlayerReference ().transform;
+		StartCoroutine ("MoveTowardsPlayer");
+	}
+
+	IEnumerator MoveTowardsPlayer() {
+		working = true;
+		while (true) {
+			transform.position = Vector3.Lerp(transform.position, player.transform.position, Time.deltaTime);
+
+			yield return null;
+		}
+	}
 
 }
