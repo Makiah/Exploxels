@@ -30,6 +30,7 @@ public class ResourceReference {
 		GameTool, 
 		CraftingMaterial, 
 		Ore, 
+		Food, 
 		Other
 	}
 	
