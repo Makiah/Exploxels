@@ -80,9 +80,4 @@ public class ProjectileScript : MonoBehaviour {
 
 	}
 
-//	void OnTriggerExit2D () {
-//		if (notificationSent) 
-//			notificationSent = false;
-//	}
-
 }

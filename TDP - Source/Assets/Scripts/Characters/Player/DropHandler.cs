@@ -29,34 +29,25 @@ public class DropHandler : MonoBehaviour {
 	/************************************************** DROP HANDLER **************************************************/
 
 	public SlotScript[,] slotArray;
+	bool initialized = false;
 
 	void InitializeSystem(SlotScript[,] slots) {
 		slotArray = slots;
-		StartCoroutine ("CheckForItemsInProximity");
+		initialized = true;
 	}
-
-	IEnumerator CheckForItemsInProximity() {
-		while (true) {
-			Vector3 startPoint = gameObject.transform.position - new Vector3(0, .75f, 0);
-			Vector3 endPoint = gameObject.transform.position - new Vector3(0, .75f, 0) + new Vector3(5, 0, 0) * gameObject.GetComponent <PlayerAction> ().GetFacingDirection();
-
-			RaycastHit2D linecastResult = Physics2D.Linecast(startPoint, endPoint, 1 << LayerMask.NameToLayer ("Drops"));
-
-			if (linecastResult.collider != null) {
-				Debug.Log ("ItemCheck hit collider with name of " + linecastResult.collider.gameObject.name + ".");
-				if (linecastResult.collider.gameObject.GetComponent <DroppedItemProperties> () != null)
-					PickupItem(linecastResult.collider.gameObject);
-			}
-
-			yield return null;
-		}
+	
+	//When an item drop hits the player.  
+	void OnTriggerEnter2D(Collider2D externalTrigger) {
+		if (externalTrigger.gameObject.GetComponent <DroppedItemProperties> () != null && initialized) 
+			PickupItem (externalTrigger.gameObject);
 	}
 
 	public void PickupItem(GameObject item) {
+		//This does not check the resourcereference property of the attached script as a comparison, only the tag.  Consider changing later.  
 		if (!(item.CompareTag ("ExpNodule"))) {
 
 			UISlotContentReference pendingObject = new UISlotContentReference (item.GetComponent <DroppedItemProperties> ().localResourceReference, 1);
-			SlotScript bestAvailableSlot = AttemptToStackOnBestAvailableSlot (slotArray, pendingObject);
+			SlotScript bestAvailableSlot = FindBestAvailableSlot (slotArray, pendingObject);
 
 			if (bestAvailableSlot != null) {
 				bestAvailableSlot.ModifyCurrentItemStack (1);
@@ -64,19 +55,20 @@ public class DropHandler : MonoBehaviour {
 				Destroy (item);
 			} else {
 				Debug.Log ("Could not stack item: Attempting null slot");
-				bestAvailableSlot = AttemptToPlaceOnBestAvailableNullSlot (slotArray);
+				bestAvailableSlot = FindBestAvailableNullSlot (slotArray);
 				if (bestAvailableSlot != null) {
 					bestAvailableSlot.AssignNewItem (pendingObject);
 					Destroy (item);
 				}
 			}
 		} else {
-			GetComponent <PlayerHealthPanelManager> ().OnExperienceNodulePickedUp(1);
+			transform.parent.gameObject.GetComponent <PlayerHealthPanelManager> ().OnExperienceNodulePickedUp(1);
 			Destroy(item);
 		}
 	}
 
-	SlotScript AttemptToStackOnBestAvailableSlot(SlotScript[,] slotScriptArray, UISlotContentReference pendingObjectToCheck) {
+	//Searches fot the best available slot in the slot array.  
+	SlotScript FindBestAvailableSlot(SlotScript[,] slotScriptArray, UISlotContentReference pendingObjectToCheck) {
 		if (slotScriptArray != null) {
 			for (int y = slotScriptArray.GetLength(0) - 1; y >= 0; y--) {
 				//Check for a stackable slot.  
@@ -97,7 +89,7 @@ public class DropHandler : MonoBehaviour {
 		return null;
 	}
 
-	SlotScript AttemptToPlaceOnBestAvailableNullSlot(SlotScript[,] slotScriptArray) {
+	SlotScript FindBestAvailableNullSlot(SlotScript[,] slotScriptArray) {
 		if (slotScriptArray != null) {
 			for (int y = slotScriptArray.GetLength(0) - 1; y >= 0; y--) {
 				//If no stackable slot is found, choose an empty slot.  
@@ -113,6 +105,5 @@ public class DropHandler : MonoBehaviour {
 
 		return null;
 	}
-
 
 }

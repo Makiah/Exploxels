@@ -42,7 +42,7 @@ public class PlayerHealthPanelManager : CharacterHealthPanelManager {
 		uiHealthController = VariableManagement.GetLevelUIReference().transform.FindChild ("Health Controller").gameObject.GetComponent <UIHealthController> (); 
 		playerHealthPanelReference = uiHealthController.GetPlayerHealthPanelReference ();
 		//Initialize icon
-		characterHeadSprite = transform.GetChild (0).GetChild (0).FindChild ("Head").GetComponent <SpriteRenderer> ().sprite;
+		characterHeadSprite = transform.FindChild ("FlippingItem").GetChild (0).FindChild ("Head").GetComponent <SpriteRenderer> ().sprite;
 		playerHealthPanelReference.InitializePanel (characterHeadSprite, lifePoints, currentHealth);
 	}
 
