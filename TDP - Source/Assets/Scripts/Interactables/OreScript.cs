@@ -2,14 +2,12 @@ using UnityEngine;
 using System.Collections;
 
 public class OreScript : DropsItems {
-
-	public int typeOfOre;
-
-	public Sprite[] possibleImages;
+	[SerializeField] private int typeOfOre;
+	[SerializeField] private Sprite[] possibleImages;
 
 	SpriteRenderer attachedSpriteRenderer;
 
-	public int hitsUntilDrop = 2;
+	[SerializeField] private int hitsUntilDrop = 2;
 	private int currentHits;
 
 	protected override void MakeReferences() {

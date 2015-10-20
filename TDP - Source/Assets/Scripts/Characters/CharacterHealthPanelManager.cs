@@ -59,10 +59,8 @@ public class CharacterHealthPanelManager : MonoBehaviour {
 	IEnumerator ControlHealthBarState() {
 		while (true) {
 			if (Vector3.Distance(transform.position, player.position) <= distanceUntilHealthBarActive && healthPanelReference == null) {
-				Debug.Log("Player entered radius");
 				OnThisEnemyActivated();
 			} else if (Vector3.Distance(transform.position, player.position) > distanceUntilHealthBarActive && healthPanelReference != null) {
-				Debug.Log("Player exited radius");
 				OnThisEnemyDeActivated();
 			}
 

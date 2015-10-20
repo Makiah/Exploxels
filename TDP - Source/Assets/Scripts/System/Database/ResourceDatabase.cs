@@ -52,6 +52,7 @@ public class ResourceDatabase : MonoBehaviour {
 		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.Ore, "Gold", "A weak but easily enchantable item.", 3, "Items/Ores/Gold/Gold", "Items/Ores/Gold/UIGold"));
 		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.Ore, "Ruby", "A nice red gem", 4, "Items/Ores/Ruby/Ruby", "Items/Ores/Ruby/UIRuby"));
 		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.Ore, "Silver", "A good material for strong weapons", 5, "Items/Ores/Silver/Silver", "Items/Ores/Silver/UISilver"));
+		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.Ore, "Iron", "A dull yet tough metal.", 6, "Items/Ores/Iron/Iron", "Items/Ores/Iron/UIIron"));
 
 		//Food
 		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.Food, "Apple", "A yummy snack.", 0, "Items/Food/Apple/Apple", "Items/Food/Apple/UIApple"));

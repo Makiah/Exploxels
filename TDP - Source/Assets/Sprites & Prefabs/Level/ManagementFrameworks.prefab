@@ -173,7 +173,7 @@ MonoBehaviour:
   - elementReference: {fileID: 185688, guid: 5924714cab1d44ef2bd7e037cffdf22f, type: 2}
     probabilityOfInstantiation: 7
   - elementReference: {fileID: 178818, guid: b93cc74f47786d941bc438f0f74f7171, type: 2}
-    probabilityOfInstantiation: 0
+    probabilityOfInstantiation: 1
   - elementReference: {fileID: 156718, guid: c2ea16a9671dea64180a3eadd53b416a, type: 2}
     probabilityOfInstantiation: 8
   - elementReference: {fileID: 172888, guid: f9d3c8ae910c048ba8ec6f3845b566c9, type: 2}
@@ -190,6 +190,8 @@ MonoBehaviour:
     probabilityOfInstantiation: 13
   - elementReference: {fileID: 185688, guid: bd12a06d595864b7dbde19f711e40e23, type: 2}
     probabilityOfInstantiation: 14
+  - elementReference: {fileID: 106888, guid: 857c93e1e681d4efe89ad134eadb7642, type: 2}
+    probabilityOfInstantiation: 8
 --- !u!114 &11460264
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -243,7 +245,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: initialGameElements.Array.size
-      value: 10
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: transferSegments.l1Variations.Array.size
@@ -299,7 +301,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: initialGameElements.Array.data[1].probabilityOfInstantiation
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: probabilityToInstantiateNullElement
@@ -324,6 +326,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: initialGameElements.Array.data[3].probabilityOfInstantiation
       value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: initialGameElements.Array.data[10].elementReference
+      value: 
+      objectReference: {fileID: 106888, guid: 857c93e1e681d4efe89ad134eadb7642, type: 2}
+    - target: {fileID: 0}
+      propertyPath: initialGameElements.Array.data[10].probabilityOfInstantiation
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
