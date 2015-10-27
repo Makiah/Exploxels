@@ -22,7 +22,7 @@ public class BackgroundScroller : MonoBehaviour {
 	void InitializeBackgroundElements() {
 		VariableManagement variableManagement = GameObject.Find ("ManagementFrameworks").transform.FindChild ("GameVariables").GetComponent <VariableManagement> ();
 		float terrainXLength = variableManagement.GetLevelLengthX ();
-		float backgroundXLength = terrainXLength * (scrollSpeed * 10);
+		float backgroundXLength = terrainXLength * (scrollSpeed * 12);
 		int maxBackgroundSegments = (int) (backgroundXLength / segments[0].bounds.size.x + 1);
 		for (int i = 0; i < maxBackgroundSegments; i++) {
 			GameObject createdPanel = (GameObject) (Instantiate(backgroundPanel, Vector3.zero, Quaternion.identity));

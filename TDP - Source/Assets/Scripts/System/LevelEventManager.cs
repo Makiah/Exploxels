@@ -28,6 +28,11 @@ public class LevelEventManager : MonoBehaviour {
 	public static event BaseInitialization InitializeUIHealthController;
 	public static event BaseInitialization InitializeHealthPanels;
 
+	public static event BaseInitialization InitializeInteractablePanelController;
+	public static event BaseInitialization InitializeInteractablePanels;
+
+	public static event BaseInitialization InitializeUISpeechControl;
+
 	public delegate TerrainReferenceClass TerrainInitialization();
 	public static event TerrainInitialization InitializeTerrain;
 
@@ -53,6 +58,9 @@ public class LevelEventManager : MonoBehaviour {
 
 	public static event BaseInitialization InitializeEnemyHealthControllers;
 	public static event BaseInitialization InitializeEnemies;
+	
+	public static event BaseInitialization InitializeNPCPanelControllers;
+	public static event BaseInitialization InitializeNPCs;
 
 	void Start() {
 
@@ -66,6 +74,11 @@ public class LevelEventManager : MonoBehaviour {
 		if (EnableUIHideShow != null) EnableUIHideShow (); else Debug.LogError("EnableUIHideShow was null!");//Used with InventoryHideShow
 		if (InitializeUIHealthController != null) InitializeUIHealthController(); else Debug.LogError("InitializeUIHealthController was null!"); //Used for UIHealthController
 		if (InitializeHealthPanels != null) InitializeHealthPanels (); else Debug.LogError("InitializeHealthPanels was null!"); //Used for HealthPanelReference and PlayerHealthPanelReference.  
+
+		if (InitializeInteractablePanelController != null) InitializeInteractablePanelController(); else Debug.LogError("InitializeInteractablePanelController was null!");
+		if (InitializeInteractablePanels != null) InitializeInteractablePanels(); else Debug.LogError("InitializeInteractablePanels was null!");
+
+		if (InitializeUISpeechControl != null) InitializeUISpeechControl (); else Debug.LogError("InitializeUISpeechControl was null!");
 
 		//Lay out the level
 		TerrainReferenceClass initializedMaze = null;
@@ -91,6 +104,9 @@ public class LevelEventManager : MonoBehaviour {
 		if (CreateTerrainItems != null) CreateTerrainItems(initializedMaze); else Debug.LogError("CreateTerrainItems was null!"); //Used for instantiating the enemies and trees.  
 		if (InitializeEnemyHealthControllers != null) InitializeEnemyHealthControllers (); else Debug.LogError("InitializeEnemyHealthControllers was null!"); //Used for initializing CharacterHealthController.  
 		if (InitializeEnemies != null) InitializeEnemies(); else Debug.LogError("InitializeEnemies was null!"); //Used for all enemies (requires player being instantiated).  
+
+		if (InitializeNPCPanelControllers != null) InitializeNPCPanelControllers(); else Debug.LogError("InitializeNPCPanelControllers was null!");
+		if (InitializeNPCs != null) InitializeNPCs(); else Debug.LogError("InitializeNPCs was null!");
 
 		Debug.Log("Completed EventManager");
 

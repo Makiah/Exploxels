@@ -38,7 +38,7 @@ public class HealthPanelReference : MonoBehaviour {
 		panel = gameObject;
 		headIcon = transform.FindChild ("Icon").gameObject.GetComponent <Image> ();
 		healthBar = transform.FindChild ("Health Bar").gameObject.GetComponent <Slider> ();
-		masterController = UIHealthController.reference;
+		masterController = transform.parent.parent.GetComponent <UIHealthController> ();
 		healthBarFillImage = healthBar.transform.FindChild ("Fill Area").FindChild ("Fill").GetComponent <Image> ();
 		//Make sure that the panels do not have any initial value.  
 		Clear ();

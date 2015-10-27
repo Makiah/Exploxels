@@ -14,7 +14,6 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-using System.Collections.Generic;
 
 public class UIHealthController : MonoBehaviour {
 
@@ -29,26 +28,22 @@ public class UIHealthController : MonoBehaviour {
 	PlayerHealthPanelReference playerHealthPanel;
 	HealthPanelReference enemyHealthPanel1, enemyHealthPanel2, enemyHealthPanel3;
 
-	public static UIHealthController reference; 
-
 	void InitializeUIHealthController() {
 		playerHealthPanel = transform.FindChild ("Player Health Controller").FindChild ("HealthPanelPlayer").GetComponent <PlayerHealthPanelReference> ();
 		enemyHealthPanel1 = transform.FindChild ("Enemy Health Controller").FindChild ("HealthPanel1").GetComponent <HealthPanelReference> ();
 		enemyHealthPanel2 = transform.FindChild("Enemy Health Controller").FindChild("HealthPanel2").GetComponent <HealthPanelReference> ();
 		enemyHealthPanel3 = transform.FindChild ("Enemy Health Controller").FindChild ("HealthPanel3").GetComponent <HealthPanelReference> ();	
-
-		reference = this;
 	}
 
-	public HealthPanelReference GetEnemyHealthPanelReference(CharacterHealthPanelManager someHealthController) {
-		return GetBestAvailableEnemyHealthPanelReference (someHealthController);
+	public HealthPanelReference GetEnemyHealthPanelReference() {
+		return GetBestAvailableEnemyHealthPanelReference ();
 	}
 
 	public PlayerHealthPanelReference GetPlayerHealthPanelReference () {
 		return playerHealthPanel;
 	}
 
-	HealthPanelReference GetBestAvailableEnemyHealthPanelReference(CharacterHealthPanelManager someHealthController) {
+	HealthPanelReference GetBestAvailableEnemyHealthPanelReference() {
 		if (enemyHealthPanel1.IsEmpty ())
 			return enemyHealthPanel1;
 		else if (enemyHealthPanel2.IsEmpty ())

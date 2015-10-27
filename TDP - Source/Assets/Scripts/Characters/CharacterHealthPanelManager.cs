@@ -80,7 +80,7 @@ public class CharacterHealthPanelManager : MonoBehaviour {
 
 	// Called when player enters radius of the character health controller.  
 	void OnThisEnemyActivated() {
-		healthPanelReference = uiHealthController.GetEnemyHealthPanelReference (this);
+		healthPanelReference = uiHealthController.GetEnemyHealthPanelReference ();
 		if (healthPanelReference != null)
 			healthPanelReference.InitializePanel (characterHeadSprite, lifePoints, currentHealth);
 	}
