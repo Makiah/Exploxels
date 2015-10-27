@@ -25,16 +25,35 @@ public class LevelLayout : MonoBehaviour {
 
 	/*************************** INITIALIZATION ***************************/
 	void OnEnable() {
-		LevelEventManager.InitializeTerrain += InitializeTerrain;
+		LevelEventManager.InitializeTerrain += InitializationMedium;
 	}
 	
 	void OnDisable() {
-		LevelEventManager.InitializeTerrain -= InitializeTerrain;
+		LevelEventManager.InitializeTerrain -= InitializationMedium;
 	}
 
 	/*************************** SCRIPT ***************************/
 	public TransferSegments transferSegments = new TransferSegments();
 	public int levelLength;	
+
+	[SerializeField]
+	private bool useCustomTerrain;
+	[SerializeField]
+	private Transform terrainToUse;
+
+	TerrainReferenceClass InitializationMedium() {
+		if (! useCustomTerrain) {
+			Debug.Log("Used previous terrain");
+			return InitializeTerrain ();
+		}
+		else {
+			Debug.Log("Used custom terrain");
+			VariableManagement.SetLevelLengthX(GetSpriteSizeFromGameObject(terrainToUse.gameObject).x);
+			TerrainReferenceClass toReturn = new TerrainReferenceClass(1);
+			toReturn.layer1[0] = terrainToUse.transform;
+			return toReturn;
+		}
+	}
 
 	TerrainReferenceClass InitializeTerrain() {
 
@@ -83,7 +102,7 @@ public class LevelLayout : MonoBehaviour {
 
 		float levelLengthX = instantiatedEndPoint.transform.position.x - instantiatedStartPoint.transform.position.x;
 
-		GameObject.Find ("ManagementFrameworks").transform.FindChild ("GameVariables").GetComponent <VariableManagement> ().SetLevelLengthX (levelLengthX);
+		VariableManagement.SetLevelLengthX (levelLengthX);
 		return createdMaze;
 	}
 

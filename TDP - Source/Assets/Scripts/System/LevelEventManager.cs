@@ -56,40 +56,41 @@ public class LevelEventManager : MonoBehaviour {
 
 	void Start() {
 
+		//Note: This would be a lot easier if I could figure out a way to pass an event in as a method parameter, but all attempts have not worked.  
+
 		//Inventory UI Initialization
-		SlotScript[,] createdUISlots = CreateInventorySlots (); // Used with PanelLayout
-		CreateHotbarSlots (); //Used with HotbarPanelLayout (Otherwise createdUISlots gets the hotbarslots return).  
-		InitializeSlots (); //Used with SlotScript
-		EnableUIHideShow (); //Used with InventoryHideShow
-		InitializeUIHealthController(); //Used for UIHealthController
-		InitializeHealthPanels (); //Used for HealthPanelReference and PlayerHealthPanelReference.  
+		SlotScript[,] createdUISlots = null;
+		if (CreateInventorySlots != null) createdUISlots = CreateInventorySlots (); else Debug.LogError("CreateInventorySlots was null!"); // Used with PanelLayout
+		if (CreateHotbarSlots != null) CreateHotbarSlots (); else Debug.LogError("CreateHotbarSlots was null!"); //Used with HotbarPanelLayout (Otherwise createdUISlots gets the hotbarslots return).  
+		if (InitializeSlots != null) InitializeSlots (); else Debug.LogError("InitializeSlots was null!");//Used with SlotScript
+		if (EnableUIHideShow != null) EnableUIHideShow (); else Debug.LogError("EnableUIHideShow was null!");//Used with InventoryHideShow
+		if (InitializeUIHealthController != null) InitializeUIHealthController(); else Debug.LogError("InitializeUIHealthController was null!"); //Used for UIHealthController
+		if (InitializeHealthPanels != null) InitializeHealthPanels (); else Debug.LogError("InitializeHealthPanels was null!"); //Used for HealthPanelReference and PlayerHealthPanelReference.  
 
 		//Lay out the level
-		TerrainReferenceClass initializedMaze = InitializeTerrain(); //Used with LevelLayout
+		TerrainReferenceClass initializedMaze = null;
+		if (InitializeTerrain != null) initializedMaze = InitializeTerrain(); else Debug.LogError("InitializeTerrain was null!"); //Used with LevelLayout
 
 		//Instantiate the player and initialize costumeManager
 		bool useAltRace = GameObject.Find ("UI Data").GetComponent <UIData> ().chosenRace == 1 ? true : false;
-		Race raceToUse;
 		//Purpose: Get race from ResourceDatabase.  Requirements: Database initialized.
-		if (useAltRace) 
-			raceToUse = ResourceDatabase.GetRaceByParameter ("MinecrafterFemale");
-		else 
-			raceToUse = ResourceDatabase.GetRaceByParameter ("MinecrafterMale");  
-		raceToUse.SetHeadVariation (0);   
-		CreatePlayer(); //Used for CreateLevelItems (Instantiating player)
-		CreatePlayerReference (); //Used for CreateLevelItems
-		InitializeLightingSystem (); //Used for LightingManager.  
-		InitializeCostume(raceToUse);//Used for PlayerCostumeManager
-		InitializeHotbarItems (raceToUse); //Used for initializing the HotbarManager.  
-		InitializePlayer (); //Used for initializing the HumanoidBaseReferenceClass.  
-		InitializePlayerDropSystem(createdUISlots); //Used for DropHandler
-		InitializeCameraFunctions (); // Used for camera controller.  
-		InitializeBackgroundScroller (); //Initialize the BackgroundScroller class.  
+		Race raceToUse = useAltRace ? ResourceDatabase.GetRaceByParameter ("MinecrafterFemale") : ResourceDatabase.GetRaceByParameter ("MinecrafterMale");
+		raceToUse.SetHeadVariation (0);
+
+		if (CreatePlayer != null) CreatePlayer(); else Debug.LogError("CreatePlayer was null!"); //Used for CreateLevelItems (Instantiating player)
+		if (CreatePlayerReference != null) CreatePlayerReference (); else Debug.LogError("CreatePlayerReference was null!"); //Used for CreateLevelItems
+		if (InitializeLightingSystem != null) InitializeLightingSystem (); else Debug.LogError("InitializeLightingSystem was null!"); //Used for LightingManager.  
+		if (InitializeCostume != null) InitializeCostume(raceToUse); else Debug.LogError("InitializeCostume was null!"); //Used for PlayerCostumeManager
+		if (InitializeHotbarItems != null) InitializeHotbarItems (raceToUse); else Debug.LogError("InitializeHotbarItems was null!"); //Used for initializing the HotbarManager.  
+		if (InitializePlayer != null) InitializePlayer (); else Debug.LogError("InitializePlayer was null!"); //Used for initializing the HumanoidBaseReferenceClass.  
+		if (InitializePlayerDropSystem != null) InitializePlayerDropSystem(createdUISlots); else Debug.LogError("InitializePlayerDropSystem was null!"); //Used for DropHandler
+		if (InitializeCameraFunctions != null) InitializeCameraFunctions (); else Debug.LogError("InitializeCameraFunctions was null!"); // Used for camera controller.  
+		if (InitializeBackgroundScroller != null) InitializeBackgroundScroller (); else Debug.LogError("InitializeBackgroundScroller was null!"); //Initialize the BackgroundScroller class.  
 
 		//Initialize the enemies.  
-		CreateTerrainItems(initializedMaze); //Used for instantiating the enemies and trees.  
-		InitializeEnemyHealthControllers (); //Used for initializing CharacterHealthController.  
-		InitializeEnemies(); //Used for all enemies (requires player being instantiated).  
+		if (CreateTerrainItems != null) CreateTerrainItems(initializedMaze); else Debug.LogError("CreateTerrainItems was null!"); //Used for instantiating the enemies and trees.  
+		if (InitializeEnemyHealthControllers != null) InitializeEnemyHealthControllers (); else Debug.LogError("InitializeEnemyHealthControllers was null!"); //Used for initializing CharacterHealthController.  
+		if (InitializeEnemies != null) InitializeEnemies(); else Debug.LogError("InitializeEnemies was null!"); //Used for all enemies (requires player being instantiated).  
 
 		Debug.Log("Completed EventManager");
 

@@ -27,7 +27,7 @@ public class UIData : MonoBehaviour {
 	public void OnButtonPress() {
 		chosenRace = profileSwitcher.currentRace;
 		specifiedPlayerName = gameUI.transform.FindChild ("NameField").GetComponent <InputField> ().text;
-		Application.LoadLevel (1);
+		Application.LoadLevel (2);
 	}
 
 }

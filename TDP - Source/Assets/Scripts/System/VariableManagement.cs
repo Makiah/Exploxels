@@ -14,7 +14,7 @@ public class VariableManagement : MonoBehaviour {
 	static GameObject playerObject;
 	static GameObject mainCamera;
 	static GameObject levelUI;
-	float levelLengthX;
+	static float levelLengthX;
 	
 	void SetPlayerReference() {
 		playerObject = GameObject.Find ("PlayerReferenceObject(Clone)");
@@ -34,7 +34,7 @@ public class VariableManagement : MonoBehaviour {
 		return levelUI;
 	}
 
-	public void SetLevelLengthX(float value) {
+	public static void SetLevelLengthX(float value) {
 		levelLengthX = value;
 	}
 

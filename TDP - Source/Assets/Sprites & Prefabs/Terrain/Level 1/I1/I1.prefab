@@ -1,0 +1,144 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &106764
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 493788}
+  - 212: {fileID: 21248822}
+  - 68: {fileID: 6844542}
+  m_Layer: 8
+  m_Name: I1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &493788
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 106764}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!68 &6844542
+EdgeCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 106764}
+  m_Enabled: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  m_Points:
+  - {x: -96, y: 0}
+  - {x: -71.709671, y: .00506389141}
+  - {x: -71.6982346, y: 1.26918292}
+  - {x: -67.8638, y: 1.24893212}
+  - {x: -67.8578339, y: 2.53260851}
+  - {x: -64.0302734, y: 2.55235457}
+  - {x: -64.0319977, y: 3.82085156}
+  - {x: -61.3893433, y: 3.82881427}
+  - {x: -61.4034805, y: 5.08853388}
+  - {x: -58.8472328, y: 5.0909791}
+  - {x: -58.8489609, y: 6.4039135}
+  - {x: -57.5653915, y: 6.41159391}
+  - {x: -57.5698166, y: 7.62023067}
+  - {x: -56.3382416, y: 7.63747311}
+  - {x: -56.3014221, y: 10.2720261}
+  - {x: -55.0224266, y: 10.2639742}
+  - {x: -54.9797287, y: 12.8015518}
+  - {x: -53.7096443, y: 12.7933931}
+  - {x: -53.7125473, y: 14.0947409}
+  - {x: -52.4723396, y: 14.1092997}
+  - {x: -52.4892082, y: 15.3169279}
+  - {x: -40.940464, y: 15.3194151}
+  - {x: -40.9503555, y: 16.6197433}
+  - {x: -30.776413, y: 16.617569}
+  - {x: -30.763031, y: 15.3005028}
+  - {x: -29.4447441, y: 15.3123999}
+  - {x: -29.4559593, y: 14.0558605}
+  - {x: -23.0803509, y: 14.0577812}
+  - {x: -23.0691719, y: 12.770956}
+  - {x: -6.36618948, y: 12.7829742}
+  - {x: -6.36800814, y: 14.0915337}
+  - {x: -2.50142741, y: 14.0730734}
+  - {x: -2.50851965, y: 15.2939386}
+  - {x: 2.53224468, y: 15.3064737}
+  - {x: 2.54483843, y: 16.6067505}
+  - {x: 7.68445492, y: 16.6306305}
+  - {x: 7.66436529, y: 15.3170109}
+  - {x: 10.1806383, y: 15.2967196}
+  - {x: 10.20749, y: 14.0901289}
+  - {x: 12.8459015, y: 14.0898333}
+  - {x: 12.8472481, y: 12.7905426}
+  - {x: 14.0460777, y: 12.7773409}
+  - {x: 14.0640793, y: 11.4718256}
+  - {x: 15.3665705, y: 11.4627972}
+  - {x: 15.3666401, y: 10.2435637}
+  - {x: 16.6383877, y: 10.2680645}
+  - {x: 16.61479, y: 7.63760471}
+  - {x: 20.4475441, y: 7.646451}
+  - {x: 20.4356556, y: 6.41057014}
+  - {x: 30.7375832, y: 6.40663433}
+  - {x: 30.7427101, y: 5.09792042}
+  - {x: 96.0049286, y: 5.10542631}
+--- !u!212 &21248822
+SpriteRenderer:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 106764}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_Materials:
+  - {fileID: 2100000, guid: e454f5127eda748efb16894d8530fcd8, type: 2}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 0
+  m_ReflectionProbeUsage: 0
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_ImportantGI: 0
+  m_AutoUVMaxDistance: .5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 459935887
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 701f9240c47284f94bbc85e94b4185e9, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e454f5127eda748efb16894d8530fcd8, type: 2}
+    - target: {fileID: 0}
+      propertyPath: m_SortingLayerID
+      value: 459935887
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 106764}
+  m_IsPrefabParent: 1
