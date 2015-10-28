@@ -15,10 +15,12 @@ public class NPCPanelController : MonoBehaviour {
 	Sprite playerIcon;
 	SpeechControl mainSpeechControl;
 	bool speechBubbleActive = false;
+	bool alreadySpeakingToPlayer = false;
 	[SerializeField] float minDistanceRequiredForInteraction = 5f;
 	InteractablePanelController mainInteractablePanelController;
 	InteractablePanelReference interactablePanel;
 
+	//Set references to the playerIcon, start necessary coroutines, etc.  
 	void InitializeNPCPanelController() {
 		playerTransform = VariableManagement.GetPlayerReference ().transform;
 		playerIcon = transform.FindChild ("FlippingItem").FindChild ("Character").FindChild ("Head").GetComponent <SpriteRenderer> ().sprite;
@@ -34,8 +36,9 @@ public class NPCPanelController : MonoBehaviour {
 			if (Vector3.Distance(transform.position, playerTransform.position) <= minDistanceRequiredForInteraction) {
 				if (interactablePanel == null) 
 					OnActivateInteractablePanel();
-				if (Input.GetKeyDown (KeyCode.X)) {
-					SpeakToPlayer("Hey there!");
+				if (Input.GetKeyDown (KeyCode.X) && ! alreadySpeakingToPlayer) {
+					string[] phrases = new string[]{"Hey there!", "My name is Gandalf.", "Pleased to make your acquaintance.", "Welcome to Exploxels!"};
+					SpeakToPlayer(phrases);
 				}
 			} else if (Vector3.Distance (transform.position, playerTransform.position) > minDistanceRequiredForInteraction) {
 				if (interactablePanel != null)
@@ -43,6 +46,8 @@ public class NPCPanelController : MonoBehaviour {
 				if (speechBubbleActive) {
 					ClearSpeechBubble();
 				}
+				if (alreadySpeakingToPlayer) 
+					alreadySpeakingToPlayer = false;
 			}
 
 			yield return null;
@@ -51,6 +56,11 @@ public class NPCPanelController : MonoBehaviour {
 
 	//Makes a call to SpeechControl on the UI with the arguments that determine what to say and the icon that is saying it.  
 	public virtual void SpeakToPlayer(string toSay) {
+		mainSpeechControl.SaySomething (playerIcon, toSay);
+		speechBubbleActive = true;
+	}
+
+	public virtual void SpeakToPlayer(string[] toSay) {
 		mainSpeechControl.SaySomething (playerIcon, toSay);
 		speechBubbleActive = true;
 	}
