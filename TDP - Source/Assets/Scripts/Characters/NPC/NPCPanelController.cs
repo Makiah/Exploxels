@@ -20,6 +20,8 @@ public class NPCPanelController : MonoBehaviour {
 	InteractablePanelController mainInteractablePanelController;
 	InteractablePanelReference interactablePanel;
 
+	string[] dialogueForPlayer;
+
 	//Set references to the playerIcon, start necessary coroutines, etc.  
 	void InitializeNPCPanelController() {
 		playerTransform = VariableManagement.GetPlayerReference ().transform;
@@ -37,17 +39,25 @@ public class NPCPanelController : MonoBehaviour {
 				if (interactablePanel == null) 
 					OnActivateInteractablePanel();
 				if (Input.GetKeyDown (KeyCode.X) && ! alreadySpeakingToPlayer) {
-					string[] phrases = new string[]{"Hey there!", "My name is Gandalf.", "Pleased to make your acquaintance.", "Welcome to Exploxels!"};
-					SpeakToPlayer(phrases);
+					if (dialogueForPlayer.Length != 0) {
+						GetComponent <NPCBaseScript> ().StopWalkingAround();
+						GetComponent <NPCBaseScript> ().FlipToFacePlayer();
+						SpeakToPlayer(dialogueForPlayer);
+						alreadySpeakingToPlayer = true;
+					}
 				}
 			} else if (Vector3.Distance (transform.position, playerTransform.position) > minDistanceRequiredForInteraction) {
-				if (interactablePanel != null)
+				if (interactablePanel != null) {
 					ClearInteractablePanel();
+				}
 				if (speechBubbleActive) {
 					ClearSpeechBubble();
+					GetComponent <NPCBaseScript> ().ResumeWalkingAround();
+					Debug.Log("Called resume");
 				}
-				if (alreadySpeakingToPlayer) 
+				if (alreadySpeakingToPlayer) {
 					alreadySpeakingToPlayer = false;
+				}
 			}
 
 			yield return null;
@@ -84,6 +94,10 @@ public class NPCPanelController : MonoBehaviour {
 			interactablePanel.Clear ();
 			interactablePanel = null;
 		}
+	}
+
+	public void SetCharacterDialogue(string[] customDialogue) {
+		dialogueForPlayer = customDialogue;
 	}
 
 }

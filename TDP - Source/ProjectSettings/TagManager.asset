@@ -46,11 +46,11 @@ TagManager:
   - name: Trees and Rocks
     uniqueID: 2488917345
     locked: 0
+  - name: Buildings
+    uniqueID: 224556047
+    locked: 0
   - name: Terrain
     uniqueID: 459935887
-    locked: 0
-  - name: Default
-    uniqueID: 0
     locked: 0
   - name: Items
     uniqueID: 1821076941
@@ -63,4 +63,7 @@ TagManager:
     locked: 0
   - name: Player
     uniqueID: 794406875
+    locked: 0
+  - name: Default
+    uniqueID: 0
     locked: 0

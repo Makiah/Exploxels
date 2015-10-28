@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class OldManBehaviour : NPCBaseScript {
+public class BlacksmithBehaviour : Artisan {
 
 	protected override void SetReferences() {
 		base.SetReferences ();
-		string[] dialogue = new string[]{"Hey there!", "My name is Gandalf.", "I will be your guide."};
+		string[] dialogue = new string[]{"Why, hello!", "My name is Durog.", "I will smelt your metals."};
 		GetComponent <NPCPanelController> ().SetCharacterDialogue (dialogue);
 	}
 

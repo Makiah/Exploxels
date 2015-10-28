@@ -11,6 +11,8 @@ public abstract class NPCBaseScript : CharacterBaseActionClass {
 		LevelEventManager.InitializeNPCs -= SetReferences;
 	}
 
+	bool walkingAround = true;
+
 	protected Transform playerTransform;
 	[SerializeField] protected float minDistanceRequiredForInteraction;
 
@@ -18,6 +20,50 @@ public abstract class NPCBaseScript : CharacterBaseActionClass {
 		characterSpriteObject = transform.FindChild ("FlippingItem").FindChild ("Character");
 		base.SetReferences ();
 		playerTransform = VariableManagement.GetPlayerReference ().transform;
+		StartCoroutine ("WalkAround");
+	}
+
+	protected virtual IEnumerator WalkAround() {
+		while (true) {
+			anim.SetFloat("Speed", 1);
+			rb2d.velocity = new Vector2(GetFacingDirection() * moveForce, 0);
+			yield return new WaitForSeconds(3f);
+			anim.SetFloat("Speed", 0);
+			rb2d.velocity = Vector2.zero;
+			yield return new WaitForSeconds(3f);
+			Flip ();
+			
+			yield return null;
+		}
+	}
+	
+	public void StopWalkingAround() {
+		if (walkingAround) {
+			StopCoroutine ("WalkAround");
+			rb2d.velocity = Vector2.zero;
+			anim.SetFloat("Speed", 0);
+			walkingAround = false;
+		}
+	}
+	
+	public void ResumeWalkingAround() {
+		if (! walkingAround) {
+			StartCoroutine("WalkAround");
+			walkingAround = true;
+			Debug.Log("Resumed walking around");
+		}
+	}
+
+	public void FlipToFacePlayer() {
+		if (playerTransform.position.x >= transform.position.x) {
+			if (GetFacingDirection() != 1) {
+				Flip ();
+			}
+		} else {
+			if (GetFacingDirection() != -1) {
+				Flip();
+			}
+		}
 	}
 
 }
