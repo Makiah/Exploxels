@@ -12,13 +12,18 @@
 
 using UnityEngine;
 using System.Collections;
+[System.Serializable]
+public class VariationReference {
+	public GameObject variationReference;
+	public bool canBeFlipped;
+}
 
 [System.Serializable]
 public class TransferSegments {
 	public GameObject startSegment;
-	public GameObject[] l1Variations;
-	public GameObject[] l2Variations;
-	public GameObject[] l3Variations;
+	public VariationReference[] l1Variations;
+	public VariationReference[] l2Variations;
+	public VariationReference[] l3Variations;
 }
 
 public class LevelLayout : MonoBehaviour {
@@ -55,6 +60,7 @@ public class LevelLayout : MonoBehaviour {
 		}
 	}
 
+	//Takes the transfer segments defined earlier and instantiates them based on sprite size.  
 	TerrainReferenceClass InitializeTerrain() {
 
 		float currentXPosition = 0;
@@ -69,29 +75,38 @@ public class LevelLayout : MonoBehaviour {
 		//For all levelLength values
 		for (int i = 0; i < levelLength; i ++) {
 			//Half-Width and currentX position are used for all variations.  
-			GameObject chosenObjectLayer1 = ChooseRandomObjectFromArray(transferSegments.l1Variations);
+			VariationReference chosenVariationLayer1 = ScriptingUtilities.GetRandomObjectFromArray(transferSegments.l1Variations);
+			GameObject chosenObjectLayer1 = chosenVariationLayer1.variationReference;
 			float halfWidth = GetSpriteSizeFromGameObject(chosenObjectLayer1).x / 2f;
 			currentXPosition += halfWidth;
 			//Layer 1
 			Vector3 pointToInstantiateLayer1Object = new Vector3(currentXPosition, 0, 0);
 			GameObject instantiatedObjectLayer1 = LayTerrainAsset(chosenObjectLayer1, pointToInstantiateLayer1Object, Quaternion.identity, parentMaze);
-			if (Random.Range(0, 2) == 1)
+			if (Random.Range(0, 2) == 1 && chosenVariationLayer1.canBeFlipped)
 				instantiatedObjectLayer1.transform.localScale = new Vector3(-1, 1, 1);
 			createdMaze.layer1[i] = instantiatedObjectLayer1.transform;
 			//Layer 2
-			GameObject chosenObjectLayer2 = ChooseRandomObjectFromArray(transferSegments.l2Variations);
-			Vector3 pointToInstantiateLayer2Object = new Vector3(currentXPosition, - (GetSpriteSizeFromGameObject(chosenObjectLayer1).y / 2f + GetSpriteSizeFromGameObject(chosenObjectLayer2).y / 2f), 0);
-			GameObject instantiatedObjectLayer2 = LayTerrainAsset(chosenObjectLayer2, pointToInstantiateLayer2Object, Quaternion.identity, parentMaze);
-			if (Random.Range(0, 2) == 1)
-				instantiatedObjectLayer2.transform.localScale = new Vector3(-1, 1, 1);
-			createdMaze.layer2[i] = instantiatedObjectLayer2.transform;
-			//Layer 3
-			GameObject chosenObjectLayer3 = ChooseRandomObjectFromArray (transferSegments.l3Variations);
-			Vector3 pointToInstantiateLayer3Object = new Vector3(currentXPosition, instantiatedObjectLayer2.transform.position.y - (GetSpriteSizeFromGameObject(chosenObjectLayer2).y / 2f + GetSpriteSizeFromGameObject(chosenObjectLayer3).y / 2f), 0); 
-			GameObject instantiatedObjectLayer3 = LayTerrainAsset(chosenObjectLayer3, pointToInstantiateLayer3Object, Quaternion.identity, parentMaze);
-			if (Random.Range(0, 2) == 1) 
-				instantiatedObjectLayer3.transform.localScale = new Vector3(-1, 1, 1);
-			createdMaze.layer3[i] = instantiatedObjectLayer3.transform;
+			//Make sure that layer 2 objects do exist.  
+			if (transferSegments.l2Variations.Length != 0) {
+				VariationReference chosenVariationLayer2 = ScriptingUtilities.GetRandomObjectFromArray(transferSegments.l2Variations);
+				GameObject chosenObjectLayer2 = chosenVariationLayer2.variationReference;
+				Vector3 pointToInstantiateLayer2Object = new Vector3(currentXPosition, - (GetSpriteSizeFromGameObject(chosenObjectLayer1).y / 2f + GetSpriteSizeFromGameObject(chosenObjectLayer2).y / 2f), 0);
+				GameObject instantiatedObjectLayer2 = LayTerrainAsset(chosenObjectLayer2, pointToInstantiateLayer2Object, Quaternion.identity, parentMaze);
+				if (Random.Range(0, 2) == 1 && chosenVariationLayer2.canBeFlipped)
+					instantiatedObjectLayer2.transform.localScale = new Vector3(-1, 1, 1);
+				createdMaze.layer2[i] = instantiatedObjectLayer2.transform;
+				//Layer 3
+				//Make sure that layer 3 objects do exist (dependent on whether layer 2 objects exist as well).  
+				if (transferSegments.l3Variations.Length != 0) {
+					VariationReference chosenVariationLayer3 = ScriptingUtilities.GetRandomObjectFromArray(transferSegments.l3Variations);
+					GameObject chosenObjectLayer3 = chosenVariationLayer3.variationReference;
+					Vector3 pointToInstantiateLayer3Object = new Vector3(currentXPosition, instantiatedObjectLayer2.transform.position.y - (GetSpriteSizeFromGameObject(chosenObjectLayer2).y / 2f + GetSpriteSizeFromGameObject(chosenObjectLayer3).y / 2f), 0); 
+					GameObject instantiatedObjectLayer3 = LayTerrainAsset(chosenObjectLayer3, pointToInstantiateLayer3Object, Quaternion.identity, parentMaze);
+					if (Random.Range(0, 2) == 1 && chosenVariationLayer3.canBeFlipped) 
+					instantiatedObjectLayer3.transform.localScale = new Vector3(-1, 1, 1);
+					createdMaze.layer3[i] = instantiatedObjectLayer3.transform;
+				}
+			}
 			//Add current X position
 			currentXPosition += halfWidth;
 		}
@@ -104,15 +119,6 @@ public class LevelLayout : MonoBehaviour {
 
 		VariableManagement.SetLevelLengthX (levelLengthX);
 		return createdMaze;
-	}
-
-	GameObject ChooseRandomObjectFromArray (GameObject[] itemArray) {
-		if (itemArray.Length != 0) {
-			return itemArray [Random.Range (0, itemArray.Length)];
-		} else {
-			Debug.LogError("No terrain objects were found.  Check the array attached to the LevelLayout script.");
-			return null;
-		}
 	}
 
 	GameObject LayTerrainAsset(GameObject asset, Vector3 position, Quaternion rotation, Transform parentObj) {

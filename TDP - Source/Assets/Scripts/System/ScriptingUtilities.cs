@@ -60,4 +60,13 @@ public class ScriptingUtilities {
 		return toReturn;
 	}
 
+	public static T GetRandomObjectFromArray <T> (T[] array) {
+		if (array.Length != 0) {
+			return array [Random.Range (0, array.Length)];
+		} else {
+			Debug.LogError("Array length was 0!");
+			return default(T);
+		}
+	}
+
 }

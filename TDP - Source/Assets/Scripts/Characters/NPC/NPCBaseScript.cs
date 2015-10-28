@@ -12,7 +12,6 @@ public abstract class NPCBaseScript : CharacterBaseActionClass {
 	}
 
 	protected Transform playerTransform;
-
 	[SerializeField] protected float minDistanceRequiredForInteraction;
 
 	protected override void SetReferences() {
