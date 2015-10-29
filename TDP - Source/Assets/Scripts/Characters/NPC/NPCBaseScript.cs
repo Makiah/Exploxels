@@ -50,7 +50,6 @@ public abstract class NPCBaseScript : CharacterBaseActionClass {
 		if (! walkingAround) {
 			StartCoroutine("WalkAround");
 			walkingAround = true;
-			Debug.Log("Resumed walking around");
 		}
 	}
 

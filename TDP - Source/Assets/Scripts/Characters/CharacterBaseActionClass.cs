@@ -59,7 +59,7 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 	protected virtual void SetReferences() {
 		anim = characterSpriteObject.GetComponent <Animator> ();
 		rb2d = GetComponent <Rigidbody2D> ();
-		groundCheck = characterSpriteObject.FindChild ("GroundCheck");
+		groundCheck = transform.FindChild ("GroundCheck");
 
 		maxSpeedInitial = maxSpeed;
 		

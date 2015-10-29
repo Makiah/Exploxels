@@ -53,7 +53,6 @@ public class NPCPanelController : MonoBehaviour {
 				if (speechBubbleActive) {
 					ClearSpeechBubble();
 					GetComponent <NPCBaseScript> ().ResumeWalkingAround();
-					Debug.Log("Called resume");
 				}
 				if (alreadySpeakingToPlayer) {
 					alreadySpeakingToPlayer = false;

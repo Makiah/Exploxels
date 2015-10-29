@@ -7,18 +7,13 @@ public abstract class Artisan : NPCBaseScript {
 	protected override IEnumerator WalkAround() {
 		while (true) {
 			if (transform.localPosition.x > 0) {
-				if (GetFacingDirection() == 1) {
+				if (GetFacingDirection() == 1)
 					Flip ();
-					Debug.Log("Flipped for scenario 1, facing direction is " + GetFacingDirection());
-				}
 				Debug.Log("Chose scenario 1");
 			}
 			else if (transform.localPosition.x <= 0) {
-				if (GetFacingDirection() == -1) {
+				if (GetFacingDirection() == -1)
 					Flip ();
-					Debug.Log("Flipped for scenario 2");
-				}
-				Debug.Log("Chose scenario 2, facing direction is " + GetFacingDirection());
 			}
 
 			anim.SetFloat("Speed", 1);
