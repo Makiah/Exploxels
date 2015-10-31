@@ -11,4 +11,8 @@ public class NPCSlotModifier : ModifiesSlotContent {
 		return true;
 	}
 
+	public SlotScript CheckWhetherPlayerHasSpecifiedItem(UISlotContentReference specifiedItem) {
+		return CheckWhetherPlayerHasCertainItem(specifiedItem);
+	}
+
 }

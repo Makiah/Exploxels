@@ -9,6 +9,10 @@ public class BlacksmithBehaviour : Artisan {
 		GetComponent <NPCPanelController> ().SetCharacterDialogue (dialogue);
 	}
 
+	public override void NPCActionBeforeSpeaking() {
+		
+	}
+
 	public override void NPCActionAfterSpeaking() {
 
 	}

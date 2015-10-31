@@ -3,6 +3,10 @@ using System.Collections;
 
 public class OldManBehaviour : NPCBaseScript {
 
+	bool gavePlayerInstructions = false;
+	bool tookApples = false;
+	bool completedStoryRole = false;
+
 	protected override void SetReferences() {
 		base.SetReferences ();
 		string[] dialogue = new string[] {"Oh dear.  Oh dear me...", 
@@ -16,10 +20,39 @@ public class OldManBehaviour : NPCBaseScript {
 		GetComponent <NPCPanelController> ().SetCharacterDialogue (dialogue);
 	}
 
+	public override void NPCActionBeforeSpeaking() {
+		if (gavePlayerInstructions && tookApples == false) {
+			SlotScript slotWithContent = localNPCSlotModifier.CheckWhetherPlayerHasSpecifiedItem(new UISlotContentReference(ResourceDatabase.GetItemByParameter("Apple"), 6));
+			if (slotWithContent != null) {
+				slotWithContent.ModifyCurrentItemStack(-6);
+				Debug.Log("Player had required items");
+				string[] newDialogue = new string[]{
+					"Thank you, young one!", 
+					"I appreciate your help.", 
+					"Here is a bit of money as a reward."
+				};
+				GetComponent <NPCPanelController> ().SetCharacterDialogue(newDialogue);
+				tookApples = true;
+			}
+		}
+	}
+
 	public override void NPCActionAfterSpeaking() {
-		transform.FindChild ("DropHandler").GetComponent <NPCSlotModifier> ().AddNewItemToPlayerInventory (
-			new UISlotContentReference(ResourceDatabase.GetItemByParameter ("Wooden Hatchet"), 1)
-		);
+		if (gavePlayerInstructions == false) {
+			localNPCSlotModifier.AddNewItemToPlayerInventory (
+			new UISlotContentReference (ResourceDatabase.GetItemByParameter ("Wooden Hatchet"), 1)
+			);
+			gavePlayerInstructions = true;
+		}
+
+		if (tookApples && completedStoryRole == false) {
+			string[] newDialogue = new string[]{
+				"If you walk over the hills, you should see a small town.", 
+				"Use some of the money I gave you to buy some new stuff!"
+			};
+			GetComponent <NPCPanelController> ().SetCharacterDialogue(newDialogue);
+			completedStoryRole = true;
+		}
 	}
 
 }

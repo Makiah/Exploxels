@@ -42,6 +42,7 @@ public class NPCPanelController : MonoBehaviour {
 					if (dialogueForPlayer.Length != 0) {
 						GetComponent <NPCBaseScript> ().StopWalkingAround();
 						GetComponent <NPCBaseScript> ().FlipToFacePlayer();
+						GetComponent <NPCBaseScript> ().NPCActionBeforeSpeaking();
 						SpeakToPlayer(dialogueForPlayer);
 						alreadySpeakingToPlayer = true;
 					}
@@ -97,6 +98,10 @@ public class NPCPanelController : MonoBehaviour {
 	}
 
 	public void SetCharacterDialogue(string[] customDialogue) {
+		if (alreadySpeakingToPlayer) {
+			ClearSpeechBubble();
+			SpeakToPlayer(customDialogue);
+		}
 		dialogueForPlayer = customDialogue;
 	}
 

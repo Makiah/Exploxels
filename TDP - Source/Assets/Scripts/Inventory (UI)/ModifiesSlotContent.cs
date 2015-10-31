@@ -44,18 +44,42 @@ public abstract class ModifiesSlotContent : MonoBehaviour {
 		return successfullyAssigned;
 	}
 
-	//Searches fot the best available slot in the slot array.  
+	protected SlotScript CheckWhetherPlayerHasCertainItem(UISlotContentReference certainItem) {
+		return DetermineWhetherPlayerHasCertainInventoryItem (slotArray, certainItem);
+	}
+
+	//Searches for the best available slot in the slot array.  (One that already has the specified item)
 	SlotScript FindBestAvailableSlot(SlotScript[,] slotScriptArray, UISlotContentReference pendingObjectToCheck) {
 		if (slotScriptArray != null) {
 			for (int y = slotScriptArray.GetLength(0) - 1; y >= 0; y--) {
 				//Check for a stackable slot.  
 				for (int x = 0; x < slotScriptArray.GetLength(1); x++) {
-					if (slotArray [y, x].GetCurrentlyAssigned () != null) {
-						if (slotArray [y, x].GetCurrentlyAssigned ().uiSlotContent.itemType == pendingObjectToCheck.uiSlotContent.itemType) {
-							if (slotArray [y, x].GetCurrentlyAssigned ().uiSlotContent.localGroupID == pendingObjectToCheck.uiSlotContent.localGroupID) {
+					//Define the object in the slot.  
+					UISlotContentReference objectAssigned = slotArray[y, x].GetCurrentlyAssigned();
+					//Check to make sure objectAssigned is not null.  
+					if (objectAssigned != null)
+						//Check to make sure the item is the same.  
+						if (objectAssigned.uiSlotContent.itemType == pendingObjectToCheck.uiSlotContent.itemType)
+							if (objectAssigned.uiSlotContent.localGroupID == pendingObjectToCheck.uiSlotContent.localGroupID)
+								//Since the slot fits all requirements, return the slot.  
 								return slotArray [y, x];
-							}
-						}
+				}
+			}
+		} else {
+			Debug.Log("Slot array is null");
+		}
+		
+		return null;
+	}
+
+	//Find the best available empty slot.  
+	SlotScript FindBestAvailableNullSlot(SlotScript[,] slotScriptArray) {
+		if (slotScriptArray != null) {
+			for (int y = slotScriptArray.GetLength(0) - 1; y >= 0; y--) {
+				//If no stackable slot is found, choose an empty slot.  
+				for (int x = 0; x < slotScriptArray.GetLength(1); x++) {
+					if (slotArray [y, x].GetCurrentlyAssigned () == null) {
+						return slotArray [y, x];
 					}
 				}
 			}
@@ -65,15 +89,25 @@ public abstract class ModifiesSlotContent : MonoBehaviour {
 		
 		return null;
 	}
-	
-	SlotScript FindBestAvailableNullSlot(SlotScript[,] slotScriptArray) {
+
+	//Used to determine whether the player has a required item.  
+	SlotScript DetermineWhetherPlayerHasCertainInventoryItem(SlotScript[,] slotScriptArray, UISlotContentReference pendingObjectToCheck) {
 		if (slotScriptArray != null) {
 			for (int y = slotScriptArray.GetLength(0) - 1; y >= 0; y--) {
-				//If no stackable slot is found, choose an empty slot.  
+				//Check for a stackable slot.  
 				for (int x = 0; x < slotScriptArray.GetLength(1); x++) {
-					if (slotArray [y, x].GetCurrentlyAssigned () == null) {
-						return slotArray [y, x];
-					}
+					//Define the item that is in the specified slot.  
+					UISlotContentReference objectAssigned = slotArray[y, x].GetCurrentlyAssigned();
+					//Check whether the assigned object is null.  
+					if (objectAssigned != null)
+						//Check to make sure the item types are the same.  
+						if (objectAssigned.uiSlotContent.itemType == pendingObjectToCheck.uiSlotContent.itemType)
+							//Check to see that the IDs are the same.  
+							if (objectAssigned.uiSlotContent.localGroupID == pendingObjectToCheck.uiSlotContent.localGroupID)
+								//Check to see that the stacks are greater or equal to one another.  
+								if (objectAssigned.stack >= pendingObjectToCheck.stack)
+									//Since the slot fits all requirements, return the slot.  
+									return slotArray [y, x];
 				}
 			}
 		} else {

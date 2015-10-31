@@ -12,6 +12,7 @@ public abstract class NPCBaseScript : CharacterBaseActionClass {
 	}
 	
 	bool walkingAround = true;
+	protected NPCSlotModifier localNPCSlotModifier;
 
 	protected Transform playerTransform;
 	[SerializeField] protected float minDistanceRequiredForInteraction;
@@ -20,9 +21,11 @@ public abstract class NPCBaseScript : CharacterBaseActionClass {
 		characterSpriteObject = transform.FindChild ("FlippingItem").FindChild ("Character");
 		base.SetReferences ();
 		playerTransform = VariableManagement.GetPlayerReference ().transform;
+		localNPCSlotModifier = transform.FindChild ("DropHandler").GetComponent <NPCSlotModifier> ();
 		StartCoroutine ("WalkAround");
 	}
 
+	public abstract void NPCActionBeforeSpeaking();
 	public abstract void NPCActionAfterSpeaking();
 
 	protected virtual IEnumerator WalkAround() {
@@ -33,7 +36,8 @@ public abstract class NPCBaseScript : CharacterBaseActionClass {
 			anim.SetFloat("Speed", 0);
 			rb2d.velocity = Vector2.zero;
 			yield return new WaitForSeconds(3f);
-			Flip ();
+			if (Random.Range(0, 2) == 1)
+				Flip ();
 			
 			yield return null;
 		}
