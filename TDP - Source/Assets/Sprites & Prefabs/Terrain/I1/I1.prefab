@@ -5884,7 +5884,7 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 119802}
-  m_Mass: 1
+  m_Mass: 1e+06
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
   m_GravityScale: 1.5
@@ -5900,7 +5900,7 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 102004}
-  m_Mass: 30
+  m_Mass: 1e+06
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
   m_GravityScale: 1.5
@@ -5916,7 +5916,7 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 117544}
-  m_Mass: 1
+  m_Mass: 1e+06
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
   m_GravityScale: 1.5
