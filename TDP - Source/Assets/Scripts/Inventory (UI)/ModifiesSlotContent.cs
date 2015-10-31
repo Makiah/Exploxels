@@ -1,70 +1,47 @@
-
-/*
- * Author: Makiah Bennett
- * Last edited: 11 September 2015
- * 
- * This script pretty much just sends a continual linecast in front of the player, and if an object is found and matches the specified
- * criteria, the script will then assign that item to the best available slot.  
- * 
- * 
- */
-
-
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 
-public class DropHandler : MonoBehaviour {
+public abstract class ModifiesSlotContent : MonoBehaviour {
 
 	/************************************************** INITIALIZATION **************************************************/
-
-	void OnEnable() {
+	
+	protected virtual void OnEnable() {
 		LevelEventManager.InitializePlayerDropSystem += InitializeSystem;
 	}
-
-	void OnDisable() {
+	
+	protected virtual void OnDisable() {
 		LevelEventManager.InitializePlayerDropSystem -= InitializeSystem;
 	}
-
-
+	
+	
 	/************************************************** DROP HANDLER **************************************************/
-
+	
 	public SlotScript[,] slotArray;
-	bool initialized = false;
-
+	protected bool initialized = false;
+	
 	void InitializeSystem(SlotScript[,] slots) {
 		slotArray = slots;
 		initialized = true;
 	}
-	
-	//When an item drop hits the player.  
-	void OnTriggerEnter2D(Collider2D externalTrigger) {
-		if (externalTrigger.gameObject.GetComponent <DroppedItemProperties> () != null && initialized) 
-			PickupItem (externalTrigger.gameObject);
-	}
 
-	public void PickupItem(GameObject item) {
-		//This does not check the resourcereference property of the attached script as a comparison, only the tag.  Consider changing later.  
-		if (!(item.CompareTag ("ExpNodule"))) {
-
-			UISlotContentReference pendingObject = new UISlotContentReference (item.GetComponent <DroppedItemProperties> ().localResourceReference, 1);
-			SlotScript bestAvailableSlot = FindBestAvailableSlot (slotArray, pendingObject);
-
-			if (bestAvailableSlot != null) {
-				bestAvailableSlot.ModifyCurrentItemStack (1);
-				Debug.Log ("Assigned " + item.GetComponent <DroppedItemProperties> ().localResourceReference.itemScreenName + " to best available slot.");
-				Destroy (item);
-			} else {
-				Debug.Log ("Could not stack item: Attempting null slot");
-				bestAvailableSlot = FindBestAvailableNullSlot (slotArray);
-				if (bestAvailableSlot != null) {
-					bestAvailableSlot.AssignNewItem (pendingObject);
-					Destroy (item);
-				}
-			}
+	protected bool AssignNewItemToBestSlot(UISlotContentReference item) {
+		bool successfullyAssigned = false;
+		SlotScript bestAvailableSlot = FindBestAvailableSlot (slotArray, item);
+		
+		if (bestAvailableSlot != null) {
+			successfullyAssigned = true;
+			bestAvailableSlot.ModifyCurrentItemStack (1);
+			Debug.Log ("Assigned " + item.uiSlotContent.itemScreenName + " to slot with items of same type.");
 		} else {
-			transform.parent.gameObject.GetComponent <PlayerHealthPanelManager> ().OnExperienceNodulePickedUp(1);
-			Destroy(item);
+			Debug.Log ("Could not stack item: Attempting to add to an empty slot");
+			bestAvailableSlot = FindBestAvailableNullSlot (slotArray);
+			if (bestAvailableSlot != null) {
+				successfullyAssigned = true;
+				bestAvailableSlot.AssignNewItem (item);
+			}
 		}
+
+		return successfullyAssigned;
 	}
 
 	//Searches fot the best available slot in the slot array.  
@@ -85,10 +62,10 @@ public class DropHandler : MonoBehaviour {
 		} else {
 			Debug.Log("Slot array is null");
 		}
-
+		
 		return null;
 	}
-
+	
 	SlotScript FindBestAvailableNullSlot(SlotScript[,] slotScriptArray) {
 		if (slotScriptArray != null) {
 			for (int y = slotScriptArray.GetLength(0) - 1; y >= 0; y--) {
@@ -102,7 +79,7 @@ public class DropHandler : MonoBehaviour {
 		} else {
 			Debug.Log("Slot array is null");
 		}
-
+		
 		return null;
 	}
 

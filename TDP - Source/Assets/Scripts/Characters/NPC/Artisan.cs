@@ -9,7 +9,6 @@ public abstract class Artisan : NPCBaseScript {
 			if (transform.localPosition.x > 0) {
 				if (GetFacingDirection() == 1)
 					Flip ();
-				Debug.Log("Chose scenario 1");
 			}
 			else if (transform.localPosition.x <= 0) {
 				if (GetFacingDirection() == -1)

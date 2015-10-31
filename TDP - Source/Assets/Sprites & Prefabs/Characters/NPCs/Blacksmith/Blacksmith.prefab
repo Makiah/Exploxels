@@ -93,7 +93,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 444106}
   - 61: {fileID: 6118704}
-  - 114: {fileID: 11428156}
+  - 114: {fileID: 11487480}
   m_Layer: 11
   m_Name: DropHandler
   m_TagString: Untagged
@@ -519,17 +519,6 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
---- !u!114 &11428156
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 132448}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 820ed6cf7d4094a67af9b24bfb658185, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &11431640
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -560,6 +549,17 @@ MonoBehaviour:
   groundedOffset: 0
   characterName: 
   minDistanceRequiredForInteraction: 0
+--- !u!114 &11487480
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 132448}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1464abf2b7bd0482ea8ba557b1840602, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!212 &21216814
 SpriteRenderer:
   m_ObjectHideFlags: 1

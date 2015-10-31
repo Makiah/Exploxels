@@ -65,17 +65,17 @@ public class ResourceDatabase : MonoBehaviour {
 		//Male Minecrafter
 		string[] minecrafterMaleHeads = {"MinecrafterMaleHead1"};
 		ResourceReference[] minecrafterMaleInitialItems = {
-			GetItemByParameter ("Wooden Sword"), 
-			GetItemByParameter ("Wooden Hatchet"),
-			GetItemByParameter ("Wooden Pickaxe")
+			//GetItemByParameter ("Wooden Sword"), 
+			//GetItemByParameter ("Wooden Hatchet"),
+			//GetItemByParameter ("Wooden Pickaxe")
 		};
 		gameRaces.Add (new Race ("Races/MinecrafterMale/", minecrafterMaleHeads, "MinecrafterMale", 0, minecrafterMaleInitialItems));
 
 		//Female Minecrafter
 		string[] minecrafterFemaleHeads = {"MinecrafterFemaleHead1"};
 		ResourceReference[] minecrafterFemaleInitialItems = {
-			GetItemByParameter ("Wooden Bow"), 
-			GetItemByParameter ("Diamond Sword")
+			//GetItemByParameter ("Wooden Bow"), 
+			//GetItemByParameter ("Diamond Sword")
 		};
 		gameRaces.Add (new Race ("Races/MinecrafterFemale/", minecrafterFemaleHeads, "MinecrafterFemale", 1, minecrafterFemaleInitialItems));
 

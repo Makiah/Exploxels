@@ -24,6 +24,10 @@ public class PlayerHealthPanelReference : HealthPanelReference {
 		experienceSlider.value = 0;
 	}
 
+	public string GetPlayerName() {
+		return playerName.text;
+	}
+
 	//The method that controls the values of the experience bar.  
 	public int UpdateExperience (int currentExp) {
 		if (currentExp >= experienceSlider.maxValue) {

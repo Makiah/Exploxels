@@ -10,7 +10,7 @@ public abstract class NPCBaseScript : CharacterBaseActionClass {
 	protected override void OnDisable() {
 		LevelEventManager.InitializeNPCs -= SetReferences;
 	}
-
+	
 	bool walkingAround = true;
 
 	protected Transform playerTransform;
@@ -22,6 +22,8 @@ public abstract class NPCBaseScript : CharacterBaseActionClass {
 		playerTransform = VariableManagement.GetPlayerReference ().transform;
 		StartCoroutine ("WalkAround");
 	}
+
+	public abstract void NPCActionAfterSpeaking();
 
 	protected virtual IEnumerator WalkAround() {
 		while (true) {

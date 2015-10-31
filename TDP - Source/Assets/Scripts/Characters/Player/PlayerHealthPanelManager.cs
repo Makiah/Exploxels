@@ -62,6 +62,10 @@ public class PlayerHealthPanelManager : CharacterHealthPanelManager {
 		}
 	}
 
+	public string GetPlayerName() {
+		return playerHealthPanelReference.GetPlayerName ();
+	}
+
 	protected override void OnDeath() {
 		playerHealthPanelReference.Clear ();
 		//Note: Application.Quit() does not work for the Web Player or the Unity Editor.  

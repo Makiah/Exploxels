@@ -38,7 +38,7 @@ public class NPCPanelController : MonoBehaviour {
 			if (Vector3.Distance(transform.position, playerTransform.position) <= minDistanceRequiredForInteraction) {
 				if (interactablePanel == null) 
 					OnActivateInteractablePanel();
-				if (Input.GetKeyDown (KeyCode.X) && ! alreadySpeakingToPlayer) {
+				if (Input.GetKeyDown (KeyCode.X) && ! alreadySpeakingToPlayer && interactablePanel != null) {
 					if (dialogueForPlayer.Length != 0) {
 						GetComponent <NPCBaseScript> ().StopWalkingAround();
 						GetComponent <NPCBaseScript> ().FlipToFacePlayer();
@@ -52,6 +52,7 @@ public class NPCPanelController : MonoBehaviour {
 				}
 				if (speechBubbleActive) {
 					ClearSpeechBubble();
+					GetComponent <NPCBaseScript> ().NPCActionAfterSpeaking();
 					GetComponent <NPCBaseScript> ().ResumeWalkingAround();
 				}
 				if (alreadySpeakingToPlayer) {

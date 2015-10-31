@@ -165,7 +165,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 492064}
   - 61: {fileID: 6116110}
-  - 114: {fileID: 11476376}
+  - 114: {fileID: 11445316}
   m_Layer: 11
   m_Name: DropHandler
   m_TagString: Untagged
@@ -441,7 +441,7 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 197286}
-  m_Mass: 1
+  m_Mass: 30
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
   m_GravityScale: 1.5
@@ -531,7 +531,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minDistanceRequiredForInteraction: 5
---- !u!114 &11476376
+--- !u!114 &11445316
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -539,7 +539,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 172014}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 820ed6cf7d4094a67af9b24bfb658185, type: 3}
+  m_Script: {fileID: 11500000, guid: 1464abf2b7bd0482ea8ba557b1840602, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &11488224
@@ -734,6 +734,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_LocalScale.x
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Mass
+      value: 30
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

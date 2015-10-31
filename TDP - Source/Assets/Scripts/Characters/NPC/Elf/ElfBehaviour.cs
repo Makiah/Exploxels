@@ -1,11 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BlacksmithBehaviour : Artisan {
+public class ElfBehaviour : Artisan {
 
 	protected override void SetReferences() {
 		base.SetReferences ();
-		string[] dialogue = new string[]{"Why, hello!", "My name is Durog.", "I will smelt your metals."};
+		string[] dialogue = new string[]{"It is good to meet you!", "My name is Gwendel.", "I will enchant your weapons."};
 		GetComponent <NPCPanelController> ().SetCharacterDialogue (dialogue);
 	}
 
