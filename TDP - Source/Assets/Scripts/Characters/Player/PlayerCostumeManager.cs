@@ -57,7 +57,6 @@ public class PlayerCostumeManager : MonoBehaviour {
 		holdingArm.sprite = race.arm;
 		topLeg.sprite = race.legs;
 		bottomLeg.sprite = race.legs;
-
 	}
 
 	//Called by HotbarManager when a new hotbar item is selected.
@@ -73,7 +72,7 @@ public class PlayerCostumeManager : MonoBehaviour {
 			GameObject createdItem = (GameObject)Instantiate (prefabSelectedInHotbar);
 			createdItem.transform.SetParent (holdingItem);
 			createdItem.transform.localPosition = Vector2.zero; 
-			createdItem.transform.localScale = new Vector3(transform.parent.localScale.x * createdItem.transform.localScale.x, transform.parent.localScale.y * createdItem.transform.localScale.y, 1);//transform.parent.localScale * createdItem.transform.localScale;
+			createdItem.transform.localScale = new Vector3(prefabSelectedInHotbar.transform.localScale.x, prefabSelectedInHotbar.transform.localScale.y, 1);//transform.parent.localScale * createdItem.transform.localScale;
 			createdItem.transform.localRotation = transform.parent.localRotation;
 
 			if (prefabSelectedInHotbar.GetComponent <ItemBase> () != null) {
