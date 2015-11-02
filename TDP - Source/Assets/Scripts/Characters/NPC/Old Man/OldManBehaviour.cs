@@ -32,6 +32,7 @@ public class OldManBehaviour : NPCBaseScript {
 					"Here is a bit of money as a reward."
 				};
 				GetComponent <NPCPanelController> ().SetCharacterDialogue(newDialogue);
+				GiveMoneyToPlayer(50);
 				tookApples = true;
 			}
 		}

@@ -4,24 +4,31 @@ using UnityEngine.UI;
 
 public class PlayerHealthPanelReference : HealthPanelReference {
 
+	//Experience components
 	Slider experienceSlider;
-	Text playerName;
 	Text playerLevel;
 	int maxExpValue = 10;
 	int currentLevel = 1;
+	//Other components
+	Text playerName;
+	//Coin stuff
+	Text coinValue;
 
 	//The method that initializes the values of the health panel.  
 	protected override void InitializeHealthPanelReference() {
 		base.InitializeHealthPanelReference ();
 
-		//Additional components of the panel
-		playerName = transform.FindChild ("Name").gameObject.GetComponent <Text> ();
-		playerLevel = transform.FindChild ("PlayerLevel").gameObject.GetComponent <Text> ();
-		//Set panel initial values.  
+		//Name of player
+		playerName = transform.FindChild ("Name").gameObject.GetComponent <Text> (); 
 		playerName.text = GameObject.Find ("UI Data").GetComponent <UIData> ().specifiedPlayerName;
-		experienceSlider = transform.FindChild ("Experience Indicator").gameObject.GetComponent <Slider> ();
+		//Experience components.  
+		experienceSlider = transform.FindChild ("Experience").FindChild ("Experience Indicator").gameObject.GetComponent <Slider> ();
+		playerLevel = transform.FindChild ("Experience").FindChild ("PlayerLevel").gameObject.GetComponent <Text> ();
 		experienceSlider.maxValue = maxExpValue;
 		experienceSlider.value = 0;
+		//Coin Values
+		coinValue = transform.FindChild("Cash").FindChild("Value").GetComponent <Text> ();
+		coinValue.text = "0";
 	}
 
 	public string GetPlayerName() {
@@ -43,6 +50,19 @@ public class PlayerHealthPanelReference : HealthPanelReference {
 			experienceSlider.value = currentExp;
 			return currentExp;
 		}
+	}
+
+	public bool UpdateCoinValue(int valueToAdd) {
+		int newCoinValue = int.Parse (coinValue.text) + valueToAdd;
+		if (newCoinValue >= 0) {
+			coinValue.text = newCoinValue.ToString ();
+			return true;
+		} else
+			return false;
+	}
+
+	public int GetCoinAmount() {
+		return int.Parse(coinValue.text);
 	}
 
 }

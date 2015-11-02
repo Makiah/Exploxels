@@ -42,6 +42,10 @@ public abstract class NPCBaseScript : CharacterBaseActionClass {
 			yield return null;
 		}
 	}
+
+	protected bool GiveMoneyToPlayer(int amount) {
+		return playerTransform.GetComponent <PlayerHealthPanelManager> ().GiveMoneyToPlayer (amount);
+	}
 	
 	public void StopWalkingAround() {
 		if (walkingAround) {

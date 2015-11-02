@@ -66,6 +66,14 @@ public class PlayerHealthPanelManager : CharacterHealthPanelManager {
 		return playerHealthPanelReference.GetPlayerName ();
 	}
 
+	public bool GiveMoneyToPlayer(int amount) {
+		return playerHealthPanelReference.UpdateCoinValue (amount);
+	}
+
+	public int GetPlayerMoney() {
+		return playerHealthPanelReference.GetCoinAmount ();
+	}
+
 	protected override void OnDeath() {
 		playerHealthPanelReference.Clear ();
 		//Note: Application.Quit() does not work for the Web Player or the Unity Editor.  
