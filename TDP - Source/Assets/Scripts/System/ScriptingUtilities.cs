@@ -69,4 +69,13 @@ public class ScriptingUtilities {
 		}
 	}
 
+	public static Sprite GetSpriteWithoutPivotPoint(Sprite originalSprite) {
+		if (originalSprite != null) 
+			return Sprite.Create (originalSprite.texture, originalSprite.textureRect, Vector2.zero);
+		else {
+			Debug.LogError("Cannot get new sprite from null.");
+			return null;
+		}
+	}
+
 }

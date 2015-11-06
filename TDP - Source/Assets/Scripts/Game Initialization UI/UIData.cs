@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class UIData : MonoBehaviour {
 
+	//Initialization
 	void OnEnable() {
 		UIEventManager.InitializeUI += InitializeUIElements;
 	}

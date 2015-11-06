@@ -52,6 +52,12 @@ TagManager:
   - name: Terrain
     uniqueID: 459935887
     locked: 0
+  - name: PPanelBack
+    uniqueID: 2503326593
+    locked: 0
+  - name: PPanelFront
+    uniqueID: 1754800749
+    locked: 0
   - name: Items
     uniqueID: 1821076941
     locked: 0

@@ -74,8 +74,8 @@ public class ResourceDatabase : MonoBehaviour {
 		//Female Minecrafter
 		string[] minecrafterFemaleHeads = {"MinecrafterFemaleHead1"};
 		ResourceReference[] minecrafterFemaleInitialItems = {
-			//GetItemByParameter ("Wooden Bow"), 
-			//GetItemByParameter ("Diamond Sword")
+			GetItemByParameter ("Wooden Bow"), 
+			GetItemByParameter ("Diamond Sword")
 		};
 		gameRaces.Add (new Race ("Races/MinecrafterFemale/", minecrafterFemaleHeads, "MinecrafterFemale", 1, minecrafterFemaleInitialItems));
 

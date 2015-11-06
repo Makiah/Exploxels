@@ -129,7 +129,7 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 
 	public void AssignNewItem(UISlotContentReference itemToAssign) {
 		if (itemToAssign.stack != 0) {
-			Sprite itemWithoutPivotPoint= Sprite.Create (itemToAssign.uiSlotContent.itemIcon.texture, itemToAssign.uiSlotContent.itemIcon.rect, Vector2.zero);
+			Sprite itemWithoutPivotPoint = ScriptingUtilities.GetSpriteWithoutPivotPoint(itemToAssign.uiSlotContent.itemIcon);
 
 			childIcon.enabled = true;
 			currentlyAssigned = itemToAssign;

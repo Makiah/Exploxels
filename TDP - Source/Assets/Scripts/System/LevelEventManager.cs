@@ -61,6 +61,9 @@ public class LevelEventManager : MonoBehaviour {
 	
 	public static event BaseInitialization InitializeNPCPanelControllers;
 	public static event BaseInitialization InitializeNPCs;
+	
+	public static event BaseInitialization InitializePurchasePanels;
+	public static event BaseInitialization InitializePurchasePanelManager;
 
 	void Start() {
 
@@ -107,6 +110,9 @@ public class LevelEventManager : MonoBehaviour {
 
 		if (InitializeNPCPanelControllers != null) InitializeNPCPanelControllers(); else Debug.LogError("InitializeNPCPanelControllers was null!");
 		if (InitializeNPCs != null) InitializeNPCs(); else Debug.LogError("InitializeNPCs was null!");
+
+		if (InitializePurchasePanels != null) InitializePurchasePanels(); else Debug.LogError("InitializePurchasePanels was null!");
+		if (InitializePurchasePanelManager != null) InitializePurchasePanelManager(); else Debug.LogError("InitializePurchasePanelManager is null!");
 
 		Debug.Log("Completed EventManager");
 
