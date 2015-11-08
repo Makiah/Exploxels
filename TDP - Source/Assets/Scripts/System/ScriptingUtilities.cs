@@ -81,4 +81,14 @@ public class ScriptingUtilities {
 		}
 	}
 
+	//Pauses game7
+	public static void PauseGame() {
+		Time.timeScale = 0;
+	}
+
+	//Resumes game
+	public static void ResumeGame() {
+		Time.timeScale = 1;
+	}
+
 }
