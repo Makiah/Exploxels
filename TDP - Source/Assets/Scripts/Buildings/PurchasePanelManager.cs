@@ -17,7 +17,7 @@ public class PurchasePanelManager : MonoBehaviour {
 
 	//Initialize Purchase Panel Manager.  
 	void InitializePurchasePanelManager() {
-		Transform purchasePanelsTransform = transform.FindChild("Purchase Panels");
+		Transform purchasePanelsTransform = transform;
 		purchasePanels = new PurchasePanelReference[purchasePanelsTransform.childCount];
 		for (int i = 0; i < purchasePanelsTransform.childCount; i++) {
 			//Define purchase panel.  

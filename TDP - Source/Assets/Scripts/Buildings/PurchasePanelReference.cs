@@ -21,8 +21,12 @@ public class PurchasePanelReference : MonoBehaviour {
 
 	//Done during the InitializePurchasePanels phase (no real dependencies).  
 	void InitializePurchasePanelReference() {
+		//Define required components.  
 		currentItemIcon = transform.FindChild ("Animation Controller").FindChild ("Item Icon").GetComponent <SpriteRenderer> ();
 		cost = transform.FindChild ("Animation Controller").FindChild ("Value").FindChild ("Cost").GetComponent <TextMesh> ();
+		//Not accessible in the editor, but can be modified via code.  (Looks weird otherwise).  
+		cost.GetComponent<MeshRenderer> ().sortingLayerName = "PPanelFront";
+		cost.GetComponent<MeshRenderer> ().sortingOrder = 0;
 	}
 
 	//Should be called by PurchasePanelManager.  
@@ -31,6 +35,8 @@ public class PurchasePanelReference : MonoBehaviour {
 			heldItem = item;
 			//Get sprite without pivot point.  
 			currentItemIcon.sprite = ScriptingUtilities.GetSpriteWithoutPivotPoint(item.uiSlotContent.itemIcon);
+			Debug.Log("The purchase panel sprite is " + currentItemIcon.sprite.name + " with rect " + currentItemIcon.sprite.rect + " and pivot point " + currentItemIcon.sprite.pivot);
+			Debug.Log("It also has an offset of " + currentItemIcon.sprite.textureRectOffset);
 			cost.text = requiredCost.ToString();
 		} else 
 			Debug.LogError ("Cannot define panel item to be null or have a stack of 0!!");
