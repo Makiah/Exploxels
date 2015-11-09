@@ -30,7 +30,7 @@ public class ProfessionChoiceManager : MonoBehaviour {
 		choice2 = transform.FindChild ("Choice 2").GetComponent <Image> ();
 		description2 = choice2.transform.FindChild ("Description").GetComponent <Text> ();
 		gameObject.SetActive (false);
-		CreateProfessionChoice ("Profession Choice", ResourceDatabase.GetRaceByParameter("MinecrafterMale"), "Hunter", ResourceDatabase.GetRaceByParameter("MinecrafterFemale"), "Gatherer");
+		CreateProfessionChoice ("Profession Choice", ResourceDatabase.GetRaceByParameter("Gatherer"), "Gatherer", ResourceDatabase.GetRaceByParameter("Gatherer"), "Gatherer");
 	}
 
 	//Used when a profession choice occurs.  

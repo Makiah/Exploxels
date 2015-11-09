@@ -35,8 +35,6 @@ public class PurchasePanelReference : MonoBehaviour {
 			heldItem = item;
 			//Get sprite without pivot point.  
 			currentItemIcon.sprite = ScriptingUtilities.GetSpriteWithoutPivotPoint(item.uiSlotContent.itemIcon);
-			Debug.Log("The purchase panel sprite is " + currentItemIcon.sprite.name + " with rect " + currentItemIcon.sprite.rect + " and pivot point " + currentItemIcon.sprite.pivot);
-			Debug.Log("It also has an offset of " + currentItemIcon.sprite.textureRectOffset);
 			cost.text = requiredCost.ToString();
 		} else 
 			Debug.LogError ("Cannot define panel item to be null or have a stack of 0!!");

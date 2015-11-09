@@ -32,10 +32,12 @@ public class Profession {
 	//Profession constructor
 	public Profession(string resourcesPath, string ctorName, int ctorProfessionID, UISlotContentReference[] ctorInitialObjects) {
 
+		male = new Gender ();
+		female = new Gender ();
+
 		//Load sprite resources from the Resources folder.  
 		icon = Resources.Load <Sprite> (resourcesPath + "Icon");
 		//Male sprites
-		Debug.Log ("Looking at " + resourcesPath + "Male/Head");
 		male.head = Resources.Load <Sprite> (resourcesPath + "Male/" + "Head");
 		male.body = Resources.Load <Sprite> (resourcesPath + "Male/" + "Body");
 		male.legs = Resources.Load <Sprite> (resourcesPath + "Male/" + "Legs");
