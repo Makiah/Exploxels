@@ -1,14 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PurchasePanelReference : MonoBehaviour {
+public class PurchasePanelReference : ModifiesSlotContent {
 
 	//Initialization stuff.  
-	void OnEnable() {
+	protected override void OnEnable() {
+		base.OnEnable ();
 		LevelEventManager.InitializePurchasePanels += InitializePurchasePanelReference;
 	}
 
-	void OnDisable() {
+	protected override void OnDisable() {
+		base.OnDisable ();
 		LevelEventManager.InitializePurchasePanels -= InitializePurchasePanelReference;
 	}
 
@@ -19,6 +21,9 @@ public class PurchasePanelReference : MonoBehaviour {
 	//The actual content of the panel.  
 	UISlotContentReference heldItem;
 
+	//Player transform
+	Transform player;
+
 	//Done during the InitializePurchasePanels phase (no real dependencies).  
 	void InitializePurchasePanelReference() {
 		//Define required components.  
@@ -27,6 +32,28 @@ public class PurchasePanelReference : MonoBehaviour {
 		//Not accessible in the editor, but can be modified via code.  (Looks weird otherwise).  
 		cost.GetComponent<MeshRenderer> ().sortingLayerName = "PPanelFront";
 		cost.GetComponent<MeshRenderer> ().sortingOrder = 0;
+		player = VariableManagement.GetPlayerReference ().transform;
+		StartCoroutine ("CheckForPurchase");
+	}
+
+	//Coroutine that checks for the activation of a W key.  
+	IEnumerator CheckForPurchase() {
+		while (true) {
+			if (Vector2.Distance(player.transform.position, transform.position) < 1) {
+				if (Input.GetKeyDown(KeyCode.W)) {
+					if (GiveMoneyToPlayer(-1 * int.Parse(cost.text))) {
+						Debug.Log("Name of item is " + heldItem.uiSlotContent.itemScreenName);
+						AssignNewItemToBestSlot(heldItem);
+						RemovePanel();
+						Debug.Log("Gave to player");
+					} else {
+						Debug.Log("Player had insufficient money");
+					}
+				}
+			}
+
+			yield return null;
+		}
 	}
 
 	//Should be called by PurchasePanelManager.  
@@ -40,17 +67,15 @@ public class PurchasePanelReference : MonoBehaviour {
 			Debug.LogError ("Cannot define panel item to be null or have a stack of 0!!");
 	}
 
+	//Giving money to player. 
+	bool GiveMoneyToPlayer(int amount) {
+		return player.GetComponent <PlayerHealthPanelManager> ().GiveMoneyToPlayer (amount);
+	}
+
 	//Used when the player purchases the thing on the panel.  
-	public UISlotContentReference GetItemAndRemovePanel() {
-		if (heldItem != null) {
-			Debug.Log ("You should see a message stating that the item has been returned.  If you do not see a message, go to the PurchasePanelReference script and work on a workaround for destroying an item before returning.");
-			Destroy (gameObject);
-			Debug.Log ("The item is being returned.");
-			return heldItem;
-		} else {
-			Debug.LogError("Cannot return empty item! (PurchasePanelReference)");
-			return null;
-		}
+	public void RemovePanel() {
+		StopCoroutine ("CheckForPurchase");
+		gameObject.SetActive (false);
 	}
 
 }

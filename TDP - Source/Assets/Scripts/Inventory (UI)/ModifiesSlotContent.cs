@@ -66,7 +66,7 @@ public abstract class ModifiesSlotContent : MonoBehaviour {
 				}
 			}
 		} else {
-			Debug.Log("Slot array is null");
+			Debug.Log("Slot array is null and initialized status is " + initialized);
 		}
 		
 		return null;
