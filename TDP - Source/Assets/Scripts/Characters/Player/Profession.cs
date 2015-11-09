@@ -15,7 +15,7 @@ using System.Collections;
 
 public class Profession {
 
-	//Define required components.  
+	//Define required components for a gender.  
 	public class Gender {
 		public Sprite head, body, legs, arm;
 	}
@@ -32,11 +32,13 @@ public class Profession {
 	//Profession constructor
 	public Profession(string resourcesPath, string ctorName, int ctorProfessionID, UISlotContentReference[] ctorInitialObjects) {
 
+		//Define the male and female genders.  
 		male = new Gender ();
 		female = new Gender ();
 
 		//Load sprite resources from the Resources folder.  
 		icon = Resources.Load <Sprite> (resourcesPath + "Icon");
+
 		//Male sprites
 		male.head = Resources.Load <Sprite> (resourcesPath + "Male/" + "Head");
 		male.body = Resources.Load <Sprite> (resourcesPath + "Male/" + "Body");
@@ -62,6 +64,7 @@ public class Profession {
 		}
 	}
 
+	//Define gender.  
 	public void SetGender(int ctorGender) {
 		currentGender = ctorGender;
 	}

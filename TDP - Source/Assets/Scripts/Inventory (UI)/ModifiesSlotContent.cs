@@ -6,11 +6,11 @@ public abstract class ModifiesSlotContent : MonoBehaviour {
 	/************************************************** INITIALIZATION **************************************************/
 	
 	protected virtual void OnEnable() {
-		LevelEventManager.InitializePlayerDropSystem += InitializeSystem;
+		LevelEventManager.InitializeSlotControlSystem += InitializeSystem;
 	}
 	
 	protected virtual void OnDisable() {
-		LevelEventManager.InitializePlayerDropSystem -= InitializeSystem;
+		LevelEventManager.InitializeSlotControlSystem -= InitializeSystem;
 	}
 	
 	
@@ -54,7 +54,7 @@ public abstract class ModifiesSlotContent : MonoBehaviour {
 			for (int y = slotScriptArray.GetLength(0) - 1; y >= 0; y--) {
 				//Check for a stackable slot.  
 				for (int x = 0; x < slotScriptArray.GetLength(1); x++) {
-					//Define the object in the slot.  
+					//Define the object in the slot. 
 					UISlotContentReference objectAssigned = slotArray[y, x].GetCurrentlyAssigned();
 					//Check to make sure objectAssigned is not null.  
 					if (objectAssigned != null)

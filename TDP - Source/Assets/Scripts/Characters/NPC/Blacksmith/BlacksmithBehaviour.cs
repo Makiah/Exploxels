@@ -12,7 +12,7 @@ public class BlacksmithBehaviour : Artisan {
 	public override void NPCActionBeforeSpeaking() {
 		if (GiveMoneyToPlayer (-25)) {
 			localNPCSlotModifier.AddNewItemToPlayerInventory (
-			new UISlotContentReference (ResourceDatabase.GetItemByParameter ("Wooden Sword"), 1)
+				new UISlotContentReference (ResourceDatabase.GetItemByParameter ("Wooden Sword"), 1)
 			);
 		}
 	}

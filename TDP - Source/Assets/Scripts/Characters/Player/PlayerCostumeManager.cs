@@ -39,7 +39,7 @@ public class PlayerCostumeManager : MonoBehaviour {
 	//The prefab of the item will be childed to this object.  
 	private Transform holdingItem;
 
-	void InitializePlayerProfession(Profession profession) {
+	void InitializePlayerProfession() {
 		mainPlayerAction = transform.parent.parent.gameObject.GetComponent <CharacterBaseActionClass> ();
 		//Just setting up the basic race costume.  
 		body = transform.FindChild("Body").GetComponent <SpriteRenderer> ();
@@ -49,14 +49,12 @@ public class PlayerCostumeManager : MonoBehaviour {
 		topLeg = transform.FindChild ("Legs").FindChild ("Top Leg").GetComponent <SpriteRenderer> ();
 		bottomLeg = transform.FindChild ("Legs").FindChild("Bottom Leg").GetComponent <SpriteRenderer> ();
 		holdingItem = transform.FindChild("Hands").FindChild("HoldingHand").FindChild ("HoldingItem");
-
-		UpdatePlayerProfession (profession);
 	}
 
 	//Used when a player profession is changed.  
 	public void UpdatePlayerProfession(Profession profession) {
 		//Gender check.  
-		if (profession.currentGender == 0) {
+		if (GameObject.Find("UI Data").GetComponent <UIData> ().chosenGender == 0) {
 			body.sprite = profession.male.body;
 			head.sprite = profession.male.head;
 			idleArm.sprite = profession.male.arm;
@@ -70,6 +68,11 @@ public class PlayerCostumeManager : MonoBehaviour {
 			holdingArm.sprite = profession.female.arm;
 			topLeg.sprite = profession.female.legs;
 			bottomLeg.sprite = profession.female.legs;
+		}
+
+		//Add the initial items for the profession to the inventory.  
+		for (int i = 0; i < profession.initialObjects.Length; i++) {
+			transform.parent.parent.FindChild("DropHandler").GetComponent <PlayerDropHandler> ().AddNewItemToPlayerInventory(profession.initialObjects[i]);
 		}
 	}
 

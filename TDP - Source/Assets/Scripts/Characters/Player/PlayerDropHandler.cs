@@ -40,4 +40,9 @@ public class PlayerDropHandler : ModifiesSlotContent {
 		}
 	}
 
+	//Used for PlayerCostumeManager.  
+	public bool AddNewItemToPlayerInventory(UISlotContentReference item) {
+		return AssignNewItemToBestSlot (item);
+	}
+
 }

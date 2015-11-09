@@ -54,25 +54,24 @@ public class PanelLayout : MonoBehaviour {
 			for (int x = 1; x < maxNumberOfXSlots + 1; x++) {
 
 				//Create the slot
-				GameObject createdSlot = (GameObject) Instantiate(slotPrefab);
-				createdSlot.transform.SetParent(this.transform, false);
+				GameObject createdSlot = (GameObject)Instantiate (slotPrefab);
+				createdSlot.transform.SetParent (this.transform, false);
 
 				//Determine the coordinates and offset.  Equal to the previous padding for x/y and slot panel size (x-1) and the current size.  
-				float rectTransformXCoordinate = (float) ((x - 1) * (paddingPerXSlot + slotPanelSize.x) + (paddingPerXSlot + .5 * slotPanelSize.x));
-				float rectTransformYCoordinate = (float) ((y - 1) * (paddingPerYSlot + slotPanelSize.y) + (paddingPerYSlot + .5 * slotPanelSize.y));
+				float rectTransformXCoordinate = (float)((x - 1) * (paddingPerXSlot + slotPanelSize.x) + (paddingPerXSlot + .5 * slotPanelSize.x));
+				float rectTransformYCoordinate = (float)((y - 1) * (paddingPerYSlot + slotPanelSize.y) + (paddingPerYSlot + .5 * slotPanelSize.y));
 
 				//Determine the displacement vector (equal to half of the size of the inventory panel).
 				Vector2 displacementVector = (.5f * inventoryPanelSize);
-				createdSlot.GetComponent <RectTransform> ().anchoredPosition = new Vector2(rectTransformXCoordinate, rectTransformYCoordinate) - displacementVector;
+				createdSlot.GetComponent <RectTransform> ().anchoredPosition = new Vector2 (rectTransformXCoordinate, rectTransformYCoordinate) - displacementVector;
 
 				createdSlot.name = "Slot " + x + "." + y;
 
-				createdUISlots[y - 1, x - 1] = createdSlot.GetComponent <SlotScript> ();
-
+				createdUISlots [y - 1, x - 1] = createdSlot.GetComponent <SlotScript> ();
 			}
-
 		}
 
+		//Return created slot array.  
 		return createdUISlots;
 
 	}

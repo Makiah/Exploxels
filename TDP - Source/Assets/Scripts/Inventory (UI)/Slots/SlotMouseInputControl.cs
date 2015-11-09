@@ -162,7 +162,6 @@ public class SlotMouseInputControl : MonoBehaviour {
 
 		}
 
-		Debug.Log (cursorHotspot);
 		Cursor.SetCursor(cursorTexture, cursorHotspot, CursorMode.ForceSoftware);
 	}
 

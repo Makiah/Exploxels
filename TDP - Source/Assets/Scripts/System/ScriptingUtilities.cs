@@ -74,7 +74,7 @@ public class ScriptingUtilities {
 	//Used for getting sprites without a pivot point.  
 	public static Sprite GetSpriteWithoutPivotPoint(Sprite originalSprite) {
 		if (originalSprite != null) 
-			return Sprite.Create (originalSprite.texture, originalSprite.textureRect, new Vector2(0.5f, 0.5f));
+			return Sprite.Create (originalSprite.texture, originalSprite.rect, new Vector2(0.5f, 0.5f));
 		else {
 			Debug.LogError("Cannot get new sprite from null.");
 			return null;

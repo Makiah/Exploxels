@@ -20,30 +20,30 @@ public class HotbarManager : MonoBehaviour {
 	/************************************************** INITIALIZATION **************************************************/
 
 	void OnEnable() {
-		LevelEventManager.InitializeHotbarItems += AssignInitialHotbarItems;
+		LevelEventManager.InitializeHotbarManager += InitializeHotbarManager;
 	}
 
 	void OnDisable() {
-		LevelEventManager.InitializeHotbarItems -= AssignInitialHotbarItems;
+		LevelEventManager.InitializeHotbarManager -= InitializeHotbarManager;
 	}
 
 
 	/************************************************** HOTBAR MANAGEMENT **************************************************/
 
-
 	GameObject playerObject;
 	PlayerCostumeManager playerCostumeManager;
-
-
+	
 	HotbarSlotScript[] hotbarSlots; 
 
 	public ResourceReference currentlySelected;
 
+	//When a user enters the same key twice, there is no need for it to update the item again.  
 	int currentlyActiveSlot;
 	int previouslyActiveSlot;
 
-	void AssignInitialHotbarItems(Profession race) {
-
+	//Called by LevelEventManager.  
+	void InitializeHotbarManager() {
+		//Define player and hotbar slots.  
 		playerObject = VariableManagement.GetPlayerReference ();
 		playerCostumeManager = playerObject.transform.FindChild ("FlippingItem").FindChild ("Player").GetComponent <PlayerCostumeManager>();
 		hotbarSlots = new HotbarSlotScript[transform.childCount];
@@ -52,6 +52,10 @@ public class HotbarManager : MonoBehaviour {
 			hotbarSlots[i].masterHotbarManager = this;
 		}
 		StartCoroutine ("CheckForActiveItemKey");
+	}
+
+	//Called on costume update.   
+	public void AssignHotbarItems(Profession race) {
 
 		if (race.initialObjects != null) {
 			for (int i = 0; i < race.initialObjects.Length; i++) {
@@ -66,7 +70,7 @@ public class HotbarManager : MonoBehaviour {
 
 	}
 
-
+	//Used for detecting number keys.  
 	IEnumerator CheckForActiveItemKey() {
 		while (true) {
 			if (playerObject.GetComponent <PlayerAction> ().CheckCurrentAttackAnimationState () != true) {

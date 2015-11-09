@@ -22,8 +22,15 @@ public class ProfessionChoiceManager : MonoBehaviour {
 	Image choice2;
 	Text description2;
 
+	//The professions that are defined by the method.  
+	Profession currentProfession1;
+	Profession currentProfession2;
+
+	PlayerCostumeManager mainPlayerCostumeManager;
+
 	//Initialization
 	void InitializeProfessionChoiceComponents() {
+		mainPlayerCostumeManager = VariableManagement.GetPlayerReference ().transform.FindChild ("FlippingItem").FindChild ("Player").GetComponent <PlayerCostumeManager> ();
 		title = transform.FindChild ("Title").GetComponent <Text> ();
 		choice1 = transform.FindChild ("Choice 1").GetComponent <Image> ();
 		description1 = choice1.transform.FindChild ("Description").GetComponent <Text> ();
@@ -35,7 +42,10 @@ public class ProfessionChoiceManager : MonoBehaviour {
 
 	//Used when a profession choice occurs.  
 	public void CreateProfessionChoice(string titleText, Profession profession1, string d1, Profession profession2, string d2) {
+		//Create the panel.  
 		title.text = titleText;
+		currentProfession1 = profession1;
+		currentProfession2 = profession2;
 		choice1.sprite = profession1.icon;
 		description1.text = d1;
 		choice2.sprite = profession2.icon;
@@ -46,11 +56,18 @@ public class ProfessionChoiceManager : MonoBehaviour {
 
 	//Used when a profession has been chosen.  
 	public void ResetProfessionChoice(int chosen) {
+		//Update player costume with new profession.
+		Profession chosenProfession = chosen == 0 ? currentProfession1 : currentProfession2;
+		mainPlayerCostumeManager.UpdatePlayerProfession (chosenProfession);
+		//Reset variables.  
+		currentProfession1 = null;
+		currentProfession2 = null;
 		choice1.sprite = null;
 		description1.text = "";
 		choice2.sprite = null;
 		description2.text = "";
 		gameObject.SetActive (false);
+		//Resume game.  
 		ScriptingUtilities.ResumeGame ();
 	}
 
@@ -59,7 +76,7 @@ public class ProfessionChoiceManager : MonoBehaviour {
 		Debug.Log ("Got choice 1");
 		ResetProfessionChoice (1);
 	}
-
+	
 	public void OnChoice2Clicked() {
 		Debug.Log ("Got choice 2");
 		ResetProfessionChoice (2);
