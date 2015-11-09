@@ -18,11 +18,11 @@ public class PlayerCostumeManager : MonoBehaviour {
 	/************************************************** INITIALIZATION **************************************************/
 
 	void OnEnable() {
-		LevelEventManager.InitializeCostume += InitializePlayerCostume;
+		LevelEventManager.InitializeCostume += InitializePlayerProfession;
 	}
 	
 	void OnDisable() {
-		LevelEventManager.InitializeCostume -= InitializePlayerCostume;
+		LevelEventManager.InitializeCostume -= InitializePlayerProfession;
 	}
 
 
@@ -39,7 +39,7 @@ public class PlayerCostumeManager : MonoBehaviour {
 	//The prefab of the item will be childed to this object.  
 	private Transform holdingItem;
 
-	void InitializePlayerCostume(Race race) {
+	void InitializePlayerProfession(Profession profession) {
 		mainPlayerAction = transform.parent.parent.gameObject.GetComponent <CharacterBaseActionClass> ();
 		//Just setting up the basic race costume.  
 		body = transform.FindChild("Body").GetComponent <SpriteRenderer> ();
@@ -50,12 +50,27 @@ public class PlayerCostumeManager : MonoBehaviour {
 		bottomLeg = transform.FindChild ("Legs").FindChild("Bottom Leg").GetComponent <SpriteRenderer> ();
 		holdingItem = transform.FindChild("Hands").FindChild("HoldingHand").FindChild ("HoldingItem");
 
-		body.sprite = race.body;
-		head.sprite = race.heads[race.headVariationIndex];
-		idleArm.sprite = race.arm;
-		holdingArm.sprite = race.arm;
-		topLeg.sprite = race.legs;
-		bottomLeg.sprite = race.legs;
+		UpdatePlayerProfession (profession);
+	}
+
+	//Used when a player profession is changed.  
+	public void UpdatePlayerProfession(Profession profession) {
+		//Gender check.  
+		if (profession.currentGender == 0) {
+			body.sprite = profession.male.body;
+			head.sprite = profession.male.head;
+			idleArm.sprite = profession.male.arm;
+			holdingArm.sprite = profession.male.arm;
+			topLeg.sprite = profession.male.legs;
+			bottomLeg.sprite = profession.male.legs;
+		} else {
+			body.sprite = profession.female.body;
+			head.sprite = profession.female.head;
+			idleArm.sprite = profession.female.arm;
+			holdingArm.sprite = profession.female.arm;
+			topLeg.sprite = profession.female.legs;
+			bottomLeg.sprite = profession.female.legs;
+		}
 	}
 
 	//Called by HotbarManager when a new hotbar item is selected.

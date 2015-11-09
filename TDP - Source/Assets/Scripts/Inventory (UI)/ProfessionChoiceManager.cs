@@ -13,7 +13,6 @@ public class ProfessionChoiceManager : MonoBehaviour {
 		LevelEventManager.InitializeProfessionChoiceManager -= InitializeProfessionChoiceComponents;
 	}
 
-
 	//Title
 	Text title;
 	//Choice 1
@@ -23,8 +22,6 @@ public class ProfessionChoiceManager : MonoBehaviour {
 	Image choice2;
 	Text description2;
 
-	int toReturn = 0;
-
 	//Initialization
 	void InitializeProfessionChoiceComponents() {
 		title = transform.FindChild ("Title").GetComponent <Text> ();
@@ -33,22 +30,22 @@ public class ProfessionChoiceManager : MonoBehaviour {
 		choice2 = transform.FindChild ("Choice 2").GetComponent <Image> ();
 		description2 = choice2.transform.FindChild ("Description").GetComponent <Text> ();
 		gameObject.SetActive (false);
-		CreateProfessionChoice ("Profession Choice", null, "Option 1", null, "Option 2");
+		CreateProfessionChoice ("Profession Choice", ResourceDatabase.GetRaceByParameter("MinecrafterMale"), "Hunter", ResourceDatabase.GetRaceByParameter("MinecrafterFemale"), "Gatherer");
 	}
 
 	//Used when a profession choice occurs.  
-	public void CreateProfessionChoice(string titleText, Sprite profession1, string d1, Sprite profession2, string d2) {
+	public void CreateProfessionChoice(string titleText, Profession profession1, string d1, Profession profession2, string d2) {
 		title.text = titleText;
-		choice1.sprite = profession1;
+		choice1.sprite = profession1.icon;
 		description1.text = d1;
-		choice2.sprite = profession2;
+		choice2.sprite = profession2.icon;
 		description2.text = d2;
 		gameObject.SetActive (true);
 		ScriptingUtilities.PauseGame ();
 	}
 
 	//Used when a profession has been chosen.  
-	public void ResetProfessionChoice() {
+	public void ResetProfessionChoice(int chosen) {
 		choice1.sprite = null;
 		description1.text = "";
 		choice2.sprite = null;
@@ -60,12 +57,12 @@ public class ProfessionChoiceManager : MonoBehaviour {
 	//There is an event trigger component on each object that will call these functions.  
 	public void OnChoice1Clicked() {
 		Debug.Log ("Got choice 1");
-		ResetProfessionChoice ();
+		ResetProfessionChoice (1);
 	}
 
 	public void OnChoice2Clicked() {
 		Debug.Log ("Got choice 2");
-		ResetProfessionChoice ();
+		ResetProfessionChoice (2);
 	}
 
 }

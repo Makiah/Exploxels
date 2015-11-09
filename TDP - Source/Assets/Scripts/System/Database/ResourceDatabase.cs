@@ -27,7 +27,7 @@ public class ResourceDatabase : MonoBehaviour {
 	public static List <ResourceReference> masterItemList = new List<ResourceReference> ();
 	public static List <ItemCombination> masterItemCombinationList = new List<ItemCombination> ();
 
-	public static List <Race> gameRaces = new List <Race> ();
+	public static List <Profession> gameProfessions = new List <Profession> ();
 	
 	void InitializeDatabase() {
 
@@ -63,21 +63,10 @@ public class ResourceDatabase : MonoBehaviour {
 
 		/******************************************* RACES *******************************************/
 		//Male Minecrafter
-		string[] minecrafterMaleHeads = {"MinecrafterMaleHead1"};
-		ResourceReference[] minecrafterMaleInitialItems = {
-			//GetItemByParameter ("Wooden Sword"), 
-			//GetItemByParameter ("Wooden Hatchet"),
-			//GetItemByParameter ("Wooden Pickaxe")
-		};
-		gameRaces.Add (new Race ("Races/MinecrafterMale/", minecrafterMaleHeads, "MinecrafterMale", 0, minecrafterMaleInitialItems));
+		UISlotContentReference[] gathererInitialItems = new UISlotContentReference[]{
 
-		//Female Minecrafter
-		string[] minecrafterFemaleHeads = {"MinecrafterFemaleHead1"};
-		ResourceReference[] minecrafterFemaleInitialItems = {
-			GetItemByParameter ("Wooden Bow"), 
-			GetItemByParameter ("Diamond Sword")
 		};
-		gameRaces.Add (new Race ("Races/MinecrafterFemale/", minecrafterFemaleHeads, "MinecrafterFemale", 1, minecrafterFemaleInitialItems));
+		gameProfessions.Add (new Profession("Professions/Gatherer/", "Gatherer", 0, gathererInitialItems));
 
 		/******************************************* COMBINATIONS *******************************************/
 		//Wooden Sword
@@ -96,19 +85,19 @@ public class ResourceDatabase : MonoBehaviour {
 
 	}
 
-	public static Race GetRaceByParameter(string specifiedName) {
-		for (int i = 0; i < gameRaces.Count; i++) {
-			if (gameRaces[i].name == specifiedName) 
-				return gameRaces[i];
+	public static Profession GetRaceByParameter(string specifiedName) {
+		for (int i = 0; i < gameProfessions.Count; i++) {
+			if (gameProfessions[i].name == specifiedName) 
+				return gameProfessions[i];
 		}
 
 		return null;
 	}
 
-	public static Race GetRaceByParameter(int specifiedID) {
-		for (int i = 0; i < gameRaces.Count; i++) {
-			if (gameRaces[i].raceID == specifiedID) 
-				return gameRaces[i];
+	public static Profession GetRaceByParameter(int specifiedID) {
+		for (int i = 0; i < gameProfessions.Count; i++) {
+			if (gameProfessions[i].professionID == specifiedID) 
+				return gameProfessions[i];
 		}
 		
 		return null;
@@ -138,7 +127,7 @@ public class ResourceDatabase : MonoBehaviour {
 	}
 
 	public static int GetNumberOfRacesInGame() {
-		return gameRaces.Count;
+		return gameProfessions.Count;
 	}
 
 }

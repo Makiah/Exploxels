@@ -14,7 +14,7 @@ public class UIData : MonoBehaviour {
 	}
 
 	//This will be the data that the game later receives from the UI.  
-	[HideInInspector] public int chosenRace;
+	[HideInInspector] public int chosenGender;
 	[HideInInspector] public string specifiedPlayerName;
 	GameObject gameUI;
 	ProfileSwitcher profileSwitcher;
@@ -26,7 +26,7 @@ public class UIData : MonoBehaviour {
 	}
 
 	public void OnButtonPress() {
-		chosenRace = profileSwitcher.currentRace;
+		chosenGender = profileSwitcher.currentGender;
 		specifiedPlayerName = gameUI.transform.FindChild ("NameField").GetComponent <InputField> ().text;
 		Application.LoadLevel (2);
 	}

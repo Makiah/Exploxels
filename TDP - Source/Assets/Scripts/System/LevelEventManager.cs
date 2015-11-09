@@ -48,7 +48,7 @@ public class LevelEventManager : MonoBehaviour {
 	public delegate void InitializeDropSystem(SlotScript[,] inventorySlots);
 	public static event InitializeDropSystem InitializePlayerDropSystem;
 
-	public delegate void InitializePlayerCostume(Race playerRace);
+	public delegate void InitializePlayerCostume(Profession playerRace);
 	public static event InitializePlayerCostume InitializeCostume;
 	public static event InitializePlayerCostume InitializeHotbarItems;
 
@@ -92,16 +92,14 @@ public class LevelEventManager : MonoBehaviour {
 		if (InitializeTerrain != null) initializedMaze = InitializeTerrain(); else Debug.LogError("InitializeTerrain was null!"); //Used with LevelLayout
 
 		//Instantiate the player and initialize costumeManager
-		bool useAltRace = GameObject.Find ("UI Data").GetComponent <UIData> ().chosenRace == 1 ? true : false;
-		//Purpose: Get race from ResourceDatabase.  Requirements: Database initialized.
-		Race raceToUse = useAltRace ? ResourceDatabase.GetRaceByParameter ("MinecrafterFemale") : ResourceDatabase.GetRaceByParameter ("MinecrafterMale");
-		raceToUse.SetHeadVariation (0);
+		Profession professionToUse = ResourceDatabase.GetRaceByParameter ("Gatherer");
+		professionToUse.SetGender (GameObject.Find ("UI Data").GetComponent <UIData> ().chosenGender);
 
 		if (CreatePlayer != null) CreatePlayer(); else Debug.LogError("CreatePlayer was null!"); //Used for CreateLevelItems (Instantiating player)
 		if (CreatePlayerReference != null) CreatePlayerReference (); else Debug.LogError("CreatePlayerReference was null!"); //Used for CreateLevelItems
 		if (InitializeLightingSystem != null) InitializeLightingSystem (); else Debug.LogError("InitializeLightingSystem was null!"); //Used for LightingManager.  
-		if (InitializeCostume != null) InitializeCostume(raceToUse); else Debug.LogError("InitializeCostume was null!"); //Used for PlayerCostumeManager
-		if (InitializeHotbarItems != null) InitializeHotbarItems (raceToUse); else Debug.LogError("InitializeHotbarItems was null!"); //Used for initializing the HotbarManager.  
+		if (InitializeCostume != null) InitializeCostume(professionToUse); else Debug.LogError("InitializeCostume was null!"); //Used for PlayerCostumeManager
+		if (InitializeHotbarItems != null) InitializeHotbarItems (professionToUse); else Debug.LogError("InitializeHotbarItems was null!"); //Used for initializing the HotbarManager.  
 		if (InitializePlayer != null) InitializePlayer (); else Debug.LogError("InitializePlayer was null!"); //Used for initializing the HumanoidBaseReferenceClass.  
 		if (InitializePlayerDropSystem != null) InitializePlayerDropSystem(createdUISlots); else Debug.LogError("InitializePlayerDropSystem was null!"); //Used for DropHandler
 		if (InitializeCameraFunctions != null) InitializeCameraFunctions (); else Debug.LogError("InitializeCameraFunctions was null!"); // Used for camera controller.  

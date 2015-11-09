@@ -210,6 +210,16 @@ Prefab:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 741018796}
+    - target: {fileID: 11444166, guid: 3d25469c67b2440b39bbae200e50652b, type: 2}
+      propertyPath: maleImage
+      value: 
+      objectReference: {fileID: 21300000, guid: 0b2bd5fb418dfe6479dd26db3e4e581d,
+        type: 3}
+    - target: {fileID: 11444166, guid: 3d25469c67b2440b39bbae200e50652b, type: 2}
+      propertyPath: femaleImage
+      value: 
+      objectReference: {fileID: 21300000, guid: 526919f66548e49a99454dc647c34998,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 3d25469c67b2440b39bbae200e50652b, type: 2}
   m_IsPrefabParent: 0

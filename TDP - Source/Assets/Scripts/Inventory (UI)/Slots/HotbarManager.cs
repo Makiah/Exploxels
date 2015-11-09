@@ -42,7 +42,7 @@ public class HotbarManager : MonoBehaviour {
 	int currentlyActiveSlot;
 	int previouslyActiveSlot;
 
-	void AssignInitialHotbarItems(Race race) {
+	void AssignInitialHotbarItems(Profession race) {
 
 		playerObject = VariableManagement.GetPlayerReference ();
 		playerCostumeManager = playerObject.transform.FindChild ("FlippingItem").FindChild ("Player").GetComponent <PlayerCostumeManager>();
@@ -55,7 +55,7 @@ public class HotbarManager : MonoBehaviour {
 
 		if (race.initialObjects != null) {
 			for (int i = 0; i < race.initialObjects.Length; i++) {
-				hotbarSlots [i].AssignNewItem (new UISlotContentReference(race.initialObjects [i], 1));
+				hotbarSlots [i].AssignNewItem (race.initialObjects[i]);
 			}
 		} else
 			Debug.Log ("No initial items were found");

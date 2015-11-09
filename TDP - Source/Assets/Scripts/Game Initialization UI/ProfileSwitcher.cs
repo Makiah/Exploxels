@@ -12,34 +12,35 @@ public class ProfileSwitcher : MonoBehaviour {
 		UIEventManager.InitializeProfileSwitcher -= InitializeProfileSwitcher;
 	}
 
-	[HideInInspector]
-	public int currentRace = 0;
-	int inGameRaces;
-
+	//0 means male, 1 means female.  
+	[HideInInspector] public int currentGender = 0;
+	[SerializeField] Sprite maleImage, femaleImage;
 	Image currentProfile;
 
 	void InitializeProfileSwitcher() {
-		inGameRaces = ResourceDatabase.GetNumberOfRacesInGame ();
 		currentProfile = transform.FindChild ("Current Profile").GetComponent <Image> ();
 		UpdateProfileSprite();
 	}
 
 	public void OnLeftButtonClick() {
-		currentRace--;
-		if (currentRace < 0) 
-			currentRace = inGameRaces - 1;
+		currentGender--;
+		if (currentGender < 0) 
+			currentGender = 1;
 		UpdateProfileSprite ();
 	}
 
 	public void OnRightButtonClick() {
-		currentRace++;
-		if (currentRace > inGameRaces - 1) 
-			currentRace = 0;
+		currentGender++;
+		if (currentGender > 1) 
+			currentGender = 0;
 		UpdateProfileSprite ();
 	}
 
 	void UpdateProfileSprite() {
-		currentProfile.sprite = ResourceDatabase.GetRaceByParameter (currentRace).heads[0];
+		if (currentGender == 0) 
+			currentProfile.sprite = maleImage;
+		else 
+			currentProfile.sprite = femaleImage;
 	}
 
 }
