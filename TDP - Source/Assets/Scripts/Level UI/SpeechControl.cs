@@ -17,7 +17,7 @@ public class SpeechControl : MonoBehaviour {
 	bool speechBubbleActive = false;
 	bool coroutineActive;
 
-	protected void InitializeSpeechControl() {
+	protected virtual void InitializeSpeechControl() {
 		textSpeechBox = transform.FindChild ("Speech").GetComponent <Text> ();
 		playerIcon = transform.FindChild ("PlayerIcon").GetComponent <Image> ();
 		gameObject.SetActive (false);
@@ -68,7 +68,7 @@ public class SpeechControl : MonoBehaviour {
 	}
 
 	//Speak in scrolling text.  
-	IEnumerator SpeakInScrollingText(string[] stuffToSay) {
+	protected IEnumerator SpeakInScrollingText(string[] stuffToSay) {
 		int phraseIndex = 0;
 		while (true) {
 			Debug.Log("Starting again");

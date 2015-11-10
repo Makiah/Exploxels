@@ -50,7 +50,6 @@ public class ProfessionChoiceManager : MonoBehaviour {
 		choice2.sprite = profession2.icon;
 		description2.text = d2;
 		gameObject.SetActive (true);
-		ScriptingUtilities.PauseGame ();
 	}
 
 	//Used when a profession has been chosen.  
@@ -65,9 +64,7 @@ public class ProfessionChoiceManager : MonoBehaviour {
 		choice2.sprite = null;
 		description2.text = "";
 		gameObject.SetActive (false);
-		//Resume game.  
-		ScriptingUtilities.ResumeGame ();
-		//mainPlayerCostumeManager.UpdatePlayerProfession (chosenProfession);
+		//Resume game.
 		GameObject.Find ("UI Data").GetComponent <GameData> ().OnProfessionChosen (chosenProfession);
 	}
 
