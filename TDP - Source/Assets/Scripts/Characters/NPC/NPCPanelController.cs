@@ -66,12 +66,12 @@ public class NPCPanelController : MonoBehaviour {
 
 	//Makes a call to SpeechControl on the UI with the arguments that determine what to say and the icon that is saying it.  
 	public virtual void SpeakToPlayer(string toSay) {
-		mainSpeechControl.SaySomething (playerIcon, toSay);
+		mainSpeechControl.SaySomething (playerIcon, "NPC", toSay);
 		speechBubbleActive = true;
 	}
 
 	public virtual void SpeakToPlayer(string[] toSay) {
-		mainSpeechControl.SaySomething (playerIcon, toSay, true);
+		mainSpeechControl.SaySomething (playerIcon, "NPC", toSay, true);
 		speechBubbleActive = true;
 	}
 
