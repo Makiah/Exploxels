@@ -51,23 +51,12 @@ public class HotbarManager : MonoBehaviour {
 			hotbarSlots[i] = transform.GetChild(i).GetComponent <HotbarSlotScript> ();
 			hotbarSlots[i].masterHotbarManager = this;
 		}
-		StartCoroutine ("CheckForActiveItemKey");
-	}
-
-	//Called on costume update.   
-	public void AssignHotbarItems(Profession race) {
-
-		if (race.initialObjects != null) {
-			for (int i = 0; i < race.initialObjects.Length; i++) {
-				hotbarSlots [i].AssignNewItem (race.initialObjects[i]);
-			}
-		} else
-			Debug.Log ("No initial items were found");
-
+		
 		previouslyActiveSlot = -1;
 		currentlyActiveSlot = 0;
 		UpdateSelectedItem ();
 
+		StartCoroutine ("CheckForActiveItemKey");
 	}
 
 	//Used for detecting number keys.  

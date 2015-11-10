@@ -20,7 +20,6 @@ public class ProfessionSpeechManager : SpeechControl {
 			"But be warned, this is no easy feat.", 
 			"If you would still like to continue, choose a profession above."
 		}, true);
-		Debug.Log ("Speaking");
 	}
 
 }

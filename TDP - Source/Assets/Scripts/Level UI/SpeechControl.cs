@@ -68,6 +68,7 @@ public class SpeechControl : MonoBehaviour {
 	}
 
 	//Speak in scrolling text.  
+	//For some reason, this coroutine does not work on child classes unless set as protected.  Weird.  
 	protected IEnumerator SpeakInScrollingText(string[] stuffToSay) {
 		int phraseIndex = 0;
 		while (true) {

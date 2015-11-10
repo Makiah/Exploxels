@@ -52,6 +52,8 @@ public class ModifiesSlotContent : MonoBehaviour {
 			Debug.LogError("Could not modify slot content, not initialized");
 		}
 
+		VariableManagement.GetLevelUIReference ().transform.FindChild ("Hotbar").GetComponent <HotbarManager> ().UpdateSelectedItem ();
+
 		return successfullyAssigned;
 	}
 
