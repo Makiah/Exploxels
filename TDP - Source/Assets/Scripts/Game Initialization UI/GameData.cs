@@ -21,7 +21,7 @@ public class GameData : MonoBehaviour {
 	[HideInInspector] public string specifiedPlayerName;
 	GameObject gameUI;
 	ProfileSwitcher profileSwitcher;
-
+	
 	void DefineInitialLevelElements() {
 		DontDestroyOnLoad (this.gameObject);
 		gameUI = GameObject.Find ("Game Initialization UI");
@@ -45,7 +45,7 @@ public class GameData : MonoBehaviour {
 	//Defines the elements required to get data.  
 	public void DefineProfessionChooserElements() {
 		mainProfessionChoiceManager = GameObject.Find ("UI").transform.FindChild ("ProfessionChoice").GetComponent <ProfessionChoiceManager> ();
-		mainProfessionChoiceManager.CreateProfessionChoice ("Welcome!  Choose your player.", 
+		mainProfessionChoiceManager.CreateProfessionChoice ("Choose your player's profession.", 
 		                                                   ResourceDatabase.GetRaceByParameter ("Gatherer"), "Gatherer", 
 		                                                   ResourceDatabase.GetRaceByParameter ("Gatherer"), "Gatherer"
 		                                                    );

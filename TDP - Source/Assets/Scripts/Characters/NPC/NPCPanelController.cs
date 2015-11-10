@@ -71,7 +71,7 @@ public class NPCPanelController : MonoBehaviour {
 	}
 
 	public virtual void SpeakToPlayer(string[] toSay) {
-		mainSpeechControl.SaySomething (playerIcon, toSay);
+		mainSpeechControl.SaySomething (playerIcon, toSay, true);
 		speechBubbleActive = true;
 	}
 
