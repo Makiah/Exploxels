@@ -25,14 +25,6 @@ public class SpeechControl : MonoBehaviour {
 		gameObject.SetActive (false);
 	}
 
-	public void SaySomething(Sprite headIcon, string speaker, string toSay) {
-		gameObject.SetActive (true);
-		playerIcon.sprite = headIcon;
-		textSpeechBox.text = toSay;
-		speakerName.text = speaker;
-		speechBubbleActive = true;
-	}
-
 	public void SaySomething(Sprite headIcon, string speaker, string[] phrasesToSay) {
 		gameObject.SetActive (true);
 		playerIcon.sprite = headIcon;
@@ -76,6 +68,7 @@ public class SpeechControl : MonoBehaviour {
 	//Speak in scrolling text.  
 	//For some reason, this coroutine does not work on child classes unless set as protected.  Weird.  
 	protected IEnumerator SpeakInScrollingText(string[] stuffToSay) {
+		//Otherwise the coroutine uses the x press used to initialize the coroutine itself.  
 		yield return null;
 		int currentPhraseIndex = 0;
 		bool completedDialogue = false;
@@ -94,6 +87,7 @@ public class SpeechControl : MonoBehaviour {
 						yield break;
 				 	}
 				} else {
+					//When the x key is pressed, and the text is not finished scrolling.  
 					StopCoroutine("ScrollText");
 					textSpeechBox.text = stuffToSay[currentPhraseIndex];
 					completedDialogue = true;
