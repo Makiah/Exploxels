@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 
@@ -20,7 +20,7 @@ public class PlayerHealthPanelReference : HealthPanelReference {
 
 		//Name of player
 		playerName = transform.FindChild ("Name").gameObject.GetComponent <Text> (); 
-		playerName.text = GameObject.Find ("UI Data").GetComponent <UIData> ().specifiedPlayerName;
+		playerName.text = GameObject.Find ("UI Data").GetComponent <GameData> ().specifiedPlayerName;
 		//Experience components.  
 		experienceSlider = transform.FindChild ("Experience").FindChild ("Experience Indicator").gameObject.GetComponent <Slider> ();
 		playerLevel = transform.FindChild ("Experience").FindChild ("PlayerLevel").gameObject.GetComponent <Text> ();

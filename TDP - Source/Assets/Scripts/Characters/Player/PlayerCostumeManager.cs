@@ -49,12 +49,15 @@ public class PlayerCostumeManager : MonoBehaviour {
 		topLeg = transform.FindChild ("Legs").FindChild ("Top Leg").GetComponent <SpriteRenderer> ();
 		bottomLeg = transform.FindChild ("Legs").FindChild("Bottom Leg").GetComponent <SpriteRenderer> ();
 		holdingItem = transform.FindChild("Hands").FindChild("HoldingHand").FindChild ("HoldingItem");
+
+		Profession currentPlayerProfession = GameObject.Find ("UI Data").GetComponent <GameData> ().chosenProfession;
+		UpdatePlayerProfession (currentPlayerProfession);
 	}
 
 	//Used when a player profession is changed.  
 	public void UpdatePlayerProfession(Profession profession) {
 		//Gender check.  
-		if (GameObject.Find("UI Data").GetComponent <UIData> ().chosenGender == 0) {
+		if (GameObject.Find("UI Data").GetComponent <GameData> ().chosenGender == 0) {
 			body.sprite = profession.male.body;
 			head.sprite = profession.male.head;
 			idleArm.sprite = profession.male.arm;

@@ -35,8 +35,6 @@ public class LevelEventManager : MonoBehaviour {
 
 	public static event BaseInitialization InitializeUISpeechControl;
 
-	public static event BaseInitialization InitializeProfessionChoiceManager;
-
 	public delegate TerrainReferenceClass TerrainInitialization();
 	public static event TerrainInitialization InitializeTerrain;
 
@@ -125,9 +123,6 @@ public class LevelEventManager : MonoBehaviour {
 		if (InitializeSlotControlSystem != null) InitializeSlotControlSystem(totalNumberOfInventorySlots); else Debug.LogError("InitializePlayerDropSystem was null!"); //Used for DropHandler
 		if (InitializeCameraFunctions != null) InitializeCameraFunctions (); else Debug.LogError("InitializeCameraFunctions was null!"); // Used for camera controller.  
 		if (InitializeBackgroundScroller != null) InitializeBackgroundScroller (); else Debug.LogError("InitializeBackgroundScroller was null!"); //Initialize the BackgroundScroller class.  
-
-		//Requires that the costume manager has been set up.  
-		if (InitializeProfessionChoiceManager != null) InitializeProfessionChoiceManager(); else Debug.LogError("InitializeProfessionChoiceManager was null!!!");
 
 		//Initialize the enemies.  
 		if (CreateTerrainItems != null) CreateTerrainItems(initializedMaze); else Debug.LogError("CreateTerrainItems was null!"); //Used for instantiating the enemies and trees.  

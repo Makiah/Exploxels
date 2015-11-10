@@ -9,9 +9,9 @@ public class UIEventManager : MonoBehaviour {
 	public static event UIBaseInitialization InitializeUI;
 
 	void Start() {
-		InitializeResourceDatabase ();
-		InitializeProfileSwitcher ();
-		InitializeUI ();
+		if (InitializeResourceDatabase != null) InitializeResourceDatabase (); else Debug.LogError ("Database was not initialized");
+		if (InitializeProfileSwitcher != null) InitializeProfileSwitcher (); else Debug.LogError("InitializeProfileSwitcher was null!!");
+		if (InitializeUI != null) InitializeUI (); else Debug.LogError("InitializeUI was null!!");
 	}
 
 }
