@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public abstract class ModifiesSlotContent : MonoBehaviour {
+public class ModifiesSlotContent : MonoBehaviour {
 
 	/************************************************** INITIALIZATION **************************************************/
 	
@@ -16,44 +16,51 @@ public abstract class ModifiesSlotContent : MonoBehaviour {
 	
 	/************************************************** DROP HANDLER **************************************************/
 	
-	public SlotScript[,] slotArray;
-	protected bool initialized = false;
-	
+	static SlotScript[,] slotArray;
+	static bool initialized = false;
+
+	//Used when called from LevelEventManager.  
 	void InitializeSystem(SlotScript[,] slots) {
 		slotArray = slots;
 		initialized = true;
 	}
 
-	protected bool AssignNewItemToBestSlot(UISlotContentReference item) {
+	public static bool IsInitialized() {
+		return initialized;
+	}
+
+	//Assigns a new item to the best possible slot.  
+	public static bool AssignNewItemToBestSlot(UISlotContentReference item) {
 		bool successfullyAssigned = false;
-		SlotScript bestAvailableSlot = FindBestAvailableSlot (slotArray, item);
+
+		if (initialized) {
+			SlotScript bestAvailableSlot = FindBestAvailableSlot (item);
 		
-		if (bestAvailableSlot != null) {
-			successfullyAssigned = true;
-			bestAvailableSlot.ModifyCurrentItemStack (1);
-			Debug.Log ("Assigned " + item.uiSlotContent.itemScreenName + " to slot with items of same type.");
-		} else {
-			Debug.Log ("Could not stack item: Attempting to add to an empty slot");
-			bestAvailableSlot = FindBestAvailableNullSlot (slotArray);
 			if (bestAvailableSlot != null) {
 				successfullyAssigned = true;
-				bestAvailableSlot.AssignNewItem (item);
+				bestAvailableSlot.ModifyCurrentItemStack (1);
+				Debug.Log ("Assigned " + item.uiSlotContent.itemScreenName + " to slot with items of same type.");
+			} else {
+				Debug.Log ("Could not stack item: Attempting to add to an empty slot");
+				bestAvailableSlot = FindBestAvailableNullSlot ();
+				if (bestAvailableSlot != null) {
+					successfullyAssigned = true;
+					bestAvailableSlot.AssignNewItem (item);
+				}
 			}
+		} else {
+			Debug.LogError("Could not modify slot content, not initialized");
 		}
 
 		return successfullyAssigned;
 	}
 
-	protected SlotScript CheckWhetherPlayerHasCertainItem(UISlotContentReference certainItem) {
-		return DetermineWhetherPlayerHasCertainInventoryItem (slotArray, certainItem);
-	}
-
 	//Searches for the best available slot in the slot array.  (One that already has the specified item)
-	SlotScript FindBestAvailableSlot(SlotScript[,] slotScriptArray, UISlotContentReference pendingObjectToCheck) {
-		if (slotScriptArray != null) {
-			for (int y = slotScriptArray.GetLength(0) - 1; y >= 0; y--) {
+	public static SlotScript FindBestAvailableSlot(UISlotContentReference pendingObjectToCheck) {
+		if (slotArray != null) {
+			for (int y = slotArray.GetLength(0) - 1; y >= 0; y--) {
 				//Check for a stackable slot.  
-				for (int x = 0; x < slotScriptArray.GetLength(1); x++) {
+				for (int x = 0; x < slotArray.GetLength(1); x++) {
 					//Define the object in the slot. 
 					UISlotContentReference objectAssigned = slotArray[y, x].GetCurrentlyAssigned();
 					//Check to make sure objectAssigned is not null.  
@@ -73,11 +80,11 @@ public abstract class ModifiesSlotContent : MonoBehaviour {
 	}
 
 	//Find the best available empty slot.  
-	SlotScript FindBestAvailableNullSlot(SlotScript[,] slotScriptArray) {
-		if (slotScriptArray != null) {
-			for (int y = slotScriptArray.GetLength(0) - 1; y >= 0; y--) {
+	public static SlotScript FindBestAvailableNullSlot() {
+		if (slotArray != null) {
+			for (int y = slotArray.GetLength(0) - 1; y >= 0; y--) {
 				//If no stackable slot is found, choose an empty slot.  
-				for (int x = 0; x < slotScriptArray.GetLength(1); x++) {
+				for (int x = 0; x < slotArray.GetLength(1); x++) {
 					if (slotArray [y, x].GetCurrentlyAssigned () == null) {
 						return slotArray [y, x];
 					}
@@ -91,11 +98,11 @@ public abstract class ModifiesSlotContent : MonoBehaviour {
 	}
 
 	//Used to determine whether the player has a required item.  
-	SlotScript DetermineWhetherPlayerHasCertainInventoryItem(SlotScript[,] slotScriptArray, UISlotContentReference pendingObjectToCheck) {
-		if (slotScriptArray != null) {
-			for (int y = slotScriptArray.GetLength(0) - 1; y >= 0; y--) {
+	public static SlotScript DetermineWhetherPlayerHasCertainInventoryItem(UISlotContentReference pendingObjectToCheck) {
+		if (slotArray != null) {
+			for (int y = slotArray.GetLength(0) - 1; y >= 0; y--) {
 				//Check for a stackable slot.  
-				for (int x = 0; x < slotScriptArray.GetLength(1); x++) {
+				for (int x = 0; x < slotArray.GetLength(1); x++) {
 					//Define the item that is in the specified slot.  
 					UISlotContentReference objectAssigned = slotArray[y, x].GetCurrentlyAssigned();
 					//Check whether the assigned object is null.  

@@ -12,7 +12,6 @@ public abstract class NPCBaseScript : CharacterBaseActionClass {
 	}
 	
 	bool walkingAround = true;
-	protected NPCSlotModifier localNPCSlotModifier;
 
 	protected Transform playerTransform;
 	[SerializeField] protected float minDistanceRequiredForInteraction;
@@ -21,7 +20,6 @@ public abstract class NPCBaseScript : CharacterBaseActionClass {
 		characterSpriteObject = transform.FindChild ("FlippingItem").FindChild ("Character");
 		base.SetReferences ();
 		playerTransform = VariableManagement.GetPlayerReference ().transform;
-		localNPCSlotModifier = transform.FindChild ("DropHandler").GetComponent <NPCSlotModifier> ();
 		StartCoroutine ("WalkAround");
 	}
 

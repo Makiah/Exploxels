@@ -39,7 +39,8 @@ public class VariableManagement : MonoBehaviour {
 	}
 
 	public float GetLevelLengthX () {
-		Debug.Log("Returned " + levelLengthX + " as level length");
+		if (levelLengthX == 0)
+			Debug.LogError ("WARNING: Returning 0 as level length!");
 		return levelLengthX;
 	}
 }

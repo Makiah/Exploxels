@@ -1,16 +1,14 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class PurchasePanelReference : ModifiesSlotContent {
+public class PurchasePanelReference : MonoBehaviour {
 
 	//Initialization stuff.  
-	protected override void OnEnable() {
-		base.OnEnable ();
+	void OnEnable() {
 		LevelEventManager.InitializePurchasePanels += InitializePurchasePanelReference;
 	}
 
-	protected override void OnDisable() {
-		base.OnDisable ();
+	void OnDisable() {
 		LevelEventManager.InitializePurchasePanels -= InitializePurchasePanelReference;
 	}
 
@@ -43,7 +41,7 @@ public class PurchasePanelReference : ModifiesSlotContent {
 				if (Input.GetKeyDown(KeyCode.W)) {
 					if (GiveMoneyToPlayer(-1 * int.Parse(cost.text))) {
 						Debug.Log("Name of item is " + heldItem.uiSlotContent.itemScreenName);
-						AssignNewItemToBestSlot(heldItem);
+						ModifiesSlotContent.AssignNewItemToBestSlot(heldItem);
 						RemovePanel();
 						Debug.Log("Gave to player");
 					} else {

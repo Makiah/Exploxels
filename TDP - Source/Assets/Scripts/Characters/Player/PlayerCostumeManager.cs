@@ -72,7 +72,7 @@ public class PlayerCostumeManager : MonoBehaviour {
 
 		//Add the initial items for the profession to the inventory.  
 		for (int i = 0; i < profession.initialObjects.Length; i++) {
-			transform.parent.parent.FindChild("DropHandler").GetComponent <PlayerDropHandler> ().AddNewItemToPlayerInventory(profession.initialObjects[i]);
+			ModifiesSlotContent.AssignNewItemToBestSlot(profession.initialObjects[i]);
 		}
 	}
 

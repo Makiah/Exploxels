@@ -48,11 +48,9 @@ public class LevelLayout : MonoBehaviour {
 
 	TerrainReferenceClass InitializationMedium() {
 		if (! useCustomTerrain) {
-			Debug.Log("Used previous terrain");
 			return InitializeTerrain ();
 		}
 		else {
-			Debug.Log("Used custom terrain");
 			VariableManagement.SetLevelLengthX(GetSpriteSizeFromGameObject(terrainToUse.gameObject).x);
 			TerrainReferenceClass toReturn = new TerrainReferenceClass(1);
 			toReturn.layer1[0] = terrainToUse.transform;

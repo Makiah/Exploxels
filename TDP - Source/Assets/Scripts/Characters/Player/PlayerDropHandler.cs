@@ -13,15 +13,13 @@
 using UnityEngine;
 using System.Collections;
 
-public class PlayerDropHandler : ModifiesSlotContent {
-
-	/************************************************** INITIALIZATION **************************************************/
+public class PlayerDropHandler : MonoBehaviour {
 
 	/************************************************** DROP HANDLER **************************************************/
 	
 	//When an item drop hits the player.  
 	void OnTriggerEnter2D(Collider2D externalTrigger) {
-		if (externalTrigger.gameObject.GetComponent <DroppedItemProperties> () != null && initialized) 
+		if (externalTrigger.gameObject.GetComponent <DroppedItemProperties> () != null && ModifiesSlotContent.IsInitialized()) 
 			PickupItem (externalTrigger.gameObject);
 	}
 
@@ -29,7 +27,7 @@ public class PlayerDropHandler : ModifiesSlotContent {
 		//This does not check the resourcereference property of the attached script as a comparison, only the tag.  Consider changing later.  
 		if (!(item.CompareTag ("ExpNodule"))) {
 			UISlotContentReference pendingObject = new UISlotContentReference (item.GetComponent <DroppedItemProperties> ().localResourceReference, 1);
-			if (! AssignNewItemToBestSlot(pendingObject)) {
+			if (! ModifiesSlotContent.AssignNewItemToBestSlot(pendingObject)) {
 				Debug.LogError("ERROR WHEN ASSIGNING OBJECT");
 			} else {
 				Destroy (item);
@@ -38,11 +36,6 @@ public class PlayerDropHandler : ModifiesSlotContent {
 			transform.parent.gameObject.GetComponent <PlayerHealthPanelManager> ().OnExperienceNodulePickedUp(1);
 			Destroy(item);
 		}
-	}
-
-	//Used for PlayerCostumeManager.  
-	public bool AddNewItemToPlayerInventory(UISlotContentReference item) {
-		return AssignNewItemToBestSlot (item);
 	}
 
 }

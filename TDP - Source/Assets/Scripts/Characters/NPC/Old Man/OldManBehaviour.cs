@@ -22,7 +22,7 @@ public class OldManBehaviour : NPCBaseScript {
 
 	public override void NPCActionBeforeSpeaking() {
 		if (gavePlayerInstructions && tookApples == false) {
-			SlotScript slotWithContent = localNPCSlotModifier.CheckWhetherPlayerHasSpecifiedItem(new UISlotContentReference(ResourceDatabase.GetItemByParameter("Apple"), 6));
+			SlotScript slotWithContent = ModifiesSlotContent.DetermineWhetherPlayerHasCertainInventoryItem(new UISlotContentReference(ResourceDatabase.GetItemByParameter("Apple"), 6));
 			if (slotWithContent != null) {
 				slotWithContent.ModifyCurrentItemStack(-6);
 				Debug.Log("Player had required items");
@@ -40,8 +40,8 @@ public class OldManBehaviour : NPCBaseScript {
 
 	public override void NPCActionAfterSpeaking() {
 		if (gavePlayerInstructions == false) {
-			localNPCSlotModifier.AddNewItemToPlayerInventory (
-			new UISlotContentReference (ResourceDatabase.GetItemByParameter ("Wooden Hatchet"), 1)
+			ModifiesSlotContent.AssignNewItemToBestSlot (
+				new UISlotContentReference (ResourceDatabase.GetItemByParameter ("Wooden Hatchet"), 1)
 			);
 			gavePlayerInstructions = true;
 		}

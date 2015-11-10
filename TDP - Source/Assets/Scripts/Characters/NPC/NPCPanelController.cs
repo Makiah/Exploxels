@@ -28,7 +28,6 @@ public class NPCPanelController : MonoBehaviour {
 		playerIcon = transform.FindChild ("FlippingItem").FindChild ("Character").FindChild ("Head").GetComponent <SpriteRenderer> ().sprite;
 		mainSpeechControl = VariableManagement.GetLevelUIReference ().transform.FindChild ("Speech Bubble").GetComponent <SpeechControl> ();
 		mainInteractablePanelController = VariableManagement.GetLevelUIReference().transform.FindChild ("InteractablePanels").gameObject.GetComponent <InteractablePanelController> (); 
-		Debug.Log (mainInteractablePanelController.name);
 		StartCoroutine ("CheckForAndAttemptToSpeakToPlayer");
 	}
 
