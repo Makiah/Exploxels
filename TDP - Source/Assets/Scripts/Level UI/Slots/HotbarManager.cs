@@ -67,31 +67,26 @@ public class HotbarManager : MonoBehaviour {
 					if (previouslyActiveSlot != 0) {
 						currentlyActiveSlot = 0;
 						UpdateSelectedItem ();
-						previouslyActiveSlot = 0;
 					}
 				} else if (Input.GetKeyDown (KeyCode.Alpha2)) {
 					if (previouslyActiveSlot != 1) {
 						currentlyActiveSlot = 1;
 						UpdateSelectedItem ();
-						previouslyActiveSlot = 1;
 					}
 				} else if (Input.GetKeyDown (KeyCode.Alpha3)) {
 					if (previouslyActiveSlot != 2) {
 						currentlyActiveSlot = 2;
 						UpdateSelectedItem ();
-						previouslyActiveSlot = 2;
 					}
 				} else if (Input.GetKeyDown (KeyCode.Alpha4)) {
 					if (previouslyActiveSlot != 3) {
 						currentlyActiveSlot = 3;
 						UpdateSelectedItem ();
-						previouslyActiveSlot = 3;
 					}
 				} else if (Input.GetKeyDown (KeyCode.Alpha5)) {
 					if (previouslyActiveSlot != 4) {
 						currentlyActiveSlot = 4;
 						UpdateSelectedItem ();
-						previouslyActiveSlot = 4;
 					}
 				}
 			}
@@ -107,6 +102,7 @@ public class HotbarManager : MonoBehaviour {
 	}
 
 	public void UpdateSelectedItem() {
+		previouslyActiveSlot = currentlyActiveSlot;
 		DisableHotbarSelections ();
 		hotbarSlots [currentlyActiveSlot].SetSelectionActive ();
 

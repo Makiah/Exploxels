@@ -83,7 +83,7 @@ public class PlayerCostumeManager : MonoBehaviour {
 	public void UpdatePlayerItem(GameObject prefabSelectedInHotbar) {
 
 		//Deletes the previous item that had existed before this new item.  
-		if (holdingItem.childCount != 0 && holdingItem != null) {
+		if (holdingItem.childCount != 0 /*&& holdingItem != null*/) {
 			Destroy (holdingItem.GetChild (0).gameObject);
 		}
 
