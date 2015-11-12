@@ -45,10 +45,10 @@ public class CharacterHealthPanelManager : MonoBehaviour {
 
 	//Look into initializing this once the player comes into activation distance.  
 	protected virtual void InitializeHealthBar() {
-		player = VariableManagement.GetPlayerReference ().transform;
+		player = CurrentLevelVariableManagement.GetPlayerReference ().transform;
 		currentHealth = lifePoints;
 		//Create panel
-		uiHealthController = VariableManagement.GetLevelUIReference().transform.FindChild ("Health Controller").gameObject.GetComponent <UIHealthController> (); 
+		uiHealthController = CurrentLevelVariableManagement.GetLevelUIReference().transform.FindChild ("Health Controller").gameObject.GetComponent <UIHealthController> (); 
 		//Initialize icon
 		characterHeadSprite = transform.GetChild (0).GetChild (0).FindChild ("Head").GetComponent <SpriteRenderer> ().sprite;
 		//Start the coroutine that manages the active state of the health bar item.  

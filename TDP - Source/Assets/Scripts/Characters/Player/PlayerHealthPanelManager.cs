@@ -1,4 +1,4 @@
-﻿
+
 /*
  * Author: Makiah Bennett
  * Created 16 September 2015
@@ -39,7 +39,7 @@ public class PlayerHealthPanelManager : CharacterHealthPanelManager {
 		lifePoints = 10f;
 		currentHealth = lifePoints;
 		//Create panel
-		uiHealthController = VariableManagement.GetLevelUIReference().transform.FindChild ("Health Controller").gameObject.GetComponent <UIHealthController> (); 
+		uiHealthController = CurrentLevelVariableManagement.GetLevelUIReference().transform.FindChild ("Health Controller").gameObject.GetComponent <UIHealthController> (); 
 		playerHealthPanelReference = uiHealthController.GetPlayerHealthPanelReference ();
 		//Initialize icon
 		characterHeadSprite = transform.FindChild ("FlippingItem").GetChild (0).FindChild ("Head").GetComponent <SpriteRenderer> ().sprite;

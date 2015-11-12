@@ -44,7 +44,7 @@ public class HotbarManager : MonoBehaviour {
 	//Called by LevelEventManager.  
 	void InitializeHotbarManager() {
 		//Define player and hotbar slots.  
-		playerObject = VariableManagement.GetPlayerReference ();
+		playerObject = CurrentLevelVariableManagement.GetPlayerReference ();
 		playerCostumeManager = playerObject.transform.FindChild ("FlippingItem").FindChild ("Player").GetComponent <PlayerCostumeManager>();
 		hotbarSlots = new HotbarSlotScript[transform.childCount];
 		for (int i = 0; i < transform.childCount; i++) {
@@ -112,6 +112,7 @@ public class HotbarManager : MonoBehaviour {
 
 		if (hotbarSlots [currentlyActiveSlot].GetCurrentlyAssigned() != null) {
 			playerCostumeManager.UpdatePlayerItem (hotbarSlots [currentlyActiveSlot].GetCurrentlyAssigned().uiSlotContent.holdingPrefab);
+			Debug.Log("On slot " + currentlyActiveSlot + " the object assigned is " + hotbarSlots[currentlyActiveSlot].GetCurrentlyAssigned().uiSlotContent.itemScreenName);
 		} else {
 			playerCostumeManager.UpdatePlayerItem(null);
 		}

@@ -14,7 +14,7 @@ public class ProfessionEventManager : MonoBehaviour {
 
 		Debug.Log ("ProfessionEventManager completed");
 
-		GameObject.Find ("UI Data").GetComponent <GameData> ().DefineProfessionChooserElements ();
+		CurrentLevelVariableManagement.GetMainGameData().DefineProfessionChooserElements ();
 	}
 
 }

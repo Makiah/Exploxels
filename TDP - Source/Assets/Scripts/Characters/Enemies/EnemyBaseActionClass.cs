@@ -1,4 +1,4 @@
-﻿
+
 /*
  * Author: Makiah Bennett
  * Created 13 September 2015
@@ -39,7 +39,7 @@ public abstract class EnemyBaseActionClass : CharacterBaseActionClass {
 	protected Transform player;
 
 	protected override void SetReferences() {
-		player = VariableManagement.GetPlayerReference ().transform;
+		player = CurrentLevelVariableManagement.GetPlayerReference ().transform;
 
 		base.SetReferences ();
 

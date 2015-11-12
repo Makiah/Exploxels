@@ -51,7 +51,7 @@ public class LevelLayout : MonoBehaviour {
 			return InitializeTerrain ();
 		}
 		else {
-			VariableManagement.SetLevelLengthX(GetSpriteSizeFromGameObject(terrainToUse.gameObject).x);
+			CurrentLevelVariableManagement.SetLevelLengthX(GetSpriteSizeFromGameObject(terrainToUse.gameObject).x);
 			TerrainReferenceClass toReturn = new TerrainReferenceClass(1);
 			toReturn.layer1[0] = terrainToUse.transform;
 			return toReturn;
@@ -115,7 +115,7 @@ public class LevelLayout : MonoBehaviour {
 
 		float levelLengthX = instantiatedEndPoint.transform.position.x - instantiatedStartPoint.transform.position.x;
 
-		VariableManagement.SetLevelLengthX (levelLengthX);
+		CurrentLevelVariableManagement.SetLevelLengthX (levelLengthX);
 		return createdMaze;
 	}
 

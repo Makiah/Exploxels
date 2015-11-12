@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class PurchasePanelReference : MonoBehaviour {
@@ -30,7 +30,7 @@ public class PurchasePanelReference : MonoBehaviour {
 		//Not accessible in the editor, but can be modified via code.  (Looks weird otherwise).  
 		cost.GetComponent<MeshRenderer> ().sortingLayerName = "PPanelFront";
 		cost.GetComponent<MeshRenderer> ().sortingOrder = 0;
-		player = VariableManagement.GetPlayerReference ().transform;
+		player = CurrentLevelVariableManagement.GetPlayerReference ().transform;
 		StartCoroutine ("CheckForPurchase");
 	}
 

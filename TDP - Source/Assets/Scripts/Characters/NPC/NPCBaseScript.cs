@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public abstract class NPCBaseScript : CharacterBaseActionClass {
@@ -19,7 +19,7 @@ public abstract class NPCBaseScript : CharacterBaseActionClass {
 	protected override void SetReferences() {
 		characterSpriteObject = transform.FindChild ("FlippingItem").FindChild ("Character");
 		base.SetReferences ();
-		playerTransform = VariableManagement.GetPlayerReference ().transform;
+		playerTransform = CurrentLevelVariableManagement.GetPlayerReference ().transform;
 		StartCoroutine ("WalkAround");
 	}
 

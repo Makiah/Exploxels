@@ -62,11 +62,13 @@ public class ResourceDatabase : MonoBehaviour {
 		masterItemList.Add (new ResourceReference(ResourceReference.ItemType.Other, "ExpNodule", "", 0, "Items/Other/ExpNodule"));
 
 		/******************************************* RACES *******************************************/
-		//Male Minecrafter
-		UISlotContentReference[] gathererInitialItems = new UISlotContentReference[]{
-
-		};
+		//Gatherer
+		UISlotContentReference[] gathererInitialItems = new UISlotContentReference[]{};
 		gameProfessions.Add (new Profession("Professions/Gatherer/", "Gatherer", 0, gathererInitialItems));
+
+		//Hunter
+		UISlotContentReference[] hunterInitialItems = new UISlotContentReference[]{};
+		gameProfessions.Add (new Profession ("Professions/Hunter/", "Hunter", 1, hunterInitialItems));
 
 		/******************************************* COMBINATIONS *******************************************/
 		//Wooden Sword

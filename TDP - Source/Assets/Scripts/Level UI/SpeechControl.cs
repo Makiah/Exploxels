@@ -67,11 +67,14 @@ public class SpeechControl : MonoBehaviour {
 
 	//Speak in scrolling text.  
 	//For some reason, this coroutine does not work on child classes unless set as protected.  Weird.  
+
+	//Set by both coroutines.  
+	bool completedDialogue = false;
+
 	protected IEnumerator SpeakInScrollingText(string[] stuffToSay) {
 		//Otherwise the coroutine uses the x press used to initialize the coroutine itself.  
 		yield return null;
 		int currentPhraseIndex = 0;
-		bool completedDialogue = false;
 		StartCoroutine ("ScrollText", stuffToSay [currentPhraseIndex]);
 		while (true) {
 			if (Input.GetKeyDown(KeyCode.X)) {
@@ -102,8 +105,9 @@ public class SpeechControl : MonoBehaviour {
 	protected IEnumerator ScrollText(string toSay) {
 		for (int i = 2; i <= toSay.Length; i++) {
 			textSpeechBox.text = toSay.Substring(0, i);
-			yield return new WaitForSeconds(.05f);
+			yield return new WaitForSeconds(.02f);
 		}
+		completedDialogue = true;
 	}
 
 	public void DeActivateSpeechBubble() {

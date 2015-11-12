@@ -5,6 +5,7 @@ using UnityEngine.UI;
 public class PlayerHealthPanelReference : HealthPanelReference {
 
 	//Experience components
+	Text currentPlayerProfession;
 	Slider experienceSlider;
 	Text playerLevel;
 	int maxExpValue = 10;
@@ -20,8 +21,10 @@ public class PlayerHealthPanelReference : HealthPanelReference {
 
 		//Name of player
 		playerName = transform.FindChild ("Name").gameObject.GetComponent <Text> (); 
-		playerName.text = GameObject.Find ("UI Data").GetComponent <GameData> ().specifiedPlayerName;
+		playerName.text = CurrentLevelVariableManagement.GetMainGameData().specifiedPlayerName;
 		//Experience components.  
+		currentPlayerProfession = transform.FindChild ("Experience").FindChild ("ProfessionName").gameObject.GetComponent <Text> ();
+		currentPlayerProfession.text = CurrentLevelVariableManagement.GetMainGameData().chosenProfession.name;
 		experienceSlider = transform.FindChild ("Experience").FindChild ("Experience Indicator").gameObject.GetComponent <Slider> ();
 		playerLevel = transform.FindChild ("Experience").FindChild ("PlayerLevel").gameObject.GetComponent <Text> ();
 		experienceSlider.maxValue = maxExpValue;

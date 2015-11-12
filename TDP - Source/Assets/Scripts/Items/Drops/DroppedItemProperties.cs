@@ -1,4 +1,4 @@
-﻿
+
 /*
  * Author: Makiah Bennett
  * Last edited: 14 September 2015
@@ -24,7 +24,7 @@ public class DroppedItemProperties : MonoBehaviour {
 
 
 	public void Initialize() {
-		player = VariableManagement.GetPlayerReference ().transform;
+		player = CurrentLevelVariableManagement.GetPlayerReference ().transform;
 		StartCoroutine ("MoveTowardsPlayer");
 	}
 

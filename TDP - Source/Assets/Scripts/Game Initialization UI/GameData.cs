@@ -26,6 +26,7 @@ public class GameData : MonoBehaviour {
 		DontDestroyOnLoad (this.gameObject);
 		gameUI = GameObject.Find ("Game Initialization UI");
 		profileSwitcher = gameUI.transform.FindChild ("Profile Switcher").gameObject.GetComponent <ProfileSwitcher> ();
+		CurrentLevelVariableManagement.SetGameUIReferences ();
 	}
 
 	public void OnLevelLoadButtonPress() {
@@ -47,13 +48,14 @@ public class GameData : MonoBehaviour {
 		mainProfessionChoiceManager = GameObject.Find ("UI").transform.FindChild ("ProfessionChoice").GetComponent <ProfessionChoiceManager> ();
 		mainProfessionChoiceManager.CreateProfessionChoice ("Choose your player's profession.", 
 		                                                   ResourceDatabase.GetRaceByParameter ("Gatherer"), "Gatherer", 
-		                                                   ResourceDatabase.GetRaceByParameter ("Gatherer"), "Gatherer"
+		                                                   ResourceDatabase.GetRaceByParameter ("Hunter"), "Hunter"
 		                                                    );
 	}
 
 	//Called by the ProfessionChoiceManager when the profession has been chosen.  
 	public void OnProfessionChosen(Profession chosen) {
 		chosenProfession = chosen;
+		Debug.Log ("Chosen profession is " + chosenProfession.name);
 		Application.LoadLevel (2);
 	}
 

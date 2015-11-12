@@ -36,7 +36,6 @@ public class ProfessionChoiceManager : MonoBehaviour {
 		choice2 = transform.FindChild ("Choice 2").GetComponent <Image> ();
 		description2 = choice2.transform.FindChild ("Description").GetComponent <Text> ();
 		gameObject.SetActive (false);
-		CreateProfessionChoice ("Profession Choice", ResourceDatabase.GetRaceByParameter("Gatherer"), "Gatherer", ResourceDatabase.GetRaceByParameter("Gatherer"), "Gatherer");
 	}
 
 	//Used when a profession choice occurs.  
@@ -55,7 +54,7 @@ public class ProfessionChoiceManager : MonoBehaviour {
 	//Used when a profession has been chosen.  
 	public void ResetProfessionChoice(int chosen) {
 //		//Update player costume with new profession.
-		Profession chosenProfession = chosen == 0 ? currentProfession1 : currentProfession2;
+		Profession chosenProfession = chosen == 1 ? currentProfession1 : currentProfession2;
 		//Reset variables.  
 		currentProfession1 = null;
 		currentProfession2 = null;
@@ -65,7 +64,7 @@ public class ProfessionChoiceManager : MonoBehaviour {
 		description2.text = "";
 		gameObject.SetActive (false);
 		//Resume game.
-		GameObject.Find ("UI Data").GetComponent <GameData> ().OnProfessionChosen (chosenProfession);
+		CurrentLevelVariableManagement.GetMainGameData().OnProfessionChosen (chosenProfession);
 	}
 
 	//There is an event trigger component on each object that will call these functions.  

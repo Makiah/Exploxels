@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class ModifiesSlotContent : MonoBehaviour {
@@ -53,7 +53,7 @@ public class ModifiesSlotContent : MonoBehaviour {
 		}
 
 		//Update the hotbar item.  
-		VariableManagement.GetLevelUIReference ().transform.FindChild ("Hotbar").GetComponent <HotbarManager> ().UpdateSelectedItem ();
+		CurrentLevelVariableManagement.GetLevelUIReference ().transform.FindChild ("Hotbar").GetComponent <HotbarManager> ().UpdateSelectedItem ();
 
 		return successfullyAssigned;
 	}
