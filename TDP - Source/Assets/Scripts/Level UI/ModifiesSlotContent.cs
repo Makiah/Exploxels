@@ -31,14 +31,19 @@ public class ModifiesSlotContent : MonoBehaviour {
 
 	//Assigns a new item to the best possible slot.  
 	public static bool AssignNewItemToBestSlot(UISlotContentReference item) {
+
+		//Has to be here for the return statement
 		bool successfullyAssigned = false;
 
-		if (initialized) {
+		//Make sure that the prerequisites are met.  
+		if (initialized && item != null) {
 			SlotScript bestAvailableSlot = FindBestAvailableSlot (item);
 		
 			if (bestAvailableSlot != null) {
+				//Set successfully assigned.  
 				successfullyAssigned = true;
-				bestAvailableSlot.ModifyCurrentItemStack (1);
+				//Add the new stack to the current item stack.  
+				bestAvailableSlot.ModifyCurrentItemStack (item.stack);
 				Debug.Log ("Assigned " + item.uiSlotContent.itemScreenName + " to slot with items of same type.");
 			} else {
 				Debug.Log ("Could not stack item: Attempting to add to an empty slot");
@@ -46,14 +51,15 @@ public class ModifiesSlotContent : MonoBehaviour {
 				if (bestAvailableSlot != null) {
 					successfullyAssigned = true;
 					bestAvailableSlot.AssignNewItem (item);
+					//Update the hotbar item.
+					CurrentLevelVariableManagement.GetLevelUIReference ().transform.FindChild ("Hotbar").GetComponent <HotbarManager> ().UpdateSelectedItem ();
+				} else {
+					Debug.LogError("No slots are empty!");
 				}
 			}
 		} else {
-			Debug.LogError("Could not modify slot content, not initialized");
+			Debug.LogError("Could not modify slot content, not initialized or attempted item to assign is null.  ");
 		}
-
-		//Update the hotbar item.  
-		CurrentLevelVariableManagement.GetLevelUIReference ().transform.FindChild ("Hotbar").GetComponent <HotbarManager> ().UpdateSelectedItem ();
 
 		return successfullyAssigned;
 	}

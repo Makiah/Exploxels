@@ -95,24 +95,22 @@ public class HotbarManager : MonoBehaviour {
 		}
 	}
 
-	void DisableHotbarSelections() {
-		for (int i = 0; i < hotbarSlots.Length; i++) {
-			hotbarSlots[i].DisableSelection();
-		}
-	}
-
+	//Called by ModifiesSlotContent and locally.  
 	public void UpdateSelectedItem() {
-		previouslyActiveSlot = currentlyActiveSlot;
-		DisableHotbarSelections ();
+		// Disable selection on previous item.  
+		if (previouslyActiveSlot != -1)
+			hotbarSlots [previouslyActiveSlot].DisableSelection ();
+		//Set the selection on the currently active slot.  
 		hotbarSlots [currentlyActiveSlot].SetSelectionActive ();
+		//Set variable stuff
+		previouslyActiveSlot = currentlyActiveSlot;
 
+		//Update the player's item
 		if (hotbarSlots [currentlyActiveSlot].GetCurrentlyAssigned() != null) {
 			playerCostumeManager.UpdatePlayerItem (hotbarSlots [currentlyActiveSlot].GetCurrentlyAssigned().uiSlotContent.holdingPrefab);
-			Debug.Log("On slot " + currentlyActiveSlot + " the object assigned is " + hotbarSlots[currentlyActiveSlot].GetCurrentlyAssigned().uiSlotContent.itemScreenName);
 		} else {
 			playerCostumeManager.UpdatePlayerItem(null);
 		}
-
 	}
 
 }

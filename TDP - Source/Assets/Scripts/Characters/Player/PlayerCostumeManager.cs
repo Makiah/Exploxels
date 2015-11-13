@@ -83,8 +83,14 @@ public class PlayerCostumeManager : MonoBehaviour {
 	public void UpdatePlayerItem(GameObject prefabSelectedInHotbar) {
 
 		//Deletes the previous item that had existed before this new item.  
-		if (holdingItem.childCount != 0 /*&& holdingItem != null*/) {
-			Destroy (holdingItem.GetChild (0).gameObject);
+		if (holdingItem.childCount != 0) {
+			if (holdingItem.childCount > 1) {
+				Debug.Log("There was more than one object being held by the player.");
+			}
+
+			for (int i = 0; i < holdingItem.childCount; i++) {
+				Destroy (holdingItem.GetChild (i).gameObject);
+			}
 		}
 
 		//Instantiating the new item (even if the new item is null).  
@@ -105,7 +111,6 @@ public class PlayerCostumeManager : MonoBehaviour {
 		} else {
 			mainPlayerAction.OnRefreshCurrentWeaponMoves(null);
 		}
-
 
 	}
 

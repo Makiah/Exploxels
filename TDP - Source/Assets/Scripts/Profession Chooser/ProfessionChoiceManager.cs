@@ -53,7 +53,7 @@ public class ProfessionChoiceManager : MonoBehaviour {
 
 	//Used when a profession has been chosen.  
 	public void ResetProfessionChoice(int chosen) {
-//		//Update player costume with new profession.
+		//Update player costume with new profession.
 		Profession chosenProfession = chosen == 1 ? currentProfession1 : currentProfession2;
 		//Reset variables.  
 		currentProfession1 = null;
