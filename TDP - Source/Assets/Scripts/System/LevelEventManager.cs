@@ -141,4 +141,8 @@ public class LevelEventManager : MonoBehaviour {
 
 	}
 
+	public static void OnTutorialCompleted () {
+		Application.LoadLevel (1);
+	}
+
 }

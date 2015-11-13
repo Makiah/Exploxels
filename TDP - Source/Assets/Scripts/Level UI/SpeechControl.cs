@@ -4,6 +4,7 @@ using UnityEngine.UI;
 
 public class SpeechControl : MonoBehaviour {
 
+	/********************** INITIALIZATION **********************/
 	protected virtual void OnEnable() {
 		LevelEventManager.InitializeUISpeechControl += InitializeSpeechControl;
 	}
@@ -11,13 +12,20 @@ public class SpeechControl : MonoBehaviour {
 	protected virtual void OnDisable() {
 		LevelEventManager.InitializeUISpeechControl -= InitializeSpeechControl;
 	}
-	
+
+	/********************** SCRIPT **********************/
+
+	//Required components
 	Text textSpeechBox;
 	Text speakerName;
 	Image playerIcon;
 	bool speechBubbleActive = false;
 	bool coroutineActive;
 
+	//Set when the NPCPanelController
+	NPCPanelController currentlyAssignedTo;
+
+	//Initial initialization.  Overriden by ProfessionSpeechManager.  
 	protected virtual void InitializeSpeechControl() {
 		textSpeechBox = transform.FindChild ("Speech").GetComponent <Text> ();
 		speakerName = transform.FindChild ("NamePanel").FindChild ("SpeakerName").GetComponent <Text> ();
@@ -25,43 +33,28 @@ public class SpeechControl : MonoBehaviour {
 		gameObject.SetActive (false);
 	}
 
-	public void SaySomething(Sprite headIcon, string speaker, string[] phrasesToSay) {
-		gameObject.SetActive (true);
-		playerIcon.sprite = headIcon;
-		speakerName.text = speaker;
-		textSpeechBox.text = phrasesToSay [0];
-		speechBubbleActive = true;
-		coroutineActive = true;
-		StartCoroutine ("BasicSpeechScrolling", phrasesToSay);
+	//On dialogue completed.  
+	public void CompletedSpeakingToPlayer() {
+		if (currentlyAssignedTo != null) {
+			currentlyAssignedTo.OnCompletedSpeakingToPlayer ();
+		} else {
+			Debug.Log("Currently not assigned to NPCPanelController!");
+		}
 	}
 
-	public void SaySomething(Sprite headIcon, string speaker, string[] phrasesToSay, bool speakInScrollingText) {
-		gameObject.SetActive (true);
+	//Called when something should be said.  
+	public void SaySomething(Sprite headIcon, string speaker, string[] phrasesToSay, bool speakInScrollingText, NPCPanelController assignee) {
 		playerIcon.sprite = headIcon;
 		speakerName.text = speaker;
 		speechBubbleActive = true;
 		coroutineActive = true;
+		currentlyAssignedTo = assignee;
+		gameObject.SetActive (true);
 		if (speakInScrollingText)
 			StartCoroutine ("SpeakInScrollingText", phrasesToSay);
 		else {
 			textSpeechBox.text = phrasesToSay [0];
 			StartCoroutine ("BasicSpeechScrolling", phrasesToSay);
-		}
-	}
-	
-	IEnumerator BasicSpeechScrolling(string[] phrasesToSay) {
-		int phraseIndex = 0;
-		while (true) {
-			//Scrolling down through the list.  
-			if (Input.GetKeyDown (KeyCode.Q) && phraseIndex != 0) {
-				phraseIndex--;
-				textSpeechBox.text = phrasesToSay[phraseIndex];
-			} else if (Input.GetKeyDown(KeyCode.W) && phraseIndex != phrasesToSay.Length - 1) {
-				phraseIndex++;
-				textSpeechBox.text = phrasesToSay[phraseIndex];
-			}
-
-			yield return null;
 		}
 	}
 
@@ -87,6 +80,7 @@ public class SpeechControl : MonoBehaviour {
 						completedDialogue = false;
 					} else {
 						//Exit the coroutine.  
+						currentlyAssignedTo.OnCompletedSpeakingToPlayer();
 						yield break;
 				 	}
 				} else {

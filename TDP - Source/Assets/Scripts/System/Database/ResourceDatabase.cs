@@ -16,22 +16,12 @@ using System.Collections.Generic;
 
 public class ResourceDatabase : MonoBehaviour {
 
-	void OnEnable() {
-		UIEventManager.InitializeResourceDatabase += InitializeDatabase;
-	}
-
-	void OnDisable() {
-		UIEventManager.InitializeResourceDatabase -= InitializeDatabase;
-	}
-
 	public static List <ResourceReference> masterItemList = new List<ResourceReference> ();
 	public static List <ItemCombination> masterItemCombinationList = new List<ItemCombination> ();
 
 	public static List <Profession> gameProfessions = new List <Profession> ();
 	
-	void InitializeDatabase() {
-
-		DontDestroyOnLoad (this.gameObject);
+	public static void InitializeDatabase() {
 
 		/******************************************* ITEMS *******************************************/
 		//Tools

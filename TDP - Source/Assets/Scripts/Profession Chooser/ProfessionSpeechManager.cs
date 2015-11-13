@@ -20,7 +20,7 @@ public class ProfessionSpeechManager : SpeechControl {
 			"You will face both monsters and evil humans.",
 			"But be warned, this is no easy feat.", 
 			"If you would still like to continue, choose a profession above."
-		}, true);
+		}, true, null);
 	}
 
 }

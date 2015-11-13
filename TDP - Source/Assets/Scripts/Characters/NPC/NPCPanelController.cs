@@ -52,7 +52,6 @@ public class NPCPanelController : MonoBehaviour {
 				}
 				if (speechBubbleActive) {
 					ClearSpeechBubble();
-					GetComponent <NPCBaseScript> ().NPCActionAfterSpeaking();
 					GetComponent <NPCBaseScript> ().ResumeWalkingAround();
 				}
 				if (alreadySpeakingToPlayer) {
@@ -66,8 +65,12 @@ public class NPCPanelController : MonoBehaviour {
 
 	//Makes a call to SpeechControl on the UI with the arguments that determine what to say and the icon that is saying it.
 	public virtual void SpeakToPlayer(string[] toSay) {
-		mainSpeechControl.SaySomething (playerIcon, "NPC", toSay, true);
+		mainSpeechControl.SaySomething (playerIcon, "NPC", toSay, true, this);
 		speechBubbleActive = true;
+	}
+
+	public void OnCompletedSpeakingToPlayer() {
+		GetComponent <NPCBaseScript> ().NPCActionAfterSpeaking();
 	}
 
 	//Makes a call to SpeechControl on the UI with the argument that determine what to say and the icon that says it.  
