@@ -88,6 +88,16 @@ public class GameControl : MonoBehaviour {
 	/**************************** TUTORIAL ****************************/
 	
 	public void OnTutorialComplete() {
+		Debug.Log ("Gathering player data...");
+
+		//Get player money.  
+		GetComponent <GameData> ().currentPlayerMoney = CurrentLevelVariableManagement.GetPlayerReference ().GetComponent <PlayerHealthPanelManager> ().GetPlayerMoney();
+		Debug.Log ("Set player money to " + GetComponent <GameData> ().currentPlayerMoney);
+
+		//Get player items.
+		GetComponent <GameData> ().currentPlayerItems = ModifiesSlotContent.GetAllPlayerItems ();
+		Debug.Log ("Player has " + GetComponent <GameData> ().currentPlayerItems.Length + " items");
+
 		Debug.Log ("Tutorial has been completed!");
 		//Load Profession Chooser Level.  
 		GetComponent <GameData> ().currentLevel = 1;

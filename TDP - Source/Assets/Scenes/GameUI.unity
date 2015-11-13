@@ -1970,4 +1970,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chosenGender: 0
   specifiedPlayerName: 
+  currentPlayerMoney: 0
   currentLevel: 0

@@ -25,8 +25,8 @@ public class ElfBehaviour : Artisan {
 	}
 
 	public override void NPCActionAfterSpeaking() {
-		if (readyToLoadNextLevel)
-			LevelEventManager.OnTutorialCompleted ();
+		/*if (readyToLoadNextLevel)*/
+			CurrentLevelVariableManagement.GetMainGameControl ().OnTutorialComplete ();
 	}
 
 }

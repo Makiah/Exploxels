@@ -11,7 +11,7 @@ public class DistrictDisplayer : MonoBehaviour {
 	void OnDisable() {
 		LevelEventManager.InitializePlayer -= StartCountdown;
 	}
-
+	
 	[System.Serializable]
 	class LevelDisplay {
 		public string text;
@@ -25,9 +25,10 @@ public class DistrictDisplayer : MonoBehaviour {
 		//Show the district thing.  
 		gameObject.SetActive (true);
 
+		//Define the level that will be used locally by checking the current level in the GameData.  
 		int levelToUse = CurrentLevelVariableManagement.GetMainGameData ().currentLevel;
 
-		if (levelToUse + 1 < levels.Length) {
+		if (levelToUse + 1 <= levels.Length) {
 
 			//Access game data and determine the correct LevelDisplay.  
 			LevelDisplay levelDisplayToUse = levels [levelToUse];
@@ -47,6 +48,7 @@ public class DistrictDisplayer : MonoBehaviour {
 		}
 	}
 
+	//Time the length the district is shown for.  
 	IEnumerator DistrictDisplayingTimer() {
 		yield return new WaitForSeconds(5f);
 		gameObject.SetActive (false);

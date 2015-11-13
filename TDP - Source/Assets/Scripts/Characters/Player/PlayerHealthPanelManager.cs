@@ -44,6 +44,9 @@ public class PlayerHealthPanelManager : CharacterHealthPanelManager {
 		//Initialize icon
 		characterHeadSprite = transform.FindChild ("FlippingItem").GetChild (0).FindChild ("Head").GetComponent <SpriteRenderer> ().sprite;
 		playerHealthPanelReference.InitializePanel (characterHeadSprite, lifePoints, currentHealth);
+
+		//Give player money obtained previously.  
+		GiveMoneyToPlayer (CurrentLevelVariableManagement.GetMainGameData ().currentPlayerMoney);
 	}
 
 	//Called by PlayerDropHandler.  

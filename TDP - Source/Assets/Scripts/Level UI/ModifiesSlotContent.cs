@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class ModifiesSlotContent : MonoBehaviour {
 
@@ -10,8 +11,18 @@ public class ModifiesSlotContent : MonoBehaviour {
 	public static void InitializeSystem(SlotScript[,] slots) {
 		slotArray = slots;
 		initialized = true;
+
+		//Add previously gained items
+		if (CurrentLevelVariableManagement.GetMainGameData ().currentPlayerItems != null) {
+			UISlotContentReference[] previousPlayerItems = CurrentLevelVariableManagement.GetMainGameData ().currentPlayerItems;
+			for (int i = 0; i < previousPlayerItems.Length; i++) {
+				AssignNewItemToBestSlot (previousPlayerItems [i]);
+			}
+		}
+
 	}
 
+	//Returns whether the script has been initialized.  
 	public static bool IsInitialized() {
 		return initialized;
 	}
@@ -118,6 +129,25 @@ public class ModifiesSlotContent : MonoBehaviour {
 		}
 		
 		return null;
+	}
+
+	//Used for GameData.  
+	public static UISlotContentReference[] GetAllPlayerItems() {
+		//List that will hold all player items.  
+		List <UISlotContentReference> playerItems = new List <UISlotContentReference> ();
+
+		for (int y = slotArray.GetLength(0) - 1; y >= 0; y--) {
+			for (int x = 0; x < slotArray.GetLength(1); x++) {
+				//Check whether the slot has an item assigned.  
+				if (slotArray[y, x].GetCurrentlyAssigned() != null) {
+					//Add the item to the slot.  
+					playerItems.Add(slotArray[y, x].GetCurrentlyAssigned());
+				}
+			}
+		}
+
+		//Return the list as an array.  
+		return playerItems.ToArray ();
 	}
 
 }
