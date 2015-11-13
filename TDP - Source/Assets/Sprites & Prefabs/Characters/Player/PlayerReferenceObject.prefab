@@ -429,7 +429,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 169436}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7, y: 3, z: 10}
+  m_LocalPosition: {x: -7, y: 1, z: 10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 494082}
@@ -752,10 +752,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   scrollSpeed: .00999999978
   segments:
-  - {fileID: 21300000, guid: 9f97c7c2840494c12b3e431ff7ea7963, type: 3}
-  - {fileID: 21300000, guid: 16999f72612b7401ab64bd82d34b3b2c, type: 3}
-  - {fileID: 21300000, guid: cd664fe90cebf48cda232c59f1f81557, type: 3}
-  - {fileID: 21300000, guid: 889e9a6114db84eda96b888fcb9ac746, type: 3}
+  - {fileID: 21300000, guid: 73d850e06ef6c4b4caf091eb75853492, type: 3}
+  - {fileID: 21300000, guid: 1495ac11ae8a34439a8dcf7c782207cc, type: 3}
+  - {fileID: 21300000, guid: 677044f49e7b845b48769cc0efa20572, type: 3}
+  - {fileID: 21300000, guid: ca69fb47e526b4f8fbb3dcd45e3a4ec4, type: 3}
+  - {fileID: 21300000, guid: f57b774c8f4b84f9798cfb80529b0122, type: 3}
   backgroundPanel: {fileID: 192248, guid: 8140a623291c047229a4a39a46953bba, type: 2}
 --- !u!114 &11470282
 MonoBehaviour:

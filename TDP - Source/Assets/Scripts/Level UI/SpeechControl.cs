@@ -26,7 +26,7 @@ public class SpeechControl : MonoBehaviour {
 	NPCPanelController currentlyAssignedTo;
 
 	//Initial initialization.  Overriden by ProfessionSpeechManager.  
-	protected virtual void InitializeSpeechControl() {
+	protected void InitializeSpeechControl() {
 		textSpeechBox = transform.FindChild ("Speech").GetComponent <Text> ();
 		speakerName = transform.FindChild ("NamePanel").FindChild ("SpeakerName").GetComponent <Text> ();
 		playerIcon = transform.FindChild ("PlayerIcon").GetComponent <Image> ();
@@ -80,7 +80,8 @@ public class SpeechControl : MonoBehaviour {
 						completedDialogue = false;
 					} else {
 						//Exit the coroutine.  
-						currentlyAssignedTo.OnCompletedSpeakingToPlayer();
+						if (currentlyAssignedTo != null) 
+							currentlyAssignedTo.OnCompletedSpeakingToPlayer();
 						yield break;
 				 	}
 				} else {

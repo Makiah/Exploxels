@@ -5,9 +5,25 @@ public class CurrentLevelVariableManagement : MonoBehaviour {
 
 	//Initial screen
 	static GameData mainGameData;
+	static GameControl mainGameControl;
 
 	public static void SetGameUIReferences() {
-		mainGameData = GameObject.Find ("Game Data").GetComponent <GameData> ();
+		mainGameData = GameObject.Find ("Game Controller").GetComponent <GameData> ();
+		mainGameControl = GameObject.Find ("Game Controller").GetComponent <GameControl> ();
+	}
+	
+	public static GameData GetMainGameData() {
+		if (mainGameData == null) {
+			Debug.LogError("GameData was null!");
+		}
+		return mainGameData;
+	}
+	
+	public static GameControl GetMainGameControl() {
+		if (mainGameControl == null) {
+			Debug.LogError("GameControl was null!");
+		}
+		return mainGameControl;
 	}
 
 	//Level
@@ -20,13 +36,6 @@ public class CurrentLevelVariableManagement : MonoBehaviour {
 		playerObject = GameObject.Find ("PlayerReferenceObject(Clone)");
 		mainCamera = playerObject.transform.FindChild ("Main Camera").gameObject;
 		levelUI = GameObject.Find ("UI");
-	}
-
-	public static GameData GetMainGameData() {
-		if (mainGameData == null) {
-			Debug.LogError("GameData was null!");
-		}
-		return mainGameData;
 	}
 
 	public static GameObject GetPlayerReference() {

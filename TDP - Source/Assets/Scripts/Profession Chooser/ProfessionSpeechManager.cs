@@ -12,15 +12,8 @@ public class ProfessionSpeechManager : SpeechControl {
 		ProfessionEventManager.InitializeProfessionSpeechManager -= InitializeSpeechControl;
 	}
 
-	protected override void InitializeSpeechControl() {
-		base.InitializeSpeechControl ();
-		SaySomething (ResourceDatabase.GetRaceByParameter ("Gatherer").male.head, "Guide", new string[]{
-			"Welcome, young wanderer, to the world of Exploxels!", 
-			"Our world is undergoing rapid changes, so prepare yourself.",
-			"You will face both monsters and evil humans.",
-			"But be warned, this is no easy feat.", 
-			"If you would still like to continue, choose a profession above."
-		}, true, null);
+	public void SetSpeechDialogue(string[] stuffToSay) {
+		SaySomething (ResourceDatabase.GetRaceByParameter ("Gatherer").male.head, "Guide", stuffToSay, true, null);
 	}
 
 }

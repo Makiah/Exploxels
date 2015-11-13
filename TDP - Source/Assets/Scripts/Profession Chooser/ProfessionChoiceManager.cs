@@ -64,7 +64,7 @@ public class ProfessionChoiceManager : MonoBehaviour {
 		description2.text = "";
 		gameObject.SetActive (false);
 		//Resume game.
-		CurrentLevelVariableManagement.GetMainGameData().OnProfessionChosen (chosenProfession);
+		CurrentLevelVariableManagement.GetMainGameControl().OnProfessionChosen (chosenProfession);
 	}
 
 	//There is an event trigger component on each object that will call these functions.  

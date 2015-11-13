@@ -22,20 +22,32 @@ public class DistrictDisplayer : MonoBehaviour {
 	[SerializeField] LevelDisplay[] levels;
 
 	void StartCountdown() {
+		//Show the district thing.  
 		gameObject.SetActive (true);
-		//Set the text or image.  
-		if (levels [0].useImageInsteadOfText) {
-			transform.FindChild("Image").gameObject.SetActive(true);
-			transform.FindChild ("Image").GetComponent <Image> ().sprite = levels [0].image;
-		} else {
-			transform.FindChild("Text").gameObject.SetActive(true);
-			transform.FindChild ("Text").GetComponent <Text> ().text = levels [0].text;
-		}
 
-		StartCoroutine ("DistrictDisplayingManager");
+		int levelToUse = CurrentLevelVariableManagement.GetMainGameData ().currentLevel;
+
+		if (levelToUse + 1 < levels.Length) {
+
+			//Access game data and determine the correct LevelDisplay.  
+			LevelDisplay levelDisplayToUse = levels [levelToUse];
+				
+			//Set the text or image.  
+			if (levelDisplayToUse.useImageInsteadOfText) {
+				transform.FindChild ("Image").gameObject.SetActive (true);
+				transform.FindChild ("Image").GetComponent <Image> ().sprite = levelDisplayToUse.image;
+			} else {
+				transform.FindChild ("Text").gameObject.SetActive (true);
+				transform.FindChild ("Text").GetComponent <Text> ().text = levelDisplayToUse.text;
+			}
+
+			StartCoroutine ("DistrictDisplayingTimer");
+		} else {
+			Debug.LogError("No LevelDisplay fit the specified criteria");
+		}
 	}
 
-	IEnumerator DistrictDisplayingManager() {
+	IEnumerator DistrictDisplayingTimer() {
 		yield return new WaitForSeconds(5f);
 		gameObject.SetActive (false);
 	}

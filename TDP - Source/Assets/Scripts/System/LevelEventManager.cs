@@ -39,14 +39,12 @@ public class LevelEventManager : MonoBehaviour {
 	public static event TerrainInitialization InitializeTerrain;
 
 	public static event BaseInitialization CreatePlayer;
-	public static event BaseInitialization CreatePlayerReference;
 
 	public static event BaseInitialization InitializeLightingSystem;
 
 	public static event BaseInitialization InitializePlayer; //Use for initializing CostumeManager and PlayerAction, as well as the PlayerHealthController.  
 
 	public delegate void SlotControlSystem(SlotScript[,] inventorySlots);
-	public static event SlotControlSystem InitializeSlotControlSystem;
 
 	public static event BaseInitialization InitializeCostume;
 
@@ -121,7 +119,7 @@ public class LevelEventManager : MonoBehaviour {
 		if (InitializeHotbarManager != null) InitializeHotbarManager (); else Debug.LogError("InitializeHotbarItems was null!"); //Used for initializing the HotbarManager.  
 		if (InitializePlayer != null) InitializePlayer (); else Debug.LogError("InitializePlayer was null!"); //Used for initializing the HumanoidBaseReferenceClass.  
 
-		if (InitializeSlotControlSystem != null) InitializeSlotControlSystem(totalNumberOfInventorySlots); else Debug.LogError("InitializePlayerDropSystem was null!"); //Used for DropHandler
+		ModifiesSlotContent.InitializeSystem (totalNumberOfInventorySlots); //Used for ModifiesSlotContent
 		if (InitializeCameraFunctions != null) InitializeCameraFunctions (); else Debug.LogError("InitializeCameraFunctions was null!"); // Used for camera controller.  
 		if (InitializeBackgroundScroller != null) InitializeBackgroundScroller (); else Debug.LogError("InitializeBackgroundScroller was null!"); //Initialize the BackgroundScroller class.  
 

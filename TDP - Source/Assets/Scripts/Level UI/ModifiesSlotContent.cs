@@ -3,24 +3,11 @@ using System.Collections;
 
 public class ModifiesSlotContent : MonoBehaviour {
 
-	/************************************************** INITIALIZATION **************************************************/
-	
-	protected virtual void OnEnable() {
-		LevelEventManager.InitializeSlotControlSystem += InitializeSystem;
-	}
-	
-	protected virtual void OnDisable() {
-		LevelEventManager.InitializeSlotControlSystem -= InitializeSystem;
-	}
-	
-	
-	/************************************************** DROP HANDLER **************************************************/
-	
 	static SlotScript[,] slotArray;
 	static bool initialized = false;
 
 	//Used when called from LevelEventManager.  
-	void InitializeSystem(SlotScript[,] slots) {
+	public static void InitializeSystem(SlotScript[,] slots) {
 		slotArray = slots;
 		initialized = true;
 	}
