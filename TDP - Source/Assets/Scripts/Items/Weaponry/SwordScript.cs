@@ -59,13 +59,24 @@ public class SwordScript : ItemBase {
 			Debug.DrawLine (actualStartRaycastParameter, actualEndRaycastParameter, Color.green, 3f);
 		}
 
-		if (linecastResult.Length != 0) {
-			if (linecastResult [0].collider != null) {
-				if (linecastResult [0].collider.gameObject.GetComponent <CharacterHealthPanelManager> () != null) {
-					linecastResult [0].collider.gameObject.GetComponent <CharacterHealthPanelManager> ().YouHaveBeenAttacked (swordPowerAttack);
+		GameObject result = GameObjectContainsCharacterHealthPanelManager (linecastResult);
+
+		if (result != null) {
+			result.GetComponent <CharacterHealthPanelManager> ().YouHaveBeenAttacked (swordPowerAttack);
+		}
+	}
+
+	GameObject GameObjectContainsCharacterHealthPanelManager(RaycastHit2D[] linecastCollisions) {
+		if (linecastCollisions.Length != 0) {
+			for (int i = 0; i < linecastCollisions.Length; i++) {
+				if (linecastCollisions [i].collider.gameObject.GetComponent <CharacterHealthPanelManager> () != null) {
+					return linecastCollisions[i].collider.gameObject;
 				}
 			}
 		}
+
+		return null;
+
 	}
 
 }

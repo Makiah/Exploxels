@@ -30,7 +30,9 @@ public class TreeScript : DropsItems {
 
 	protected override void MakeReferences() {
 		DropReferenceClass woodDrop = new DropReferenceClass (ResourceDatabase.GetItemByParameter ("Wood"), 1, 1, 1);
-		drops = new DropReferenceClass[]{woodDrop};
+		DropReferenceClass appleDrop = new DropReferenceClass (ResourceDatabase.GetItemByParameter ("Apple"), 1, 2, 2);
+		DropReferenceClass sproutDrop = new DropReferenceClass (ResourceDatabase.GetItemByParameter ("Sprout"), 1, 1, 4);
+		drops = new DropReferenceClass[]{woodDrop, appleDrop, sproutDrop};
 
 		top = transform.FindChild ("Top").GetComponent <SpriteRenderer> ();
 		segment1 = transform.FindChild ("Segment 1").GetComponent <SpriteRenderer> ();

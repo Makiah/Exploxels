@@ -28,7 +28,7 @@ public class ProjectileScript : MonoBehaviour {
 	GameObject playerObject;
 
 	public void InitializeProjectileWithThresholdAndDeviation(Vector3 positionToFireToward, float velocity, float currentHeading, float headingThreshold, float maxRandomDeviation, float ctorArrowPower) {
-		playerObject = VariableManagement.GetPlayerReference ();
+		playerObject = CurrentLevelVariableManagement.GetPlayerReference ();
 
 		//Set physics of the projectile.  
 		rb2d = GetComponent <Rigidbody2D> ();
@@ -79,10 +79,5 @@ public class ProjectileScript : MonoBehaviour {
 		}
 
 	}
-
-//	void OnTriggerExit2D () {
-//		if (notificationSent) 
-//			notificationSent = false;
-//	}
 
 }

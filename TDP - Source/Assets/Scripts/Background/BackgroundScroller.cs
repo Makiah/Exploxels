@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections;
 
 public class BackgroundScroller : MonoBehaviour {
-
+	//Initialization
 	void OnEnable() {
 		LevelEventManager.InitializeBackgroundScroller += InitializeBackgroundElements;
 	}
@@ -11,17 +11,17 @@ public class BackgroundScroller : MonoBehaviour {
 		LevelEventManager.InitializeBackgroundScroller -= InitializeBackgroundElements;
 	}
 
+	//Scrolling script
 	public float scrollSpeed;
 
 	public Sprite[] segments;
 
 	public GameObject backgroundPanel;
 
-
+	//Sets references to the necessary scrolling components (as well as a few calculations).  
 	void InitializeBackgroundElements() {
-		VariableManagement variableManagement = GameObject.Find ("ManagementFrameworks").transform.FindChild ("GameVariables").GetComponent <VariableManagement> ();
-		float terrainXLength = variableManagement.GetLevelLengthX ();
-		float backgroundXLength = terrainXLength * (scrollSpeed * 10);
+		float terrainXLength = CurrentLevelVariableManagement.GetLevelLengthX ();
+		float backgroundXLength = terrainXLength * (scrollSpeed * 12);
 		int maxBackgroundSegments = (int) (backgroundXLength / segments[0].bounds.size.x + 1);
 		for (int i = 0; i < maxBackgroundSegments; i++) {
 			GameObject createdPanel = (GameObject) (Instantiate(backgroundPanel, Vector3.zero, Quaternion.identity));

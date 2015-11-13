@@ -45,10 +45,10 @@ public class CharacterHealthPanelManager : MonoBehaviour {
 
 	//Look into initializing this once the player comes into activation distance.  
 	protected virtual void InitializeHealthBar() {
-		player = VariableManagement.GetPlayerReference ().transform;
+		player = CurrentLevelVariableManagement.GetPlayerReference ().transform;
 		currentHealth = lifePoints;
 		//Create panel
-		uiHealthController = VariableManagement.GetLevelUIReference().transform.FindChild ("Health Controller").gameObject.GetComponent <UIHealthController> (); 
+		uiHealthController = CurrentLevelVariableManagement.GetLevelUIReference().transform.FindChild ("Health Controller").gameObject.GetComponent <UIHealthController> (); 
 		//Initialize icon
 		characterHeadSprite = transform.GetChild (0).GetChild (0).FindChild ("Head").GetComponent <SpriteRenderer> ().sprite;
 		//Start the coroutine that manages the active state of the health bar item.  
@@ -59,10 +59,8 @@ public class CharacterHealthPanelManager : MonoBehaviour {
 	IEnumerator ControlHealthBarState() {
 		while (true) {
 			if (Vector3.Distance(transform.position, player.position) <= distanceUntilHealthBarActive && healthPanelReference == null) {
-				Debug.Log("Player entered radius");
 				OnThisEnemyActivated();
 			} else if (Vector3.Distance(transform.position, player.position) > distanceUntilHealthBarActive && healthPanelReference != null) {
-				Debug.Log("Player exited radius");
 				OnThisEnemyDeActivated();
 			}
 
@@ -72,7 +70,6 @@ public class CharacterHealthPanelManager : MonoBehaviour {
 
 	// On player/enemy attacked.  
 	public virtual void YouHaveBeenAttacked(float lifePointDeduction) {
-		Debug.Log ("Attack received " + lifePointDeduction);
 		currentHealth -= lifePointDeduction;
 		if (healthPanelReference != null) 
 			healthPanelReference.UpdateHealth (currentHealth);
@@ -83,7 +80,7 @@ public class CharacterHealthPanelManager : MonoBehaviour {
 
 	// Called when player enters radius of the character health controller.  
 	void OnThisEnemyActivated() {
-		healthPanelReference = uiHealthController.GetEnemyHealthPanelReference (this);
+		healthPanelReference = uiHealthController.GetEnemyHealthPanelReference ();
 		if (healthPanelReference != null)
 			healthPanelReference.InitializePanel (characterHeadSprite, lifePoints, currentHealth);
 	}

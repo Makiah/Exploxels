@@ -12,10 +12,10 @@
 using UnityEngine;
 using System.Collections;
 
-public class ScriptingUtilities : MonoBehaviour {
+public class ScriptingUtilities {
 
+	//For some reason, there is no method for this in the Transform class.  Go figure.  
 	public static Transform[] ParseChildrenFromTransform(Transform someTransform) {
-
 		Transform[] childTransforms = new Transform[someTransform.childCount];
 
 		int i = 0;
@@ -25,22 +25,20 @@ public class ScriptingUtilities : MonoBehaviour {
 		}
 
 		return childTransforms;
-
 	}
-	
+
+	//Used for checking arrays for equality.  
 	public static bool CheckArraysForEquality <T,S> (T[] arrayA, S[] arrayB) {
 		if (arrayA.Length != arrayB.Length)
 			return false;
-		
 		for (int i = 0; i < arrayA.Length; i++) {
 			if (!arrayA[i].Equals(arrayB[i])) 
 				return false;
 		}
-		
 		return true;
-		
 	}
 
+	//Used for checking UIResourceReference classes for equality.  
 	public static bool CheckUIResourceReferencesForEquality (UISlotContentReference object1, UISlotContentReference object2) {
 		if (object1.uiSlotContent.itemType == object2.uiSlotContent.itemType) {
 			if (object1.uiSlotContent.localGroupID == object2.uiSlotContent.localGroupID) {
@@ -50,14 +48,47 @@ public class ScriptingUtilities : MonoBehaviour {
 		return false;
 	}
 
+	//Used for converting degrees to radians.  
 	public static float DegreesToRadians (float degrees) {
 		float toReturn = degrees * (float)(Mathf.PI / 180f);
 		return toReturn;
 	}
 
+	//Used for converting radians to degrees.  
 	public static float RadiansToDegrees (float radians) {
 		float toReturn = radians * (float)(180f / Mathf.PI);
 		return toReturn;
+	}
+
+	//Uses generics to get any random object from an array.  
+	public static T GetRandomObjectFromArray <T> (T[] array) {
+		if (array.Length != 0) {
+			return array [Random.Range (0, array.Length)];
+		} else {
+			Debug.LogError("Array length was 0!");
+			//return null does not work for some reason.  
+			return default(T);
+		}
+	}
+
+	//Used for getting sprites without a pivot point.  
+	public static Sprite GetSpriteWithoutPivotPoint(Sprite originalSprite) {
+		if (originalSprite != null) 
+			return Sprite.Create (originalSprite.texture, originalSprite.rect, new Vector2(0.5f, 0.5f));
+		else {
+			Debug.LogError("Cannot get new sprite from null.");
+			return null;
+		}
+	}
+
+	//Pauses game7
+	public static void PauseGame() {
+		Time.timeScale = 0;
+	}
+
+	//Resumes game
+	public static void ResumeGame() {
+		Time.timeScale = 1;
 	}
 
 }

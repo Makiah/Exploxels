@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class LightingManager : MonoBehaviour {
@@ -14,7 +14,7 @@ public class LightingManager : MonoBehaviour {
 	private GameObject player;
 
 	void InitializeLightingSystem() {
-		player = VariableManagement.GetPlayerReference ();
+		player = CurrentLevelVariableManagement.GetPlayerReference ();
 		StartCoroutine ("ManageInGameLighting");
 	}
 

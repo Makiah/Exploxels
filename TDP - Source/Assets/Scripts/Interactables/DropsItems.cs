@@ -45,7 +45,7 @@ public abstract class DropsItems : MonoBehaviour {
 							GameObject instantiatedDrop = (GameObject) (Instantiate (drops [i].dropReference.inGamePrefab, transform.position, Quaternion.identity));
 							instantiatedDrop.AddComponent <DroppedItemProperties> ();
 							instantiatedDrop.GetComponent <DroppedItemProperties> ().localResourceReference = drops[i].dropReference;
-							Debug.Log ("Instantiated drops: " + instantiatedDrop.gameObject.name + " (DropsItems)");
+							instantiatedDrop.GetComponent <DroppedItemProperties> ().Initialize();
 						} else {
 							Debug.Log("DropReference was null!!! (DropsItems)");
 						}
@@ -61,6 +61,7 @@ public abstract class DropsItems : MonoBehaviour {
 				GameObject expDropped = (GameObject) (Instantiate (expDrop.dropReference.inGamePrefab, transform.position, Quaternion.identity));
 				expDropped.AddComponent <DroppedItemProperties> ();
 				expDropped.GetComponent <DroppedItemProperties> ().localResourceReference = expDrop.dropReference;
+				expDropped.GetComponent <DroppedItemProperties> ().Initialize();
 			}
 		} else {
 			Debug.Log("Did not drop any experience, experience to drop was 0. (DropsItems)");

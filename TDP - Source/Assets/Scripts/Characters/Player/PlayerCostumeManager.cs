@@ -7,7 +7,6 @@
  * updating the item in use by the player.  This script controls item switching, as well as armor, etc.  Added by the Hotbar
  * Manager.  
  * 
- * 
  */
 
 
@@ -19,11 +18,11 @@ public class PlayerCostumeManager : MonoBehaviour {
 	/************************************************** INITIALIZATION **************************************************/
 
 	void OnEnable() {
-		LevelEventManager.InitializeCostume += InitializePlayerCostume;
+		LevelEventManager.InitializeCostume += InitializePlayerProfession;
 	}
 	
 	void OnDisable() {
-		LevelEventManager.InitializeCostume -= InitializePlayerCostume;
+		LevelEventManager.InitializeCostume -= InitializePlayerProfession;
 	}
 
 
@@ -40,7 +39,7 @@ public class PlayerCostumeManager : MonoBehaviour {
 	//The prefab of the item will be childed to this object.  
 	private Transform holdingItem;
 
-	void InitializePlayerCostume(Race race) {
+	void InitializePlayerProfession() {
 		mainPlayerAction = transform.parent.parent.gameObject.GetComponent <CharacterBaseActionClass> ();
 		//Just setting up the basic race costume.  
 		body = transform.FindChild("Body").GetComponent <SpriteRenderer> ();
@@ -51,21 +50,47 @@ public class PlayerCostumeManager : MonoBehaviour {
 		bottomLeg = transform.FindChild ("Legs").FindChild("Bottom Leg").GetComponent <SpriteRenderer> ();
 		holdingItem = transform.FindChild("Hands").FindChild("HoldingHand").FindChild ("HoldingItem");
 
-		body.sprite = race.body;
-		head.sprite = race.heads[race.headVariationIndex];
-		idleArm.sprite = race.arm;
-		holdingArm.sprite = race.arm;
-		topLeg.sprite = race.legs;
-		bottomLeg.sprite = race.legs;
+		Profession currentPlayerProfession = CurrentLevelVariableManagement.GetMainGameData().chosenProfession;
+		UpdatePlayerProfession (currentPlayerProfession);
+	}
 
+	//Used when a player profession is changed.  
+	public void UpdatePlayerProfession(Profession profession) {
+		//Gender check.  
+		if (CurrentLevelVariableManagement.GetMainGameData().chosenGender == 0) {
+			body.sprite = profession.male.body;
+			head.sprite = profession.male.head;
+			idleArm.sprite = profession.male.arm;
+			holdingArm.sprite = profession.male.arm;
+			topLeg.sprite = profession.male.legs;
+			bottomLeg.sprite = profession.male.legs;
+		} else {
+			body.sprite = profession.female.body;
+			head.sprite = profession.female.head;
+			idleArm.sprite = profession.female.arm;
+			holdingArm.sprite = profession.female.arm;
+			topLeg.sprite = profession.female.legs;
+			bottomLeg.sprite = profession.female.legs;
+		}
+
+		//Add the initial items for the profession to the inventory.  
+		for (int i = 0; i < profession.initialObjects.Length; i++) {
+			ModifiesSlotContent.AssignNewItemToBestSlot(profession.initialObjects[i]);
+		}
 	}
 
 	//Called by HotbarManager when a new hotbar item is selected.
 	public void UpdatePlayerItem(GameObject prefabSelectedInHotbar) {
 
 		//Deletes the previous item that had existed before this new item.  
-		if (holdingItem.childCount != 0 && holdingItem != null) {
-			Destroy (holdingItem.GetChild (0).gameObject);
+		if (holdingItem.childCount != 0) {
+			if (holdingItem.childCount > 1) {
+				Debug.Log("There was more than one object being held by the player.");
+			}
+
+			for (int i = 0; i < holdingItem.childCount; i++) {
+				Destroy (holdingItem.GetChild (i).gameObject);
+			}
 		}
 
 		//Instantiating the new item (even if the new item is null).  
@@ -73,7 +98,7 @@ public class PlayerCostumeManager : MonoBehaviour {
 			GameObject createdItem = (GameObject)Instantiate (prefabSelectedInHotbar);
 			createdItem.transform.SetParent (holdingItem);
 			createdItem.transform.localPosition = Vector2.zero; 
-			createdItem.transform.localScale = new Vector3(transform.parent.localScale.x * createdItem.transform.localScale.x, transform.parent.localScale.y * createdItem.transform.localScale.y, 1);//transform.parent.localScale * createdItem.transform.localScale;
+			createdItem.transform.localScale = new Vector3(prefabSelectedInHotbar.transform.localScale.x, prefabSelectedInHotbar.transform.localScale.y, 1);//transform.parent.localScale * createdItem.transform.localScale;
 			createdItem.transform.localRotation = transform.parent.localRotation;
 
 			if (prefabSelectedInHotbar.GetComponent <ItemBase> () != null) {
@@ -86,7 +111,6 @@ public class PlayerCostumeManager : MonoBehaviour {
 		} else {
 			mainPlayerAction.OnRefreshCurrentWeaponMoves(null);
 		}
-
 
 	}
 

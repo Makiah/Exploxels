@@ -1,4 +1,4 @@
-﻿
+
 /*
  * Author: Makiah Bennett
  * Created 16 September 2015
@@ -39,23 +39,24 @@ public class PlayerHealthPanelManager : CharacterHealthPanelManager {
 		lifePoints = 10f;
 		currentHealth = lifePoints;
 		//Create panel
-		uiHealthController = VariableManagement.GetLevelUIReference().transform.FindChild ("Health Controller").gameObject.GetComponent <UIHealthController> (); 
+		uiHealthController = CurrentLevelVariableManagement.GetLevelUIReference().transform.FindChild ("Health Controller").gameObject.GetComponent <UIHealthController> (); 
 		playerHealthPanelReference = uiHealthController.GetPlayerHealthPanelReference ();
 		//Initialize icon
-		characterHeadSprite = transform.GetChild (0).GetChild (0).FindChild ("Head").GetComponent <SpriteRenderer> ().sprite;
+		characterHeadSprite = transform.FindChild ("FlippingItem").GetChild (0).FindChild ("Head").GetComponent <SpriteRenderer> ().sprite;
 		playerHealthPanelReference.InitializePanel (characterHeadSprite, lifePoints, currentHealth);
+
+		//Give player money obtained previously.  
+		GiveMoneyToPlayer (CurrentLevelVariableManagement.GetMainGameData ().currentPlayerMoney);
 	}
 
 	//Called by PlayerDropHandler.  
 	public void OnExperienceNodulePickedUp(int expValue) {
-		Debug.Log ("On ExperienceNodulePickedUp (PlayerHealthPanelManager)");
 		currentExp += expValue;
 		//Done in case the experience level is incremented past the maximum.  
 		currentExp = playerHealthPanelReference.UpdateExperience (currentExp);
 	}
 
 	public override void YouHaveBeenAttacked(float lifePointDeduction) {
-		Debug.Log ("Attack received on player health panel manager" + lifePointDeduction);
 		currentHealth -= lifePointDeduction;
 		if (playerHealthPanelReference != null) 
 			playerHealthPanelReference.UpdateHealth (currentHealth);
@@ -64,8 +65,19 @@ public class PlayerHealthPanelManager : CharacterHealthPanelManager {
 		}
 	}
 
+	public string GetPlayerName() {
+		return playerHealthPanelReference.GetPlayerName ();
+	}
+
+	public bool GiveMoneyToPlayer(int amount) {
+		return playerHealthPanelReference.UpdateCoinValue (amount);
+	}
+
+	public int GetPlayerMoney() {
+		return playerHealthPanelReference.GetCoinAmount ();
+	}
+
 	protected override void OnDeath() {
-		Debug.Log ("Player OnDeath called (PlayerHealthPanelManager)");
 		playerHealthPanelReference.Clear ();
 		//Note: Application.Quit() does not work for the Web Player or the Unity Editor.  
 		//Application.Quit ();

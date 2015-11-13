@@ -16,22 +16,12 @@ using System.Collections.Generic;
 
 public class ResourceDatabase : MonoBehaviour {
 
-	void OnEnable() {
-		UIEventManager.InitializeResourceDatabase += InitializeDatabase;
-	}
-
-	void OnDisable() {
-		UIEventManager.InitializeResourceDatabase -= InitializeDatabase;
-	}
-
 	public static List <ResourceReference> masterItemList = new List<ResourceReference> ();
 	public static List <ItemCombination> masterItemCombinationList = new List<ItemCombination> ();
 
-	public static List <Race> gameRaces = new List <Race> ();
+	public static List <Profession> gameProfessions = new List <Profession> ();
 	
-	void InitializeDatabase() {
-
-		DontDestroyOnLoad (this.gameObject);
+	public static void InitializeDatabase() {
 
 		/******************************************* ITEMS *******************************************/
 		//Tools
@@ -45,7 +35,6 @@ public class ResourceDatabase : MonoBehaviour {
 		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.CraftingMaterial, "Wood", "A vital material for any player", 0, "Items/Wood/Wood", "Items/Wood/UIWood"));
 		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.CraftingMaterial, "Wood Plank", "A vital wood refinement", 1, "Items/Wood/WoodPlank", "Items/Wood/UIWoodPlank"));
 
-
 		//Ores
 		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.Ore, "Coal", "Useful for crafting arrow tips", 0, "Items/Ores/Coal/Coal", "Items/Ores/Coal/UICoal"));
 		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.Ore, "Diamond", "A tough material useful in epic battles", 1, "Items/Ores/Diamond/Diamond", "Items/Ores/Diamond/UIDiamond"));
@@ -53,27 +42,23 @@ public class ResourceDatabase : MonoBehaviour {
 		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.Ore, "Gold", "A weak but easily enchantable item.", 3, "Items/Ores/Gold/Gold", "Items/Ores/Gold/UIGold"));
 		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.Ore, "Ruby", "A nice red gem", 4, "Items/Ores/Ruby/Ruby", "Items/Ores/Ruby/UIRuby"));
 		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.Ore, "Silver", "A good material for strong weapons", 5, "Items/Ores/Silver/Silver", "Items/Ores/Silver/UISilver"));
+		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.Ore, "Iron", "A dull yet tough metal.", 6, "Items/Ores/Iron/Iron", "Items/Ores/Iron/UIIron"));
+
+		//Food
+		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.Food, "Apple", "A yummy snack.", 0, "Items/Food/Apple/Apple", "Items/Food/Apple/UIApple"));
+		masterItemList.Add(new ResourceReference(ResourceReference.ItemType.Food, "Sprout", "The start of a new beginning", 1, "Items/Food/Sprout/Sprout", "Items/Food/Sprout/UISprout"));
 
 		//Other 
 		masterItemList.Add (new ResourceReference(ResourceReference.ItemType.Other, "ExpNodule", "", 0, "Items/Other/ExpNodule"));
 
 		/******************************************* RACES *******************************************/
-		//Male Minecrafter
-		string[] minecrafterMaleHeads = {"MinecrafterMaleHead1"};
-		ResourceReference[] minecrafterMaleInitialItems = {
-			GetItemByParameter ("Wooden Sword"), 
-			GetItemByParameter ("Wooden Hatchet"),
-			GetItemByParameter ("Wooden Pickaxe")
-		};
-		gameRaces.Add (new Race ("Races/MinecrafterMale/", minecrafterMaleHeads, "MinecrafterMale", 0, minecrafterMaleInitialItems));
+		//Gatherer
+		UISlotContentReference[] gathererInitialItems = new UISlotContentReference[]{};
+		gameProfessions.Add (new Profession("Professions/Gatherer/", "Gatherer", 0, gathererInitialItems));
 
-		//Female Minecrafter
-		string[] minecrafterFemaleHeads = {"MinecrafterFemaleHead1"};
-		ResourceReference[] minecrafterFemaleInitialItems = {
-			GetItemByParameter ("Wooden Bow"), 
-			GetItemByParameter ("Diamond Sword")
-		};
-		gameRaces.Add (new Race ("Races/MinecrafterFemale/", minecrafterFemaleHeads, "MinecrafterFemale", 1, minecrafterFemaleInitialItems));
+		//Hunter
+		UISlotContentReference[] hunterInitialItems = new UISlotContentReference[]{};
+		gameProfessions.Add (new Profession ("Professions/Hunter/", "Hunter", 1, hunterInitialItems));
 
 		/******************************************* COMBINATIONS *******************************************/
 		//Wooden Sword
@@ -92,19 +77,19 @@ public class ResourceDatabase : MonoBehaviour {
 
 	}
 
-	public static Race GetRaceByParameter(string specifiedName) {
-		for (int i = 0; i < gameRaces.Count; i++) {
-			if (gameRaces[i].name == specifiedName) 
-				return gameRaces[i];
+	public static Profession GetRaceByParameter(string specifiedName) {
+		for (int i = 0; i < gameProfessions.Count; i++) {
+			if (gameProfessions[i].name == specifiedName) 
+				return gameProfessions[i];
 		}
 
 		return null;
 	}
 
-	public static Race GetRaceByParameter(int specifiedID) {
-		for (int i = 0; i < gameRaces.Count; i++) {
-			if (gameRaces[i].raceID == specifiedID) 
-				return gameRaces[i];
+	public static Profession GetRaceByParameter(int specifiedID) {
+		for (int i = 0; i < gameProfessions.Count; i++) {
+			if (gameProfessions[i].professionID == specifiedID) 
+				return gameProfessions[i];
 		}
 		
 		return null;
@@ -134,7 +119,7 @@ public class ResourceDatabase : MonoBehaviour {
 	}
 
 	public static int GetNumberOfRacesInGame() {
-		return gameRaces.Count;
+		return gameProfessions.Count;
 	}
 
 }
