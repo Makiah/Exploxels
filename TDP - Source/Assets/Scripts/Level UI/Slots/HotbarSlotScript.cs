@@ -37,4 +37,15 @@ public class HotbarSlotScript : SlotScript {
 		masterHotbarManager.UpdateSelectedItem ();
 	}
 
+	public override UISlotContentReference DeAssignItem() {
+		UISlotContentReference toReturn = currentlyAssigned;
+		currentlyAssigned = null;
+		childIcon.sprite = null;
+		childIcon.enabled = false;
+		UpdateStackIndicator ();
+		//Update the selected hotbar item (when it is de-assigned completely).  
+		masterHotbarManager.UpdateSelectedItem ();
+		return toReturn;
+	}
+
 }
