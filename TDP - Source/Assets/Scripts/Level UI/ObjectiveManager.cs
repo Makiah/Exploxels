@@ -71,6 +71,7 @@ public class ObjectiveManager : MonoBehaviour {
 	//When the next level is selected.  
 	public void OnContinueToNextLevelButtonPressed() {
 		Debug.Log ("Would load next level");
+		CurrentLevelVariableManagement.GetMainGameControl ().OnTutorialComplete ();
 	}
 
 	//When an objective is achieved
@@ -87,10 +88,20 @@ public class ObjectiveManager : MonoBehaviour {
 	//When a new item is added.  
 	public void OnNewItemAddedToPlayerInventory() {
 		//Check to make sure the objective has not already been completed
+		//Wooden Hatchet Objective
 		if (objectives [0].objectiveToggle.isOn == false) {
 			//Check whether the player has the hatchet.  
 			if (ModifiesSlotContent.DetermineWhetherPlayerHasCertainInventoryItem (new UISlotContentReference (ResourceDatabase.GetItemByParameter ("Wooden Hatchet"), 1)) != null) {
 				OnObjectiveHasBeenCompleted(1);
+			}
+		}
+
+		//Wooden Sword Objective
+		if (objectives [3].objectiveToggle.isOn == false) {
+			if (ModifiesSlotContent.DetermineWhetherPlayerHasCertainInventoryItem(new UISlotContentReference(ResourceDatabase.GetItemByParameter ("Wooden Sword"), 1)) != null) {
+				OnObjectiveHasBeenCompleted(4);
+				//Temporary!
+				OnObjectiveHasBeenCompleted(5);
 			}
 		}
 	}
