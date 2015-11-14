@@ -19,7 +19,6 @@ public class ModifiesSlotContent : MonoBehaviour {
 				AssignNewItemToBestSlot (previousPlayerItems [i]);
 			}
 		}
-
 	}
 
 	//Returns whether the script has been initialized.  
@@ -43,6 +42,8 @@ public class ModifiesSlotContent : MonoBehaviour {
 				//Add the new stack to the current item stack.  
 				bestAvailableSlot.ModifyCurrentItemStack (item.stack);
 				Debug.Log ("Assigned " + item.uiSlotContent.itemScreenName + " to slot with items of same type.");
+				//Check whether an objective has been completed
+				CurrentLevelVariableManagement.GetMainObjectiveManager().OnNewItemAddedToPlayerInventory();
 			} else {
 				Debug.Log ("Could not stack item: Attempting to add to an empty slot");
 				bestAvailableSlot = FindBestAvailableNullSlot ();
@@ -51,6 +52,8 @@ public class ModifiesSlotContent : MonoBehaviour {
 					bestAvailableSlot.AssignNewItem (item);
 					//Update the hotbar item.
 					CurrentLevelVariableManagement.GetLevelUIReference ().transform.FindChild ("Hotbar").GetComponent <HotbarManager> ().UpdateSelectedItem ();
+					//Check whether an objective has been completed
+					CurrentLevelVariableManagement.GetMainObjectiveManager().OnNewItemAddedToPlayerInventory();
 				} else {
 					Debug.LogError("No slots are empty!");
 				}

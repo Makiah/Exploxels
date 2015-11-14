@@ -35,6 +35,8 @@ public class LevelEventManager : MonoBehaviour {
 
 	public static event BaseInitialization InitializeUISpeechControl;
 
+	public static event BaseInitialization InitializeObjectiveManager;
+
 	public delegate TerrainReferenceClass TerrainInitialization();
 	public static event TerrainInitialization InitializeTerrain;
 
@@ -105,6 +107,8 @@ public class LevelEventManager : MonoBehaviour {
 		if (InitializeInteractablePanels != null) InitializeInteractablePanels(); else Debug.LogError("InitializeInteractablePanels was null!");
 		//Speech control
 		if (InitializeUISpeechControl != null) InitializeUISpeechControl (); else Debug.LogError("InitializeUISpeechControl was null!");
+		//Objective Manager
+		if (InitializeObjectiveManager != null) InitializeObjectiveManager(); else Debug.LogError("InitializeObjectiveManager was null!"); //Used for ObjectiveManager
 
 		//Lay out the level
 		TerrainReferenceClass initializedMaze = null;

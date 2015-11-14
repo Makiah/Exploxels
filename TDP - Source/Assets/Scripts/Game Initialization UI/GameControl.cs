@@ -31,7 +31,7 @@ public class GameControl : MonoBehaviour {
 		GetComponent <GameData> ().chosenGender = profileSwitcher.currentGender;
 		GetComponent <GameData> ().specifiedPlayerName = gameUI.transform.FindChild ("NameField").GetComponent <InputField> ().text;
 		//Load Profession Chooser level
-		Application.LoadLevel (3);
+		Application.LoadLevel ("Profession Chooser");
 	}
 	
 	/***************************** PROFESSION CHOICE SCREEN *****************************/
@@ -41,48 +41,55 @@ public class GameControl : MonoBehaviour {
 
 	//Defines the elements required to get data.  
 	public void InitializeProfessionObjects() {
+		//Set references to existing items.
 		mainProfessionChoiceManager = GameObject.Find ("UI").transform.FindChild ("ProfessionChoice").GetComponent <ProfessionChoiceManager> ();
 		mainProfessionSpeechManager = GameObject.Find ("UI").transform.FindChild ("Speech Bubble").GetComponent <ProfessionSpeechManager> ();
 
+		//Check the current level
 		if (GetComponent <GameData> ().currentLevel == 0) {
-			StoneAgeProfessionChoice ();
+			//Stone Age Speech
+			mainProfessionSpeechManager.SetSpeechDialogue (new string[] {
+				"Welcome, young wanderer, to the land of Exploxels!", 
+				"Our world is undergoing rapid change.",
+				"You will travel through many different time periods, watching the world progress.", 
+				"The person that you will become can change greatly.", 
+				"You will now enter the beginnings of humanity, the Stone Age.", 
+				"Good luck."
+			});
 		} else if (GetComponent <GameData> ().currentLevel == 1) {
-			IronAgeProfessionChoice();
+			//Iron Age Speech
+			mainProfessionSpeechManager.SetSpeechDialogue (new string[] {
+				"Nice job dealing with those cavemen!", 
+				"I have an important announcement for you.", 
+				"While mining deep underground, we have discovered a new metal.", 
+				"We call it Bronze.", 
+				"Use the new tools created by this metal to your advantage."
+			});
 		}
 	}
 
-	public void StoneAgeProfessionChoice() {
-		mainProfessionSpeechManager.SetSpeechDialogue (new string[] {
-			"Welcome, young wanderer, to the land of Exploxels!", 
-			"Our world is undergoing rapid change.",
-			"You will travel through many different time periods, watching the world progress.", 
-			"The person that you will become can change greatly.", 
-			"Good luck."
-		});
-		mainProfessionChoiceManager.CreateProfessionChoice ("Choose your player's profession.", 
-		                                                    ResourceDatabase.GetRaceByParameter ("Gatherer"), "Gatherer", 
-		                                                    ResourceDatabase.GetRaceByParameter ("Hunter"), "Hunter"
-		                                                    );
-	}
-
-	public void IronAgeProfessionChoice() {
-		mainProfessionSpeechManager.SetSpeechDialogue (new string[] {
-			"Nice job dealing with those cavemen!", 
-			"I have an important announcement for you.", 
-			"While mining deep underground, we have discovered a new metal.", 
-			"We call it Bronze."
-		});
-		mainProfessionChoiceManager.CreateProfessionChoice ("Choose your player's profession.", 
-		                                                    ResourceDatabase.GetRaceByParameter ("Gatherer"), "Gatherer", 
-		                                                    ResourceDatabase.GetRaceByParameter ("Hunter"), "Hunter"
-		                                                    );
+	//When the player has finished speaking.  
+	public void OnSpeechHasBeenCompleted() {
+		if (GetComponent <GameData> ().currentLevel == 0) {
+			//For the Stone Age
+			mainProfessionChoiceManager.CreateProfessionChoice ("Choose your Stone Age Profession.", 
+			                                                    ResourceDatabase.GetRaceByParameter ("Gatherer"), "Gatherer", 
+			                                                    ResourceDatabase.GetRaceByParameter ("Hunter"), "Hunter"
+			                                                    );
+		} else if (GetComponent <GameData> ().currentLevel == 1) {
+			//For the Iron Age
+			mainProfessionChoiceManager.CreateProfessionChoice ("Choose your Iron Age Profession.", 
+			                                                    ResourceDatabase.GetRaceByParameter ("Gatherer"), "Gatherer", 
+			                                                    ResourceDatabase.GetRaceByParameter ("Hunter"), "Hunter"
+			                                                    );
+		}
 	}
 	
 	//Called by the ProfessionChoiceManager when the profession has been chosen.  
 	public void OnProfessionChosen(Profession chosen) {
 		GetComponent<GameData> ().chosenProfession = chosen;
 		//Load tutorial.  
-		Application.LoadLevel (2);
+		Application.LoadLevel ("Stone Age");
 	}
 	
 	/**************************** TUTORIAL ****************************/
@@ -102,6 +109,6 @@ public class GameControl : MonoBehaviour {
 		//Load Profession Chooser Level.  
 		GetComponent <GameData> ().currentLevel = 1;
 		//Load the Profession Manager.
-		Application.LoadLevel (3);
+		Application.LoadLevel ("Profession Chooser");
 	}
 }

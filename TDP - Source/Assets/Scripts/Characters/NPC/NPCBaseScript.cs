@@ -10,7 +10,9 @@ public abstract class NPCBaseScript : CharacterBaseActionClass {
 	protected override void OnDisable() {
 		LevelEventManager.InitializeNPCs -= SetReferences;
 	}
-	
+
+	public string npcName = "NPC";
+
 	bool walkingAround = true;
 
 	protected Transform playerTransform;

@@ -34,7 +34,7 @@ public class SpeechControl : MonoBehaviour {
 	}
 
 	//On dialogue completed.  
-	public void CompletedSpeakingToPlayer() {
+	protected virtual void CompletedSpeakingToPlayer() {
 		if (currentlyAssignedTo != null) {
 			currentlyAssignedTo.OnCompletedSpeakingToPlayer ();
 		} else {
@@ -80,8 +80,7 @@ public class SpeechControl : MonoBehaviour {
 						completedDialogue = false;
 					} else {
 						//Exit the coroutine.  
-						if (currentlyAssignedTo != null) 
-							currentlyAssignedTo.OnCompletedSpeakingToPlayer();
+						CompletedSpeakingToPlayer();
 						yield break;
 				 	}
 				} else {

@@ -114,6 +114,8 @@ public class TreeScript : DropsItems {
 		if (currentlyActiveSegments == 0) {
 			Destroy (gameObject);
 		}
+
+		CurrentLevelVariableManagement.GetMainObjectiveManager ().OnTreeChopped ();
 	}
 
 }

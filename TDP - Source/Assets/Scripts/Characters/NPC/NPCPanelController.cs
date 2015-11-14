@@ -42,7 +42,7 @@ public class NPCPanelController : MonoBehaviour {
 						GetComponent <NPCBaseScript> ().StopWalkingAround();
 						GetComponent <NPCBaseScript> ().FlipToFacePlayer();
 						GetComponent <NPCBaseScript> ().NPCActionBeforeSpeaking();
-						SpeakToPlayer(dialogueForPlayer);
+						SpeakToPlayer(dialogueForPlayer, GetComponent <NPCBaseScript> ().npcName);
 						alreadySpeakingToPlayer = true;
 					}
 				}
@@ -64,8 +64,8 @@ public class NPCPanelController : MonoBehaviour {
 	}
 
 	//Makes a call to SpeechControl on the UI with the arguments that determine what to say and the icon that is saying it.
-	public virtual void SpeakToPlayer(string[] toSay) {
-		mainSpeechControl.SaySomething (playerIcon, "NPC", toSay, true, this);
+	public virtual void SpeakToPlayer(string[] toSay, string name) {
+		mainSpeechControl.SaySomething (playerIcon, name, toSay, true, this);
 		speechBubbleActive = true;
 	}
 
@@ -97,7 +97,7 @@ public class NPCPanelController : MonoBehaviour {
 	public void SetCharacterDialogue(string[] customDialogue) {
 		if (alreadySpeakingToPlayer) {
 			ClearSpeechBubble();
-			SpeakToPlayer(customDialogue);
+			SpeakToPlayer(customDialogue, GetComponent <NPCBaseScript> ().npcName);
 		}
 		dialogueForPlayer = customDialogue;
 	}
