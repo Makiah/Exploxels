@@ -39,13 +39,27 @@ GameObject:
   m_Component:
   - 4: {fileID: 449470}
   - 50: {fileID: 5033688}
-  - 61: {fileID: 6121998}
   - 114: {fileID: 11482978}
-  - 61: {fileID: 6121414}
   - 114: {fileID: 11421010}
   - 114: {fileID: 11463256}
   m_Layer: 9
   m_Name: MammothReferenceObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &129708
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 406606}
+  - 61: {fileID: 6147306}
+  m_Layer: 8
+  m_Name: MammothBack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -93,6 +107,22 @@ GameObject:
   - 212: {fileID: 21222158}
   m_Layer: 0
   m_Name: Tail
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &147074
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 470526}
+  - 61: {fileID: 6138598}
+  m_Layer: 9
+  m_Name: MammothColliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -241,6 +271,18 @@ Transform:
   - {fileID: 494350}
   m_Father: {fileID: 468054}
   m_RootOrder: 0
+--- !u!4 &406606
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 129708}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 468054}
+  m_RootOrder: 1
 --- !u!4 &408608
 Transform:
   m_ObjectHideFlags: 1
@@ -365,8 +407,22 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 401566}
+  - {fileID: 406606}
+  - {fileID: 470526}
   m_Father: {fileID: 449470}
   m_RootOrder: 0
+--- !u!4 &470526
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 147074}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 468054}
+  m_RootOrder: 2
 --- !u!4 &494350
 Transform:
   m_ObjectHideFlags: 1
@@ -400,7 +456,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 141370}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: .432000011, y: .0340000018, z: 0}
+  m_LocalPosition: {x: .419, y: .0340000018, z: 0}
   m_LocalScale: {x: .800000012, y: .800000012, z: 1}
   m_Children: []
   m_Father: {fileID: 401566}
@@ -421,32 +477,32 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &6121414
+--- !u!61 &6138598
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 119770}
-  m_Enabled: 1
-  m_Material: {fileID: 6200000, guid: 43753284af9654601a12a7c61978d601, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: .230000019, y: .410199642}
-  serializedVersion: 2
-  m_Size: {x: 1.6099999, y: .1817379}
---- !u!61 &6121998
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 119770}
+  m_GameObject: {fileID: 147074}
   m_Enabled: 1
   m_Material: {fileID: 6200000, guid: ad9b19ef9e7aa4a5b9b77881a6607b0b, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: .230000004, y: -.100000001}
+  m_Offset: {x: .277646393, y: -.160186291}
   serializedVersion: 2
-  m_Size: {x: 1.61000001, y: .99000001}
+  m_Size: {x: 1.41439474, y: .869627357}
+--- !u!61 &6147306
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 129708}
+  m_Enabled: 1
+  m_Material: {fileID: 6200000, guid: 43753284af9654601a12a7c61978d601, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: .205289215, y: .27000016}
+  serializedVersion: 2
+  m_Size: {x: 1.22450924, y: .199999973}
 --- !u!95 &9542884
 Animator:
   serializedVersion: 3

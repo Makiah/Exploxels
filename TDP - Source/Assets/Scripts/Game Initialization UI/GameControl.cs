@@ -88,8 +88,8 @@ public class GameControl : MonoBehaviour {
 	//Called by the ProfessionChoiceManager when the profession has been chosen.  
 	public void OnProfessionChosen(Profession chosen) {
 		GetComponent<GameData> ().chosenProfession = chosen;
-		//Load tutorial.  
-		Application.LoadLevel ("Stone Age");
+		//Load level depending on current level.  
+		Application.LoadLevel ("Ice Age");
 	}
 	
 	/**************************** TUTORIAL ****************************/
