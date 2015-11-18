@@ -1,7 +1,7 @@
 ﻿
 /*
  * Author: Makiah Bennett
- * Last edited: 11 September 2015
+ * Last edited: 18 November 2015
  * 
  * This script contains a few of the major utilities that are used multiple times throughout the scripts.  All of the methods should static.  
  * 
@@ -81,14 +81,16 @@ public class ScriptingUtilities : MonoBehaviour {
 		}
 	}
 
-	//Pauses game7
+	//Pauses game.  
 	public static void PauseGame() {
 		Time.timeScale = 0;
+		Debug.Log ("Game is paused!");
 	}
 
-	//Resumes game
+	//Resumes game.  
 	public static void ResumeGame() {
 		Time.timeScale = 1;
+		Debug.Log ("Game has been re-started!");
 	}
 
 }

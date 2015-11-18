@@ -1,7 +1,7 @@
 
 /*
  * Author: Makiah Bennett
- * Last edited: 27 September 2015
+ * Last edited: 18 November 2015
  * 
  * This script manages the entire path the game takes.  Each event is static, so it only belongs to this class.  Each OnEnable() and OnDsiable() 
  * assigns and de-assigns events to this class.  
@@ -66,12 +66,15 @@ public class LevelEventManager : MonoBehaviour {
 	public static event BaseInitialization InitializePurchasePanelManager;
 
 
+	//Pretty much the only Start() method in the whole program.  
 	void Start() {
-		StartCoroutine ("WaitOneFrame");
+		//A coroutine has to be used, so that the program does not continue before the level has been loaded.  
+		StartCoroutine ("WaitForGUILoad");
 	}
 
 	//In order to allow the level to finish loading.  
-	IEnumerator WaitOneFrame() {
+	IEnumerator WaitForGUILoad() {
+		//Thanks to Unity Answers.  
 		yield return Application.LoadLevelAdditiveAsync ("MainGameUI");
 		InitializeEverything ();
 	}
