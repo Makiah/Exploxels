@@ -53,7 +53,7 @@ public class GameControl : MonoBehaviour {
 				"Our world is undergoing rapid change.",
 				"You will travel through many different time periods, watching the world progress.", 
 				"The person that you will become can change greatly.", 
-				"You will now enter the beginnings of humanity, the Stone Age.", 
+				"You are about to enter the beginnings of humanity, the Ice Age.", 
 				"Good luck."
 			});
 		} else if (GetComponent <GameData> ().currentLevel == 1) {
@@ -72,7 +72,7 @@ public class GameControl : MonoBehaviour {
 	public void OnSpeechHasBeenCompleted() {
 		if (GetComponent <GameData> ().currentLevel == 0) {
 			//For the Stone Age
-			mainProfessionChoiceManager.CreateProfessionChoice ("Choose your Stone Age Profession.", 
+			mainProfessionChoiceManager.CreateProfessionChoice ("Choose your Ice Age Profession.", 
 			                                                    ResourceDatabase.GetRaceByParameter ("Gatherer"), "Gatherer", 
 			                                                    ResourceDatabase.GetRaceByParameter ("Hunter"), "Hunter"
 			                                                    );

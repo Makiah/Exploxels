@@ -12,7 +12,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class ScriptingUtilities {
+public class ScriptingUtilities : MonoBehaviour {
 
 	//For some reason, there is no method for this in the Transform class.  Go figure.  
 	public static Transform[] ParseChildrenFromTransform(Transform someTransform) {

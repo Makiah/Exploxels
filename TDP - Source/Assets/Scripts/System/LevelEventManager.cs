@@ -65,8 +65,18 @@ public class LevelEventManager : MonoBehaviour {
 	public static event BaseInitialization InitializePurchasePanels;
 	public static event BaseInitialization InitializePurchasePanelManager;
 
-	void Start() {
 
+	void Start() {
+		StartCoroutine ("WaitOneFrame");
+	}
+
+	//In order to allow the level to finish loading.  
+	IEnumerator WaitOneFrame() {
+		yield return Application.LoadLevelAdditiveAsync ("MainGameUI");
+		InitializeEverything ();
+	}
+
+	void InitializeEverything() {
 		//Note: This would be a lot easier if I could figure out a way to pass an event in as a method parameter, but all attempts have not worked.  
 
 		//Inventory UI Initialization
