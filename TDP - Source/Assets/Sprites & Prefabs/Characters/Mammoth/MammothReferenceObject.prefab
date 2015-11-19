@@ -39,9 +39,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 449470}
   - 50: {fileID: 5033688}
-  - 114: {fileID: 11482978}
   - 114: {fileID: 11421010}
   - 114: {fileID: 11463256}
+  - 114: {fileID: 11462258}
   m_Layer: 9
   m_Name: MammothReferenceObject
   m_TagString: Untagged
@@ -169,7 +169,7 @@ GameObject:
   - 4: {fileID: 401566}
   - 95: {fileID: 9542884}
   m_Layer: 0
-  m_Name: Boar
+  m_Name: Mammoth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -364,7 +364,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 119770}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 39.6500015, y: 7.55000019, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children:
   - {fileID: 468054}
@@ -512,7 +512,7 @@ Animator:
   m_GameObject: {fileID: 168794}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 1ae402eff00f948dbab6a728995c9ea5, type: 2}
+  m_Controller: {fileID: 9100000, guid: 1a4a48e48cc67470fb0a8fab10b88f5c, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -533,6 +533,27 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifePoints: 3
   distanceUntilHealthBarActive: 5
+--- !u!114 &11462258
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 119770}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b423b419e8a7245e6ad15e9cb9ad9313, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSpeed: 5
+  moveForce: 4
+  jumpForce: 12
+  wallJumpForce: 0
+  groundedOffset: 0
+  characterName: 
+  playerViewableThreshold: 25
+  remainDistanceFromPlayer: 8
+  ignorePlayerMovementThreshold: 7
+  maxYValueSeparation: 0
 --- !u!114 &11463256
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -545,27 +566,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   experienceToDrop: 2
---- !u!114 &11482978
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 119770}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bd6e668b7be38499fa18fd6546886df3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxSpeed: 5
-  moveForce: 4
-  jumpForce: 8
-  wallJumpForce: 0
-  groundedOffset: 0
-  characterName: 
-  playerViewableThreshold: 25
-  remainDistanceFromPlayer: 8
-  ignorePlayerMovementThreshold: 7
-  maxYValueSeparation: 0
 --- !u!212 &21205296
 SpriteRenderer:
   m_ObjectHideFlags: 1

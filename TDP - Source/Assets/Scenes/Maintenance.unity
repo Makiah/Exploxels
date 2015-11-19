@@ -85,7 +85,7 @@ NavMeshSettings:
     cellSize: .166666672
     manualCellSize: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &1564135909
+--- !u!1001 &1639732614
 Prefab:
   m_ObjectHideFlags: 0
   serializedVersion: 2

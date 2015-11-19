@@ -18,7 +18,9 @@ public class LevelEventManager : MonoBehaviour {
 	//Pretty much contains every event that does not require a parameter or a return type.  
 	public delegate void BaseInitialization();
 
+	//This delegate will be used for returning the final array of SlotScripts.  
 	public delegate SlotScript[,] InventorySlotInitialization ();
+
 	public static event InventorySlotInitialization CreateInventorySlots;
 	public static event InventorySlotInitialization CreateHotbarSlots;
 

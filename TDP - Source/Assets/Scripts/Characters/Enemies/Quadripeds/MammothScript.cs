@@ -11,10 +11,10 @@
 using UnityEngine;
 using System.Collections;
 
-public class BoarScript : EnemyBaseActionClass {
+public class MammothScript : EnemyBaseActionClass {
 
 	protected override void SetReferences() {
-		characterSpriteObject = transform.FindChild("FlippingItem").FindChild ("Boar");
+		characterSpriteObject = transform.FindChild("FlippingItem").FindChild ("Mammoth");
 		base.SetReferences ();
 	}
 
