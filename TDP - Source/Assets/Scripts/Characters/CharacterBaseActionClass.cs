@@ -62,7 +62,8 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 		groundCheck = transform.FindChild ("GroundCheck");
 
 		maxSpeedInitial = maxSpeed;
-		
+
+		//This changes based on the override methods.  
 		StartCoroutine ("CheckCharacterPhysics");
 	}
 	
@@ -108,7 +109,8 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 		}
 		
 	}
-	
+
+	//Changes the scale of FlippingItem
 	protected void Flip() {
 		facingRight = !facingRight;
 		Vector3 theScale = transform.FindChild("FlippingItem").localScale;
@@ -123,7 +125,9 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 	
 	
 	/************************************************* ATTACKING *********************************************************/
-	
+
+	//This dictionary contains the possible weapon moves for the player.  The first entry contains the required action to trigger the action, and the second
+	//includes a string of the method.  
 	protected Dictionary <string, string> possibleWeaponMoves;
 	
 	protected ItemBase itemInUseByCharacter;

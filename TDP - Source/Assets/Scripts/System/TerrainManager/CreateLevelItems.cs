@@ -6,7 +6,6 @@
  * CreateLevelItems manages the enemies of the game, and instantiates them at pre-set points in each variation.  
  * This is done through the EnemyReferenceClass probability indicators, which are defined in this class.  
  * 
- * 
  */
 
 

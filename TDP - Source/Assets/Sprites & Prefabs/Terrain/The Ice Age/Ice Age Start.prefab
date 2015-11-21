@@ -41,7 +41,7 @@ EdgeCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 6.36999989, y: 0}
   m_Points:
-  - {x: 16.1384468, y: 21.9095364}
+  - {x: 16.0323067, y: 38.3821335}
   - {x: 16.1412239, y: 6.49037552}
   - {x: 3.20906162, y: 6.44055748}
   - {x: 3.22165322, y: 5.1798439}
@@ -49,7 +49,8 @@ EdgeCollider2D:
   - {x: 1.91752183, y: 2.58555865}
   - {x: .648049355, y: 2.57379603}
   - {x: .642499566, y: .0114483833}
-  - {x: 16.125, y: 0}
+  - {x: 16.0502968, y: .016705513}
+  - {x: 16.0209007, y: -38.3886604}
 --- !u!212 &21270646
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -74,7 +75,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 459935887
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: b39b94ab7459f447aaf0e369a1edba8d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fa1eb4f979f6f448fb52013e803d5a82, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
@@ -82,7 +83,12 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: fa1eb4f979f6f448fb52013e803d5a82,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 107748}

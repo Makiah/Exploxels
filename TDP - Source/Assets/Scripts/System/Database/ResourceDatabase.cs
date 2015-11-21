@@ -57,7 +57,9 @@ public class ResourceDatabase : MonoBehaviour {
 		gameProfessions.Add (new Profession("Professions/Gatherer/", "Gatherer", 0, gathererInitialItems));
 
 		//Hunter
-		UISlotContentReference[] hunterInitialItems = new UISlotContentReference[]{};
+		UISlotContentReference[] hunterInitialItems = new UISlotContentReference[]{
+			new UISlotContentReference(GetItemByParameter("Wooden Sword"), 1)
+		};
 		gameProfessions.Add (new Profession ("Professions/Hunter/", "Hunter", 1, hunterInitialItems));
 
 		/******************************************* COMBINATIONS *******************************************/
