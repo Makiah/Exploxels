@@ -166,5 +166,17 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 		currentlyInAttackAnimation = false;
 	}
 
+	/**************** CHARACTER UTILITIES ***********************/
+
+	//Used for NPCs.  
+	protected IEnumerator MaintainAConstantXVelocity(int velocity) {
+		while (true) {
+			if (rb2d.velocity.x != velocity)
+				rb2d.velocity = new Vector2(velocity, rb2d.velocity.y);
+
+			yield return null;
+		}
+	}
+
 
 }

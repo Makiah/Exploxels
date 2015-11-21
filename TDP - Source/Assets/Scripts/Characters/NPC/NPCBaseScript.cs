@@ -31,10 +31,10 @@ public abstract class NPCBaseScript : CharacterBaseActionClass {
 	protected virtual IEnumerator WalkAround() {
 		while (true) {
 			anim.SetFloat("Speed", 1);
-			rb2d.velocity = new Vector2(GetFacingDirection() * moveForce, 0);
+			StartCoroutine ("MaintainAConstantXVelocity", GetFacingDirection() * moveForce);
 			yield return new WaitForSeconds(3f);
+			StopCoroutine("MaintainAConstantXVelocity");
 			anim.SetFloat("Speed", 0);
-			rb2d.velocity = Vector2.zero;
 			yield return new WaitForSeconds(3f);
 			if (Random.Range(0, 2) == 1)
 				Flip ();
@@ -50,6 +50,7 @@ public abstract class NPCBaseScript : CharacterBaseActionClass {
 	public void StopWalkingAround() {
 		if (walkingAround) {
 			StopCoroutine ("WalkAround");
+			StopCoroutine("MaintainAConstantXVelocity");
 			rb2d.velocity = Vector2.zero;
 			anim.SetFloat("Speed", 0);
 			walkingAround = false;

@@ -150,28 +150,18 @@ MonoBehaviour:
   pointToInstantiatePlayerAt: {x: 10, y: 4.17999983, z: 0}
   probabilityToInstantiateNullElement: 0
   initialGameElements:
-  - elementReference: {fileID: 185688, guid: 5924714cab1d44ef2bd7e037cffdf22f, type: 2}
-    probabilityOfInstantiation: 7
+  - elementReference: {fileID: 162146, guid: 239c88de2e417429f81f5982ff17c935, type: 2}
+    probabilityOfInstantiation: 0
+    mustBeInstantiated: 1
+  - elementReference: {fileID: 197286, guid: 631222a38be4a43e8b4491de01ba9841, type: 2}
+    probabilityOfInstantiation: 0
+    mustBeInstantiated: 1
   - elementReference: {fileID: 178818, guid: b93cc74f47786d941bc438f0f74f7171, type: 2}
-    probabilityOfInstantiation: 1
-  - elementReference: {fileID: 156718, guid: c2ea16a9671dea64180a3eadd53b416a, type: 2}
-    probabilityOfInstantiation: 8
-  - elementReference: {fileID: 172888, guid: f9d3c8ae910c048ba8ec6f3845b566c9, type: 2}
-    probabilityOfInstantiation: 9
-  - elementReference: {fileID: 185688, guid: 9ca9a3a6e77d64c0b8e1bc8430975bbf, type: 2}
-    probabilityOfInstantiation: 10
-  - elementReference: {fileID: 185688, guid: 1eeb07594afe64accb15eb6a6a45fd4c, type: 2}
-    probabilityOfInstantiation: 11
-  - elementReference: {fileID: 185688, guid: 7d5a2cdd34e0648e294bf73b7915d771, type: 2}
-    probabilityOfInstantiation: 12
-  - elementReference: {fileID: 185688, guid: 40ee4a814545440af98d87bc379b0e19, type: 2}
-    probabilityOfInstantiation: 9
-  - elementReference: {fileID: 146722, guid: 569939a30e8ba4a44a4bceb3c1b96da0, type: 2}
-    probabilityOfInstantiation: 13
-  - elementReference: {fileID: 185688, guid: bd12a06d595864b7dbde19f711e40e23, type: 2}
-    probabilityOfInstantiation: 14
-  - elementReference: {fileID: 106888, guid: 857c93e1e681d4efe89ad134eadb7642, type: 2}
-    probabilityOfInstantiation: 8
+    probabilityOfInstantiation: 2
+    mustBeInstantiated: 0
+  - elementReference: {fileID: 119770, guid: afa5bd1c3a9b141b1a12127ac2dd692f, type: 2}
+    probabilityOfInstantiation: 0
+    mustBeInstantiated: 0
 --- !u!114 &642813478
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -45,8 +45,8 @@ public class GameControl : MonoBehaviour {
 		mainProfessionChoiceManager = GameObject.Find ("UI").transform.FindChild ("ProfessionChoice").GetComponent <ProfessionChoiceManager> ();
 		mainProfessionSpeechManager = GameObject.Find ("UI").transform.FindChild ("Speech Bubble").GetComponent <ProfessionSpeechManager> ();
 
-		//Check the current level
-		if (GetComponent <GameData> ().currentLevel == 0) {
+		switch (GetComponent <GameData> ().currentLevel) {
+		case 0:
 			//Stone Age Speech
 			mainProfessionSpeechManager.SetSpeechDialogue (new string[] {
 				"Welcome, young wanderer, to the land of Exploxels!", 
@@ -56,8 +56,10 @@ public class GameControl : MonoBehaviour {
 				"You are about to enter the beginnings of humanity, the Ice Age.", 
 				"Good luck."
 			});
-		} else if (GetComponent <GameData> ().currentLevel == 1) {
-			//Iron Age Speech
+			break;
+		default: 
+			Debug.LogError("No profession choice exists for this level!");
+			//Just use the default ice age thing.  
 			mainProfessionSpeechManager.SetSpeechDialogue (new string[] {
 				"Nice job dealing with those cavemen!", 
 				"I have an important announcement for you.", 
@@ -65,23 +67,28 @@ public class GameControl : MonoBehaviour {
 				"We call it Bronze.", 
 				"Use the new tools created by this metal to your advantage."
 			});
+			break;
 		}
 	}
 
 	//When the player has finished speaking.  
 	public void OnSpeechHasBeenCompleted() {
-		if (GetComponent <GameData> ().currentLevel == 0) {
+		switch (GetComponent <GameData> ().currentLevel) {
+		case 0:
 			//For the Stone Age
 			mainProfessionChoiceManager.CreateProfessionChoice ("Choose your Ice Age Profession.", 
 			                                                    ResourceDatabase.GetRaceByParameter ("Gatherer"), "Gatherer", 
 			                                                    ResourceDatabase.GetRaceByParameter ("Hunter"), "Hunter"
 			                                                    );
-		} else if (GetComponent <GameData> ().currentLevel == 1) {
+			break;
+		default:
+			Debug.LogError("No level is specified!!!!");
 			//For the Iron Age
 			mainProfessionChoiceManager.CreateProfessionChoice ("Choose your Iron Age Profession.", 
 			                                                    ResourceDatabase.GetRaceByParameter ("Gatherer"), "Gatherer", 
 			                                                    ResourceDatabase.GetRaceByParameter ("Hunter"), "Hunter"
 			                                                    );
+			break;
 		}
 	}
 	
@@ -89,12 +96,20 @@ public class GameControl : MonoBehaviour {
 	public void OnProfessionChosen(Profession chosen) {
 		GetComponent<GameData> ().chosenProfession = chosen;
 		//Load level depending on current level.  
-		Application.LoadLevel ("Ice Age");
+		switch (GetComponent <GameData> ().currentLevel) {
+		case 0:
+			Application.LoadLevel ("Ice Age");
+			break;
+		default:
+			Debug.LogError("No level is specified!!!!");
+			Application.LoadLevel("Ice Age");
+			break;
+		}
 	}
 	
 	/**************************** TUTORIAL ****************************/
 	
-	public void OnTutorialComplete() {
+	public void OnCurrentLevelCompleted() {
 		Debug.Log ("Gathering player data...");
 
 		//Get player money.  
@@ -106,9 +121,9 @@ public class GameControl : MonoBehaviour {
 		Debug.Log ("Player has " + GetComponent <GameData> ().currentPlayerItems.Length + " items");
 
 		Debug.Log ("Tutorial has been completed!");
-		//Load Profession Chooser Level.  
-		GetComponent <GameData> ().currentLevel = 1;
-		//Load the Profession Manager.
+		//Increment the current level.  
+		GetComponent <GameData> ().currentLevel += 1;
+		//Load the Profession Chooser for the next level
 		Application.LoadLevel ("Profession Chooser");
 	}
 }

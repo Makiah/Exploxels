@@ -14,9 +14,10 @@ using UnityEngine;
 using System.Collections;
 
 [System.Serializable]
-public class EnemyReferenceClass {
+public class InstantiatableObjectReference {
 
 	public GameObject elementReference;
 	public int probabilityOfInstantiation;
+	public bool mustBeInstantiated;
 
 }

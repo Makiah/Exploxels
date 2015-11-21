@@ -40,6 +40,7 @@ public class SwordScript : ItemBase {
 	
 	void AttackEnemyInFocus () {
 
+		//Pretty much all of this is calculation for the eventual linecast.  
 		Vector3 enemyWithinAreaVectorBound = new Vector3 (enemyWithinAreaBounds, 0, 0);
 		Vector3 distToEnemyVectorLength = new Vector3 (distToEnemyLength, 0, 0);
 		
@@ -66,6 +67,7 @@ public class SwordScript : ItemBase {
 		}
 	}
 
+	//Look for the GameObject that has a health panel manager.  
 	GameObject GameObjectContainsCharacterHealthPanelManager(RaycastHit2D[] linecastCollisions) {
 		if (linecastCollisions.Length != 0) {
 			for (int i = 0; i < linecastCollisions.Length; i++) {
