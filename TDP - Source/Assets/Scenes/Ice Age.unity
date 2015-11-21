@@ -180,9 +180,15 @@ MonoBehaviour:
     - variationReference: {fileID: 180304, guid: 473d10f8de35a4d89b75ac1e3dd57cb6,
         type: 2}
       canBeFlipped: 0
+    - variationReference: {fileID: 153070, guid: 0b29437111e7f4220854dcaa47cd933d,
+        type: 2}
+      canBeFlipped: 1
+    - variationReference: {fileID: 192818, guid: 65064c51e02ba4df1b7f09d40b03fecc,
+        type: 2}
+      canBeFlipped: 1
     l2Variations: []
     l3Variations: []
-  levelLength: 1
+  levelLength: 7
   useCustomTerrain: 0
   terrainToUse: {fileID: 0}
 --- !u!4 &642813479
