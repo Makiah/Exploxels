@@ -3,6 +3,7 @@ using System.Collections;
 
 public abstract class NPCBaseScript : CharacterBaseActionClass {
 
+	//Initialization.  
 	protected override void OnEnable() {
 		LevelEventManager.InitializeNPCs += SetReferences;
 	}
@@ -11,6 +12,7 @@ public abstract class NPCBaseScript : CharacterBaseActionClass {
 		LevelEventManager.InitializeNPCs -= SetReferences;
 	}
 
+	//Required for the NPCPanelController.  
 	public string npcName = "NPC";
 
 	bool walkingAround = true;
@@ -28,6 +30,7 @@ public abstract class NPCBaseScript : CharacterBaseActionClass {
 	public abstract void NPCActionBeforeSpeaking();
 	public abstract void NPCActionAfterSpeaking();
 
+	//Walks around fairly randomly, keeping the player at a constant velocity.  
 	protected virtual IEnumerator WalkAround() {
 		while (true) {
 			anim.SetFloat("Speed", 1);
