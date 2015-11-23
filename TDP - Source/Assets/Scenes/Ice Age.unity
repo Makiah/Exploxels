@@ -153,23 +153,15 @@ MonoBehaviour:
   - elementReference: {fileID: 162146, guid: 239c88de2e417429f81f5982ff17c935, type: 2}
     probabilityOfInstantiation: 0
     mustBeInstantiated: 1
-    instantiateAtRandomPoint: 0
-    pointToInstantiate: 0
   - elementReference: {fileID: 197286, guid: 631222a38be4a43e8b4491de01ba9841, type: 2}
     probabilityOfInstantiation: 0
     mustBeInstantiated: 1
-    instantiateAtRandomPoint: 0
-    pointToInstantiate: 0
   - elementReference: {fileID: 178818, guid: b93cc74f47786d941bc438f0f74f7171, type: 2}
     probabilityOfInstantiation: 5
     mustBeInstantiated: 0
-    instantiateAtRandomPoint: 0
-    pointToInstantiate: 0
   - elementReference: {fileID: 119770, guid: afa5bd1c3a9b141b1a12127ac2dd692f, type: 2}
     probabilityOfInstantiation: 20
     mustBeInstantiated: 0
-    instantiateAtRandomPoint: 0
-    pointToInstantiate: 0
 --- !u!114 &642813478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,6 +176,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transferSegments:
     startSegment: {fileID: 107748, guid: f0a58adcfe13e4a81b42c4c19721f7ec, type: 2}
+    introductoryVariations: []
     l1Variations:
     - variationReference: {fileID: 180304, guid: 473d10f8de35a4d89b75ac1e3dd57cb6,
         type: 2}

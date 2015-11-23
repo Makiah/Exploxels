@@ -21,6 +21,7 @@ public class VariationReference {
 [System.Serializable]
 public class TransferSegments {
 	public GameObject startSegment;
+	public VariationReference[] introductoryVariations;
 	public VariationReference[] l1Variations;
 	public VariationReference[] l2Variations;
 	public VariationReference[] l3Variations;
@@ -60,18 +61,31 @@ public class LevelLayout : MonoBehaviour {
 
 	//Takes the transfer segments defined earlier and instantiates them based on sprite size.  
 	TerrainReferenceClass InitializeTerrain() {
-
+		//This is recorded and changed as more terrain is added.  
 		float currentXPosition = 0;
-
+		//This will be returned once filled in.  
 		TerrainReferenceClass createdMaze = new TerrainReferenceClass(levelLength);
-		
+		//This holds the main maze part.  
 		Transform parentMaze = new GameObject ("Maze").transform;
 
+		//Instantiate the starting point.  
 		GameObject instantiatedStartPoint = LayTerrainAsset(transferSegments.startSegment, Vector3.zero, Quaternion.identity, parentMaze);
 		currentXPosition += GetSpriteSizeFromGameObject(instantiatedStartPoint).x / 2f;
 
-		//For all levelLength values
-		for (int i = 0; i < levelLength; i ++) {
+		//Apparently this can be null (weird error)
+		if (transferSegments.introductoryVariations.Length > 0) {
+			//Instantiate the introductory variations in the order of the array.  
+			for (int i = 0; i < transferSegments.introductoryVariations.Length; i++) {
+				//Instantiate the next introductory variation.   
+				float halfWidth = GetSpriteSizeFromGameObject (transferSegments.introductoryVariations [i].variationReference.gameObject).x / 2f;
+				currentXPosition += halfWidth;
+				LayTerrainAsset (transferSegments.introductoryVariations [i].variationReference.gameObject, new Vector3 (currentXPosition, 0, 0), Quaternion.identity, parentMaze);
+				currentXPosition += halfWidth;
+			}
+		}
+
+		//For all levelLength values.  Start at the length of introductory variations and move on from there.  
+		for (int i = transferSegments.introductoryVariations.Length; i < levelLength; i ++) {
 			//Half-Width and currentX position are used for all variations.  
 			VariationReference chosenVariationLayer1 = ScriptingUtilities.GetRandomObjectFromArray(transferSegments.l1Variations);
 			GameObject chosenObjectLayer1 = chosenVariationLayer1.variationReference;
