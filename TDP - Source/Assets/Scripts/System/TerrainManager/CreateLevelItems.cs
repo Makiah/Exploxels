@@ -60,19 +60,23 @@ public class CreateLevelItems : MonoBehaviour {
 			//Instantiate all items
 			for (int i = 0; i < mazeSegments.layer1.Length; i++) {
 				//Preventing future errors.  
-				if (mazeSegments.layer1[i].FindChild("Points") != null) {
-					Transform enemyItemsTransform = mazeSegments.layer1[i].FindChild ("Points").FindChild ("EnemyItems");
-					//Check to make sure enemy item points exist.  
-					if (enemyItemsTransform != null) {
-						//Find the points
-						Transform[] enemyItemPoints = ScriptingUtilities.ParseChildrenFromTransform (enemyItemsTransform);
-						for (int j = 0; j < enemyItemPoints.Length; j++) {
-							//Add all transforms to the master list.  
-							allEnemyItemPoints.Add(enemyItemPoints[j]);
+				if (mazeSegments.layer1[i] != null) {
+					if (mazeSegments.layer1[i].FindChild("Points") != null) {
+						Transform enemyItemsTransform = mazeSegments.layer1[i].FindChild ("Points").FindChild ("EnemyItems");
+						//Check to make sure enemy item points exist.  
+						if (enemyItemsTransform != null) {
+							//Find the points
+							Transform[] enemyItemPoints = ScriptingUtilities.ParseChildrenFromTransform (enemyItemsTransform);
+							for (int j = 0; j < enemyItemPoints.Length; j++) {
+								//Add all transforms to the master list.  
+								allEnemyItemPoints.Add(enemyItemPoints[j]);
+							}
 						}
+					} else {
+						Debug.Log("Did not find points upon which to instantiate enemies on increment " + i + " with variation name " + mazeSegments.layer1[i].gameObject.name);
 					}
 				} else {
-					Debug.Log("Did not find points upon which to instantiate enemies on increment " + i + " with variation name " + mazeSegments.layer1[i].gameObject.name);
+					Debug.LogError("mazeSegments.layer1[" + i + "] is null!!!!");
 				}
 			}
 
@@ -94,7 +98,6 @@ public class CreateLevelItems : MonoBehaviour {
 				}
 			
 				//All required items.  
-				Debug.Log ("There are " + requiredItems.Length + " required items");
 				for (int j = 0; j < requiredItems.Length; j++) {
 				
 					int chosenLoc = Random.Range (0, emptyPoints.Count);

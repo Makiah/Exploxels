@@ -64,7 +64,7 @@ public class LevelLayout : MonoBehaviour {
 		//This is recorded and changed as more terrain is added.  
 		float currentXPosition = 0;
 		//This will be returned once filled in.  
-		TerrainReferenceClass createdMaze = new TerrainReferenceClass(levelLength);
+		TerrainReferenceClass createdMaze = new TerrainReferenceClass(levelLength + transferSegments.introductoryVariations.Length);
 		//This holds the main maze part.  
 		Transform parentMaze = new GameObject ("Maze").transform;
 
@@ -79,13 +79,14 @@ public class LevelLayout : MonoBehaviour {
 				//Instantiate the next introductory variation.   
 				float halfWidth = GetSpriteSizeFromGameObject (transferSegments.introductoryVariations [i].variationReference.gameObject).x / 2f;
 				currentXPosition += halfWidth;
-				LayTerrainAsset (transferSegments.introductoryVariations [i].variationReference.gameObject, new Vector3 (currentXPosition, 0, 0), Quaternion.identity, parentMaze);
+				GameObject createdAsset = LayTerrainAsset (transferSegments.introductoryVariations [i].variationReference.gameObject, new Vector3 (currentXPosition, 0, 0), Quaternion.identity, parentMaze);
+				createdMaze.layer1[i] = createdAsset.transform;
 				currentXPosition += halfWidth;
 			}
 		}
 
 		//For all levelLength values.  Start at the length of introductory variations and move on from there.  
-		for (int i = transferSegments.introductoryVariations.Length; i < levelLength; i ++) {
+		for (int i = transferSegments.introductoryVariations.Length - 1; i < levelLength; i ++) {
 			//Half-Width and currentX position are used for all variations.  
 			VariationReference chosenVariationLayer1 = ScriptingUtilities.GetRandomObjectFromArray(transferSegments.l1Variations);
 			GameObject chosenObjectLayer1 = chosenVariationLayer1.variationReference;
@@ -96,7 +97,7 @@ public class LevelLayout : MonoBehaviour {
 			GameObject instantiatedObjectLayer1 = LayTerrainAsset(chosenObjectLayer1, pointToInstantiateLayer1Object, Quaternion.identity, parentMaze);
 			if (Random.Range(0, 2) == 1 && chosenVariationLayer1.canBeFlipped)
 				instantiatedObjectLayer1.transform.localScale = new Vector3(-1, 1, 1);
-			createdMaze.layer1[i] = instantiatedObjectLayer1.transform;
+			createdMaze.layer1[i + transferSegments.introductoryVariations.Length] = instantiatedObjectLayer1.transform;
 			//Layer 2
 			//Make sure that layer 2 objects do exist.  
 			if (transferSegments.l2Variations.Length != 0) {
