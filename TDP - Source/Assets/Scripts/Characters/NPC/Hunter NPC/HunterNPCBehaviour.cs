@@ -11,7 +11,6 @@ public class HunterNPCBehaviour : NPCBaseScript {
 	protected override void SetReferences() {
 		base.SetReferences ();
 		npcName = "Hunter NPC";
-		Debug.Log ("Set name to " + npcName);
 		string[] dialogue = new string[] {
 			"Eh?  Why hello!", 
 			"Hey, can ya keep a secret?", 

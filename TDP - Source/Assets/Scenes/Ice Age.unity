@@ -176,11 +176,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transferSegments:
     startSegment: {fileID: 107748, guid: f0a58adcfe13e4a81b42c4c19721f7ec, type: 2}
-    introductoryVariations: []
-    l1Variations:
+    introductoryVariations:
     - variationReference: {fileID: 180304, guid: 473d10f8de35a4d89b75ac1e3dd57cb6,
         type: 2}
       canBeFlipped: 0
+    l1Variations:
     - variationReference: {fileID: 153070, guid: 0b29437111e7f4220854dcaa47cd933d,
         type: 2}
       canBeFlipped: 1

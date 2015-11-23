@@ -26,7 +26,6 @@ public class PlayerAction : CharacterBaseActionClass {
 		characterName = "Player";
 		
 		groundCheck2 = transform.FindChild ("GroundCheck2");
-		Debug.Log (groundCheck2.gameObject.name);
 
 		base.SetReferences ();
 
