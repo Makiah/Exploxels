@@ -54,7 +54,6 @@ public class HotbarManager : MonoBehaviour {
 		
 		previouslyActiveSlot = -1;
 		currentlyActiveSlot = 0;
-		UpdateSelectedItem ();
 
 		StartCoroutine ("CheckForActiveItemKey");
 	}

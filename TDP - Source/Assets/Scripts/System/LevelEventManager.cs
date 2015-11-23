@@ -133,12 +133,16 @@ public class LevelEventManager : MonoBehaviour {
 		if (CreatePlayer != null) CreatePlayer(); else Debug.LogError("CreatePlayer was null!"); //Used for CreateLevelItems (Instantiating player)
 		//Has to be done after the player is instantiated.  
 		CurrentLevelVariableManagement.SetLevelReferences ();
-		if (InitializeLightingSystem != null) InitializeLightingSystem (); else Debug.LogError("InitializeLightingSystem was null!"); //Used for LightingManager.  
-		if (InitializeCostume != null) InitializeCostume(); else Debug.LogError("InitializeCostume was null!"); //Used for PlayerCostumeManager
+
 		if (InitializeHotbarManager != null) InitializeHotbarManager (); else Debug.LogError("InitializeHotbarItems was null!"); //Used for initializing the HotbarManager.  
-		if (InitializePlayer != null) InitializePlayer (); else Debug.LogError("InitializePlayer was null!"); //Used for initializing the HumanoidBaseReferenceClass.  
 
 		ModifiesSlotContent.InitializeSystem (totalNumberOfInventorySlots); //Used for ModifiesSlotContent
+
+		if (InitializeCostume != null) InitializeCostume(); else Debug.LogError("InitializeCostume was null!"); //Used for PlayerCostumeManager
+		if (InitializePlayer != null) InitializePlayer (); else Debug.LogError("InitializePlayer was null!"); //Used for initializing the HumanoidBaseReferenceClass.  
+
+		if (InitializeLightingSystem != null) InitializeLightingSystem (); else Debug.LogError("InitializeLightingSystem was null!"); //Used for LightingManager.  
+
 		if (InitializeCameraFunctions != null) InitializeCameraFunctions (); else Debug.LogError("InitializeCameraFunctions was null!"); // Used for camera controller.  
 		if (InitializeBackgroundScroller != null) InitializeBackgroundScroller (); else Debug.LogError("InitializeBackgroundScroller was null!"); //Initialize the BackgroundScroller class.  
 

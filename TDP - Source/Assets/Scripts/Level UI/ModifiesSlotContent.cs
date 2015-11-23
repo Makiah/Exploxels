@@ -59,7 +59,13 @@ public class ModifiesSlotContent : MonoBehaviour {
 				}
 			}
 		} else {
-			Debug.LogError("Could not modify slot content, not initialized or attempted item to assign is null.  ");
+			if (initialized == false && item == null) {
+				Debug.LogError("Not initialized and item is null");
+			} else if (initialized == false) {
+				Debug.LogError("Not initialized");
+			} else {
+				Debug.LogError("Item is null");
+			}
 		}
 
 		return successfullyAssigned;
