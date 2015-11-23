@@ -15,7 +15,6 @@ using System.Collections;
 
 [System.Serializable]
 public class InstantiatableObjectReference {
-
 	public GameObject elementReference;
 	public int probabilityOfInstantiation;
 	public bool mustBeInstantiated;
