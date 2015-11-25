@@ -30,8 +30,9 @@ public class ResourceDatabase : MonoBehaviour {
 		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.GameTool, "Wooden Pickaxe", "A weak axe to gather ore and rock.", 2, "Weapons/Wooden/WoodenPickaxe/WoodenPickaxe"));
 		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.GameTool, "Wooden Bow", "A weak bow, useful for long range attacks.", 3, "Weapons/Wooden/WoodenBow/WoodenBow"));
 		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.GameTool, "Diamond Sword", "A strong monster-chopping sword.", 4, "Weapons/Diamond/DiamondSword/DiamondSword"));
+		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.GameTool, "Spear", "A tough caveman implement", 5, "Weapons/Other/Spear/Spear"));
 
-		//Crafting materialsi
+		//Crafting materials
 		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.CraftingMaterial, "Wood", "A vital material for any player", 0, "Items/Wood/Wood", "Items/Wood/UIWood"));
 		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.CraftingMaterial, "Wood Plank", "A vital wood refinement", 1, "Items/Wood/WoodPlank", "Items/Wood/UIWoodPlank"));
 
@@ -58,7 +59,7 @@ public class ResourceDatabase : MonoBehaviour {
 
 		//Hunter
 		UISlotContentReference[] hunterInitialItems = new UISlotContentReference[]{
-			new UISlotContentReference(GetItemByParameter("Wooden Sword"), 1)
+			new UISlotContentReference(GetItemByParameter("Spear"), 1)
 		};
 		gameProfessions.Add (new Profession ("Professions/Hunter/", "Hunter", 1, hunterInitialItems));
 
