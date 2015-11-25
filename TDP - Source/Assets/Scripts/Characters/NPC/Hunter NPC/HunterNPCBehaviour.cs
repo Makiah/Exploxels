@@ -28,14 +28,14 @@ public class HunterNPCBehaviour : NPCBaseScript {
 	public override void NPCActionBeforeSpeaking() {
 		//Check to make sure that the player has not already created fire.  
 		if (playerHasCreatedFire == false) {
-			if (false) { //Check whether the player has created fire;
-				playerHasCreatedFire = true;
-				string[] dialogue = new string[]{
-					"Nice job!", 
-					"I wish you luck on your travels."
-				};
-				GetComponent <NPCPanelController> ().SetCharacterDialogue(dialogue);
-			}
+//			if (false) { //Check whether the player has created fire;
+//				playerHasCreatedFire = true;
+//				string[] dialogue = new string[]{
+//					"Nice job!", 
+//					"I wish you luck on your travels."
+//				};
+//				GetComponent <NPCPanelController> ().SetCharacterDialogue(dialogue);
+//			}
 		}
 
 		//Check whether the NPC has talked to the player

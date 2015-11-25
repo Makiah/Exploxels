@@ -14,9 +14,9 @@ public class DistrictDisplayer : MonoBehaviour {
 	
 	[System.Serializable]
 	class LevelDisplay {
-		public string text;
-		public bool useImageInsteadOfText;
-		public Sprite image;
+		public string text = "";
+		public bool useImageInsteadOfText = false;
+		public Sprite image = null;
 	}
 
 	[SerializeField] LevelDisplay[] levels;
