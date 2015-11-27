@@ -17,7 +17,7 @@ public class HotbarSlotScript : SlotScript {
 
 	GameObject selectionIcon;
 
-	public HotbarManager masterHotbarManager;
+	[HideInInspector] public HotbarManager masterHotbarManager;
 
 	public override void ReferenceChildren() {
 		base.ReferenceChildren ();

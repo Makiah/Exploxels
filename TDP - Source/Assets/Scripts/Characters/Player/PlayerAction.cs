@@ -93,7 +93,7 @@ public class PlayerAction : CharacterBaseActionClass {
 
 	/************************************************* ATTACKING *********************************************************/
 
-	string[] knownAttackKeys = {"Stab", "OverheadSlice", "ShootBow"};
+	string[] knownAttackKeys = {"Stab", "OverheadSlice", "ShootBow", "CreatePhysicalItem"};
 	
 	//The Update() method that will check whether the dictionary requirements for some attack have been met.  The code that sets the dictionary 
 	//is in the costume manager class.  

@@ -150,4 +150,13 @@ public class ObjectiveManager : MonoBehaviour {
 
 	}
 
+	public void OnFireBuilt() {
+		switch (CurrentLevelVariableManagement.GetMainGameData ().currentLevel) {
+		case 0: 
+			if (objectives[4].objectiveToggle.isOn == false) 
+				OnObjectiveHasBeenCompleted(5);
+			break;
+		}
+	}
+
 }

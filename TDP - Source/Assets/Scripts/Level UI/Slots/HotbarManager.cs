@@ -112,4 +112,17 @@ public class HotbarManager : MonoBehaviour {
 		}
 	}
 
+	//For instance: when an item is used.  
+	public void ModifyStackOfSelectedItem(int stackToRemove) {
+		//Error checking.  
+		if (hotbarSlots [currentlyActiveSlot].GetCurrentlyAssigned () != null) {
+			//Remove item
+			hotbarSlots [currentlyActiveSlot].ModifyCurrentItemStack (-stackToRemove);
+			UpdateSelectedItem();
+			
+		} else {
+			Debug.LogError("Cannot change stack of null!!!");
+		}
+	}
+
 }

@@ -25,7 +25,8 @@ public class ResourceReference {
 	public Sprite itemIcon;
 	public GameObject inGamePrefab;
 	public GameObject holdingPrefab;
-	
+
+	//Used for organizational convenience.  
 	public enum ItemType {
 		GameTool, 
 		CraftingMaterial, 
@@ -33,7 +34,8 @@ public class ResourceReference {
 		Food, 
 		Other
 	}
-	
+
+	//Constructor that loads all required components.  
 	public ResourceReference (ItemType ctorItemType, string ctorItemScreenName, string ctorItemDescription, int ctorLocalGroupID, string localPath) {
 		itemType = ctorItemType;
 		itemScreenName = ctorItemScreenName;
@@ -41,13 +43,10 @@ public class ResourceReference {
 		localGroupID = ctorLocalGroupID;
 		inGamePrefab = Resources.Load ("Prefabs/" + localPath) as GameObject;
 		holdingPrefab = inGamePrefab;
-		if (! (ctorItemType == ItemType.Other)) {
-			itemIcon = inGamePrefab.GetComponent <SpriteRenderer> ().sprite;
-		} else {
-			itemIcon = null;
-		}
+		itemIcon = inGamePrefab.GetComponent <SpriteRenderer> ().sprite;
 	}
 
+	//This constructor is an overload that has the ability to have both a physical and a ui prefab.  
 	public ResourceReference (ItemType ctorItemType, string ctorItemScreenName, string ctorItemDescription, int ctorLocalGroupID, string localPath, string customUIPrefabPath) {
 		itemType = ctorItemType;
 		itemScreenName = ctorItemScreenName;
@@ -56,6 +55,17 @@ public class ResourceReference {
 		inGamePrefab = Resources.Load ("Prefabs/" + localPath) as GameObject;
 		holdingPrefab = Resources.Load("Prefabs/" + customUIPrefabPath) as GameObject;
 		itemIcon = holdingPrefab.GetComponent <SpriteRenderer> ().sprite;
+	}
+
+	public ResourceReference (ItemType ctorItemType, string ctorItemScreenName, string ctorItemDescription, int ctorLocalGroupID, string localPath, bool hasNoIcon) {
+		itemType = ctorItemType;
+		itemScreenName = ctorItemScreenName;
+		itemDescription = ctorItemDescription;
+		localGroupID = ctorLocalGroupID;
+		inGamePrefab = Resources.Load ("Prefabs/" + localPath) as GameObject;
+		holdingPrefab = inGamePrefab;
+		if (hasNoIcon)
+			itemIcon = inGamePrefab.GetComponent <SpriteRenderer> ().sprite;
 	}
 
 }

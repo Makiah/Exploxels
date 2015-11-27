@@ -133,7 +133,8 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 	protected ItemBase itemInUseByCharacter;
 	
 	protected bool currentlyInAttackAnimation = false;
-	
+
+	//This delegate is called after the animation completes.  
 	public delegate void ActionAfterCompletedAnimation ();
 	public event ActionAfterCompletedAnimation ActionsAfterAnimation;
 	
@@ -151,7 +152,9 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 		if (!currentlyInAttackAnimation) {
 			anim.SetTrigger (someAttackKey);
 			itemInUseByCharacter.InfluenceEnvironment (someAttackKey);
-			currentlyInAttackAnimation = true;
+			Debug.Log(someAttackKey);
+			if (! (someAttackKey.Equals("CreatePhysicalItem")))
+				currentlyInAttackAnimation = true;
 		} else {
 			Debug.Log("Was in attack animation, did not attack");
 		}
