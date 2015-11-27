@@ -283,6 +283,7 @@ GameObject:
   - 212: {fileID: 21200888}
   - 68: {fileID: 6813544}
   - 68: {fileID: 6873724}
+  - 68: {fileID: 6859966}
   m_Layer: 8
   m_Name: Ice Age
   m_TagString: Untagged
@@ -655,7 +656,7 @@ EdgeCollider2D:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 180304}
   m_Enabled: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: a14c4ba1eb50e49b0a7728d1c81f9a52, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
@@ -753,8 +754,25 @@ EdgeCollider2D:
   - {x: 61.5342407, y: 2.54598546}
   - {x: 61.4833832, y: 1.28906977}
   - {x: 66.6138535, y: 1.26985717}
-  - {x: 66.620018, y: .0101913214}
+  - {x: 66.5916367, y: -2.60087442}
+  - {x: 74.2022324, y: -2.57268023}
+  - {x: 74.2630386, y: -3.84756947}
+  - {x: 95.8010406, y: -7.58798885}
   - {x: 95.999939, y: .00787040591}
+--- !u!68 &6859966
+EdgeCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 180304}
+  m_Enabled: 1
+  m_Material: {fileID: 6200000, guid: ad9b19ef9e7aa4a5b9b77881a6607b0b, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  m_Points:
+  - {x: 66.5816879, y: -.0163254738}
+  - {x: 96, y: 0}
 --- !u!68 &6873724
 EdgeCollider2D:
   m_ObjectHideFlags: 1
@@ -762,7 +780,7 @@ EdgeCollider2D:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 180304}
   m_Enabled: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: a14c4ba1eb50e49b0a7728d1c81f9a52, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
@@ -1907,7 +1925,9 @@ ParticleSystemRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_MinimumChartSize: 4
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
@@ -1943,7 +1963,9 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_MinimumChartSize: 4
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
