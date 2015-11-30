@@ -162,6 +162,12 @@ MonoBehaviour:
   - elementReference: {fileID: 119770, guid: afa5bd1c3a9b141b1a12127ac2dd692f, type: 2}
     probabilityOfInstantiation: 20
     mustBeInstantiated: 0
+  - elementReference: {fileID: 106888, guid: 857c93e1e681d4efe89ad134eadb7642, type: 2}
+    probabilityOfInstantiation: 3
+    mustBeInstantiated: 0
+  - elementReference: {fileID: 185688, guid: 5924714cab1d44ef2bd7e037cffdf22f, type: 2}
+    probabilityOfInstantiation: 3
+    mustBeInstantiated: 0
 --- !u!114 &642813478
 MonoBehaviour:
   m_ObjectHideFlags: 0
