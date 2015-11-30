@@ -60,8 +60,7 @@ public class ResourceDatabase : MonoBehaviour {
 
 		//Hunter
 		UISlotContentReference[] hunterInitialItems = new UISlotContentReference[]{
-			new UISlotContentReference(GetItemByParameter("Spear"), 1), 
-			new UISlotContentReference(ResourceDatabase.GetItemByParameter("Fire"), 2)
+			new UISlotContentReference(GetItemByParameter("Spear"), 1)
 		};
 		gameProfessions.Add (new Profession ("Professions/Hunter/", "Hunter", 1, hunterInitialItems));
 

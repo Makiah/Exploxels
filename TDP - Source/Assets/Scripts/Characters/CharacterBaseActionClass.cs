@@ -152,7 +152,6 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 		if (!currentlyInAttackAnimation) {
 			anim.SetTrigger (someAttackKey);
 			itemInUseByCharacter.InfluenceEnvironment (someAttackKey);
-			Debug.Log(someAttackKey);
 			if (! (someAttackKey.Equals("CreatePhysicalItem")))
 				currentlyInAttackAnimation = true;
 		} else {
