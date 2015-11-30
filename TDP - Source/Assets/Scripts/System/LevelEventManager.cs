@@ -54,6 +54,7 @@ public class LevelEventManager : MonoBehaviour {
 
 	public static event BaseInitialization InitializeCameraFunctions;
 	public static event BaseInitialization InitializeBackgroundScroller;
+	public static event BaseInitialization InitializeTimeIndicator;
 
 	public delegate void TerrainCreation (TerrainReferenceClass maze);
 	public static event TerrainCreation CreateTerrainItems;
@@ -145,6 +146,7 @@ public class LevelEventManager : MonoBehaviour {
 
 		if (InitializeCameraFunctions != null) InitializeCameraFunctions (); else Debug.LogError("InitializeCameraFunctions was null!"); // Used for camera controller.  
 		if (InitializeBackgroundScroller != null) InitializeBackgroundScroller (); else Debug.LogError("InitializeBackgroundScroller was null!"); //Initialize the BackgroundScroller class.  
+		if (InitializeTimeIndicator != null) InitializeTimeIndicator(); else Debug.LogError("InitializeTimeIndicator was null!!"); //Used for TimeIndicator.  
 
 		//Initialize the enemies.  
 		if (CreateTerrainItems != null) CreateTerrainItems(initializedMaze); else Debug.LogError("CreateTerrainItems was null!"); //Used for instantiating the enemies and trees.  

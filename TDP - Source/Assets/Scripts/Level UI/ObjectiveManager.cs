@@ -66,6 +66,11 @@ public class ObjectiveManager : MonoBehaviour {
 			continueToNextLevel.interactable = true;
 	}
 
+	//Called by HunterNPCBehaviour to see whether fire has been created.  
+	public bool CheckStateOfObjective(int objectiveIndex) {
+		return objectives [objectiveIndex - 1].objectiveToggle.isOn;
+	}
+
 	bool AllObjectivesComplete() {
 		for (int i = 0; i < objectives.Length; i++) {
 			if (objectives[i].objectiveToggle.isOn == false) {
