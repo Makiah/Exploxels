@@ -33,10 +33,11 @@ public class NPCPanelController : MonoBehaviour {
 
 	//Loops continuously and checks each frame whether or not the player is close enough to the NPC.  If so, it checks whether an interactable panel has a reference set.
 	IEnumerator CheckForAndAttemptToSpeakToPlayer() {
-		while (true) {
-			if (Vector3.Distance(transform.position, playerTransform.position) <= minDistanceRequiredForInteraction) {
-				if (interactablePanel == null) 
+		while (true) {//Vector 3 distance includes PLAYER Z COORDINATE!!!! HOLY **** YES!!!!
+			if (Vector2.Distance(transform.position, playerTransform.position) <= minDistanceRequiredForInteraction) {
+				if (interactablePanel == null)
 					OnActivateInteractablePanel();
+
 				if (Input.GetKeyDown (KeyCode.X) && ! alreadySpeakingToPlayer && interactablePanel != null) {
 					if (dialogueForPlayer.Length != 0) {
 						GetComponent <NPCBaseScript> ().StopWalkingAround();
@@ -46,7 +47,7 @@ public class NPCPanelController : MonoBehaviour {
 						alreadySpeakingToPlayer = true;
 					}
 				}
-			} else if (Vector3.Distance (transform.position, playerTransform.position) > minDistanceRequiredForInteraction) {
+			} else if (Vector2.Distance (transform.position, playerTransform.position) > minDistanceRequiredForInteraction) {
 				if (interactablePanel != null) {
 					ClearInteractablePanel();
 				}

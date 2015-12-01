@@ -40,9 +40,6 @@ TagManager:
   - 
   - 
   m_SortingLayers:
-  - name: Sun
-    uniqueID: 2362621925
-    locked: 0
   - name: Backgrounds
     uniqueID: 3940305695
     locked: 0

@@ -83,7 +83,7 @@ public class PlayerAction : CharacterBaseActionClass {
 			if (h < 0 && facingRight) 
 				Flip ();
 
-			transform.FindChild("Main Camera").FindChild("Background").GetComponent <BackgroundScroller> ().Movement(rb2d.velocity.x / maxSpeed);
+			transform.FindChild("Main Camera").FindChild("Background").FindChild("Background Tiles").GetComponent <BackgroundScroller> ().Movement(rb2d.velocity.x / maxSpeed);
 
 			yield return new WaitForFixedUpdate();
 

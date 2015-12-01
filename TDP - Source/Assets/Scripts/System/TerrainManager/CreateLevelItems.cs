@@ -104,9 +104,9 @@ public class CreateLevelItems : MonoBehaviour {
 					//Choose a point out of the existing points.  
 					int pointToInstantiateRequiredItem = emptyPoints [chosenLoc];
 					//Instantiate the object
-					GameObject createdElement = (GameObject)(Instantiate (requiredItems [j].elementReference, 
-				                                                      allEnemyItemPoints [pointToInstantiateRequiredItem].position + requiredItems [j].elementReference.transform.localPosition, 
-				                                                      Quaternion.identity));
+					GameObject createdElement = InstantiateElementOnPoint(requiredItems [j].elementReference, 
+					                                                      allEnemyItemPoints [pointToInstantiateRequiredItem].position
+					                                                      );
 					createdElement.transform.SetParent (allEnemyItemPoints [pointToInstantiateRequiredItem]);
 				
 					//Remove the point that was just used from the list.  
@@ -122,9 +122,9 @@ public class CreateLevelItems : MonoBehaviour {
 					//Check to make sure that it is not supposed to instantiate anything.  
 					if (chosenElement != null) {
 						//Instantiate element
-						GameObject createdElement = (GameObject)(Instantiate (chosenElement.elementReference, 
-					                                                      allEnemyItemPoints [pointToInstantiateRequiredItem].position + chosenElement.elementReference.transform.localPosition, 
-					                                                      Quaternion.identity));
+						GameObject createdElement = InstantiateElementOnPoint (chosenElement.elementReference, 
+					                                                           allEnemyItemPoints [pointToInstantiateRequiredItem].position
+						                                                       );
 						createdElement.transform.SetParent (allEnemyItemPoints [pointToInstantiateRequiredItem]);
 					}
 					//Remove the point that was just used from the list.  
@@ -170,6 +170,13 @@ public class CreateLevelItems : MonoBehaviour {
 		} else {
 			return null;
 		}
+	}
+
+	//Used for instantiating elements with a z position of 0.  
+	GameObject InstantiateElementOnPoint(GameObject element, Vector3 position) {
+		GameObject createdElement = (GameObject)(Instantiate (element, position, Quaternion.identity));
+		createdElement.transform.position = new Vector3 (element.transform.localPosition.x + position.x, element.transform.localPosition.y + position.y, element.transform.localPosition.z);
+		return createdElement;
 	}
 
 }

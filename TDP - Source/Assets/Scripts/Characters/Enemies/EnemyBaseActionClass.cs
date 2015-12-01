@@ -48,7 +48,7 @@ public abstract class EnemyBaseActionClass : CharacterBaseActionClass {
 
 	protected virtual IEnumerator BasicEnemyControl() {
 		while (true) {
-			if (Vector3.Distance(transform.position, player.transform.position) <= playerViewableThreshold) {
+			if (Vector2.Distance(transform.position, player.transform.position) <= playerViewableThreshold) {
 				
 				float distanceFromLeftPointX = Mathf.Abs(transform.position.x - (player.transform.position.x - remainDistanceFromPlayer));
 				float distanceFromRightPointX = Mathf.Abs(transform.position.x - (player.transform.position.x + remainDistanceFromPlayer));

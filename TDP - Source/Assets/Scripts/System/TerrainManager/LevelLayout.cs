@@ -67,9 +67,11 @@ public class LevelLayout : MonoBehaviour {
 		TerrainReferenceClass createdMaze = new TerrainReferenceClass(levelLength + transferSegments.introductoryVariations.Length);
 		//This holds the main maze part.  
 		Transform parentMaze = new GameObject ("Maze").transform;
+		parentMaze.localPosition = new Vector3 (0, 0, -8);
 
 		//Instantiate the starting point.  
 		GameObject instantiatedStartPoint = LayTerrainAsset(transferSegments.startSegment, Vector3.zero, Quaternion.identity, parentMaze);
+		instantiatedStartPoint.transform.localPosition = Vector3.zero;
 		currentXPosition += GetSpriteSizeFromGameObject(instantiatedStartPoint).x / 2f;
 
 		//Apparently this can be null (weird error)
@@ -128,6 +130,8 @@ public class LevelLayout : MonoBehaviour {
 		GameObject instantiatedEndPoint = LayTerrainAsset (transferSegments.startSegment, new Vector3 (currentXPosition, 0, 0), Quaternion.identity, parentMaze);
 		instantiatedEndPoint.transform.localScale = new Vector3 (-1, 1, 1);
 
+		instantiatedEndPoint.transform.localPosition = new Vector3 (instantiatedEndPoint.transform.position.x, instantiatedEndPoint.transform.position.y, 0);
+
 		float levelLengthX = instantiatedEndPoint.transform.position.x - instantiatedStartPoint.transform.position.x;
 
 		CurrentLevelVariableManagement.SetLevelLengthX (levelLengthX);
@@ -138,6 +142,7 @@ public class LevelLayout : MonoBehaviour {
 		if (asset != null) {
 			GameObject createdAsset = (GameObject)(Instantiate (asset, position, rotation));
 			createdAsset.transform.SetParent (parentObj);
+			createdAsset.transform.localPosition = new Vector3(createdAsset.transform.position.x, createdAsset.transform.position.y, 0);
 			return createdAsset;
 		} else {
 			Debug.LogError("Asset was null in the LevelLayout script");

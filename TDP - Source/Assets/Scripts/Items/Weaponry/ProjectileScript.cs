@@ -63,7 +63,7 @@ public class ProjectileScript : MonoBehaviour {
 
 	IEnumerator DestroyIfDistanceFromPlayer() {
 		while (true) {
-			if (Vector3.Distance (transform.position, playerObject.transform.position) >= destroyIfDistanceFromPlayer) {
+			if (Vector2.Distance (transform.position, playerObject.transform.position) >= destroyIfDistanceFromPlayer) {
 				Destroy (this.gameObject);
 			}
 			yield return null;

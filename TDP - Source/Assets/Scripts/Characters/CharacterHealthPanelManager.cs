@@ -58,9 +58,9 @@ public class CharacterHealthPanelManager : MonoBehaviour {
 	// This coroutine controls the health bar controller.  
 	IEnumerator ControlHealthBarState() {
 		while (true) {
-			if (Vector3.Distance(transform.position, player.position) <= distanceUntilHealthBarActive && healthPanelReference == null) {
+			if (Vector2.Distance(transform.position, player.position) <= distanceUntilHealthBarActive && healthPanelReference == null) {
 				OnThisEnemyActivated();
-			} else if (Vector3.Distance(transform.position, player.position) > distanceUntilHealthBarActive && healthPanelReference != null) {
+			} else if (Vector2.Distance(transform.position, player.position) > distanceUntilHealthBarActive && healthPanelReference != null) {
 				OnThisEnemyDeActivated();
 			}
 
