@@ -497,7 +497,7 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 119770}
-  m_Mass: 20
+  m_Mass: 80
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
   m_GravityScale: 3
@@ -822,6 +822,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: lifePoints
       value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Mass
+      value: 80
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

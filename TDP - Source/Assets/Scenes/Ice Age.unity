@@ -147,7 +147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerToInstantiate: {fileID: 172182, guid: c7d744bf7cde3a948aded2b45bbc2264, type: 2}
   pointToInstantiatePlayerAt: {x: 10, y: 4.17999983, z: 0}
-  probabilityToInstantiateNullElement: 9
+  probabilityToInstantiateNullElement: 6
   initialGameElements:
   - elementReference: {fileID: 162146, guid: 239c88de2e417429f81f5982ff17c935, type: 2}
     probabilityOfInstantiation: 0

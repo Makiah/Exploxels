@@ -124,6 +124,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11442372, guid: 370d054f2a9e2475591478c5031ad787, type: 2}
+      propertyPath: playerViewableThreshold
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 370d054f2a9e2475591478c5031ad787, type: 2}
   m_IsPrefabParent: 0
