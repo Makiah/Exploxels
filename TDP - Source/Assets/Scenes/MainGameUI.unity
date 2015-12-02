@@ -1125,6 +1125,10 @@ Prefab:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 11464100, guid: 6e6cbd7c170674657af86df933b5ad44, type: 2}
+      propertyPath: m_PreserveAspect
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6e6cbd7c170674657af86df933b5ad44, type: 2}
   m_IsPrefabParent: 0
@@ -2260,6 +2264,10 @@ Prefab:
       propertyPath: m_Pivot.y
       value: .5
       objectReference: {fileID: 0}
+    - target: {fileID: 109602, guid: 6e6cbd7c170674657af86df933b5ad44, type: 2}
+      propertyPath: m_Name
+      value: HealthPanel2
+      objectReference: {fileID: 0}
     - target: {fileID: 22447514, guid: 6e6cbd7c170674657af86df933b5ad44, type: 2}
       propertyPath: m_AnchorMax.x
       value: 0
@@ -2279,10 +2287,6 @@ Prefab:
     - target: {fileID: 22434756, guid: 6e6cbd7c170674657af86df933b5ad44, type: 2}
       propertyPath: m_AnchorMax.y
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 109602, guid: 6e6cbd7c170674657af86df933b5ad44, type: 2}
-      propertyPath: m_Name
-      value: HealthPanel2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6e6cbd7c170674657af86df933b5ad44, type: 2}
