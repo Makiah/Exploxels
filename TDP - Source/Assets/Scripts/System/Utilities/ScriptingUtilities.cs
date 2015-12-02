@@ -93,4 +93,13 @@ public class ScriptingUtilities : MonoBehaviour {
 		Debug.Log ("Game has been re-started!");
 	}
 
+	//If the game is playing in the Unity Editor, it has to quit a different way.  
+	public static void QuitGame() {
+		#if UNITY_EDITOR
+		UnityEditor.EditorApplication.isPlaying = false;
+		#else
+		Application.Quit();
+		#endif
+	}
+
 }

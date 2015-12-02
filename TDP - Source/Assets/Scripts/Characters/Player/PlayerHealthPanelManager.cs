@@ -83,7 +83,7 @@ public class PlayerHealthPanelManager : CharacterHealthPanelManager {
 		//Application.Quit ();
 		//The following does work for the editor.  
 		Debug.Log ("Quitting the game");
-		UnityEditor.EditorApplication.isPlaying = false;
+		ScriptingUtilities.QuitGame ();
 		Destroy (this.gameObject);
 	}
 }

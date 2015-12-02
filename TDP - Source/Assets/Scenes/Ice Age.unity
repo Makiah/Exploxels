@@ -156,16 +156,37 @@ MonoBehaviour:
     probabilityOfInstantiation: 0
     mustBeInstantiated: 1
   - elementReference: {fileID: 178818, guid: b93cc74f47786d941bc438f0f74f7171, type: 2}
-    probabilityOfInstantiation: 5
-    mustBeInstantiated: 0
+    probabilityOfInstantiation: 0
+    mustBeInstantiated: 1
+  - elementReference: {fileID: 178818, guid: b93cc74f47786d941bc438f0f74f7171, type: 2}
+    probabilityOfInstantiation: 0
+    mustBeInstantiated: 1
+  - elementReference: {fileID: 178818, guid: b93cc74f47786d941bc438f0f74f7171, type: 2}
+    probabilityOfInstantiation: 0
+    mustBeInstantiated: 1
+  - elementReference: {fileID: 178818, guid: b93cc74f47786d941bc438f0f74f7171, type: 2}
+    probabilityOfInstantiation: 0
+    mustBeInstantiated: 1
+  - elementReference: {fileID: 178818, guid: b93cc74f47786d941bc438f0f74f7171, type: 2}
+    probabilityOfInstantiation: 0
+    mustBeInstantiated: 1
   - elementReference: {fileID: 119770, guid: afa5bd1c3a9b141b1a12127ac2dd692f, type: 2}
-    probabilityOfInstantiation: 20
+    probabilityOfInstantiation: 5
     mustBeInstantiated: 0
   - elementReference: {fileID: 106888, guid: 857c93e1e681d4efe89ad134eadb7642, type: 2}
     probabilityOfInstantiation: 3
     mustBeInstantiated: 0
   - elementReference: {fileID: 185688, guid: 5924714cab1d44ef2bd7e037cffdf22f, type: 2}
-    probabilityOfInstantiation: 3
+    probabilityOfInstantiation: 0
+    mustBeInstantiated: 1
+  - elementReference: {fileID: 185688, guid: 5924714cab1d44ef2bd7e037cffdf22f, type: 2}
+    probabilityOfInstantiation: 0
+    mustBeInstantiated: 1
+  - elementReference: {fileID: 185688, guid: 5924714cab1d44ef2bd7e037cffdf22f, type: 2}
+    probabilityOfInstantiation: 5
+    mustBeInstantiated: 0
+  - elementReference: {fileID: 123452, guid: 370d054f2a9e2475591478c5031ad787, type: 2}
+    probabilityOfInstantiation: 5
     mustBeInstantiated: 0
 --- !u!114 &642813478
 MonoBehaviour:
