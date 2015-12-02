@@ -380,7 +380,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 135882}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 36.6100006, y: 6.38999987, z: 0}
+  m_LocalPosition: {x: 35.0730019, y: 7.671, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 435048}
@@ -551,15 +551,15 @@ EdgeCollider2D:
   - {x: 30.0668373, y: 12.8316145}
   - {x: 30.104063, y: 11.5338564}
   - {x: 31.3299084, y: 11.4556618}
-  - {x: 31.3896351, y: 10.2369547}
-  - {x: 32.5798149, y: 10.1922274}
-  - {x: 32.6343498, y: 8.9989481}
-  - {x: 33.944458, y: 8.99055958}
-  - {x: 33.9574051, y: 7.68588448}
-  - {x: 35.2079735, y: 7.6730175}
-  - {x: 35.2233238, y: 6.41226149}
-  - {x: 37.7882576, y: 6.40102196}
-  - {x: 37.7777901, y: 5.13102055}
+  - {x: 31.339222, y: 10.2369547}
+  - {x: 32.6503944, y: 10.2325592}
+  - {x: 32.6242676, y: 8.95861721}
+  - {x: 33.9242897, y: 8.95022774}
+  - {x: 33.9069901, y: 7.68588448}
+  - {x: 36.4814453, y: 7.6730175}
+  - {x: 36.4811401, y: 6.40170145}
+  - {x: 37.7581177, y: 6.40102196}
+  - {x: 37.7627182, y: 5.12348509}
   - {x: 39.0402908, y: 5.12199593}
   - {x: 39.0617142, y: 2.57630277}
   - {x: 40.3119698, y: 2.54121017}
@@ -1623,7 +1623,9 @@ ParticleSystemRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_MinimumChartSize: 4
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
@@ -1659,7 +1661,9 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_MinimumChartSize: 4
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
