@@ -26,7 +26,7 @@ public class SkeletonAction : EnemyBaseActionClass {
 		OnRefreshCurrentWeaponMoves (skeletonBow);
 		skeletonBow.SetAttachedCharacterInput (this);
 
-		remainDistanceFromPlayer = Random.Range (remainDistanceFromPlayer - 2, remainDistanceFromPlayer + 3);
+		ignorePlayerMovementThreshold = Random.Range (ignorePlayerMovementThreshold - 2, ignorePlayerMovementThreshold + 3);
 
 		base.SetReferences ();
 	}

@@ -123,6 +123,12 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 		return facingRight ? 1 : -1;
 	}
 	
+	//Used to stop the character.  
+	protected void Stop() {
+		anim.SetFloat("Speed", 0);
+		rb2d.velocity = new Vector3(0, rb2d.velocity.y, 0);
+	}
+	
 	
 	/************************************************* ATTACKING *********************************************************/
 

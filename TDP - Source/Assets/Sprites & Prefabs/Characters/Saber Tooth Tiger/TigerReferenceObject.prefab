@@ -606,10 +606,10 @@ MonoBehaviour:
   wallJumpForce: 0
   groundedOffset: 0
   characterName: 
-  playerViewableThreshold: 5
-  remainDistanceFromPlayer: 8
-  ignorePlayerMovementThreshold: 7
-  maxYValueSeparation: 0
+  playerViewableThreshold: 25
+  playerAttackDistance: 2
+  ignorePlayerMovementThreshold: 2
+  maxYValueSeparation: 3
 --- !u!114 &11451108
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -828,6 +828,26 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Mass
       value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: playerViewableThreshold
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: maxYValueSeparation
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: remainDistanceFromPlayer
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: playerAttackDistance
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ignorePlayerMovementThreshold
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

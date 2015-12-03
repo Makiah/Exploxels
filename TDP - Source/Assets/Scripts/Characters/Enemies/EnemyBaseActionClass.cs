@@ -28,9 +28,9 @@ public abstract class EnemyBaseActionClass : CharacterBaseActionClass {
 
 	//The maximum distance that the player can be away from the enemy for it to activate.  
 	public float playerViewableThreshold;
-	//The safe distance to stay away from the player.  
-	public float remainDistanceFromPlayer;
-	//Once in the safe zone, how much closer can the player come before moving again?
+	//When at this distance, the enemy will attack.  
+	public float playerAttackDistance;
+	//If the enemy is within the safe attack distance + the movement threshold, it will remain stationary.  
 	public float ignorePlayerMovementThreshold;
 	//What is the maximum difference in Y values the enemies must have to attack?
 	public float maxYValueSeparation;
@@ -48,75 +48,71 @@ public abstract class EnemyBaseActionClass : CharacterBaseActionClass {
 
 	protected virtual IEnumerator BasicEnemyControl() {
 		while (true) {
+
 			if (Vector2.Distance(transform.position, player.transform.position) <= playerViewableThreshold) {
-				
-				float distanceFromLeftPointX = Mathf.Abs(transform.position.x - (player.transform.position.x - remainDistanceFromPlayer));
-				float distanceFromRightPointX = Mathf.Abs(transform.position.x - (player.transform.position.x + remainDistanceFromPlayer));
+
+				float distanceFromLeftPointX = Mathf.Abs(transform.position.x - (player.transform.position.x - ignorePlayerMovementThreshold));
+				float distanceFromRightPointX = Mathf.Abs(transform.position.x - (player.transform.position.x + ignorePlayerMovementThreshold));
 
 				if (distanceFromLeftPointX <= distanceFromRightPointX) {
 					//Flip if some point to the left of the player is further right than the skeleton.  
-					if (player.position.x - remainDistanceFromPlayer >= transform.position.x) {
-						if (GetFacingDirection() != 1) {
-							Flip ();
-						}
+					if (player.position.x - ignorePlayerMovementThreshold >= transform.position.x && GetFacingDirection() == -1) {
+						Flip ();
+					} else if (player.position.x - ignorePlayerMovementThreshold >= transform.position.x && GetFacingDirection() == 1) {
+						Flip();
 					} else {
-						if (GetFacingDirection() != -1) {
-							Flip();
+						if (Mathf.Abs(rb2d.velocity.x) < 0.6f && grounded) {
+							Debug.Log("Jumped");
+							InitializeJump(1);
 						}
 					}
 				} else {
-					if (player.position.x + remainDistanceFromPlayer >= transform.position.x ) {
-						if (GetFacingDirection() != 1) {
-							Flip ();
-						}
+					//You should not jump if you are going to change direction.  
+					//If facing right and the player is farther right than the attack distance
+					if (player.position.x - transform.position.x >= ignorePlayerMovementThreshold && GetFacingDirection() == 1) {
+						Flip ();
+					} else if (player.position.x + transform.position.x >= ignorePlayerMovementThreshold && GetFacingDirection() != -1) {
+						Flip ();
 					} else {
-						if (GetFacingDirection() != -1) {
-							Flip();
+						//Jump if the enemy is not going to change direction.  
+						if (Mathf.Abs(rb2d.velocity.x) < 0.3f && grounded) {
+							Debug.Log("Jumped");
+							InitializeJump(1);
 						}
 					}
 				}
-				
-				if (Mathf.Abs(rb2d.velocity.x) < 1 && grounded) {
-					InitializeJump(1);
-				}
-				
-				anim.SetFloat("Speed", 1);
-				yield return new WaitForSeconds(.3f);
-				rb2d.velocity = new Vector3(moveForce * GetFacingDirection(), rb2d.velocity.y, 0);
-				yield return null;
-
-				if (Mathf.Abs(player.transform.position.y - transform.position.y) <= maxYValueSeparation) {
-					//Check if the current position is within the boundaries of the safe zone.  
+					
+				//Check if the current position is within the boundaries of the attack zone, and the y value is acceptable.  
+				if ((distanceFromLeftPointX <= playerAttackDistance || distanceFromRightPointX <= playerAttackDistance) && (Mathf.Abs(player.transform.position.y - transform.position.y) <= maxYValueSeparation)) {
 					if (distanceFromLeftPointX <= distanceFromRightPointX) {
-						if (distanceFromLeftPointX <= ignorePlayerMovementThreshold) {
-							FlipToFacePlayer();
-							rb2d.velocity = new Vector2(0, rb2d.velocity.y);
-							anim.SetFloat("Speed", 0);
-							Attack ();
-							yield return new WaitForSeconds(2.5f);
-						}
+						Stop ();
+						FlipToFacePlayer();
+						Attack ();
+						yield return new WaitForSeconds(2.5f);
 					} else {
-						if (distanceFromRightPointX <= ignorePlayerMovementThreshold) {
-							FlipToFacePlayer();
-							rb2d.velocity = new Vector2(0, rb2d.velocity.y);
-							anim.SetFloat("Speed", 0);
-							Attack ();
-							yield return new WaitForSeconds(2.5f);
-						}
+						Stop ();
+						FlipToFacePlayer();
+						Attack ();
+						yield return new WaitForSeconds(2.5f);
 					}
+				} else {
+					//Speed management.  
+					anim.SetFloat("Speed", 1);
+					rb2d.velocity = new Vector3(moveForce * GetFacingDirection(), rb2d.velocity.y, 0);
+					yield return new WaitForSeconds(3f);
 				}
 
 			} else {
-				anim.SetFloat("Speed", 0);
-				rb2d.velocity = new Vector3(0, rb2d.velocity.y, 0);
-			
-				yield return null;
+				//Remain stopped, if not within the viewable radius.  
+				Stop();
+				yield return new WaitForSeconds(1);
 			}
 			
 		}
 
 	}
 
+	//Used to flip to face the player.  
 	void FlipToFacePlayer() {
 		if (player.position.x >= transform.position.x) {
 			if (GetFacingDirection() != 1) {
