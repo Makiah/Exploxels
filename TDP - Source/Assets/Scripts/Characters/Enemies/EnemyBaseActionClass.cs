@@ -43,13 +43,17 @@ public abstract class EnemyBaseActionClass : CharacterBaseActionClass {
 
 		base.SetReferences ();
 
-		StartCoroutine ("BasicEnemyControl");
+		StartCoroutine ("EnemyControl");
 	}
 
 	protected virtual IEnumerator BasicEnemyControl() {
 		while (true) {
 
 			if (Vector2.Distance(transform.position, player.transform.position) <= playerViewableThreshold) {
+
+				Debug.Log(gameObject.name + " can see the player.");
+
+				Stop ();
 
 				float distanceFromLeftPointX = Mathf.Abs(transform.position.x - (player.transform.position.x - ignorePlayerMovementThreshold));
 				float distanceFromRightPointX = Mathf.Abs(transform.position.x - (player.transform.position.x + ignorePlayerMovementThreshold));
@@ -64,6 +68,7 @@ public abstract class EnemyBaseActionClass : CharacterBaseActionClass {
 						if (Mathf.Abs(rb2d.velocity.x) < 0.6f && grounded) {
 							Debug.Log("Jumped");
 							InitializeJump(1);
+							yield return new WaitForSeconds(0.3f);
 						}
 					}
 				} else {
@@ -97,6 +102,7 @@ public abstract class EnemyBaseActionClass : CharacterBaseActionClass {
 					}
 				} else {
 					//Speed management.  
+					Debug.Log("Moving");
 					anim.SetFloat("Speed", 1);
 					rb2d.velocity = new Vector3(moveForce * GetFacingDirection(), rb2d.velocity.y, 0);
 					yield return new WaitForSeconds(3f);
@@ -108,6 +114,100 @@ public abstract class EnemyBaseActionClass : CharacterBaseActionClass {
 				yield return new WaitForSeconds(1);
 			}
 			
+		}
+
+	}
+
+	protected virtual IEnumerator EnemyControl() {
+		//PSEUDOCODE
+		//Check to make sure the enemy can see the player.  
+			//If it can, check whether it is in the safe zone.  
+				//Flip to face the player and attack.  
+				//Wait a couple seconds.  
+			//Otherwise, flip toward the direction of the nearest safe zone (On either side of the player)
+				//Start moving.  
+				//Wait for a second.  
+				//If the velocity is still 0, jump.  
+					//Wait for part of a second.  
+					//Move again.  
+					//Wait for part of a second.  
+		//Otherwise stop moving.  
+
+		//ACTUAL CODE
+
+		//Continuously
+		while (true) {
+			//Check to see whether player is within radius. 
+			if (Vector2.Distance(transform.position, player.transform.position) <= playerViewableThreshold) {
+
+				//Calculate the distance from each respective safe zone.  
+				float distanceFromLeftSafeZone = transform.position.x - (player.transform.position.x - ignorePlayerMovementThreshold);
+				float distanceFromRightSafeZone = transform.position.x - (player.transform.position.x + ignorePlayerMovementThreshold);
+
+				//If we are in a safe zone, either the left, right, or neither.  
+				if (Mathf.Abs(distanceFromLeftSafeZone) <= ignorePlayerMovementThreshold || Mathf.Abs(distanceFromRightSafeZone) <= ignorePlayerMovementThreshold) {
+					//Flip to face the player and attack.  
+					Stop();
+					FlipToFacePlayer();
+					Attack ();
+					Debug.Log("Attacking");
+					yield return new WaitForSeconds(1.5f);
+
+				} else {
+					//We are not in either safe zone.  
+
+					//This will hold the eventual value of the target safe zone.  
+					float distanceFromTargetSafeZone = 0;
+
+					//Give target safe zone a value.  
+					if (Mathf.Abs(distanceFromLeftSafeZone) <= Mathf.Abs(distanceFromRightSafeZone)) {
+						distanceFromTargetSafeZone = distanceFromLeftSafeZone;
+					} else {
+						distanceFromTargetSafeZone = distanceFromRightSafeZone;
+					}
+
+					//Calculate how to flip based on the distance from the target safe zone.  
+					//If we are to the left of the safe zone.  
+					//Example: We are at 7, and the left safe zone at 1.  7 - 1 is positive, and we are to the left of the safe zone.  
+					if (distanceFromTargetSafeZone < 0) {
+						//If we are facing left
+						if (GetFacingDirection() == -1)
+							//Flip to face the right side.  
+							Flip ();
+					} else if (distanceFromTargetSafeZone >= 0) {
+						//If we are facing right.  
+						if (GetFacingDirection() == 1) 
+							//Flip to face the left side.  
+							Flip ();
+					}
+
+					//Start moving toward the target safe zone (we have already flipped to the position
+					anim.SetFloat("Speed", 1);
+					rb2d.velocity = new Vector2(GetFacingDirection() * moveForce, rb2d.velocity.y);
+					yield return new WaitForSeconds(1f);
+
+					//In the event that the x velocity is very small, jump.  
+					if (rb2d.velocity.x < 0.5f) {
+						InitializeJump(1);
+						//Wait until we are in the air.  
+						//At some point, consider calculating the time at which the jump is at it's highest point and then resuming, as opposed to some constant.  
+						yield return new WaitForSeconds(0.3f);
+						//Start moving forward again (mid-air).  
+						anim.SetFloat("Speed", 1);
+						rb2d.velocity = new Vector2(GetFacingDirection() * moveForce, rb2d.velocity.y);
+						yield return new WaitForSeconds(1f);
+					}
+
+				}
+			} else {
+				//We are not viewable by the player.  
+				Stop ();
+				//Wait a couple seconds instead of a frame (processing reasons).  
+				yield return new WaitForSeconds(5);
+			}
+
+			//Every frame
+			yield return null;
 		}
 
 	}
