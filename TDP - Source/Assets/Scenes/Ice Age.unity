@@ -186,7 +186,7 @@ MonoBehaviour:
     probabilityOfInstantiation: 5
     mustBeInstantiated: 0
   - elementReference: {fileID: 123452, guid: 370d054f2a9e2475591478c5031ad787, type: 2}
-    probabilityOfInstantiation: 5
+    probabilityOfInstantiation: 2
     mustBeInstantiated: 0
 --- !u!114 &642813478
 MonoBehaviour:
