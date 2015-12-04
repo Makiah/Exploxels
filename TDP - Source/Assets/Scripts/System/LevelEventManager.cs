@@ -56,6 +56,8 @@ public class LevelEventManager : MonoBehaviour {
 
 	public delegate void TerrainCreation (TerrainReferenceClass maze);
 	public static event TerrainCreation CreateTerrainItems;
+	
+	public static event BaseInitialization InitializeSystemWideParticleEffect;
 
 	public static event BaseInitialization InitializeEnemyHealthControllers;
 	public static event BaseInitialization InitializeEnemies;
@@ -146,6 +148,7 @@ public class LevelEventManager : MonoBehaviour {
 
 		//Initialize the enemies.  
 		if (CreateTerrainItems != null) CreateTerrainItems(initializedMaze); else Debug.LogError("CreateTerrainItems was null!"); //Used for instantiating the enemies and trees.  
+		if (InitializeSystemWideParticleEffect != null) InitializeSystemWideParticleEffect(); else Debug.LogError("InitializeSystemWideParticleEffect was null!");
 		if (InitializeEnemyHealthControllers != null) InitializeEnemyHealthControllers (); else Debug.LogError("InitializeEnemyHealthControllers was null!"); //Used for initializing CharacterHealthController.  
 		if (InitializeEnemies != null) InitializeEnemies(); else Debug.LogError("InitializeEnemies was null!"); //Used for all enemies (requires player being instantiated).  
 

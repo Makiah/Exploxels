@@ -126,6 +126,7 @@ GameObject:
   - 4: {fileID: 642813479}
   - 114: {fileID: 642813478}
   - 114: {fileID: 642813477}
+  - 114: {fileID: 642813480}
   m_Layer: 0
   m_Name: TerrainManager
   m_TagString: Untagged
@@ -230,6 +231,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 551097936}
   m_RootOrder: 2
+--- !u!114 &642813480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 642813476}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7675d7edcaa7e49709f37a30c72df075, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  snowParticleEffect: {fileID: 158262, guid: f47159d4a7cce4b4394ba75e85e28906, type: 2}
 --- !u!1 &1397373983
 GameObject:
   m_ObjectHideFlags: 0
