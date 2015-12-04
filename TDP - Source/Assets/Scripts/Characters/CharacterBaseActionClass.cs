@@ -47,7 +47,7 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 	public float groundedOffset;
 	
 	protected Transform characterSpriteObject;
-	protected Transform groundCheck;
+	protected Transform[] groundChecks;
 	
 	protected Animator anim;
 	protected Rigidbody2D rb2d;
@@ -57,19 +57,33 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 	public string characterName;
 	
 	protected virtual void SetReferences() {
+		//Get required components
 		anim = characterSpriteObject.GetComponent <Animator> ();
 		rb2d = GetComponent <Rigidbody2D> ();
-		groundCheck = transform.FindChild ("GroundCheck");
+		groundChecks = GetAllGroundChecks ();
 
 		maxSpeedInitial = maxSpeed;
 
 		//This changes based on the override methods.  
 		StartCoroutine ("CheckCharacterPhysics");
 	}
+
+	private Transform[] GetAllGroundChecks() {
+		List <Transform> groundCheckList = new List<Transform>();
+
+		int i = 1; 
+		//Loop through all ground checks until one does not exist.  
+		while (transform.FindChild("GroundCheck" + i)) {
+			groundCheckList.Add(transform.FindChild("GroundCheck" + i));
+			i++;
+		}
+
+		return groundCheckList.ToArray ();
+	}
 	
 	protected virtual IEnumerator CheckCharacterPhysics() {
 		while (true) {
-			grounded = Physics2D.Linecast (groundCheck.position, transform.position, 1 << LayerMask.NameToLayer ("Ground"));
+			grounded = CheckWhetherGrounded();
 			
 			if (grounded) {
 				jumpInEffect = 0;
@@ -81,6 +95,17 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 			yield return null;
 		}
 		
+	}
+
+	//Use the grounded boolean instead
+	protected bool CheckWhetherGrounded() {
+		//Loop through the whole array and look for a true.  
+		for (int i = 0; i < groundChecks.Length; i++) {
+			if (Physics2D.Linecast (groundChecks[i].position, transform.position, 1 << LayerMask.NameToLayer ("Ground")))
+				return true;
+		}
+
+		return false;
 	}
 	
 	protected virtual void InitializeJump(int jumpStyle) {

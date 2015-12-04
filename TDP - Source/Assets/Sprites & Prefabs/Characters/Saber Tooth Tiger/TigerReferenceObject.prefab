@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &103378
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 486434}
+  m_Layer: 9
+  m_Name: GroundCheck1
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &106198
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 463964}
+  m_Layer: 9
+  m_Name: GroundCheck2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &107712
 GameObject:
   m_ObjectHideFlags: 0
@@ -138,7 +168,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 451160}
   m_Layer: 9
-  m_Name: GroundCheck
+  m_Name: GroundCheck3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -390,11 +420,11 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 147392}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -.799000025, z: 0}
+  m_LocalPosition: {x: .694999993, y: -.477999985, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 482112}
-  m_RootOrder: 1
+  m_RootOrder: 3
 --- !u!4 &452350
 Transform:
   m_ObjectHideFlags: 1
@@ -421,6 +451,18 @@ Transform:
   - {fileID: 452350}
   m_Father: {fileID: 487840}
   m_RootOrder: 1
+--- !u!4 &463964
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 106198}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: .150999993, y: -.584999979, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 482112}
+  m_RootOrder: 2
 --- !u!4 &482112
 Transform:
   m_ObjectHideFlags: 1
@@ -432,9 +474,23 @@ Transform:
   m_LocalScale: {x: 2.20000005, y: 2.20000005, z: 1}
   m_Children:
   - {fileID: 424932}
+  - {fileID: 486434}
+  - {fileID: 463964}
   - {fileID: 451160}
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!4 &486434
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 103378}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -.428000003, y: -.584999979, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 482112}
+  m_RootOrder: 1
 --- !u!4 &487840
 Transform:
   m_ObjectHideFlags: 1
@@ -497,7 +553,7 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 123452}
-  m_Mass: 80
+  m_Mass: 17
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
   m_GravityScale: 3
@@ -525,10 +581,10 @@ PolygonCollider2D:
       - {x: .43080914, y: -.2012178}
       - {x: .430187374, y: -.42383495}
       - {x: .108104572, y: -.425505847}
-      - {x: -.211983472, y: -.42732054}
-      - {x: -.209559932, y: -.195306644}
-      - {x: -.252765477, y: -.196685791}
-      - {x: -.258701652, y: .187839806}
+      - {x: -.273510963, y: -.42732054}
+      - {x: -.275820225, y: -.200039461}
+      - {x: -.319025636, y: -.196685791}
+      - {x: -.315496147, y: .183107093}
 --- !u!61 &6105538
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -587,7 +643,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04e59b25dc0924eea83e62e582ee087d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifePoints: 25
+  lifePoints: 10
   distanceUntilHealthBarActive: 5
 --- !u!114 &11442372
 MonoBehaviour:
@@ -601,15 +657,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 5
-  moveForce: 4
+  moveForce: 7
   jumpForce: 12
   wallJumpForce: 0
   groundedOffset: 0
   characterName: 
   playerViewableThreshold: 25
-  playerAttackDistance: 1
-  ignorePlayerMovementThreshold: 2
+  playerAttackDistance: .5
+  ignorePlayerMovementThreshold: 1
   maxYValueSeparation: 3
+  tigerAttackPower: 3
 --- !u!114 &11451108
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -827,7 +884,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: m_Mass
-      value: 80
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: playerViewableThreshold
@@ -843,15 +900,27 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: playerAttackDistance
-      value: 1
+      value: .5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: ignorePlayerMovementThreshold
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Constraints
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: tigerAttackPower
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: lifePoints
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: moveForce
+      value: 7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

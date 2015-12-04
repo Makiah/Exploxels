@@ -27,13 +27,13 @@ public abstract class EnemyBaseActionClass : CharacterBaseActionClass {
 	}
 
 	//The maximum distance that the player can be away from the enemy for it to activate.  
-	public float playerViewableThreshold;
+	[SerializeField] protected float playerViewableThreshold;
 	//When at this distance, the enemy will attack.  
-	public float playerAttackDistance;
+	[SerializeField] protected float playerAttackDistance;
 	//If the enemy is within the safe attack distance + the movement threshold, it will remain stationary.  
-	public float ignorePlayerMovementThreshold;
+	[SerializeField] protected float ignorePlayerMovementThreshold;
 	//What is the maximum difference in Y values the enemies must have to attack?
-	public float maxYValueSeparation;
+	[SerializeField] protected float maxYValueSeparation;
 
 	//The player transform
 	protected Transform player;
@@ -54,8 +54,8 @@ public abstract class EnemyBaseActionClass : CharacterBaseActionClass {
 			if (Vector2.Distance(transform.position, player.transform.position) <= playerViewableThreshold) {
 
 				//Calculate the distance from each respective safe zone.  
-				float distanceFromLeftSafeZone = transform.position.x - (player.transform.position.x - ignorePlayerMovementThreshold);
-				float distanceFromRightSafeZone = transform.position.x - (player.transform.position.x + ignorePlayerMovementThreshold);
+				float distanceFromLeftSafeZone = transform.position.x - (player.transform.position.x - playerAttackDistance);
+				float distanceFromRightSafeZone = transform.position.x - (player.transform.position.x + playerAttackDistance);
 
 				//If we are in a safe zone, either the left, right, or neither.  
 				if (Mathf.Abs(distanceFromLeftSafeZone) <= ignorePlayerMovementThreshold || Mathf.Abs(distanceFromRightSafeZone) <= ignorePlayerMovementThreshold) {
@@ -66,7 +66,6 @@ public abstract class EnemyBaseActionClass : CharacterBaseActionClass {
 					if (Mathf.Abs(player.transform.position.y - transform.position.y) <= maxYValueSeparation) {
 						anim.SetTrigger("Attack");
 						Attack ();
-						Debug.Log("Attacking");
 					}
 					yield return new WaitForSeconds(1.5f);
 
@@ -101,10 +100,10 @@ public abstract class EnemyBaseActionClass : CharacterBaseActionClass {
 					//Start moving toward the target safe zone (we have already flipped to the position
 					anim.SetFloat("Speed", 1);
 					rb2d.velocity = new Vector2(GetFacingDirection() * moveForce, rb2d.velocity.y);
-					yield return new WaitForSeconds(1f);
+					yield return new WaitForSeconds(0.3f);
 
 					//In the event that the x velocity is very small, jump.  
-					if (rb2d.velocity.x < 0.5f) {
+					if (rb2d.velocity.x < 0.1f && grounded) {
 						InitializeJump(1);
 						//Wait until we are in the air.  
 						//At some point, consider calculating the time at which the jump is at it's highest point and then resuming, as opposed to some constant.  
@@ -112,7 +111,7 @@ public abstract class EnemyBaseActionClass : CharacterBaseActionClass {
 						//Start moving forward again (mid-air).  
 						anim.SetFloat("Speed", 1);
 						rb2d.velocity = new Vector2(GetFacingDirection() * moveForce, rb2d.velocity.y);
-						yield return new WaitForSeconds(1f);
+						yield return new WaitForSeconds(0.3f);
 					}
 
 				}

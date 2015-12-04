@@ -314,7 +314,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 442250}
   m_Layer: 11
-  m_Name: GroundCheck
+  m_Name: GroundCheck1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

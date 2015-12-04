@@ -18,14 +18,11 @@ public class PlayerAction : CharacterBaseActionClass {
 
 	private bool touchingWall;
 	private Transform wallCheck;
-	private Transform groundCheck2;
 
 	protected override void SetReferences() {
 		characterSpriteObject = transform.FindChild("FlippingItem").FindChild ("Player");
 		wallCheck = transform.FindChild("FlippingItem").FindChild ("WallCheck");
 		characterName = "Player";
-		
-		groundCheck2 = transform.FindChild ("GroundCheck2");
 
 		base.SetReferences ();
 
@@ -37,7 +34,7 @@ public class PlayerAction : CharacterBaseActionClass {
 	//Used to check whether or not player is grounded, touching a wall, etc.  Defines movements.  
 	protected override IEnumerator CheckCharacterPhysics() {
 		while (true) {
-			grounded = Physics2D.Linecast (groundCheck.position, transform.position, 1 << LayerMask.NameToLayer ("Ground")) || Physics2D.Linecast (groundCheck2.position, transform.position, 1 << LayerMask.NameToLayer ("Ground"));
+			grounded = CheckWhetherGrounded();
 			//Debug.DrawLine(groundCheck.position + new Vector3(groundedOffset, 0, 0), groundCheck.position - new Vector3(groundedOffset, 0, 0));
 			touchingWall = Physics2D.Linecast (transform.position, wallCheck.position, 1 << LayerMask.NameToLayer ("Ground"));
 
