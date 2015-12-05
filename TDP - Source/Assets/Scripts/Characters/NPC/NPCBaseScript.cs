@@ -24,7 +24,7 @@ public abstract class NPCBaseScript : CharacterBaseActionClass {
 		characterSpriteObject = transform.FindChild ("FlippingItem").FindChild ("Character");
 		base.SetReferences ();
 		playerTransform = CurrentLevelVariableManagement.GetPlayerReference ().transform;
-		StartCoroutine ("WalkAround");
+		StartCoroutine (WalkAround());
 	}
 
 	public abstract void NPCActionBeforeSpeaking();
@@ -34,9 +34,7 @@ public abstract class NPCBaseScript : CharacterBaseActionClass {
 	protected virtual IEnumerator WalkAround() {
 		while (true) {
 			anim.SetFloat("Speed", 1);
-			StartCoroutine ("MaintainAConstantXVelocity", GetFacingDirection() * moveForce);
-			yield return new WaitForSeconds(3f);
-			StopCoroutine("MaintainAConstantXVelocity");
+			StartCoroutine (MaintainAConstantXVelocity(GetFacingDirection() * moveForce, 3));
 			anim.SetFloat("Speed", 0);
 			yield return new WaitForSeconds(3f);
 			if (Random.Range(0, 2) == 1)
@@ -52,17 +50,16 @@ public abstract class NPCBaseScript : CharacterBaseActionClass {
 	
 	public void StopWalkingAround() {
 		if (walkingAround) {
-			StopCoroutine ("WalkAround");
+			StopCoroutine (WalkAround());
 			StopCoroutine("MaintainAConstantXVelocity");
-			rb2d.velocity = Vector2.zero;
-			anim.SetFloat("Speed", 0);
+			Stop ();
 			walkingAround = false;
 		}
 	}
 	
 	public void ResumeWalkingAround() {
 		if (! walkingAround) {
-			StartCoroutine("WalkAround");
+			StartCoroutine(WalkAround());
 			walkingAround = true;
 		}
 	}

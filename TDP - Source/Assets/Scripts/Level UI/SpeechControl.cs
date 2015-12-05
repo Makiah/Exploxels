@@ -43,19 +43,14 @@ public class SpeechControl : MonoBehaviour {
 	}
 
 	//Called when something should be said.  
-	public void SaySomething(Sprite headIcon, string speaker, string[] phrasesToSay, bool speakInScrollingText, NPCPanelController assignee) {
+	public void SaySomething(Sprite headIcon, string speaker, string[] phrasesToSay, NPCPanelController assignee) {
 		playerIcon.sprite = headIcon;
 		speakerName.text = speaker;
 		speechBubbleActive = true;
 		coroutineActive = true;
 		currentlyAssignedTo = assignee;
 		gameObject.SetActive (true);
-		if (speakInScrollingText)
-			StartCoroutine ("SpeakInScrollingText", phrasesToSay);
-		else {
-			textSpeechBox.text = phrasesToSay [0];
-			StartCoroutine ("BasicSpeechScrolling", phrasesToSay);
-		}
+		StartCoroutine (SpeakInScrollingText(phrasesToSay));
 	}
 
 	//Speak in scrolling text.  

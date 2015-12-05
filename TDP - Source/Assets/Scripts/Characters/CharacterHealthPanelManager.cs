@@ -52,7 +52,7 @@ public class CharacterHealthPanelManager : MonoBehaviour {
 		//Initialize icon
 		characterHeadSprite = transform.GetChild (0).GetChild (0).FindChild ("Head").GetComponent <SpriteRenderer> ().sprite;
 		//Start the coroutine that manages the active state of the health bar item.  
-		StartCoroutine ("ControlHealthBarState");
+		StartCoroutine (ControlHealthBarState());
 	}
 
 	// This coroutine controls the health bar controller.  

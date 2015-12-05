@@ -181,13 +181,13 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 	public void SetCombinationPending() {
 		selectionIndicator.gameObject.SetActive (true);
 		thisSlotHasACombinationPending = true;
-		StartCoroutine ("IndicateCombinationSelection");
+		StartCoroutine (IndicateCombinationSelection());
 	}
 
 	public void DisableCombinationPending() {
 		selectionIndicator.gameObject.SetActive (false);
 		thisSlotHasACombinationPending = false;
-		StopCoroutine ("IndicateCombinationSelection");
+		StopCoroutine (IndicateCombinationSelection());
 		selectionIndicator.localScale = new Vector3 (1, 1, 1);
 	}
 

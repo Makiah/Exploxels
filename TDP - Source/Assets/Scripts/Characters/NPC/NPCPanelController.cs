@@ -28,7 +28,7 @@ public class NPCPanelController : MonoBehaviour {
 		playerIcon = transform.FindChild ("FlippingItem").FindChild ("Character").FindChild ("Head").GetComponent <SpriteRenderer> ().sprite;
 		mainSpeechControl = CurrentLevelVariableManagement.GetLevelUIReference ().transform.FindChild ("Speech Bubble").GetComponent <SpeechControl> ();
 		mainInteractablePanelController = CurrentLevelVariableManagement.GetLevelUIReference().transform.FindChild ("InteractablePanels").gameObject.GetComponent <InteractablePanelController> (); 
-		StartCoroutine ("CheckForAndAttemptToSpeakToPlayer");
+		StartCoroutine (CheckForAndAttemptToSpeakToPlayer());
 	}
 
 	//Loops continuously and checks each frame whether or not the player is close enough to the NPC.  If so, it checks whether an interactable panel has a reference set.
@@ -66,7 +66,7 @@ public class NPCPanelController : MonoBehaviour {
 
 	//Makes a call to SpeechControl on the UI with the arguments that determine what to say and the icon that is saying it.
 	public virtual void SpeakToPlayer(string[] toSay, string name) {
-		mainSpeechControl.SaySomething (playerIcon, name, toSay, true, this);
+		mainSpeechControl.SaySomething (playerIcon, name, toSay, this);
 		speechBubbleActive = true;
 	}
 

@@ -55,7 +55,7 @@ public class HotbarManager : MonoBehaviour {
 		previouslyActiveSlot = -1;
 		currentlyActiveSlot = 0;
 
-		StartCoroutine ("CheckForActiveItemKey");
+		StartCoroutine (CheckForActiveItemKey());
 	}
 
 	//Used for detecting number keys.  

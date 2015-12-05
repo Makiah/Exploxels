@@ -14,7 +14,7 @@ public class ProfessionSpeechManager : SpeechControl {
 
 	//Set speech dialogue: does not have assigner.  
 	public void SetSpeechDialogue(string[] stuffToSay) {
-		SaySomething (ResourceDatabase.GetRaceByParameter ("Gatherer").male.head, "Guide", stuffToSay, true, null);
+		SaySomething (ResourceDatabase.GetRaceByParameter ("Gatherer").male.head, "Guide", stuffToSay, null);
 	}
 
 	//Modify what happens when the player has clicked through each message.  

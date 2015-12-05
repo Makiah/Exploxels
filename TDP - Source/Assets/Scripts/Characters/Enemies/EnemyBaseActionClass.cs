@@ -43,9 +43,10 @@ public abstract class EnemyBaseActionClass : CharacterBaseActionClass {
 
 		base.SetReferences ();
 
-		StartCoroutine ("EnemyControl");
+		StartCoroutine (EnemyControl());
 	}
 
+	//This should be FixedUpdate.  
 	protected virtual IEnumerator EnemyControl() {
 
 		//Continuously
@@ -99,31 +100,28 @@ public abstract class EnemyBaseActionClass : CharacterBaseActionClass {
 
 					//Start moving toward the target safe zone (we have already flipped to the position
 					anim.SetFloat("Speed", 1);
-					rb2d.velocity = new Vector2(GetFacingDirection() * moveForce, rb2d.velocity.y);
-					yield return new WaitForSeconds(0.3f);
+					StartCoroutine(MaintainAConstantXVelocity(GetFacingDirection() * moveForce, 0.3f));
 
 					//In the event that the x velocity is very small, jump.  
-					if (rb2d.velocity.x < 0.1f && grounded) {
+					if (rb2d.velocity.x < moveForce / 1000f && grounded) {
 						InitializeJump(1);
 						//Wait until we are in the air.  
 						//At some point, consider calculating the time at which the jump is at it's highest point and then resuming, as opposed to some constant.  
 						yield return new WaitForSeconds(0.3f);
 						//Start moving forward again (mid-air).  
 						anim.SetFloat("Speed", 1);
-						rb2d.velocity = new Vector2(GetFacingDirection() * moveForce, rb2d.velocity.y);
-						yield return new WaitForSeconds(0.3f);
-					}
+						StartCoroutine(MaintainAConstantXVelocity(GetFacingDirection() * moveForce, 0.3f));					}
 
 				}
 			} else {
 				//We are not viewable by the player.  
 				Stop ();
 				//Wait a couple seconds instead of a frame (processing reasons).  
-				yield return new WaitForSeconds(5);
+				yield return new WaitForSeconds(3);
 			}
 
 			//Every frame
-			yield return null;
+			yield return new WaitForFixedUpdate();
 		}
 
 	}

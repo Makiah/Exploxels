@@ -25,7 +25,7 @@ public class DroppedItemProperties : MonoBehaviour {
 
 	public void Initialize() {
 		player = CurrentLevelVariableManagement.GetPlayerReference ().transform;
-		StartCoroutine ("MoveTowardsPlayer");
+		StartCoroutine (MoveTowardsPlayer());
 	}
 
 	IEnumerator MoveTowardsPlayer() {

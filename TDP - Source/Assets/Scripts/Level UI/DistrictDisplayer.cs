@@ -42,7 +42,7 @@ public class DistrictDisplayer : MonoBehaviour {
 				transform.FindChild ("Text").GetComponent <Text> ().text = levelDisplayToUse.text;
 			}
 
-			StartCoroutine ("DistrictDisplayingTimer");
+			StartCoroutine (DistrictDisplayingTimer());
 		} else {
 			Debug.LogError("No LevelDisplay fit the specified criteria");
 		}

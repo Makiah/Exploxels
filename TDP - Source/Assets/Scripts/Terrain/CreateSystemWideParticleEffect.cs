@@ -19,7 +19,6 @@ public class CreateSystemWideParticleEffect : MonoBehaviour {
 		if (CurrentLevelVariableManagement.GetMainGameData ().currentLevel == 0) {
 			//Get level length
 			float levelLength = CurrentLevelVariableManagement.GetLevelLengthX ();
-			Debug.Log ("Current level length x = " + levelLength);
 
 			//Instantiate the particle effect into the maze.  
 			GameObject createdParticleEffect = (GameObject) (Instantiate(snowParticleEffect, Vector3.zero, Quaternion.identity));

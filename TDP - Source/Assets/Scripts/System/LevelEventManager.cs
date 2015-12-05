@@ -72,7 +72,7 @@ public class LevelEventManager : MonoBehaviour {
 	//Pretty much the only Start() method in the whole program.  
 	void Start() {
 		//A coroutine has to be used, so that the program does not continue before the level has been loaded.  
-		StartCoroutine ("WaitForGUILoad");
+		StartCoroutine (WaitForGUILoad());
 	}
 
 	//In order to allow the level to finish loading.  

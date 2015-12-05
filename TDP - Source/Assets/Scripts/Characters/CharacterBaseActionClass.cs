@@ -65,7 +65,8 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 		maxSpeedInitial = maxSpeed;
 
 		//This changes based on the override methods.  
-		StartCoroutine ("CheckCharacterPhysics");
+		StartCoroutine (CheckCharacterPhysics());
+		StartCoroutine (PreventExcessPlayerSpeed());
 	}
 
 	private Transform[] GetAllGroundChecks() {
@@ -80,7 +81,19 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 
 		return groundCheckList.ToArray ();
 	}
-	
+
+	//Used to prevent the excess speed of any enemy or player.  
+	IEnumerator PreventExcessPlayerSpeed() {
+		while (true) {
+			if (rb2d.velocity.magnitude > maxSpeed) {
+				rb2d.velocity = rb2d.velocity.normalized * maxSpeed;
+			}
+
+			yield return new WaitForFixedUpdate();
+		}
+
+	}
+
 	protected virtual IEnumerator CheckCharacterPhysics() {
 		while (true) {
 			grounded = CheckWhetherGrounded();
@@ -206,14 +219,22 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 	/**************** CHARACTER UTILITIES ***********************/
 
 	//Used for NPCs.  
-	protected IEnumerator MaintainAConstantXVelocity(int velocity) {
+	protected IEnumerator MaintainAConstantXVelocity(float velocity) {
 		while (true) {
 			if (rb2d.velocity.x != velocity)
 				rb2d.velocity = new Vector2(velocity, rb2d.velocity.y);
 
-			yield return null;
+			yield return new WaitForFixedUpdate();
 		}
 	}
 
+	protected IEnumerator MaintainAConstantXVelocity(float velocity, float time) {
+		while (true) {
+			if (rb2d.velocity.x != velocity)
+				rb2d.velocity = new Vector2(velocity, rb2d.velocity.y);
+			
+			yield return new WaitForSeconds(time);
+		}
+	}
 
 }

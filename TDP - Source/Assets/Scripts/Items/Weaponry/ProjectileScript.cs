@@ -57,7 +57,7 @@ public class ProjectileScript : MonoBehaviour {
 		arrowPower = ctorArrowPower;
 
 		//Start the coroutine that checks when the arrow should be destroyed (takes up memory space)
-		StartCoroutine ("DestroyIfDistanceFromPlayer");
+		StartCoroutine (DestroyIfDistanceFromPlayer());
 	}
 
 

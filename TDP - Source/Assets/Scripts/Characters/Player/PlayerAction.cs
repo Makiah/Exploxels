@@ -26,8 +26,8 @@ public class PlayerAction : CharacterBaseActionClass {
 
 		base.SetReferences ();
 
-		StartCoroutine ("CheckForWeaponInput");
-		StartCoroutine ("ListenForArrowMovement");
+		StartCoroutine (CheckForWeaponInput());
+		StartCoroutine (ListenForArrowMovement());
 
 	}
 
