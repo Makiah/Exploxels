@@ -44,8 +44,8 @@ public class SpearScript : ItemBase {
 		                                                                                                         distToEnemyLength, 
 		                                                                                                         enemyWithinAreaBounds, 
 		                                                                                                         attachedCharacterInput.GetFacingDirection (), 
-		                                                                                                         attachedCharacterInput.name == "Player");
-		
+		                                                                                                          attachedCharacterInput.characterName.Equals ("Player"));
+
 		if (resultingHealthPanelManager != null) {
 			resultingHealthPanelManager.YouHaveBeenAttacked (spearPowerAttack);
 		}

@@ -351,7 +351,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!1 &188460
 GameObject:
   m_ObjectHideFlags: 1
@@ -826,7 +826,7 @@ BoxCollider2D:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 105724}
   m_Enabled: 1
-  m_Material: {fileID: 6200000, guid: 43753284af9654601a12a7c61978d601, type: 2}
+  m_Material: {fileID: 6200000, guid: a14c4ba1eb50e49b0a7728d1c81f9a52, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: .0599999987}

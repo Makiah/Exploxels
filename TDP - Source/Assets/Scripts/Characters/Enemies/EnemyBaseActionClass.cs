@@ -106,6 +106,7 @@ public abstract class EnemyBaseActionClass : CharacterBaseActionClass {
 					//In the event that the x velocity is very small, jump.  
 					if (rb2d.velocity.x < moveForce / 1000f && grounded) {
 						InitializeJump(1);
+						Debug.Log("Jumping, grounded is " + grounded);
 						//Wait until we are in the air.  
 						//At some point, consider calculating the time at which the jump is at it's highest point and then resuming, as opposed to some constant.  
 						yield return new WaitForSeconds(0.3f);
