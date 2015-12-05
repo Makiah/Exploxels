@@ -111,7 +111,8 @@ public abstract class EnemyBaseActionClass : CharacterBaseActionClass {
 						yield return new WaitForSeconds(0.3f);
 						//Start moving forward again (mid-air).  
 						anim.SetFloat("Speed", 1);
-						yield return StartCoroutine(MaintainAConstantXVelocity(GetFacingDirection() * moveForce, 0.3f));					}
+						yield return StartCoroutine(MaintainAConstantXVelocity(GetFacingDirection() * moveForce, 0.3f));
+					}
 
 				}
 			} else {
