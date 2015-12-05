@@ -41,7 +41,7 @@ public class CharacterHealthPanelManager : MonoBehaviour {
 	//The player transform
 	protected Transform player;
 
-	[SerializeField] float distanceUntilHealthBarActive;
+	[SerializeField] float distanceUntilHealthBarActive = 0;
 
 	//Look into initializing this once the player comes into activation distance.  
 	protected virtual void InitializeHealthBar() {

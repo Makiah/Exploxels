@@ -3,7 +3,7 @@ using System.Collections;
 
 public class LimitSpriteZRotation : MonoBehaviour {
 
-	[SerializeField] private float rotationRange;
+	[SerializeField] private float rotationRange = 0;
 	
 	void Update() {
 		if (rotationRange < 180) {

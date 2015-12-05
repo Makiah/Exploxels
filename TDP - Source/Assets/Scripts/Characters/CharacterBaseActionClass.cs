@@ -66,34 +66,26 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 
 		//This changes based on the override methods.  
 		StartCoroutine (CheckCharacterPhysics());
-		StartCoroutine (PreventExcessPlayerSpeed());
 	}
 
 	private Transform[] GetAllGroundChecks() {
+		//The transform that holds all of the ground check transforms.  
+		Transform groundCheckParent = transform.FindChild ("FlippingItem").FindChild ("GroundChecks");
+
+		//Will contain all of the ground checks.  
 		List <Transform> groundCheckList = new List<Transform>();
 
 		int i = 1; 
 		//Loop through all ground checks until one does not exist.  
-		while (transform.FindChild("GroundCheck" + i)) {
-			groundCheckList.Add(transform.FindChild("GroundCheck" + i));
+		while (groundCheckParent.FindChild("GroundCheck" + i)) {
+			groundCheckList.Add(groundCheckParent.FindChild("GroundCheck" + i));
 			i++;
 		}
 
 		return groundCheckList.ToArray ();
 	}
 
-	//Used to prevent the excess speed of any enemy or player.  
-	IEnumerator PreventExcessPlayerSpeed() {
-		while (true) {
-			if (rb2d.velocity.magnitude > maxSpeed) {
-				rb2d.velocity = rb2d.velocity.normalized * maxSpeed;
-			}
-
-			yield return new WaitForFixedUpdate();
-		}
-
-	}
-
+	//Used to check grounded state.  
 	protected virtual IEnumerator CheckCharacterPhysics() {
 		while (true) {
 			grounded = CheckWhetherGrounded();
@@ -217,23 +209,18 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 	}
 
 	/**************** CHARACTER UTILITIES ***********************/
-
-	//Used for NPCs.  
-	protected IEnumerator MaintainAConstantXVelocity(float velocity) {
-		while (true) {
+	//This coroutine keeps enemies and NPCs at a constant velocity for a given duration of time (better than infinite mass).  
+	protected IEnumerator MaintainAConstantXVelocity(float velocity, float time) {
+		//Controls the time that it runs for.  
+		float currentTime = 0;
+		while (currentTime <= time) {
+			//Increment time.  
+			currentTime += Time.deltaTime;
+			//Check velocity.  
 			if (rb2d.velocity.x != velocity)
 				rb2d.velocity = new Vector2(velocity, rb2d.velocity.y);
 
 			yield return new WaitForFixedUpdate();
-		}
-	}
-
-	protected IEnumerator MaintainAConstantXVelocity(float velocity, float time) {
-		while (true) {
-			if (rb2d.velocity.x != velocity)
-				rb2d.velocity = new Vector2(velocity, rb2d.velocity.y);
-			
-			yield return new WaitForSeconds(time);
 		}
 	}
 

@@ -27,14 +27,22 @@ public class RaycastAttackUtilities : MonoBehaviour {
 			Debug.DrawLine (actualStartRaycastParameter, actualEndRaycastParameter, Color.green, 3f);
 		}
 
+		//Go through all linecast results and look for the health panel.  
 		if (linecastResult.Length != 0) {
 			for (int i = 0; i < linecastResult.Length; i++) {
-				if (linecastResult [i].collider.gameObject.GetComponent <CharacterHealthPanelManager> () != null) {
-					return linecastResult[i].collider.gameObject.GetComponent <CharacterHealthPanelManager> ();
+				//Check to make sure that the collider has a second parent.  
+				//If the collider has a parent and not a second parent, short-circuiting prevents an error.  
+				if (linecastResult[i].collider.transform.parent != null && linecastResult[i].collider.transform.parent.parent != null) {
+					Transform healthPanelTransform = linecastResult[i].collider.transform.parent.parent;
+					if (healthPanelTransform.GetComponent <CharacterHealthPanelManager> () != null) {
+						//Return the health panel manager if it exists.  
+						return healthPanelTransform.GetComponent <CharacterHealthPanelManager> ();
+					}
 				}
 			}
 		}
 
+		//In the event that none of the results had a health panel manager.  
 		return null;
 	}
 

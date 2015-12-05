@@ -43,9 +43,9 @@ public class LevelLayout : MonoBehaviour {
 	public int levelLength;	
 
 	[SerializeField]
-	private bool useCustomTerrain;
+	private bool useCustomTerrain = false;
 	[SerializeField]
-	private Transform terrainToUse;
+	private Transform terrainToUse = null;
 
 	TerrainReferenceClass InitializationMedium() {
 		if (! useCustomTerrain) {

@@ -2,8 +2,8 @@ using UnityEngine;
 using System.Collections;
 
 public class OreScript : DropsItems {
-	[SerializeField] private int typeOfOre;
-	[SerializeField] private Sprite[] possibleImages;
+	[SerializeField] private int typeOfOre = 0;
+	[SerializeField] private Sprite[] possibleImages = null;
 
 	SpriteRenderer attachedSpriteRenderer;
 

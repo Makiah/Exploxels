@@ -22,8 +22,8 @@ public class TreeScript : DropsItems {
 		public Sprite[] topTreeSprite;
 	}
 	
-	[SerializeField] private SpritePair[] treeTypes;
-	[SerializeField] int treeType;
+	[SerializeField] private SpritePair[] treeTypes = null;
+	[SerializeField] int treeType = 0;
 
 	//Note: Segment 1 is at top, 3 is at bottom.  
 	private SpriteRenderer top, segment1, segment2, segment3, segment4, segment5;

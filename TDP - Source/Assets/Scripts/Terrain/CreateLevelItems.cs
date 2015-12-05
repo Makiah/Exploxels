@@ -31,8 +31,8 @@ public class CreateLevelItems : MonoBehaviour {
 	/****************** PLAYER ********************/
 
 	//Variables that will be used later.  
-	[SerializeField] private GameObject playerToInstantiate;
-	[SerializeField] private Vector3 pointToInstantiatePlayerAt;
+	[SerializeField] private GameObject playerToInstantiate = null;
+	[SerializeField] private Vector3 pointToInstantiatePlayerAt = Vector3.zero;
 
 	//Instantiate the player
 	void InstantiatePlayer() {

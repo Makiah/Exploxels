@@ -28,7 +28,6 @@ public class PlayerAction : CharacterBaseActionClass {
 
 		StartCoroutine (CheckForWeaponInput());
 		StartCoroutine (ListenForArrowMovement());
-
 	}
 
 	//Used to check whether or not player is grounded, touching a wall, etc.  Defines movements.  

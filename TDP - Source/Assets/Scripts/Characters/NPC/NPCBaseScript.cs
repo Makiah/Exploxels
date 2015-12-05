@@ -33,10 +33,12 @@ public abstract class NPCBaseScript : CharacterBaseActionClass {
 	//Walks around fairly randomly, keeping the player at a constant velocity.  
 	protected virtual IEnumerator WalkAround() {
 		while (true) {
+			//Walk in one direction
 			anim.SetFloat("Speed", 1);
-			StartCoroutine (MaintainAConstantXVelocity(GetFacingDirection() * moveForce, 3));
+			yield return StartCoroutine (MaintainAConstantXVelocity(GetFacingDirection() * moveForce, 3));
 			anim.SetFloat("Speed", 0);
 			yield return new WaitForSeconds(3f);
+			//Flip (random movement)
 			if (Random.Range(0, 2) == 1)
 				Flip ();
 			

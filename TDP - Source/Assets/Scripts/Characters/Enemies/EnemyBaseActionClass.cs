@@ -100,7 +100,8 @@ public abstract class EnemyBaseActionClass : CharacterBaseActionClass {
 
 					//Start moving toward the target safe zone (we have already flipped to the position
 					anim.SetFloat("Speed", 1);
-					StartCoroutine(MaintainAConstantXVelocity(GetFacingDirection() * moveForce, 0.3f));
+					//Yield returning a coroutine makes it wait until the coroutine is completed.  
+					yield return StartCoroutine(MaintainAConstantXVelocity(GetFacingDirection() * moveForce, 0.3f));
 
 					//In the event that the x velocity is very small, jump.  
 					if (rb2d.velocity.x < moveForce / 1000f && grounded) {
@@ -110,7 +111,7 @@ public abstract class EnemyBaseActionClass : CharacterBaseActionClass {
 						yield return new WaitForSeconds(0.3f);
 						//Start moving forward again (mid-air).  
 						anim.SetFloat("Speed", 1);
-						StartCoroutine(MaintainAConstantXVelocity(GetFacingDirection() * moveForce, 0.3f));					}
+						yield return StartCoroutine(MaintainAConstantXVelocity(GetFacingDirection() * moveForce, 0.3f));					}
 
 				}
 			} else {

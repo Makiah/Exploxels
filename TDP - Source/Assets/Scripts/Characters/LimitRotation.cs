@@ -4,8 +4,8 @@ using System.Collections;
 public class LimitRotation : MonoBehaviour {
 
 	//These values are set in the Inspector.  They control the max and min values.  
-	[SerializeField] private Vector3 minRotation;
-	[SerializeField] private Vector3 maxRotation;
+	[SerializeField] private Vector3 minRotation = Vector3.zero;
+	[SerializeField] private Vector3 maxRotation = Vector3.zero;
 
 	//Constantly make sure they are within their ranges.  
 	void Update() {

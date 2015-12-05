@@ -19,7 +19,7 @@ public class DistrictDisplayer : MonoBehaviour {
 		public Sprite image = null;
 	}
 
-	[SerializeField] LevelDisplay[] levels;
+	[SerializeField] LevelDisplay[] levels = null;
 
 	void StartCountdown() {
 		//Show the district thing.  

@@ -137,68 +137,30 @@ GameObject:
 --- !u!114 &642813477
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11448840, guid: 18b4142b370cbb14baea755f1df9e14e,
-    type: 2}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 642813476}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8de66c6553ef64f648d72f9d21bb29a4, type: 3}
+  m_Script: {fileID: 11500000, guid: f588d94dfd13ad149870132d8f52a0ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerToInstantiate: {fileID: 172182, guid: c7d744bf7cde3a948aded2b45bbc2264, type: 2}
-  pointToInstantiatePlayerAt: {x: 10, y: 4.17999983, z: 0}
-  probabilityToInstantiateNullElement: 6
+  pointToInstantiatePlayerAt: {x: 12, y: 6, z: 0}
+  probabilityToInstantiateNullElement: 4
   initialGameElements:
-  - elementReference: {fileID: 162146, guid: 239c88de2e417429f81f5982ff17c935, type: 2}
-    probabilityOfInstantiation: 0
-    mustBeInstantiated: 1
-  - elementReference: {fileID: 197286, guid: 631222a38be4a43e8b4491de01ba9841, type: 2}
-    probabilityOfInstantiation: 0
-    mustBeInstantiated: 1
-  - elementReference: {fileID: 178818, guid: b93cc74f47786d941bc438f0f74f7171, type: 2}
-    probabilityOfInstantiation: 0
-    mustBeInstantiated: 1
-  - elementReference: {fileID: 178818, guid: b93cc74f47786d941bc438f0f74f7171, type: 2}
-    probabilityOfInstantiation: 0
-    mustBeInstantiated: 1
-  - elementReference: {fileID: 178818, guid: b93cc74f47786d941bc438f0f74f7171, type: 2}
-    probabilityOfInstantiation: 0
-    mustBeInstantiated: 1
-  - elementReference: {fileID: 178818, guid: b93cc74f47786d941bc438f0f74f7171, type: 2}
-    probabilityOfInstantiation: 0
-    mustBeInstantiated: 1
-  - elementReference: {fileID: 178818, guid: b93cc74f47786d941bc438f0f74f7171, type: 2}
-    probabilityOfInstantiation: 0
-    mustBeInstantiated: 1
-  - elementReference: {fileID: 119770, guid: afa5bd1c3a9b141b1a12127ac2dd692f, type: 2}
-    probabilityOfInstantiation: 5
-    mustBeInstantiated: 0
-  - elementReference: {fileID: 106888, guid: 857c93e1e681d4efe89ad134eadb7642, type: 2}
-    probabilityOfInstantiation: 3
-    mustBeInstantiated: 0
-  - elementReference: {fileID: 185688, guid: 5924714cab1d44ef2bd7e037cffdf22f, type: 2}
-    probabilityOfInstantiation: 0
-    mustBeInstantiated: 1
-  - elementReference: {fileID: 185688, guid: 5924714cab1d44ef2bd7e037cffdf22f, type: 2}
-    probabilityOfInstantiation: 0
-    mustBeInstantiated: 1
-  - elementReference: {fileID: 185688, guid: 5924714cab1d44ef2bd7e037cffdf22f, type: 2}
-    probabilityOfInstantiation: 5
-    mustBeInstantiated: 0
   - elementReference: {fileID: 123452, guid: 370d054f2a9e2475591478c5031ad787, type: 2}
-    probabilityOfInstantiation: 2
+    probabilityOfInstantiation: 0
     mustBeInstantiated: 0
 --- !u!114 &642813478
 MonoBehaviour:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 11420470, guid: 18b4142b370cbb14baea755f1df9e14e,
-    type: 2}
+  m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 642813476}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70ab5a26bfb7b44d3bb1fd80cc554b50, type: 3}
+  m_Script: {fileID: 11500000, guid: 9b3fce7570a69e549ab6bba15041cc04, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   transferSegments:
