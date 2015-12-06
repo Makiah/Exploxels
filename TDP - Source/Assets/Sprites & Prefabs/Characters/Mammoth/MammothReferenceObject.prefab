@@ -611,14 +611,14 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 119770}
-  m_Mass: 25
+  m_Mass: 3
   m_LinearDrag: 0
-  m_AngularDrag: .0500000007
+  m_AngularDrag: 0
   m_GravityScale: 3
   m_IsKinematic: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!60 &6075796
 PolygonCollider2D:
@@ -741,7 +741,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 5
   moveForce: 4
-  jumpForce: 12
+  jumpForce: 9.5
   wallJumpForce: 0
   groundedOffset: 0
   characterName: 
@@ -991,6 +991,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: maxYValueSeparation
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_CollisionDetection
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: jumpForce
+      value: 9.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
