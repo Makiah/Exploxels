@@ -149,8 +149,38 @@ MonoBehaviour:
   pointToInstantiatePlayerAt: {x: 12, y: 6, z: 0}
   probabilityToInstantiateNullElement: 4
   initialGameElements:
-  - elementReference: {fileID: 123452, guid: 370d054f2a9e2475591478c5031ad787, type: 2}
+  - elementReference: {fileID: 185688, guid: 5924714cab1d44ef2bd7e037cffdf22f, type: 2}
     probabilityOfInstantiation: 0
+    mustBeInstantiated: 1
+  - elementReference: {fileID: 185688, guid: 5924714cab1d44ef2bd7e037cffdf22f, type: 2}
+    probabilityOfInstantiation: 0
+    mustBeInstantiated: 1
+  - elementReference: {fileID: 178818, guid: b93cc74f47786d941bc438f0f74f7171, type: 2}
+    probabilityOfInstantiation: 0
+    mustBeInstantiated: 1
+  - elementReference: {fileID: 178818, guid: b93cc74f47786d941bc438f0f74f7171, type: 2}
+    probabilityOfInstantiation: 0
+    mustBeInstantiated: 1
+  - elementReference: {fileID: 178818, guid: b93cc74f47786d941bc438f0f74f7171, type: 2}
+    probabilityOfInstantiation: 0
+    mustBeInstantiated: 1
+  - elementReference: {fileID: 178818, guid: b93cc74f47786d941bc438f0f74f7171, type: 2}
+    probabilityOfInstantiation: 0
+    mustBeInstantiated: 1
+  - elementReference: {fileID: 178818, guid: b93cc74f47786d941bc438f0f74f7171, type: 2}
+    probabilityOfInstantiation: 0
+    mustBeInstantiated: 1
+  - elementReference: {fileID: 185688, guid: 5924714cab1d44ef2bd7e037cffdf22f, type: 2}
+    probabilityOfInstantiation: 5
+    mustBeInstantiated: 0
+  - elementReference: {fileID: 178818, guid: b93cc74f47786d941bc438f0f74f7171, type: 2}
+    probabilityOfInstantiation: 5
+    mustBeInstantiated: 0
+  - elementReference: {fileID: 123452, guid: 370d054f2a9e2475591478c5031ad787, type: 2}
+    probabilityOfInstantiation: 7
+    mustBeInstantiated: 0
+  - elementReference: {fileID: 119770, guid: afa5bd1c3a9b141b1a12127ac2dd692f, type: 2}
+    probabilityOfInstantiation: 7
     mustBeInstantiated: 0
 --- !u!114 &642813478
 MonoBehaviour:
