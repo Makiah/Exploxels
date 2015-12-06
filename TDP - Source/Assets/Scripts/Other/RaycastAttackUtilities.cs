@@ -52,8 +52,6 @@ public class RaycastAttackUtilities : MonoBehaviour {
 		Vector2 distToEnemyVectorLength = new Vector3 (distToEnemyOffset, 0);
 		Vector2 yOffsetVector = new Vector3 (0, yOffsetToEnemy);
 
-		Debug.Log ("Dist to enemy vector length is " + distToEnemyVectorLength);
-
 		int playerFacingDirection = characterFacingDirection;
 
 		//This sets the size of the eventual linecast.  
