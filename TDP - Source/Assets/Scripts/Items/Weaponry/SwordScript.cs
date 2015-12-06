@@ -39,43 +39,15 @@ public class SwordScript : ItemBase {
 	}
 	
 	void AttackEnemyInFocus () {
-
-		Vector3 enemyWithinAreaVectorBound = new Vector3 (enemyWithinAreaBounds, 0, 0);
-		Vector3 distToEnemyVectorLength = new Vector3 (distToEnemyLength, 0, 0);
+		CharacterHealthPanelManager resultingHealthPanelManager = RaycastAttackUtilities.LookForEnemyViaLinecast (attachedCharacterInput.transform.position, 
+		                                                                                                          distToEnemyLength, 
+		                                                                                                          enemyWithinAreaBounds, 
+		                                                                                                          attachedCharacterInput.GetFacingDirection (), 
+		                                                                                                          attachedCharacterInput.name == "Player");
 		
-		int playerFacingDirection = attachedCharacterInput.GetFacingDirection ();
-		
-		Vector3 startRaycastParameter = attachedCharacterInput.transform.position - enemyWithinAreaVectorBound;
-		Vector3 endRaycastParameter = attachedCharacterInput.transform.position + enemyWithinAreaVectorBound;
-		
-		Vector3 actualStartRaycastParameter = startRaycastParameter + distToEnemyVectorLength * playerFacingDirection;
-		Vector3 actualEndRaycastParameter = endRaycastParameter + distToEnemyVectorLength * playerFacingDirection;
-
-		RaycastHit2D[] linecastResult = Physics2D.LinecastAll (actualStartRaycastParameter, actualEndRaycastParameter, 1 << LayerMask.NameToLayer (lookForItemsOnLayer));
-
-		if (lookForItemsOnLayer == "Player") {
-			Debug.DrawLine (actualStartRaycastParameter, actualEndRaycastParameter, Color.red, 3f);
-		} else {
-			Debug.DrawLine (actualStartRaycastParameter, actualEndRaycastParameter, Color.green, 3f);
+		if (resultingHealthPanelManager != null) {
+			resultingHealthPanelManager.YouHaveBeenAttacked (swordPowerAttack);
 		}
-
-		GameObject result = GameObjectContainsCharacterHealthPanelManager (linecastResult);
-
-		if (result != null) {
-			result.GetComponent <CharacterHealthPanelManager> ().YouHaveBeenAttacked (swordPowerAttack);
-		}
-	}
-
-	GameObject GameObjectContainsCharacterHealthPanelManager(RaycastHit2D[] linecastCollisions) {
-		if (linecastCollisions.Length != 0) {
-			for (int i = 0; i < linecastCollisions.Length; i++) {
-				if (linecastCollisions [i].collider.gameObject.GetComponent <CharacterHealthPanelManager> () != null) {
-					return linecastCollisions[i].collider.gameObject;
-				}
-			}
-		}
-
-		return null;
 
 	}
 

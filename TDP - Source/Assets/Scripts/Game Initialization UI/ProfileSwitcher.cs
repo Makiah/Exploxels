@@ -14,7 +14,7 @@ public class ProfileSwitcher : MonoBehaviour {
 
 	//0 means male, 1 means female.  
 	[HideInInspector] public int currentGender = 0;
-	[SerializeField] Sprite maleImage, femaleImage;
+	[SerializeField] Sprite maleImage = null, femaleImage = null;
 	Image currentProfile;
 
 	void InitializeProfileSwitcher() {

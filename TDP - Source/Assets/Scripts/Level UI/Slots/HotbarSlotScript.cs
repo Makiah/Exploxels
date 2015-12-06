@@ -17,7 +17,7 @@ public class HotbarSlotScript : SlotScript {
 
 	GameObject selectionIcon;
 
-	public HotbarManager masterHotbarManager;
+	[HideInInspector] public HotbarManager masterHotbarManager;
 
 	public override void ReferenceChildren() {
 		base.ReferenceChildren ();
@@ -35,6 +35,17 @@ public class HotbarSlotScript : SlotScript {
 	public override void MouseItemMovementAndStackHandler() {
 		base.MouseItemMovementAndStackHandler ();
 		masterHotbarManager.UpdateSelectedItem ();
+	}
+
+	public override UISlotContentReference DeAssignItem() {
+		UISlotContentReference toReturn = currentlyAssigned;
+		currentlyAssigned = null;
+		childIcon.sprite = null;
+		childIcon.enabled = false;
+		UpdateStackIndicator ();
+		//Update the selected hotbar item (when it is de-assigned completely).  
+		masterHotbarManager.UpdateSelectedItem ();
+		return toReturn;
 	}
 
 }

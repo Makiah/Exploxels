@@ -41,7 +41,7 @@ public class CharacterHealthPanelManager : MonoBehaviour {
 	//The player transform
 	protected Transform player;
 
-	[SerializeField] float distanceUntilHealthBarActive;
+	[SerializeField] float distanceUntilHealthBarActive = 0;
 
 	//Look into initializing this once the player comes into activation distance.  
 	protected virtual void InitializeHealthBar() {
@@ -52,15 +52,15 @@ public class CharacterHealthPanelManager : MonoBehaviour {
 		//Initialize icon
 		characterHeadSprite = transform.GetChild (0).GetChild (0).FindChild ("Head").GetComponent <SpriteRenderer> ().sprite;
 		//Start the coroutine that manages the active state of the health bar item.  
-		StartCoroutine ("ControlHealthBarState");
+		StartCoroutine (ControlHealthBarState());
 	}
 
 	// This coroutine controls the health bar controller.  
 	IEnumerator ControlHealthBarState() {
 		while (true) {
-			if (Vector3.Distance(transform.position, player.position) <= distanceUntilHealthBarActive && healthPanelReference == null) {
+			if (Vector2.Distance(transform.position, player.position) <= distanceUntilHealthBarActive && healthPanelReference == null) {
 				OnThisEnemyActivated();
-			} else if (Vector3.Distance(transform.position, player.position) > distanceUntilHealthBarActive && healthPanelReference != null) {
+			} else if (Vector2.Distance(transform.position, player.position) > distanceUntilHealthBarActive && healthPanelReference != null) {
 				OnThisEnemyDeActivated();
 			}
 

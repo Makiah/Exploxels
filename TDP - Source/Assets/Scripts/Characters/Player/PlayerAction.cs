@@ -26,15 +26,14 @@ public class PlayerAction : CharacterBaseActionClass {
 
 		base.SetReferences ();
 
-		StartCoroutine ("CheckForWeaponInput");
-		StartCoroutine ("ListenForArrowMovement");
-
+		StartCoroutine (CheckForWeaponInput());
+		StartCoroutine (ListenForArrowMovement());
 	}
 
 	//Used to check whether or not player is grounded, touching a wall, etc.  Defines movements.  
 	protected override IEnumerator CheckCharacterPhysics() {
 		while (true) {
-			grounded = Physics2D.Linecast (groundCheck.position, transform.position, 1 << LayerMask.NameToLayer ("Ground"));
+			grounded = CheckWhetherGrounded();
 			//Debug.DrawLine(groundCheck.position + new Vector3(groundedOffset, 0, 0), groundCheck.position - new Vector3(groundedOffset, 0, 0));
 			touchingWall = Physics2D.Linecast (transform.position, wallCheck.position, 1 << LayerMask.NameToLayer ("Ground"));
 
@@ -80,7 +79,7 @@ public class PlayerAction : CharacterBaseActionClass {
 			if (h < 0 && facingRight) 
 				Flip ();
 
-			GameObject.Find("Background").GetComponent <BackgroundScroller> ().Movement(rb2d.velocity.x / maxSpeed);
+			transform.FindChild("Main Camera").FindChild("Background").FindChild("Background Tiles").GetComponent <BackgroundScroller> ().Movement(rb2d.velocity.x / maxSpeed);
 
 			yield return new WaitForFixedUpdate();
 
@@ -90,7 +89,7 @@ public class PlayerAction : CharacterBaseActionClass {
 
 	/************************************************* ATTACKING *********************************************************/
 
-	string[] knownAttackKeys = {"Stab", "OverheadSlice", "ShootBow"};
+	string[] knownAttackKeys = {"Stab", "OverheadSlice", "ShootBow", "CreatePhysicalItem"};
 	
 	//The Update() method that will check whether the dictionary requirements for some attack have been met.  The code that sets the dictionary 
 	//is in the costume manager class.  

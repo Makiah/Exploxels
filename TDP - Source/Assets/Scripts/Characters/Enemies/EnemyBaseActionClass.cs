@@ -27,13 +27,13 @@ public abstract class EnemyBaseActionClass : CharacterBaseActionClass {
 	}
 
 	//The maximum distance that the player can be away from the enemy for it to activate.  
-	public float playerViewableThreshold;
-	//The safe distance to stay away from the player.  
-	public float remainDistanceFromPlayer;
-	//Once in the safe zone, how much closer can the player come before moving again?
-	public float ignorePlayerMovementThreshold;
+	[SerializeField] protected float playerViewableThreshold;
+	//When at this distance, the enemy will attack.  
+	[SerializeField] protected float playerAttackDistance;
+	//If the enemy is within the safe attack distance + the movement threshold, it will remain stationary.  
+	[SerializeField] protected float ignorePlayerMovementThreshold;
 	//What is the maximum difference in Y values the enemies must have to attack?
-	public float maxYValueSeparation;
+	[SerializeField] protected float maxYValueSeparation;
 
 	//The player transform
 	protected Transform player;
@@ -43,80 +43,92 @@ public abstract class EnemyBaseActionClass : CharacterBaseActionClass {
 
 		base.SetReferences ();
 
-		StartCoroutine ("BasicEnemyControl");
+		StartCoroutine (EnemyControl());
 	}
 
-	protected virtual IEnumerator BasicEnemyControl() {
+	//This should be FixedUpdate.  
+	protected virtual IEnumerator EnemyControl() {
+
+		//Continuously
 		while (true) {
-			if (Vector3.Distance(transform.position, player.transform.position) <= playerViewableThreshold) {
-				
-				float distanceFromLeftPointX = Mathf.Abs(transform.position.x - (player.transform.position.x - remainDistanceFromPlayer));
-				float distanceFromRightPointX = Mathf.Abs(transform.position.x - (player.transform.position.x + remainDistanceFromPlayer));
+			//Check to see whether player is within radius. 
+			if (Vector2.Distance(transform.position, player.transform.position) <= playerViewableThreshold) {
 
-				if (distanceFromLeftPointX <= distanceFromRightPointX) {
-					//Flip if some point to the left of the player is further right than the skeleton.  
-					if (player.position.x - remainDistanceFromPlayer >= transform.position.x) {
-						if (GetFacingDirection() != 1) {
-							Flip ();
-						}
-					} else {
-						if (GetFacingDirection() != -1) {
-							Flip();
-						}
+				//Calculate the distance from each respective safe zone.  
+				float distanceFromLeftSafeZone = transform.position.x - (player.transform.position.x - playerAttackDistance);
+				float distanceFromRightSafeZone = transform.position.x - (player.transform.position.x + playerAttackDistance);
+
+				//If we are in a safe zone, either the left, right, or neither.  
+				if (Mathf.Abs(distanceFromLeftSafeZone) <= ignorePlayerMovementThreshold || Mathf.Abs(distanceFromRightSafeZone) <= ignorePlayerMovementThreshold) {
+					//Flip to face the player and attack.  
+					Stop();
+					FlipToFacePlayer();
+					//Attack if the y values between the enemy and the player are close enough.  
+					if (Mathf.Abs(player.transform.position.y - transform.position.y) <= maxYValueSeparation) {
+						anim.SetTrigger("Attack");
+						Attack ();
 					}
+					yield return new WaitForSeconds(1.5f);
+
 				} else {
-					if (player.position.x + remainDistanceFromPlayer >= transform.position.x ) {
-						if (GetFacingDirection() != 1) {
+					//We are not in either safe zone.  
+
+					//This will hold the eventual value of the target safe zone.  
+					float distanceFromTargetSafeZone = 0;
+
+					//Give target safe zone a value.  
+					if (Mathf.Abs(distanceFromLeftSafeZone) <= Mathf.Abs(distanceFromRightSafeZone)) {
+						distanceFromTargetSafeZone = distanceFromLeftSafeZone;
+					} else {
+						distanceFromTargetSafeZone = distanceFromRightSafeZone;
+					}
+
+					//Calculate how to flip based on the distance from the target safe zone.  
+					//If we are to the left of the safe zone.  
+					//Example: We are at 7, and the left safe zone at 1.  7 - 1 is positive, and we are to the left of the safe zone.  
+					if (distanceFromTargetSafeZone < 0) {
+						//If we are facing left
+						if (GetFacingDirection() == -1)
+							//Flip to face the right side.  
 							Flip ();
-						}
-					} else {
-						if (GetFacingDirection() != -1) {
-							Flip();
-						}
+					} else if (distanceFromTargetSafeZone >= 0) {
+						//If we are facing right.  
+						if (GetFacingDirection() == 1) 
+							//Flip to face the left side.  
+							Flip ();
 					}
-				}
-				
-				if (Mathf.Abs(rb2d.velocity.x) < 1 && grounded) {
-					InitializeJump(1);
-				}
-				
-				anim.SetFloat("Speed", 1);
-				yield return new WaitForSeconds(.3f);
-				rb2d.velocity = new Vector3(moveForce * GetFacingDirection(), rb2d.velocity.y, 0);
-				yield return null;
 
-				if (Mathf.Abs(player.transform.position.y - transform.position.y) <= maxYValueSeparation) {
-					//Check if the current position is within the boundaries of the safe zone.  
-					if (distanceFromLeftPointX <= distanceFromRightPointX) {
-						if (distanceFromLeftPointX <= ignorePlayerMovementThreshold) {
-							FlipToFacePlayer();
-							rb2d.velocity = new Vector2(0, rb2d.velocity.y);
-							anim.SetFloat("Speed", 0);
-							Attack ();
-							yield return new WaitForSeconds(2.5f);
-						}
-					} else {
-						if (distanceFromRightPointX <= ignorePlayerMovementThreshold) {
-							FlipToFacePlayer();
-							rb2d.velocity = new Vector2(0, rb2d.velocity.y);
-							anim.SetFloat("Speed", 0);
-							Attack ();
-							yield return new WaitForSeconds(2.5f);
-						}
+					//Start moving toward the target safe zone (we have already flipped to the position
+					anim.SetFloat("Speed", 1);
+					//Yield returning a coroutine makes it wait until the coroutine is completed.  
+					yield return StartCoroutine(MaintainAConstantXVelocity(GetFacingDirection() * moveForce, 0.3f));
+
+					//In the event that the x velocity is very small, jump.  
+					if (Mathf.Abs (rb2d.velocity.x) < moveForce / 100f && grounded) {
+						InitializeJump(1);
+						//Wait until we are in the air.  
+						//At some point, consider calculating the time at which the jump is at it's highest point and then resuming, as opposed to some constant.  
+						yield return new WaitForSeconds(0.3f);
+						//Start moving forward again (mid-air).  
+						anim.SetFloat("Speed", 1);
+						yield return StartCoroutine(MaintainAConstantXVelocity(GetFacingDirection() * moveForce, 0.3f));
 					}
-				}
 
+				}
 			} else {
-				anim.SetFloat("Speed", 0);
-				rb2d.velocity = new Vector3(0, rb2d.velocity.y, 0);
-			
-				yield return null;
+				//We are not viewable by the player.  
+				Stop ();
+				//Wait a couple seconds instead of a frame (processing reasons).  
+				yield return new WaitForSeconds(3);
 			}
-			
+
+			//Every frame
+			yield return new WaitForFixedUpdate();
 		}
 
 	}
 
+	//Used to flip to face the player.  
 	void FlipToFacePlayer() {
 		if (player.position.x >= transform.position.x) {
 			if (GetFacingDirection() != 1) {

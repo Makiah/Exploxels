@@ -40,6 +40,7 @@ public class PlayerHealthPanelReference : HealthPanelReference {
 
 	//The method that controls the values of the experience bar.  
 	public int UpdateExperience (int currentExp) {
+		Debug.Log ("Experience updated");
 		if (currentExp >= experienceSlider.maxValue) {
 			int valueForNextSlider = currentExp - (int) experienceSlider.maxValue;
 			currentLevel++;
@@ -55,7 +56,11 @@ public class PlayerHealthPanelReference : HealthPanelReference {
 		}
 	}
 
+	//Add/subtract coins.  
 	public bool UpdateCoinValue(int valueToAdd) {
+		//In case an objective depends on this.  
+		CurrentLevelVariableManagement.GetMainObjectiveManager ().OnMoneyModified (valueToAdd);
+		//Determine the new coin value.  
 		int newCoinValue = int.Parse (coinValue.text) + valueToAdd;
 		if (newCoinValue >= 0) {
 			coinValue.text = newCoinValue.ToString ();
@@ -64,6 +69,7 @@ public class PlayerHealthPanelReference : HealthPanelReference {
 			return false;
 	}
 
+	//Get the total amount of coins the player has.  
 	public int GetCoinAmount() {
 		return int.Parse(coinValue.text);
 	}

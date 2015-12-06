@@ -9,8 +9,6 @@ public class ElfBehaviour : Artisan {
 		GetComponent <NPCPanelController> ().SetCharacterDialogue (dialogue);
 	}
 
-	bool readyToLoadNextLevel = false;
-
 	public override void NPCActionBeforeSpeaking() {
 		if (ModifiesSlotContent.DetermineWhetherPlayerHasCertainInventoryItem(
 			new UISlotContentReference(ResourceDatabase.GetItemByParameter("Wooden Sword"), 1)) != null
@@ -18,15 +16,13 @@ public class ElfBehaviour : Artisan {
 			ModifiesSlotContent.DetermineWhetherPlayerHasCertainInventoryItem(
 			new UISlotContentReference(ResourceDatabase.GetItemByParameter("Wooden Hatchet"), 1)) != null
 			) {
-			string[] newDialogue = new string[] {"Nice job!", "See you in the next level"};
+			string[] newDialogue = new string[] {"Nice job!", "See you in the next level."};
 			GetComponent <NPCPanelController> ().SetCharacterDialogue(newDialogue);
-			readyToLoadNextLevel = true;
 		}
 	}
 
 	public override void NPCActionAfterSpeaking() {
-		/*if (readyToLoadNextLevel)*/
-			CurrentLevelVariableManagement.GetMainGameControl ().OnTutorialComplete ();
+
 	}
 
 }

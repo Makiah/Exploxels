@@ -33,37 +33,37 @@ public class ProjectileScript : MonoBehaviour {
 		//Set physics of the projectile.  
 		rb2d = GetComponent <Rigidbody2D> ();
 		//Returned in radians.  
-		float radianAngleToPlayer = Mathf.Atan2 ((positionToFireToward.y - transform.position.y) , (positionToFireToward.x - transform.position.x));
-		float degreeAngleToPlayer = ScriptingUtilities.RadiansToDegrees (radianAngleToPlayer);
+		float radianAngleToTarget = Mathf.Atan2 ((positionToFireToward.y - transform.position.y) , (positionToFireToward.x - transform.position.x));
+		float degreeAngleToTarget = ScriptingUtilities.RadiansToDegrees (radianAngleToTarget);
 
 		//Used to set the threshold angles that the arrow can be shot at.  
 		if (currentHeading == 0) {
-			if (180 >= degreeAngleToPlayer && degreeAngleToPlayer >= headingThreshold) 
-				degreeAngleToPlayer = headingThreshold;
-			else if (-180 <= degreeAngleToPlayer && degreeAngleToPlayer <= -headingThreshold) 
-				degreeAngleToPlayer = -headingThreshold;
+			if (180 >= degreeAngleToTarget && degreeAngleToTarget >= headingThreshold) 
+				degreeAngleToTarget = headingThreshold;
+			else if (-180 <= degreeAngleToTarget && degreeAngleToTarget <= -headingThreshold) 
+				degreeAngleToTarget = -headingThreshold;
 		} else if (currentHeading == 180) {
-			if (0 <= degreeAngleToPlayer && degreeAngleToPlayer <= 180 - headingThreshold) 
-				degreeAngleToPlayer = 180 - headingThreshold;
-			else if (0 >= degreeAngleToPlayer && degreeAngleToPlayer >= -180 + headingThreshold)
-				degreeAngleToPlayer = -180 + headingThreshold;
+			if (0 <= degreeAngleToTarget && degreeAngleToTarget <= 180 - headingThreshold) 
+				degreeAngleToTarget = 180 - headingThreshold;
+			else if (0 >= degreeAngleToTarget && degreeAngleToTarget >= -180 + headingThreshold)
+				degreeAngleToTarget = -180 + headingThreshold;
 		}
 
-		degreeAngleToPlayer += Random.Range (0, maxRandomDeviation) - maxRandomDeviation / 2;
+		degreeAngleToTarget += Random.Range (0, maxRandomDeviation) - maxRandomDeviation / 2;
 		
-		transform.localRotation = Quaternion.Euler(new Vector3 (0, 0, degreeAngleToPlayer));
-		rb2d.velocity = new Vector2 (velocity * Mathf.Cos (ScriptingUtilities.DegreesToRadians(degreeAngleToPlayer)), velocity * Mathf.Sin (ScriptingUtilities.DegreesToRadians(degreeAngleToPlayer)));
+		transform.localRotation = Quaternion.Euler(new Vector3 (0, 0, degreeAngleToTarget));
+		rb2d.velocity = new Vector2 (velocity * Mathf.Cos (ScriptingUtilities.DegreesToRadians(degreeAngleToTarget)), velocity * Mathf.Sin (ScriptingUtilities.DegreesToRadians(degreeAngleToTarget)));
 
 		arrowPower = ctorArrowPower;
 
 		//Start the coroutine that checks when the arrow should be destroyed (takes up memory space)
-		StartCoroutine ("DestroyIfDistanceFromPlayer");
+		StartCoroutine (DestroyIfDistanceFromPlayer());
 	}
 
 
 	IEnumerator DestroyIfDistanceFromPlayer() {
 		while (true) {
-			if (Vector3.Distance (transform.position, playerObject.transform.position) >= destroyIfDistanceFromPlayer) {
+			if (Vector2.Distance (transform.position, playerObject.transform.position) >= destroyIfDistanceFromPlayer) {
 				Destroy (this.gameObject);
 			}
 			yield return null;

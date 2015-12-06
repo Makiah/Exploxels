@@ -21,7 +21,7 @@ public class BackgroundScroller : MonoBehaviour {
 	//Sets references to the necessary scrolling components (as well as a few calculations).  
 	void InitializeBackgroundElements() {
 		float terrainXLength = CurrentLevelVariableManagement.GetLevelLengthX ();
-		float backgroundXLength = terrainXLength * (scrollSpeed * 12);
+		float backgroundXLength = terrainXLength * (scrollSpeed * 15);
 		int maxBackgroundSegments = (int) (backgroundXLength / segments[0].bounds.size.x + 1);
 		for (int i = 0; i < maxBackgroundSegments; i++) {
 			GameObject createdPanel = (GameObject) (Instantiate(backgroundPanel, Vector3.zero, Quaternion.identity));

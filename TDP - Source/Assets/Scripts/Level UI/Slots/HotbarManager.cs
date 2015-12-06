@@ -54,9 +54,8 @@ public class HotbarManager : MonoBehaviour {
 		
 		previouslyActiveSlot = -1;
 		currentlyActiveSlot = 0;
-		UpdateSelectedItem ();
 
-		StartCoroutine ("CheckForActiveItemKey");
+		StartCoroutine (CheckForActiveItemKey());
 	}
 
 	//Used for detecting number keys.  
@@ -110,6 +109,19 @@ public class HotbarManager : MonoBehaviour {
 			playerCostumeManager.UpdatePlayerItem (hotbarSlots [currentlyActiveSlot].GetCurrentlyAssigned().uiSlotContent.holdingPrefab);
 		} else {
 			playerCostumeManager.UpdatePlayerItem(null);
+		}
+	}
+
+	//For instance: when an item is used.  
+	public void ModifyStackOfSelectedItem(int stackToRemove) {
+		//Error checking.  
+		if (hotbarSlots [currentlyActiveSlot].GetCurrentlyAssigned () != null) {
+			//Remove item
+			hotbarSlots [currentlyActiveSlot].ModifyCurrentItemStack (-stackToRemove);
+			UpdateSelectedItem();
+			
+		} else {
+			Debug.LogError("Cannot change stack of null!!!");
 		}
 	}
 

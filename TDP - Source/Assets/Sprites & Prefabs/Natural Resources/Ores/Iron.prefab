@@ -25,8 +25,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 106888}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: .5, z: 0}
-  m_LocalScale: {x: .75, y: .75, z: 1}
+  m_LocalPosition: {x: 0, y: .649999976, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -57,8 +57,7 @@ MonoBehaviour:
   experienceToDrop: 0
   typeOfOre: 6
   possibleImages:
-  - {fileID: 21300000, guid: 0d53cba6439634dc39a840e1f273274e, type: 3}
-  - {fileID: 21300000, guid: e9071b6b60c7440658a162160bc7ea66, type: 3}
+  - {fileID: 21300000, guid: fa0180b40793542fc9f3ccded3d85726, type: 3}
   hitsUntilDrop: 2
 --- !u!212 &21214574
 SpriteRenderer:
@@ -78,13 +77,15 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_ScaleInLightmap: 1
   m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
+  m_MinimumChartSize: 4
   m_AutoUVMaxDistance: .5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
+  m_SortingLayerID: -1806049951
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0d53cba6439634dc39a840e1f273274e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fa0180b40793542fc9f3ccded3d85726, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
 --- !u!1001 &100100000
 Prefab:
@@ -92,7 +93,42 @@ Prefab:
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: possibleImages.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: fa0180b40793542fc9f3ccded3d85726,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_SortingLayerID
+      value: -1806049951
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: possibleImages.Array.data[1]
+      value: 
+      objectReference: {fileID: 21300000, guid: e9071b6b60c7440658a162160bc7ea66,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: possibleImages.Array.data[0]
+      value: 
+      objectReference: {fileID: 21300000, guid: fa0180b40793542fc9f3ccded3d85726,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalPosition.y
+      value: .649999976
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 106888}

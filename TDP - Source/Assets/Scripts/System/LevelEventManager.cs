@@ -1,7 +1,7 @@
 
 /*
  * Author: Makiah Bennett
- * Last edited: 27 September 2015
+ * Last edited: 18 November 2015
  * 
  * This script manages the entire path the game takes.  Each event is static, so it only belongs to this class.  Each OnEnable() and OnDsiable() 
  * assigns and de-assigns events to this class.  
@@ -18,7 +18,9 @@ public class LevelEventManager : MonoBehaviour {
 	//Pretty much contains every event that does not require a parameter or a return type.  
 	public delegate void BaseInitialization();
 
+	//This delegate will be used for returning the final array of SlotScripts.  
 	public delegate SlotScript[,] InventorySlotInitialization ();
+
 	public static event InventorySlotInitialization CreateInventorySlots;
 	public static event InventorySlotInitialization CreateHotbarSlots;
 
@@ -35,12 +37,12 @@ public class LevelEventManager : MonoBehaviour {
 
 	public static event BaseInitialization InitializeUISpeechControl;
 
+	public static event BaseInitialization InitializeObjectiveManager;
+
 	public delegate TerrainReferenceClass TerrainInitialization();
 	public static event TerrainInitialization InitializeTerrain;
 
 	public static event BaseInitialization CreatePlayer;
-
-	public static event BaseInitialization InitializeLightingSystem;
 
 	public static event BaseInitialization InitializePlayer; //Use for initializing CostumeManager and PlayerAction, as well as the PlayerHealthController.  
 
@@ -50,9 +52,12 @@ public class LevelEventManager : MonoBehaviour {
 
 	public static event BaseInitialization InitializeCameraFunctions;
 	public static event BaseInitialization InitializeBackgroundScroller;
+	public static event BaseInitialization InitializeTimeIndicator;
 
 	public delegate void TerrainCreation (TerrainReferenceClass maze);
 	public static event TerrainCreation CreateTerrainItems;
+	
+	public static event BaseInitialization InitializeSystemWideParticleEffect;
 
 	public static event BaseInitialization InitializeEnemyHealthControllers;
 	public static event BaseInitialization InitializeEnemies;
@@ -63,8 +68,21 @@ public class LevelEventManager : MonoBehaviour {
 	public static event BaseInitialization InitializePurchasePanels;
 	public static event BaseInitialization InitializePurchasePanelManager;
 
-	void Start() {
 
+	//Pretty much the only Start() method in the whole program.  
+	void Start() {
+		//A coroutine has to be used, so that the program does not continue before the level has been loaded.  
+		StartCoroutine (WaitForGUILoad());
+	}
+
+	//In order to allow the level to finish loading.  
+	IEnumerator WaitForGUILoad() {
+		//Thanks to Unity Answers.  
+		yield return Application.LoadLevelAdditiveAsync ("MainGameUI");
+		InitializeEverything ();
+	}
+
+	void InitializeEverything() {
 		//Note: This would be a lot easier if I could figure out a way to pass an event in as a method parameter, but all attempts have not worked.  
 
 		//Inventory UI Initialization
@@ -105,6 +123,8 @@ public class LevelEventManager : MonoBehaviour {
 		if (InitializeInteractablePanels != null) InitializeInteractablePanels(); else Debug.LogError("InitializeInteractablePanels was null!");
 		//Speech control
 		if (InitializeUISpeechControl != null) InitializeUISpeechControl (); else Debug.LogError("InitializeUISpeechControl was null!");
+		//Objective Manager
+		if (InitializeObjectiveManager != null) InitializeObjectiveManager(); else Debug.LogError("InitializeObjectiveManager was null!"); //Used for ObjectiveManager
 
 		//Lay out the level
 		TerrainReferenceClass initializedMaze = null;
@@ -114,17 +134,21 @@ public class LevelEventManager : MonoBehaviour {
 		if (CreatePlayer != null) CreatePlayer(); else Debug.LogError("CreatePlayer was null!"); //Used for CreateLevelItems (Instantiating player)
 		//Has to be done after the player is instantiated.  
 		CurrentLevelVariableManagement.SetLevelReferences ();
-		if (InitializeLightingSystem != null) InitializeLightingSystem (); else Debug.LogError("InitializeLightingSystem was null!"); //Used for LightingManager.  
-		if (InitializeCostume != null) InitializeCostume(); else Debug.LogError("InitializeCostume was null!"); //Used for PlayerCostumeManager
+
 		if (InitializeHotbarManager != null) InitializeHotbarManager (); else Debug.LogError("InitializeHotbarItems was null!"); //Used for initializing the HotbarManager.  
-		if (InitializePlayer != null) InitializePlayer (); else Debug.LogError("InitializePlayer was null!"); //Used for initializing the HumanoidBaseReferenceClass.  
 
 		ModifiesSlotContent.InitializeSystem (totalNumberOfInventorySlots); //Used for ModifiesSlotContent
+
+		if (InitializeCostume != null) InitializeCostume(); else Debug.LogError("InitializeCostume was null!"); //Used for PlayerCostumeManager
+		if (InitializePlayer != null) InitializePlayer (); else Debug.LogError("InitializePlayer was null!"); //Used for initializing the HumanoidBaseReferenceClass.  
+
 		if (InitializeCameraFunctions != null) InitializeCameraFunctions (); else Debug.LogError("InitializeCameraFunctions was null!"); // Used for camera controller.  
 		if (InitializeBackgroundScroller != null) InitializeBackgroundScroller (); else Debug.LogError("InitializeBackgroundScroller was null!"); //Initialize the BackgroundScroller class.  
+		if (InitializeTimeIndicator != null) InitializeTimeIndicator(); else Debug.LogError("InitializeTimeIndicator was null!!"); //Used for TimeIndicator.  
 
 		//Initialize the enemies.  
 		if (CreateTerrainItems != null) CreateTerrainItems(initializedMaze); else Debug.LogError("CreateTerrainItems was null!"); //Used for instantiating the enemies and trees.  
+		if (InitializeSystemWideParticleEffect != null) InitializeSystemWideParticleEffect(); else Debug.LogError("InitializeSystemWideParticleEffect was null!");
 		if (InitializeEnemyHealthControllers != null) InitializeEnemyHealthControllers (); else Debug.LogError("InitializeEnemyHealthControllers was null!"); //Used for initializing CharacterHealthController.  
 		if (InitializeEnemies != null) InitializeEnemies(); else Debug.LogError("InitializeEnemies was null!"); //Used for all enemies (requires player being instantiated).  
 

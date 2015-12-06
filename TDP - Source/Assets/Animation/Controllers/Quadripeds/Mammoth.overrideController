@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!221 &22100000
+AnimatorOverrideController:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_Name: Mammoth
+  m_Controller: {fileID: 9100000, guid: 4f7a8b24d16a44c2e8a1976e7ff3009c, type: 2}
+  m_Clips:
+  - m_OriginalClip: {fileID: 7400000, guid: 2d6660a0fee8e4cc791b6ea31c611b79, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 2d6660a0fee8e4cc791b6ea31c611b79, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 901df777e0a9147d7b42c7aa3f6cb443, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 7911788a111174cc6a09425dd443a810, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: e8219cb3c4fab4924bc5a104bd0be85f, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 08d990b71f5d44ec9b2b6ba001f44952, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: 75abca1402193495f9a27121f1f094fb, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: 2d6660a0fee8e4cc791b6ea31c611b79, type: 2}
+  - m_OriginalClip: {fileID: 7400000, guid: f86916a3e76584ca0913a60968313c5d, type: 2}
+    m_OverrideClip: {fileID: 7400000, guid: a799c9f77634f45228a52b6c4507c64f, type: 2}

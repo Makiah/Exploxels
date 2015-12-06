@@ -47,7 +47,7 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 	public float groundedOffset;
 	
 	protected Transform characterSpriteObject;
-	protected Transform groundCheck;
+	protected Transform[] groundChecks;
 	
 	protected Animator anim;
 	protected Rigidbody2D rb2d;
@@ -57,18 +57,38 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 	public string characterName;
 	
 	protected virtual void SetReferences() {
+		//Get required components
 		anim = characterSpriteObject.GetComponent <Animator> ();
 		rb2d = GetComponent <Rigidbody2D> ();
-		groundCheck = transform.FindChild ("GroundCheck");
+		groundChecks = GetAllGroundChecks ();
 
 		maxSpeedInitial = maxSpeed;
-		
-		StartCoroutine ("CheckCharacterPhysics");
+
+		//This changes based on the override methods.  
+		StartCoroutine (CheckCharacterPhysics());
 	}
-	
+
+	private Transform[] GetAllGroundChecks() {
+		//The transform that holds all of the ground check transforms.  
+		Transform groundCheckParent = transform.FindChild ("FlippingItem").FindChild ("GroundChecks");
+
+		//Will contain all of the ground checks.  
+		List <Transform> groundCheckList = new List<Transform>();
+
+		int i = 1; 
+		//Loop through all ground checks until one does not exist.  
+		while (groundCheckParent.FindChild("GroundCheck" + i)) {
+			groundCheckList.Add(groundCheckParent.FindChild("GroundCheck" + i));
+			i++;
+		}
+
+		return groundCheckList.ToArray ();
+	}
+
+	//Used to check grounded state.  
 	protected virtual IEnumerator CheckCharacterPhysics() {
 		while (true) {
-			grounded = Physics2D.Linecast (groundCheck.position, transform.position, 1 << LayerMask.NameToLayer ("Ground"));
+			grounded = CheckWhetherGrounded();
 			
 			if (grounded) {
 				jumpInEffect = 0;
@@ -80,6 +100,17 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 			yield return null;
 		}
 		
+	}
+
+	//Use the grounded boolean instead
+	protected bool CheckWhetherGrounded() {
+		//Loop through the whole array and look for a true.  
+		for (int i = 0; i < groundChecks.Length; i++) {
+			if (Physics2D.Linecast (groundChecks[i].position, transform.position, 1 << LayerMask.NameToLayer ("Ground")))
+				return true;
+		}
+
+		return false;
 	}
 	
 	protected virtual void InitializeJump(int jumpStyle) {
@@ -108,7 +139,8 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 		}
 		
 	}
-	
+
+	//Changes the scale of FlippingItem
 	protected void Flip() {
 		facingRight = !facingRight;
 		Vector3 theScale = transform.FindChild("FlippingItem").localScale;
@@ -121,15 +153,24 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 		return facingRight ? 1 : -1;
 	}
 	
+	//Used to stop the character.  
+	protected void Stop() {
+		anim.SetFloat("Speed", 0);
+		rb2d.velocity = new Vector3(0, rb2d.velocity.y, 0);
+	}
+	
 	
 	/************************************************* ATTACKING *********************************************************/
-	
+
+	//This dictionary contains the possible weapon moves for the player.  The first entry contains the required action to trigger the action, and the second
+	//includes a string of the method.  
 	protected Dictionary <string, string> possibleWeaponMoves;
 	
 	protected ItemBase itemInUseByCharacter;
 	
 	protected bool currentlyInAttackAnimation = false;
-	
+
+	//This delegate is called after the animation completes.  
 	public delegate void ActionAfterCompletedAnimation ();
 	public event ActionAfterCompletedAnimation ActionsAfterAnimation;
 	
@@ -147,7 +188,8 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 		if (!currentlyInAttackAnimation) {
 			anim.SetTrigger (someAttackKey);
 			itemInUseByCharacter.InfluenceEnvironment (someAttackKey);
-			currentlyInAttackAnimation = true;
+			if (! (someAttackKey.Equals("CreatePhysicalItem")))
+				currentlyInAttackAnimation = true;
 		} else {
 			Debug.Log("Was in attack animation, did not attack");
 		}
@@ -166,5 +208,20 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 		currentlyInAttackAnimation = false;
 	}
 
+	/**************** CHARACTER UTILITIES ***********************/
+	//This coroutine keeps enemies and NPCs at a constant velocity for a given duration of time (better than infinite mass).  
+	protected IEnumerator MaintainAConstantXVelocity(float velocity, float time) {
+		//Controls the time that it runs for.  
+		float currentTime = 0;
+		while (currentTime <= time) {
+			//Increment time.  
+			currentTime += Time.deltaTime;
+			//Check velocity.  
+			if (rb2d.velocity.x != velocity)
+				rb2d.velocity = new Vector2(velocity, rb2d.velocity.y);
+
+			yield return new WaitForFixedUpdate();
+		}
+	}
 
 }

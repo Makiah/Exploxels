@@ -30,8 +30,9 @@ public class ResourceDatabase : MonoBehaviour {
 		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.GameTool, "Wooden Pickaxe", "A weak axe to gather ore and rock.", 2, "Weapons/Wooden/WoodenPickaxe/WoodenPickaxe"));
 		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.GameTool, "Wooden Bow", "A weak bow, useful for long range attacks.", 3, "Weapons/Wooden/WoodenBow/WoodenBow"));
 		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.GameTool, "Diamond Sword", "A strong monster-chopping sword.", 4, "Weapons/Diamond/DiamondSword/DiamondSword"));
+		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.GameTool, "Spear", "A tough caveman implement", 5, "Weapons/Other/Spear/Spear"));
 
-		//Crafting materialsi
+		//Crafting materials
 		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.CraftingMaterial, "Wood", "A vital material for any player", 0, "Items/Wood/Wood", "Items/Wood/UIWood"));
 		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.CraftingMaterial, "Wood Plank", "A vital wood refinement", 1, "Items/Wood/WoodPlank", "Items/Wood/UIWoodPlank"));
 
@@ -49,7 +50,8 @@ public class ResourceDatabase : MonoBehaviour {
 		masterItemList.Add(new ResourceReference(ResourceReference.ItemType.Food, "Sprout", "The start of a new beginning", 1, "Items/Food/Sprout/Sprout", "Items/Food/Sprout/UISprout"));
 
 		//Other 
-		masterItemList.Add (new ResourceReference(ResourceReference.ItemType.Other, "ExpNodule", "", 0, "Items/Other/ExpNodule"));
+		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.Other, "ExpNodule", "", 0, "Items/Other/ExpNodule", false));
+		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.Other, "Fire", "A life changing implement of cavemen", 1, "Items/Other/Fire/BasicWoodPile"));
 
 		/******************************************* RACES *******************************************/
 		//Gatherer
@@ -57,7 +59,9 @@ public class ResourceDatabase : MonoBehaviour {
 		gameProfessions.Add (new Profession("Professions/Gatherer/", "Gatherer", 0, gathererInitialItems));
 
 		//Hunter
-		UISlotContentReference[] hunterInitialItems = new UISlotContentReference[]{};
+		UISlotContentReference[] hunterInitialItems = new UISlotContentReference[]{
+			new UISlotContentReference(GetItemByParameter("Spear"), 1)
+		};
 		gameProfessions.Add (new Profession ("Professions/Hunter/", "Hunter", 1, hunterInitialItems));
 
 		/******************************************* COMBINATIONS *******************************************/
@@ -74,6 +78,13 @@ public class ResourceDatabase : MonoBehaviour {
 			new UISlotContentReference(ResourceDatabase.GetItemByParameter("Diamond"), 2)
 		},
 		new UISlotContentReference(ResourceDatabase.GetItemByParameter("Diamond Sword"), 1)));
+
+		//Fire
+		masterItemCombinationList.Add (new ItemCombination (new UISlotContentReference[] {
+			new UISlotContentReference(ResourceDatabase.GetItemByParameter("Wood"), 5), 
+			new UISlotContentReference(ResourceDatabase.GetItemByParameter("Coal"), 2)
+		}, 
+		new UISlotContentReference (ResourceDatabase.GetItemByParameter ("Fire"), 1)));
 
 	}
 

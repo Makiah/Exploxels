@@ -1,15 +1,12 @@
 # PROJECT SUMMARY #
 
 ## What is Three Doors? (Possibly consider renaming to Exploxels) ###
+
 ### TECHNICAL ###
-Three Doors is a 2D, Voxel Game made using the Unity3D game engine, and assets from Kenney.NL.  The concept of the game is similar to Magicite, Terraria, and Minecraft in many respects, yet what makes the project the most interesting is the concept, and the broad things you will be able to do in the final project.  NOTE: MINING WILL NEVER BE A FEATURE!!!
+Three Doors is a 2D, Voxel Game made using the Unity3D game engine, and assets from Kenney.NL.  The concept of the game is similar to Magicite, Terraria, and Minecraft in many respects, yet what makes the project the most interesting is the concept, and the broad things you will be able to do in the final project.  It is coded entirely in C#.  
+
 ### GAMEPLAY SUMMARY ###
-Players start off in a randomly generated (procedurally) world.  (Note: Entirely different from current spawn system).  Player meets a man who directs him
-to a village, who explains the game basics (subtlely), gives the player some money, and the player continues into a village.  Within the village, the player 
-receives traits that give bonuses to the player stats (Ex. Wizard NPC gives player magic capability bonus).  Once complete in the village, the player moves 
-into District 1.  A few NPCs roam about, but the world is mainly inhabited by skeletons, zombies, boars, the lot.  As the player ventures around the landscape, 
-he/she searches for a door that will lead to the next level (objective is to get to final level).  Once found, the player can continue on to the next level at 
-any point that the player chooses.  Districts continue until finally, the boss is battled and [hopefully] defeated.  PERMADEATH IN EFFECT.  
+Players in Exploxels travel through the most notable points in human history: working their way from the Ice Age up into the Stone Age, all the way to Modern Day.  Along the way, they have choices of professions, which will change the way their character appears and the tools they are allowed to use.  The different eras are all different scenes, with different enemies and terrain.  The main concept of the game remains the same, however.  The one problem that is notable is the fact that I have no freaking idea what the point for beating the game will be.  "Oh, you have to try to become the master of the universe!"  Probably not.  
 
 ### What is this repository for? ###
 This repository is used as a great way to keep track of code changes, new ideas, and revert unnecessary "updates, all with the power of Git.  The code is powered mainly by SmartGit, a great GUI for Windows, Mac, and (Thankfully) Linux.  

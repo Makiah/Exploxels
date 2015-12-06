@@ -31,7 +31,7 @@ public class PurchasePanelReference : MonoBehaviour {
 		cost.GetComponent<MeshRenderer> ().sortingLayerName = "PPanelFront";
 		cost.GetComponent<MeshRenderer> ().sortingOrder = 0;
 		player = CurrentLevelVariableManagement.GetPlayerReference ().transform;
-		StartCoroutine ("CheckForPurchase");
+		StartCoroutine (CheckForPurchase());
 	}
 
 	//Coroutine that checks for the activation of a W key.  

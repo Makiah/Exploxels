@@ -29,7 +29,7 @@ public class ZombieAction : EnemyBaseActionClass {
 		zombieSword.SetAttachedCharacterInput (this);
 		zombieSword.ChangeLayerToCheckForItemsOn ("Player");
 
-		remainDistanceFromPlayer = Random.Range (remainDistanceFromPlayer - 1, remainDistanceFromPlayer + 2);
+		ignorePlayerMovementThreshold = Random.Range (ignorePlayerMovementThreshold - 1, ignorePlayerMovementThreshold + 2);
 
 		//Refers to the EnemyBaseActionClass SetReferences, not the CharacterBaseActionClass SetReferences.  
 		base.SetReferences ();

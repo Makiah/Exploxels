@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class OldManBehaviour : NPCBaseScript {
@@ -9,6 +9,7 @@ public class OldManBehaviour : NPCBaseScript {
 
 	protected override void SetReferences() {
 		base.SetReferences ();
+		npcName = "Old Man";
 		string[] dialogue = new string[] {"Oh dear.  Oh dear me...", 
 			"Why hello there, young stranger.  I don't suppose you have a moment?", 
 			"These trees contain apples, which I need to stock up for winter.", 

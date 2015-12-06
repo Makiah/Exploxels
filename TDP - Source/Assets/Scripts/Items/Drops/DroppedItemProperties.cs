@@ -25,13 +25,13 @@ public class DroppedItemProperties : MonoBehaviour {
 
 	public void Initialize() {
 		player = CurrentLevelVariableManagement.GetPlayerReference ().transform;
-		StartCoroutine ("MoveTowardsPlayer");
+		StartCoroutine (MoveTowardsPlayer());
 	}
 
 	IEnumerator MoveTowardsPlayer() {
 		working = true;
 		while (true) {
-			if (Vector3.Distance(transform.position, player.transform.position) < 5)
+			if (Vector2.Distance(transform.position, player.transform.position) < 5)
 				transform.position = Vector3.Lerp(transform.position, player.transform.position, Time.deltaTime / 3);
 
 			yield return null;

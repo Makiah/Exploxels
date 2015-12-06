@@ -30,14 +30,14 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 	/******************************** SLOT SCRIPT *******************************/
 
 	// Main properties of each slot.  
-	UISlotContentReference currentlyAssigned;
+	protected UISlotContentReference currentlyAssigned;
 	bool thisSlotHasACombinationPending = false;
 
 	//Components
-	Image childIcon;
+	protected Image childIcon;
 	RectTransform selectionIndicator;
 	Transform tooltip;
-	Text stackIndicator;
+	protected Text stackIndicator;
 
 	//References
 	SlotMouseInputControl mainSlotManager;
@@ -130,20 +130,21 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 	public void AssignNewItem(UISlotContentReference itemToAssign) {
 		if (itemToAssign.stack != 0) {
 			Sprite itemWithoutPivotPoint = ScriptingUtilities.GetSpriteWithoutPivotPoint(itemToAssign.uiSlotContent.itemIcon);
-
 			childIcon.enabled = true;
 			currentlyAssigned = itemToAssign;
 			childIcon.sprite = itemWithoutPivotPoint;
+			UpdateStackIndicator();
 		} else {
 			Debug.LogError("Could not assign item with 0 stack!");
 		}
 	}
 	
-	public UISlotContentReference DeAssignItem() {
+	public virtual UISlotContentReference DeAssignItem() {
 		UISlotContentReference toReturn = currentlyAssigned;
 		currentlyAssigned = null;
 		childIcon.sprite = null;
 		childIcon.enabled = false;
+		UpdateStackIndicator ();
 		return toReturn;
 	}
 	
@@ -180,13 +181,13 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 	public void SetCombinationPending() {
 		selectionIndicator.gameObject.SetActive (true);
 		thisSlotHasACombinationPending = true;
-		StartCoroutine ("IndicateCombinationSelection");
+		StartCoroutine (IndicateCombinationSelection());
 	}
 
 	public void DisableCombinationPending() {
 		selectionIndicator.gameObject.SetActive (false);
 		thisSlotHasACombinationPending = false;
-		StopCoroutine ("IndicateCombinationSelection");
+		StopCoroutine (IndicateCombinationSelection());
 		selectionIndicator.localScale = new Vector3 (1, 1, 1);
 	}
 

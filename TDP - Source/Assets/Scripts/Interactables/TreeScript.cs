@@ -18,15 +18,18 @@ public class TreeScript : DropsItems {
 
 	[System.Serializable]
 	public class SpritePair {
-		public Sprite baseTreeSprite, trunkTreeSprite, topTreeSprite;
+		public Sprite baseTreeSprite, trunkTreeSprite;
+		public Sprite[] topTreeSprite;
 	}
-
-	public SpritePair[] treeTypes;
-	public int treeType;
+	
+	[SerializeField] private SpritePair[] treeTypes = null;
+	[SerializeField] int treeType = 0;
 
 	//Note: Segment 1 is at top, 3 is at bottom.  
 	private SpriteRenderer top, segment1, segment2, segment3, segment4, segment5;
 	private int currentlyActiveSegments;
+
+	private int spriteToUseForTreeTop;
 
 	protected override void MakeReferences() {
 		DropReferenceClass woodDrop = new DropReferenceClass (ResourceDatabase.GetItemByParameter ("Wood"), 1, 1, 1);
@@ -42,6 +45,9 @@ public class TreeScript : DropsItems {
 		segment5 = transform.FindChild ("Segment 5").GetComponent <SpriteRenderer> ();
 
 		currentlyActiveSegments = Random.Range (1, 6);
+
+		spriteToUseForTreeTop = Random.Range (0, treeTypes [treeType].topTreeSprite.Length);
+
 		UpdateTree ();
 	}
 
@@ -57,7 +63,7 @@ public class TreeScript : DropsItems {
 			segment5.sprite = null;
 			break;
 		case 1:
-			top.sprite = treeTypes[treeType].topTreeSprite;
+			top.sprite = treeTypes[treeType].topTreeSprite[spriteToUseForTreeTop];
 			top.gameObject.transform.localPosition = new Vector3 (0, 0.91f, 0);
 			segment1.sprite = null;
 			segment2.sprite = null;
@@ -66,7 +72,7 @@ public class TreeScript : DropsItems {
 			segment5.sprite = treeTypes[treeType].baseTreeSprite;
 			break;
 		case 2:
-			top.sprite = treeTypes[treeType].topTreeSprite;
+			top.sprite = treeTypes[treeType].topTreeSprite[spriteToUseForTreeTop];
 			top.gameObject.transform.localPosition = new Vector3 (0, 1.59f, 0);
 			segment1.sprite = null;
 			segment2.sprite = null;
@@ -75,7 +81,7 @@ public class TreeScript : DropsItems {
 			segment5.sprite = treeTypes[treeType].baseTreeSprite;
 			break;
 		case 3: 
-			top.sprite = treeTypes[treeType].topTreeSprite;
+			top.sprite = treeTypes[treeType].topTreeSprite[spriteToUseForTreeTop];
 			top.gameObject.transform.localPosition = new Vector3 (0, 2.29f, 0);
 			segment1.sprite = null;
 			segment2.sprite = null;
@@ -84,7 +90,7 @@ public class TreeScript : DropsItems {
 			segment5.sprite = treeTypes[treeType].baseTreeSprite;
 			break;
 		case 4: 
-			top.sprite = treeTypes[treeType].topTreeSprite;
+			top.sprite = treeTypes[treeType].topTreeSprite[spriteToUseForTreeTop];
 			top.gameObject.transform.localPosition = new Vector3 (0, 2.99f, 0);
 			segment1.sprite = null;
 			segment2.sprite = treeTypes[treeType].trunkTreeSprite;
@@ -93,7 +99,7 @@ public class TreeScript : DropsItems {
 			segment5.sprite = treeTypes[treeType].baseTreeSprite;
 			break;
 		case 5: 
-			top.sprite = treeTypes[treeType].topTreeSprite;
+			top.sprite = treeTypes[treeType].topTreeSprite[spriteToUseForTreeTop];
 			top.gameObject.transform.localPosition = new Vector3 (0, 3.69f, 0);
 			segment1.sprite = treeTypes[treeType].trunkTreeSprite;
 			segment2.sprite = treeTypes[treeType].trunkTreeSprite;
@@ -114,6 +120,8 @@ public class TreeScript : DropsItems {
 		if (currentlyActiveSegments == 0) {
 			Destroy (gameObject);
 		}
+
+		CurrentLevelVariableManagement.GetMainObjectiveManager ().OnTreeChopped ();
 	}
 
 }
