@@ -749,6 +749,7 @@ MonoBehaviour:
   playerAttackDistance: 3
   ignorePlayerMovementThreshold: 2
   maxYValueSeparation: 2
+  mammothAttackPower: 2
 --- !u!114 &11463256
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -999,6 +1000,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: jumpForce
       value: 9.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: mammothAttackPower
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

@@ -104,7 +104,7 @@ public abstract class EnemyBaseActionClass : CharacterBaseActionClass {
 					yield return StartCoroutine(MaintainAConstantXVelocity(GetFacingDirection() * moveForce, 0.3f));
 
 					//In the event that the x velocity is very small, jump.  
-					if (rb2d.velocity.x < moveForce / 1000f && grounded) {
+					if (Mathf.Abs (rb2d.velocity.x) < moveForce / 100f && grounded) {
 						InitializeJump(1);
 						//Wait until we are in the air.  
 						//At some point, consider calculating the time at which the jump is at it's highest point and then resuming, as opposed to some constant.  

@@ -147,7 +147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerToInstantiate: {fileID: 172182, guid: c7d744bf7cde3a948aded2b45bbc2264, type: 2}
   pointToInstantiatePlayerAt: {x: 12, y: 6, z: 0}
-  probabilityToInstantiateNullElement: 4
+  probabilityToInstantiateNullElement: 6
   initialGameElements:
   - elementReference: {fileID: 185688, guid: 5924714cab1d44ef2bd7e037cffdf22f, type: 2}
     probabilityOfInstantiation: 0
@@ -182,6 +182,12 @@ MonoBehaviour:
   - elementReference: {fileID: 119770, guid: afa5bd1c3a9b141b1a12127ac2dd692f, type: 2}
     probabilityOfInstantiation: 7
     mustBeInstantiated: 0
+  - elementReference: {fileID: 162146, guid: 239c88de2e417429f81f5982ff17c935, type: 2}
+    probabilityOfInstantiation: 0
+    mustBeInstantiated: 1
+  - elementReference: {fileID: 197286, guid: 631222a38be4a43e8b4491de01ba9841, type: 2}
+    probabilityOfInstantiation: 0
+    mustBeInstantiated: 1
 --- !u!114 &642813478
 MonoBehaviour:
   m_ObjectHideFlags: 0
