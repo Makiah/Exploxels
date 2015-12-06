@@ -66,7 +66,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &117394
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -81,7 +81,7 @@ GameObject:
   m_IsActive: 1
 --- !u!1 &124616
 GameObject:
-  m_ObjectHideFlags: 0
+  m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 4
@@ -150,6 +150,21 @@ GameObject:
   - 4: {fileID: 426564}
   m_Layer: 11
   m_Name: HoldingItem
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!1 &144342
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 482018}
+  m_Layer: 11
+  m_Name: GroundChecks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -290,8 +305,8 @@ Transform:
   m_LocalPosition: {x: -.210999995, y: -1.07000005, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 431514}
-  m_RootOrder: 1
+  m_Father: {fileID: 482018}
+  m_RootOrder: 0
 --- !u!4 &414200
 Transform:
   m_ObjectHideFlags: 1
@@ -329,8 +344,8 @@ Transform:
   m_LocalPosition: {x: .252000004, y: -1.07000005, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 431514}
-  m_RootOrder: 2
+  m_Father: {fileID: 482018}
+  m_RootOrder: 1
 --- !u!4 &425052
 Transform:
   m_ObjectHideFlags: 1
@@ -343,6 +358,7 @@ Transform:
   m_Children:
   - {fileID: 400012}
   - {fileID: 451060}
+  - {fileID: 482018}
   m_Father: {fileID: 431514}
   m_RootOrder: 0
 --- !u!4 &426564
@@ -368,8 +384,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 425052}
-  - {fileID: 413372}
-  - {fileID: 420758}
   m_Father: {fileID: 0}
   m_RootOrder: 0
 --- !u!4 &434792
@@ -420,6 +434,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 425052}
   m_RootOrder: 1
+--- !u!4 &482018
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 144342}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 413372}
+  - {fileID: 420758}
+  m_Father: {fileID: 425052}
+  m_RootOrder: 2
 --- !u!4 &492972
 Transform:
   m_ObjectHideFlags: 1
@@ -439,7 +467,7 @@ Rigidbody2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 197286}
-  m_Mass: 5
+  m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: .0500000007
   m_GravityScale: 1.5
@@ -529,7 +557,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxSpeed: 0
   moveForce: 3
-  jumpForce: 4
+  jumpForce: 9
   wallJumpForce: 0
   groundedOffset: 0
   characterName: 
@@ -724,7 +752,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Mass
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalPosition.x
@@ -733,6 +761,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_LocalPosition.y
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: jumpForce
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
