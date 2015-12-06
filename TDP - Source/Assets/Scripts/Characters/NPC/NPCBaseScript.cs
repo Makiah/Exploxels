@@ -13,26 +13,32 @@ public abstract class NPCBaseScript : CharacterBaseActionClass {
 	}
 
 	//Required for the NPCPanelController.  
-	public string npcName = "NPC";
+	[HideInInspector] public string npcName = "NPC";
 
 	bool walkingAround = true;
 
 	protected Transform playerTransform;
 	[SerializeField] protected float minDistanceRequiredForInteraction;
 
+	//By using an actual IEnumerator object, we can selectively run and manipulate coroutines.  
+	IEnumerator walkAroundCoroutine;
+
 	protected override void SetReferences() {
 		characterSpriteObject = transform.FindChild ("FlippingItem").FindChild ("Character");
 		base.SetReferences ();
 		playerTransform = CurrentLevelVariableManagement.GetPlayerReference ().transform;
-		StartCoroutine (WalkAround());
+		//Create and start the coroutine.  
+		walkAroundCoroutine = WalkAround ();
+		StartCoroutine (walkAroundCoroutine);
 	}
 
 	public abstract void NPCActionBeforeSpeaking();
 	public abstract void NPCActionAfterSpeaking();
 
-	//Walks around fairly randomly, keeping the player at a constant velocity.  
+	//Walks around fairly randomly, keeping the npc at a constant velocity.  
 	protected virtual IEnumerator WalkAround() {
 		while (true) {
+
 			//Walk in one direction
 			anim.SetFloat("Speed", 1);
 			//Yield returning a coroutine makes it wait until the coroutine is completed.  
@@ -55,8 +61,6 @@ public abstract class NPCBaseScript : CharacterBaseActionClass {
 			//Flip (random movement)
 			if (Random.Range(0, 2) == 1)
 				Flip ();
-			
-			yield return null;
 		}
 	}
 
@@ -65,8 +69,9 @@ public abstract class NPCBaseScript : CharacterBaseActionClass {
 	}
 	
 	public void StopWalkingAround() {
+		Debug.Log (gameObject.name + " NPC has stopped walking around.  Walking around is " + walkingAround);
 		if (walkingAround) {
-			StopCoroutine (WalkAround());
+			StopCoroutine (walkAroundCoroutine);
 			StopCoroutine("MaintainAConstantXVelocity");
 			Stop ();
 			walkingAround = false;
@@ -75,7 +80,7 @@ public abstract class NPCBaseScript : CharacterBaseActionClass {
 	
 	public void ResumeWalkingAround() {
 		if (! walkingAround) {
-			StartCoroutine(WalkAround());
+			StartCoroutine(walkAroundCoroutine);
 			walkingAround = true;
 		}
 	}

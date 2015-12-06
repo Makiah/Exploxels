@@ -562,7 +562,7 @@ MonoBehaviour:
   groundedOffset: 0
   characterName: 
   npcName: NPC
-  minDistanceRequiredForInteraction: 0
+  minDistanceRequiredForInteraction: 5
 --- !u!212 &21224066
 SpriteRenderer:
   m_ObjectHideFlags: 1
