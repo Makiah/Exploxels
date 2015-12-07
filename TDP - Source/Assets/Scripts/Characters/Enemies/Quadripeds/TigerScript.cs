@@ -25,8 +25,8 @@ public class TigerScript : EnemyBaseActionClass {
 	}
 
 	//Based off of SwordScript
-	private float enemyWithinAreaBounds = 1.5f;
-	private float distToEnemyLength = 1f;
+	private float enemyWithinAreaBounds = .8f;
+	private float distToEnemyLength = 1.5f;
 	
 	public float tigerAttackPower;
 

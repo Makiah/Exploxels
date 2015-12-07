@@ -24,9 +24,9 @@ public class MammothScript : EnemyBaseActionClass {
 	}
 	
 	//Based off of SwordScript
-	private float enemyWithinAreaBounds = 4f;
+	private float enemyWithinAreaBounds = 1.6f;
 	private float yOffsetToEnemy = -1f;
-	private float distToEnemyLength = 1.4f;
+	private float distToEnemyLength = 3.2f;
 	
 	public float mammothAttackPower;
 	

@@ -69,7 +69,6 @@ public abstract class NPCBaseScript : CharacterBaseActionClass {
 	}
 	
 	public void StopWalkingAround() {
-		Debug.Log (gameObject.name + " NPC has stopped walking around.  Walking around is " + walkingAround);
 		if (walkingAround) {
 			StopCoroutine (walkAroundCoroutine);
 			StopCoroutine("MaintainAConstantXVelocity");
