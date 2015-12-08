@@ -77,16 +77,16 @@ public class GameControl : MonoBehaviour {
 		case 0:
 			//For the Stone Age
 			mainProfessionChoiceManager.CreateProfessionChoice ("Choose your Ice Age Profession.", 
-			                                                    ResourceDatabase.GetRaceByParameter ("Gatherer"), "Gatherer", 
-			                                                    ResourceDatabase.GetRaceByParameter ("Hunter"), "Hunter"
+			                                                    ResourceDatabase.GetRaceByParameter ("Spear Fighter"), "Spear Fighter", 
+			                                                    ResourceDatabase.GetRaceByParameter ("Mace Fighter"), "Mace Fighter"
 			                                                    );
 			break;
 		default:
 			Debug.LogError("No level is specified!!!!");
 			//For the Iron Age
 			mainProfessionChoiceManager.CreateProfessionChoice ("Choose your Iron Age Profession.", 
-			                                                    ResourceDatabase.GetRaceByParameter ("Gatherer"), "Gatherer", 
-			                                                    ResourceDatabase.GetRaceByParameter ("Hunter"), "Hunter"
+			                                                    ResourceDatabase.GetRaceByParameter ("Spear Fighter"), "Spear Fighter", 
+			                                                    ResourceDatabase.GetRaceByParameter ("Mace Fighter"), "Mace Fighter"
 			                                                    );
 			break;
 		}

@@ -15,7 +15,8 @@ public class DropUtilities : MonoBehaviour {
 		createdObject.transform.FindChild("SpriteAnimation").GetComponent <SpriteRenderer> ().sprite = itemReference.uiSlotContent.itemIcon;
 		//Add the object info to the created object.  
 		createdObject.AddComponent <DroppedItemProperties> ();
-		createdObject.GetComponent <DroppedItemProperties> ().localResourceReference = new UISlotContentReference(itemReference.uiSlotContent, itemReference.stack);
+		//Drop one of the items.  
+		createdObject.GetComponent <DroppedItemProperties> ().localResourceReference = new UISlotContentReference(itemReference.uiSlotContent, 1);
 		createdObject.GetComponent <DroppedItemProperties> ().Initialize();
 
 		return createdObject;

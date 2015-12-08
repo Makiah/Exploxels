@@ -131,8 +131,7 @@ public class HotbarManager : MonoBehaviour {
 	IEnumerator CheckForPlayerDropItem() {
 		while (true) {
 			//Right click + shift.  
-			if (Input.GetMouseButtonDown (1) && Input.GetKey (KeyCode.LeftShift) && hotbarSlots[currentlyActiveSlot].GetCurrentlyAssigned() != null) {
-				Debug.Log("Running once");
+			if (Input.GetMouseButtonDown (1) && Input.GetKey (KeyCode.LeftShift) && hotbarSlots[currentlyActiveSlot].GetCurrentlyAssigned() != null) {			
 
 				//Instantiate the item.  
 				DropUtilities.InstantiateDroppedItem (hotbarSlots [currentlyActiveSlot].GetCurrentlyAssigned (), 4 * playerObject.GetComponent <PlayerAction> ().GetFacingDirection ());

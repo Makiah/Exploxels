@@ -31,7 +31,7 @@ public class ResourceDatabase : MonoBehaviour {
 		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.GameTool, "Wooden Bow", "A weak bow, useful for long range attacks.", 3, "Weapons/Wooden/WoodenBow/"));
 		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.GameTool, "Diamond Sword", "A strong monster-chopping sword.", 4, "Weapons/Diamond/DiamondSword/"));
 		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.GameTool, "Spear", "A tough caveman implement", 5, "Weapons/Other/Spear/"));
-		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.GameTool, "Mace", "A weapon that strikes fear into the hearts of all", 6, "Weapons/Other/Mace"));
+		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.GameTool, "Mace", "A weapon that strikes fear into the hearts of all", 6, "Weapons/Other/Mace/"));
 
 		//Crafting materials
 		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.CraftingMaterial, "Wood", "A vital material for any player", 0, "Items/Wood/"));
@@ -56,14 +56,16 @@ public class ResourceDatabase : MonoBehaviour {
 
 		/******************************************* RACES *******************************************/
 		//Gatherer
-		UISlotContentReference[] gathererInitialItems = new UISlotContentReference[]{};
-		gameProfessions.Add (new Profession("Professions/Gatherer/", "Gatherer", 0, gathererInitialItems));
+		UISlotContentReference[] maceFighterInitialItems = new UISlotContentReference[]{
+			new UISlotContentReference(ResourceDatabase.GetItemByParameter("Mace"), 1)
+		};
+		gameProfessions.Add (new Profession("Professions/MaceFighter/", "Mace Fighter", 0, maceFighterInitialItems));
 
 		//Hunter
-		UISlotContentReference[] hunterInitialItems = new UISlotContentReference[]{
+		UISlotContentReference[] spearFighterInitialItems = new UISlotContentReference[]{
 			new UISlotContentReference(GetItemByParameter("Spear"), 1)
 		};
-		gameProfessions.Add (new Profession ("Professions/Hunter/", "Hunter", 1, hunterInitialItems));
+		gameProfessions.Add (new Profession ("Professions/SpearFighter/", "Spear Fighter", 1, spearFighterInitialItems));
 
 		/******************************************* COMBINATIONS *******************************************/
 		//Wooden Sword
