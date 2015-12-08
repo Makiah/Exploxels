@@ -17,9 +17,7 @@ using System.Collections;
 
 public class DroppedItemProperties : MonoBehaviour {
 
-	public bool working = false;
-
-	[HideInInspector] public ResourceReference localResourceReference;
+	[HideInInspector] public UISlotContentReference localResourceReference;
 	private Transform player;
 
 
@@ -29,10 +27,13 @@ public class DroppedItemProperties : MonoBehaviour {
 	}
 
 	IEnumerator MoveTowardsPlayer() {
-		working = true;
 		while (true) {
-			if (Vector2.Distance(transform.position, player.transform.position) < 5)
-				transform.position = Vector3.Lerp(transform.position, player.transform.position, Time.deltaTime / 3);
+			if (Mathf.Abs(player.transform.position.x - transform.position.x) < 5) {
+				if (player.transform.position.x > transform.position.x)
+					transform.position += new Vector3(0.02f, 0, 0);
+				else 
+					transform.position += new Vector3(-0.02f, 0, 0);
+			}
 
 			yield return null;
 		}

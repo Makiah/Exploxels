@@ -23,8 +23,7 @@ public class ResourceReference {
 	public string itemDescription;
 	public int localGroupID;
 	public Sprite itemIcon;
-	public GameObject inGamePrefab;
-	public GameObject holdingPrefab;
+	public GameObject playerHoldingPrefab;
 
 	//Used for organizational convenience.  
 	public enum ItemType {
@@ -35,37 +34,38 @@ public class ResourceReference {
 		Other
 	}
 
+	//Note: These constructors require each folder to have naming conventions.  
+	//Player holding prefab for "Mace" should be under Prefabs/(path specified here)/Mace.  
+	//Drop Prefab for "Mace" should be under Prefabs/(path specified here)/MaceDrop.  
+	//Custom item icon (for inventory and cursor) should be under Prefabs/(path specified here)/MaceCustomIcon.  
+	//These components are loaded automatically if they exist.  If they do not, very specific errors should be returned.  
+
 	//Constructor that loads all required components.  
-	public ResourceReference (ItemType ctorItemType, string ctorItemScreenName, string ctorItemDescription, int ctorLocalGroupID, string localPath) {
+	public ResourceReference (ItemType ctorItemType, string ctorItemScreenName, string ctorItemDescription, int ctorLocalGroupID, string path) {
+		//Load the items that are a definite.  
 		itemType = ctorItemType;
 		itemScreenName = ctorItemScreenName;
 		itemDescription = ctorItemDescription;
 		localGroupID = ctorLocalGroupID;
-		inGamePrefab = Resources.Load ("Prefabs/" + localPath) as GameObject;
-		holdingPrefab = inGamePrefab;
-		itemIcon = inGamePrefab.GetComponent <SpriteRenderer> ().sprite;
-	}
 
-	//This constructor is an overload that has the ability to have both a physical and a ui prefab.  
-	public ResourceReference (ItemType ctorItemType, string ctorItemScreenName, string ctorItemDescription, int ctorLocalGroupID, string localPath, string customUIPrefabPath) {
-		itemType = ctorItemType;
-		itemScreenName = ctorItemScreenName;
-		itemDescription = ctorItemDescription;
-		localGroupID = ctorLocalGroupID;
-		inGamePrefab = Resources.Load ("Prefabs/" + localPath) as GameObject;
-		holdingPrefab = Resources.Load("Prefabs/" + customUIPrefabPath) as GameObject;
-		itemIcon = holdingPrefab.GetComponent <SpriteRenderer> ().sprite;
-	}
+		//Load the holding prefab.  
+		string inGamePrefabPath = "Prefabs/" + path + itemScreenName;
+		if ((Resources.Load (inGamePrefabPath) as GameObject) != null) 
+			playerHoldingPrefab = Resources.Load (inGamePrefabPath) as GameObject;
+		else 
+			Debug.LogError ("Could not load item " + itemScreenName + " holding prefab from path " + inGamePrefabPath);
 
-	public ResourceReference (ItemType ctorItemType, string ctorItemScreenName, string ctorItemDescription, int ctorLocalGroupID, string localPath, bool hasNoIcon) {
-		itemType = ctorItemType;
-		itemScreenName = ctorItemScreenName;
-		itemDescription = ctorItemDescription;
-		localGroupID = ctorLocalGroupID;
-		inGamePrefab = Resources.Load ("Prefabs/" + localPath) as GameObject;
-		holdingPrefab = inGamePrefab;
-		if (hasNoIcon)
-			itemIcon = inGamePrefab.GetComponent <SpriteRenderer> ().sprite;
+		//Set the sprite icon if it exists.  
+		string customIconPath = "Prefabs/" + path + itemScreenName + "CustomIcon";
+		if (Resources.Load <Sprite> (customIconPath) != null) {
+			itemIcon = Resources.Load <Sprite> (customIconPath);
+		} else {
+			Debug.Log ("Could not load custom icon for item " + itemScreenName + " at path " + customIconPath);
+			if (playerHoldingPrefab.GetComponent <SpriteRenderer> () != null) 
+				itemIcon = playerHoldingPrefab.GetComponent <SpriteRenderer> ().sprite;
+			else 
+				Debug.Log ("Item " + itemScreenName + " does not have an item icon");
+		}
 	}
 
 }

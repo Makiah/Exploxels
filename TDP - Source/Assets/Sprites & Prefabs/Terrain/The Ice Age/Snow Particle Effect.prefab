@@ -46,7 +46,7 @@ ParticleSystem:
   InitialModule:
     enabled: 1
     startLifetime:
-      scalar: 16
+      scalar: 12
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1139,7 +1139,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: InitialModule.startLifetime.scalar
-      value: 16
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: VelocityModule.enabled

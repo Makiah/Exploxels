@@ -30,6 +30,7 @@ public class HotbarManager : MonoBehaviour {
 
 	/************************************************** HOTBAR MANAGEMENT **************************************************/
 
+
 	GameObject playerObject;
 	PlayerCostumeManager playerCostumeManager;
 	
@@ -56,6 +57,7 @@ public class HotbarManager : MonoBehaviour {
 		currentlyActiveSlot = 0;
 
 		StartCoroutine (CheckForActiveItemKey());
+		StartCoroutine (CheckForPlayerDropItem ());
 	}
 
 	//Used for detecting number keys.  
@@ -106,7 +108,7 @@ public class HotbarManager : MonoBehaviour {
 
 		//Update the player's item
 		if (hotbarSlots [currentlyActiveSlot].GetCurrentlyAssigned() != null) {
-			playerCostumeManager.UpdatePlayerItem (hotbarSlots [currentlyActiveSlot].GetCurrentlyAssigned().uiSlotContent.holdingPrefab);
+			playerCostumeManager.UpdatePlayerItem (hotbarSlots [currentlyActiveSlot].GetCurrentlyAssigned().uiSlotContent.playerHoldingPrefab);
 		} else {
 			playerCostumeManager.UpdatePlayerItem(null);
 		}
@@ -122,6 +124,24 @@ public class HotbarManager : MonoBehaviour {
 			
 		} else {
 			Debug.LogError("Cannot change stack of null!!!");
+		}
+	}
+
+	//Used when a player has to drop an item.  
+	IEnumerator CheckForPlayerDropItem() {
+		while (true) {
+			//Right click + shift.  
+			if (Input.GetMouseButtonDown (1) && Input.GetKey (KeyCode.LeftShift) && hotbarSlots[currentlyActiveSlot].GetCurrentlyAssigned() != null) {
+				Debug.Log("Running once");
+
+				//Instantiate the item.  
+				DropUtilities.InstantiateDroppedItem (hotbarSlots [currentlyActiveSlot].GetCurrentlyAssigned (), 4 * playerObject.GetComponent <PlayerAction> ().GetFacingDirection ());
+
+				//Used to remove the current item from the hotbar.  
+				ModifyStackOfSelectedItem (1);
+			}
+
+			yield return null;
 		}
 	}
 

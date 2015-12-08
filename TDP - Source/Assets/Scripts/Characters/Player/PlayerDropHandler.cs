@@ -19,14 +19,14 @@ public class PlayerDropHandler : MonoBehaviour {
 	
 	//When an item drop hits the player.  
 	void OnTriggerEnter2D(Collider2D externalTrigger) {
-		if (externalTrigger.gameObject.GetComponent <DroppedItemProperties> () != null && ModifiesSlotContent.IsInitialized()) 
+		if ((externalTrigger.gameObject.GetComponent <DroppedItemProperties> () != null || externalTrigger.gameObject.CompareTag("ExpNodule")) && ModifiesSlotContent.IsInitialized()) 
 			PickupItem (externalTrigger.gameObject);
 	}
 
 	public void PickupItem(GameObject item) {
 		//This does not check the resourcereference property of the attached script as a comparison, only the tag.  Consider changing later.  
 		if (!(item.CompareTag ("ExpNodule"))) {
-			UISlotContentReference pendingObject = new UISlotContentReference (item.GetComponent <DroppedItemProperties> ().localResourceReference, 1);
+			UISlotContentReference pendingObject = item.GetComponent <DroppedItemProperties> ().localResourceReference;
 			if (! ModifiesSlotContent.AssignNewItemToBestSlot(pendingObject)) {
 				Debug.LogError("ERROR WHEN ASSIGNING OBJECT");
 			} else {

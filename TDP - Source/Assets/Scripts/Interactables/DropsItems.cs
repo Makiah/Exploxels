@@ -1,4 +1,4 @@
-﻿
+
 /*
  * Author: Makiah Bennett
  * Last edited: 8 October 2015
@@ -42,10 +42,7 @@ public abstract class DropsItems : MonoBehaviour {
 				if (Random.Range (0, drops [i].probabilityToDrop) == 0) {
 					for (int q = 0; q < Random.Range(drops[i].minToDrop, drops[i].maxToDrop + 1); q++) {
 						if (drops[i].dropReference != null) {
-							GameObject instantiatedDrop = (GameObject) (Instantiate (drops [i].dropReference.inGamePrefab, transform.position, Quaternion.identity));
-							instantiatedDrop.AddComponent <DroppedItemProperties> ();
-							instantiatedDrop.GetComponent <DroppedItemProperties> ().localResourceReference = drops[i].dropReference;
-							instantiatedDrop.GetComponent <DroppedItemProperties> ().Initialize();
+							DropUtilities.InstantiateDroppedItem(new UISlotContentReference(drops[i].dropReference, 1), 0);
 						} else {
 							Debug.Log("DropReference was null!!! (DropsItems)");
 						}
@@ -58,9 +55,9 @@ public abstract class DropsItems : MonoBehaviour {
 
 		if (experienceToDrop > 0) {
 			for (int i = 0; i < experienceToDrop; i++) {
-				GameObject expDropped = (GameObject) (Instantiate (expDrop.dropReference.inGamePrefab, transform.position, Quaternion.identity));
+				GameObject expDropped = (GameObject) (Instantiate (expDrop.dropReference.playerHoldingPrefab, transform.position, Quaternion.identity));
 				expDropped.AddComponent <DroppedItemProperties> ();
-				expDropped.GetComponent <DroppedItemProperties> ().localResourceReference = expDrop.dropReference;
+				expDropped.GetComponent <DroppedItemProperties> ().localResourceReference = new UISlotContentReference(expDrop.dropReference, 1);
 				expDropped.GetComponent <DroppedItemProperties> ().Initialize();
 			}
 		} else {
