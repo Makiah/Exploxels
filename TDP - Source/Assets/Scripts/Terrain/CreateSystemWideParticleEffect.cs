@@ -18,15 +18,14 @@ public class CreateSystemWideParticleEffect : MonoBehaviour {
 	void InitializeSystemWideParticleEffect() {
 		if (CurrentLevelVariableManagement.GetMainGameData ().currentLevel == 0) {
 			//Get level length
-			float levelLength = CurrentLevelVariableManagement.GetLevelLengthX ();
+			Camera mainCamera = CurrentLevelVariableManagement.GetMainCameraReference().GetComponent <Camera> ();
+			float cameraWidth = (mainCamera.orthographicSize * 2 * mainCamera.aspect) * 2; //Multiply by two so more is covered.  
 
 			//Instantiate the particle effect into the maze.  
 			GameObject createdParticleEffect = (GameObject) (Instantiate(snowParticleEffect, Vector3.zero, Quaternion.identity));
-			createdParticleEffect.transform.SetParent(GameObject.Find("Maze").transform);
 			//A local x of 0 means in the center of the maze.  
-			createdParticleEffect.transform.localPosition = new Vector3(levelLength/2, 60, 0);
 			//Set particle system size.  The particle system size is changed as the scale changes.  Add 50 so it covers the start segments as well.   
-			createdParticleEffect.transform.localScale = new Vector3 (levelLength + 70, 1, 1);
+			createdParticleEffect.transform.localScale = new Vector3 (cameraWidth + 70, 1, 1);
 
 			//Other setup stuff.  
 			createdParticleEffect.transform.eulerAngles = new Vector3(0, 0, 180);

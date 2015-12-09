@@ -10,6 +10,7 @@
 using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameControl : MonoBehaviour {
 	
@@ -31,7 +32,7 @@ public class GameControl : MonoBehaviour {
 		GetComponent <GameData> ().chosenGender = profileSwitcher.currentGender;
 		GetComponent <GameData> ().specifiedPlayerName = gameUI.transform.FindChild ("NameField").GetComponent <InputField> ().text;
 		//Load Profession Chooser level
-		Application.LoadLevel ("Profession Chooser");
+		SceneManager.LoadScene ("Profession Chooser");
 	}
 	
 	/***************************** PROFESSION CHOICE SCREEN *****************************/
@@ -98,11 +99,11 @@ public class GameControl : MonoBehaviour {
 		//Load level depending on current level.  
 		switch (GetComponent <GameData> ().currentLevel) {
 		case 0:
-			Application.LoadLevel ("Ice Age");
+			SceneManager.LoadScene ("Ice Age");
 			break;
 		default:
 			Debug.LogError("No level is specified!!!!");
-			Application.LoadLevel("Ice Age");
+			SceneManager.LoadScene ("Ice Age");
 			break;
 		}
 	}
@@ -124,6 +125,6 @@ public class GameControl : MonoBehaviour {
 		//Increment the current level.  
 		GetComponent <GameData> ().currentLevel += 1;
 		//Load the Profession Chooser for the next level
-		Application.LoadLevel ("Profession Chooser");
+		SceneManager.LoadScene ("Profession Chooser");
 	}
 }

@@ -12,6 +12,7 @@
 
 using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class LevelEventManager : MonoBehaviour {
 
@@ -78,7 +79,7 @@ public class LevelEventManager : MonoBehaviour {
 	//In order to allow the level to finish loading.  
 	IEnumerator WaitForGUILoad() {
 		//Thanks to Unity Answers.  
-		yield return Application.LoadLevelAdditiveAsync ("MainGameUI");
+		yield return Application.LoadLevelAdditiveAsync("MainGameUI");
 		InitializeEverything ();
 	}
 
