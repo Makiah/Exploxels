@@ -12,19 +12,41 @@ public class CreateSystemWideParticleEffect : MonoBehaviour {
 		LevelEventManager.InitializeSystemWideParticleEffect -= InitializeSystemWideParticleEffect;
 	}
 
+	//This variable holds the number of segments (sub-particle effects) that will be used for any given interval [x, 100+x]
+	[SerializeField] private int numberOfSegmentsToCreatePer100;
+	[SerializeField] private GameObject snowParticleEffect;
+
 	//Actual script
 	void InitializeSystemWideParticleEffect() {
+		//Check to make sure that this is the Ice Age.  
 		if (CurrentLevelVariableManagement.GetMainGameData ().currentLevel == 0) {
+			//Create the particle effect thing.  
+			GameObject createdParticleEffectParent = new GameObject("Level Particle Effect");
+			createdParticleEffectParent.transform.SetParent (GameObject.Find ("Maze").transform);
+
 			//Get level length
-			float currentLevelLength = CurrentLevelVariableManagement.GetLevelLengthX();
+			float levelLength = CurrentLevelVariableManagement.GetLevelLengthX();
+			float amountOfAreaToCover = 1.2f * levelLength;
 
-			//Set snow particle system size.  
-			transform.localScale = new Vector3 (1.2f * currentLevelLength, 1, 1);
-			transform.position = new Vector3 (currentLevelLength / 2, 30, 0);
+			createdParticleEffectParent.transform.localPosition = new Vector3 (levelLength / 2, 25, 0);
 
-			//Quick bug fix.  
-			gameObject.SetActive (false);
-			gameObject.SetActive (true);
+			//For all of the sub-100 segments.  (i.e., 700 width, 7 times).  
+			for (int i = 0; i < (int)(amountOfAreaToCover / 100f); i++) {
+				//For all of the particle effects that should be created for each interval of 100.  
+				for (int j = 0; j < numberOfSegmentsToCreatePer100; j++) {
+					//Create a particle effect at some point.  
+					//Formula is half the level length (counteract the local position of the parent) + i * numberOfSegmentsToCreatePer100
+					float particleEffectScale = 100f / numberOfSegmentsToCreatePer100;
+					float xPosition = (-amountOfAreaToCover / 2) + (i * numberOfSegmentsToCreatePer100 + j) * (particleEffectScale);
+
+					//Create the particle effect
+					GameObject createdParticleEffectSegment = (GameObject)(Instantiate (snowParticleEffect, Vector3.zero, snowParticleEffect.transform.localRotation));
+					createdParticleEffectSegment.transform.SetParent (createdParticleEffectParent.transform);
+					createdParticleEffectSegment.transform.localPosition = new Vector3 (xPosition, 0, 0);
+					createdParticleEffectSegment.transform.localScale = new Vector3 (particleEffectScale, 1, 1);
+					createdParticleEffectSegment.GetComponent <ActivityDependsOnPlayerDistance> ().StartPlayerDistanceChecking ();
+				}
+			}
 
 		}
 	}
