@@ -10,7 +10,7 @@ GameObject:
   - 4: {fileID: 465378}
   - 199: {fileID: 19992746}
   - 198: {fileID: 19879630}
-  - 114: {fileID: 11411862}
+  - 114: {fileID: 11492256}
   m_Layer: 0
   m_Name: Snow Particle Effect
   m_TagString: Untagged
@@ -30,7 +30,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11411862
+--- !u!114 &11492256
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -38,10 +38,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 130400}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5bb047b77a11d4a65be6f71510a24f4f, type: 3}
+  m_Script: {fileID: 11500000, guid: 3375ffe3072b2c140a7dd0b5299a16e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceRequirement: 20
+  distanceRequirement: 25
 --- !u!198 &19879630
 ParticleSystem:
   m_ObjectHideFlags: 1
@@ -398,7 +398,7 @@ ParticleSystem:
     serializedVersion: 2
     m_Type: 0
     rate:
-      scalar: 300
+      scalar: 50
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1358,7 +1358,7 @@ ParticleSystem:
     plane4: {fileID: 0}
     plane5: {fileID: 0}
     m_Dampen:
-      scalar: 0
+      scalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1531,7 +1531,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: distanceRequirement
-      value: 20
+      value: 25
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_LocalRotation.z
@@ -1540,6 +1540,26 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_LocalRotation.w
       value: -0.00000016292068
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: InitialModule.startLifetime.scalar
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: EmissionModule.rate.scalar
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: CollisionModule.quality
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: CollisionModule.m_Dampen.scalar
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

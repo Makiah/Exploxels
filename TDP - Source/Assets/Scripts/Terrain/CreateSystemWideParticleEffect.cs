@@ -13,8 +13,8 @@ public class CreateSystemWideParticleEffect : MonoBehaviour {
 	}
 
 	//This variable holds the number of segments (sub-particle effects) that will be used for any given interval [x, 100+x]
-	[SerializeField] private int numberOfSegmentsToCreatePer100;
-	[SerializeField] private GameObject snowParticleEffect;
+	[SerializeField] private int numberOfSegmentsToCreatePer100 = 0;
+	[SerializeField] private GameObject snowParticleEffect = null;
 
 	//Actual script
 	void InitializeSystemWideParticleEffect() {
@@ -28,7 +28,11 @@ public class CreateSystemWideParticleEffect : MonoBehaviour {
 			float levelLength = CurrentLevelVariableManagement.GetLevelLengthX();
 			float amountOfAreaToCover = 1.2f * levelLength;
 
-			createdParticleEffectParent.transform.localPosition = new Vector3 (levelLength / 2, 25, 0);
+			//Set the position of the particle effect parent.  
+			createdParticleEffectParent.transform.localPosition = new Vector3 (levelLength / 2, 45, 0);
+		
+			//The scale of the particle effect.  
+			float particleEffectScale = 100f / numberOfSegmentsToCreatePer100;
 
 			//For all of the sub-100 segments.  (i.e., 700 width, 7 times).  
 			for (int i = 0; i < (int)(amountOfAreaToCover / 100f); i++) {
@@ -36,7 +40,6 @@ public class CreateSystemWideParticleEffect : MonoBehaviour {
 				for (int j = 0; j < numberOfSegmentsToCreatePer100; j++) {
 					//Create a particle effect at some point.  
 					//Formula is half the level length (counteract the local position of the parent) + i * numberOfSegmentsToCreatePer100
-					float particleEffectScale = 100f / numberOfSegmentsToCreatePer100;
 					float xPosition = (-amountOfAreaToCover / 2) + (i * numberOfSegmentsToCreatePer100 + j) * (particleEffectScale);
 
 					//Create the particle effect
@@ -44,7 +47,12 @@ public class CreateSystemWideParticleEffect : MonoBehaviour {
 					createdParticleEffectSegment.transform.SetParent (createdParticleEffectParent.transform);
 					createdParticleEffectSegment.transform.localPosition = new Vector3 (xPosition, 0, 0);
 					createdParticleEffectSegment.transform.localScale = new Vector3 (particleEffectScale, 1, 1);
-					createdParticleEffectSegment.GetComponent <ActivityDependsOnPlayerDistance> ().StartPlayerDistanceChecking ();
+
+					//Set the emission rate of the particle effect.  
+					ParticleSystem.EmissionModule em = createdParticleEffectSegment.GetComponent <ParticleSystem> ().emission;
+					em.rate = new ParticleSystem.MinMaxCurve(particleEffectScale);
+					//Initialize the particle effect.  
+					createdParticleEffectSegment.GetComponent <ActivateParticleEffectDependingOnPlayerDistance> ().StartPlayerDistanceChecking ();
 				}
 			}
 

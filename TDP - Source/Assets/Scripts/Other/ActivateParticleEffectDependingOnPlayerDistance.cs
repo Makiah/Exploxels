@@ -1,14 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class ActivityDependsOnPlayerDistance : MonoBehaviour {
+public class ActivateParticleEffectDependingOnPlayerDistance : MonoBehaviour {
 
 	Transform player;
-	[SerializeField] private float distanceRequirement;
+	ParticleSystem mainParticleSystem;
+	[SerializeField] private float distanceRequirement = 0;
 
 	//Required to initialize.  
 	public void StartPlayerDistanceChecking() {
 		player = CurrentLevelVariableManagement.GetPlayerReference ().transform;
+		mainParticleSystem = GetComponent <ParticleSystem> ();
 
 		//Start the coroutine.  
 		StartCoroutine (ActivityIsDependentOnPlayerDistance());
@@ -16,21 +18,18 @@ public class ActivityDependsOnPlayerDistance : MonoBehaviour {
 
 	//Works if the player is close enough.  
 	IEnumerator ActivityIsDependentOnPlayerDistance() {
-		bool gameObjectActive = true;
-
 		while (true) {
-			if (Mathf.Abs (transform.position.x - player.position.x) < distanceRequirement && gameObjectActive == false) {
-				gameObject.SetActive (true);
-				gameObjectActive = true;
+			if (Mathf.Abs (transform.position.x - player.position.x) < distanceRequirement && mainParticleSystem.isStopped) {
+				mainParticleSystem.Play ();
 				Debug.Log ("Set active: distance is " + Mathf.Abs (transform.position.x - player.position.x));
-			} else if (Mathf.Abs (transform.position.x - player.position.x) >= distanceRequirement && gameObjectActive) {
-				gameObject.SetActive (false);
-				gameObjectActive = false;
+			} else if (Mathf.Abs (transform.position.x - player.position.x) >= distanceRequirement && mainParticleSystem.isPlaying) {
+				mainParticleSystem.Stop ();
+				mainParticleSystem.Clear ();
 				Debug.Log ("Set inactive: distance is " + Mathf.Abs (transform.position.x - player.position.x));
 			}
 
 			//Processing purposes.  
-			yield return new WaitForSeconds(3);
+			yield return new WaitForSeconds(0.5f);
 		}
 	}
 
