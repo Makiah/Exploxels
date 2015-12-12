@@ -16,6 +16,9 @@ using UnityEngine.SceneManagement;
 
 public class LevelEventManager : MonoBehaviour {
 
+	//The loading bar.  
+	[SerializeField] private GameObject loadingBar = null;
+
 	//Pretty much contains every event that does not require a parameter or a return type.  
 	public delegate void BaseInitialization();
 
@@ -70,21 +73,32 @@ public class LevelEventManager : MonoBehaviour {
 	public static event BaseInitialization InitializePurchasePanelManager;
 
 
+	//Used during initialization.  
+	LoadingProgressBar createdLoadingBar;
+
 	//Pretty much the only Start() method in the whole program.  
 	void Start() {
+		//Instantiate the loading bar.  
+		GameObject instantiatedLoadingBar = (GameObject) (Instantiate(loadingBar, Vector3.zero, Quaternion.identity));
+		createdLoadingBar = instantiatedLoadingBar.GetComponent <LoadingProgressBar> ();
 		//A coroutine has to be used, so that the program does not continue before the level has been loaded.  
-		StartCoroutine (WaitForGUILoad());
+		StartCoroutine (LoadEverything());
 	}
 
-	//In order to allow the level to finish loading.  
-	IEnumerator WaitForGUILoad() {
-		//Thanks to Unity Answers.  
-		//yield return SceneManager.UnloadScene("MainGameUI");
-		yield return Application.LoadLevelAdditiveAsync("MainGameUI");
-		InitializeEverything ();
-	}
+	IEnumerator LoadEverything() {
+		createdLoadingBar.InitializeNewAction (.1f, "Loading Main UI");
+		AsyncOperation loadingOperation = SceneManager.LoadSceneAsync ("MainGameUI", LoadSceneMode.Additive);
+		while (!loadingOperation.isDone) {
+			yield return null;
+			Debug.Log ("Progress loading is " + loadingOperation.progress);
+		}
 
-	void InitializeEverything() {
+		Debug.Log ("Loading complete");
+
+		//Update the loading bar.  
+		yield return new WaitForSeconds (.1f);
+		createdLoadingBar.InitializeNewAction (.15f, "Loading Inventory");
+
 		//Note: This would be a lot easier if I could figure out a way to pass an event in as a method parameter, but all attempts have not worked.  
 
 		//Inventory UI Initialization
@@ -115,11 +129,15 @@ public class LevelEventManager : MonoBehaviour {
 		if (InitializeSlots != null) InitializeSlots (); else Debug.LogError("InitializeSlots was null!"); //Used with SlotScript
 
 		//UI stuff.  
+		yield return new WaitForSeconds (.1f);
+		createdLoadingBar.InitializeNewAction (.2f, "Loading UI Stuff");
+
 		//Hide/Show
 		if (EnableUIHideShow != null) EnableUIHideShow (); else Debug.LogError("EnableUIHideShow was null!");//Used with InventoryHideShow
 		//Health Panels
 		if (InitializeUIHealthController != null) InitializeUIHealthController(); else Debug.LogError("InitializeUIHealthController was null!"); //Used for UIHealthController
 		if (InitializeHealthPanels != null) InitializeHealthPanels (); else Debug.LogError("InitializeHealthPanels was null!"); //Used for HealthPanelReference and PlayerHealthPanelReference.  
+
 		//Interactable Panels
 		if (InitializeInteractablePanelController != null) InitializeInteractablePanelController(); else Debug.LogError("InitializeInteractablePanelController was null!");
 		if (InitializeInteractablePanels != null) InitializeInteractablePanels(); else Debug.LogError("InitializeInteractablePanels was null!");
@@ -129,10 +147,16 @@ public class LevelEventManager : MonoBehaviour {
 		if (InitializeObjectiveManager != null) InitializeObjectiveManager(); else Debug.LogError("InitializeObjectiveManager was null!"); //Used for ObjectiveManager
 
 		//Lay out the level
+		yield return new WaitForSeconds (.1f);
+		createdLoadingBar.InitializeNewAction(.25f, "Creating terrain");
+
 		TerrainReferenceClass initializedMaze = null;
 		if (InitializeTerrain != null) initializedMaze = InitializeTerrain(); else Debug.LogError("InitializeTerrain was null!"); //Used with LevelLayout
 
 		//Player stuff.  
+		yield return new WaitForSeconds (.1f);
+		createdLoadingBar.InitializeNewAction(.5f, "Initializing Player");
+
 		if (CreatePlayer != null) CreatePlayer(); else Debug.LogError("CreatePlayer was null!"); //Used for CreateLevelItems (Instantiating player)
 		//Has to be done after the player is instantiated.  
 		CurrentLevelVariableManagement.SetLevelReferences ();
@@ -149,20 +173,38 @@ public class LevelEventManager : MonoBehaviour {
 		if (InitializeTimeIndicator != null) InitializeTimeIndicator(); else Debug.LogError("InitializeTimeIndicator was null!!"); //Used for TimeIndicator.  
 
 		//Initialize the enemies.  
+		yield return new WaitForSeconds (.1f);
+		createdLoadingBar.InitializeNewAction(.75f, "Initializing Enemies");
+
 		if (CreateTerrainItems != null) CreateTerrainItems(initializedMaze); else Debug.LogError("CreateTerrainItems was null!"); //Used for instantiating the enemies and trees.  
-		if (InitializeSystemWideParticleEffect != null) InitializeSystemWideParticleEffect(); else Debug.LogError("InitializeSystemWideParticleEffect was null!");
 		if (InitializeEnemyHealthControllers != null) InitializeEnemyHealthControllers (); else Debug.LogError("InitializeEnemyHealthControllers was null!"); //Used for initializing CharacterHealthController.  
 		if (InitializeEnemies != null) InitializeEnemies(); else Debug.LogError("InitializeEnemies was null!"); //Used for all enemies (requires player being instantiated).  
+
+		//NPCs
+		yield return new WaitForSeconds (.1f);
+		createdLoadingBar.InitializeNewAction(.85f, "Initializing NPCs");
 
 		if (InitializeNPCPanelControllers != null) InitializeNPCPanelControllers(); else Debug.LogError("InitializeNPCPanelControllers was null!");
 		if (InitializeNPCs != null) InitializeNPCs(); else Debug.LogError("InitializeNPCs was null!");
 
+		//Particle effect (world)
+		yield return new WaitForSeconds (.1f);
+		createdLoadingBar.InitializeNewAction(.9f, "Initializing Particle Effects");
+
+		if (InitializeSystemWideParticleEffect != null) InitializeSystemWideParticleEffect(); else Debug.LogError("InitializeSystemWideParticleEffect was null!");
+
+		//Purchase panels
 		if (InitializePurchasePanels != null) InitializePurchasePanels(); else Debug.LogError("InitializePurchasePanels was null!");
 		if (InitializePurchasePanelManager != null) InitializePurchasePanelManager(); else Debug.LogError("InitializePurchasePanelManager is null!");
 
 		//Just mention that EventManager has been completed successfully.  
+		yield return new WaitForSeconds (.1f);
+		createdLoadingBar.InitializeNewAction(1, "Completed successfully!");
+		yield return new WaitForSeconds (1.5f);
 		Debug.Log("Completed EventManager");
 
+		//Delete the loading bar
+		Destroy(createdLoadingBar.gameObject);
 	}
 
 }

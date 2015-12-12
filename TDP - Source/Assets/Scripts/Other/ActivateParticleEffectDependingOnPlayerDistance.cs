@@ -19,13 +19,12 @@ public class ActivateParticleEffectDependingOnPlayerDistance : MonoBehaviour {
 	//Works if the player is close enough.  
 	IEnumerator ActivityIsDependentOnPlayerDistance() {
 		while (true) {
+			//Check the distance to the player, then clear the particle effect or play the particle effect depending on whether the player is close enough.  
 			if (Mathf.Abs (transform.position.x - player.position.x) < distanceRequirement && mainParticleSystem.isStopped) {
 				mainParticleSystem.Play ();
-				Debug.Log ("Set active: distance is " + Mathf.Abs (transform.position.x - player.position.x));
 			} else if (Mathf.Abs (transform.position.x - player.position.x) >= distanceRequirement && mainParticleSystem.isPlaying) {
 				mainParticleSystem.Stop ();
 				mainParticleSystem.Clear ();
-				Debug.Log ("Set inactive: distance is " + Mathf.Abs (transform.position.x - player.position.x));
 			}
 
 			//Processing purposes.  
