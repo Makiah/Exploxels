@@ -148,7 +148,7 @@ public class LevelEventManager : MonoBehaviour {
 
 		//Lay out the level
 		yield return new WaitForSeconds (.1f);
-		createdLoadingBar.InitializeNewAction(.25f, "Creating terrain");
+		createdLoadingBar.InitializeNewAction(.25f, "Creating Terrain");
 
 		TerrainReferenceClass initializedMaze = null;
 		if (InitializeTerrain != null) initializedMaze = InitializeTerrain(); else Debug.LogError("InitializeTerrain was null!"); //Used with LevelLayout
