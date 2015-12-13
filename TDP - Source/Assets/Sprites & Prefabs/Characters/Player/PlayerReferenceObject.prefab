@@ -1,5 +1,21 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &105252
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 477400}
+  - 61: {fileID: 6180458}
+  m_Layer: 12
+  m_Name: CollisionChecker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &105552
 GameObject:
   m_ObjectHideFlags: 1
@@ -9,7 +25,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 419608}
   - 212: {fileID: 21217596}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Bottom Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -29,7 +45,7 @@ GameObject:
   - 61: {fileID: 6161070}
   - 61: {fileID: 6148060}
   - 61: {fileID: 6138854}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -92,7 +108,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 408148}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: WallCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -108,7 +124,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 466742}
   - 212: {fileID: 21236190}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,7 +139,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 482286}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: FlippingItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +154,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 466186}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: GroundChecks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -153,7 +169,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 412278}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: HoldingItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -184,7 +200,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 407748}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Hands
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -249,7 +265,7 @@ GameObject:
   - 50: {fileID: 5040590}
   - 114: {fileID: 11470282}
   - 114: {fileID: 11413802}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: PlayerReferenceObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -265,7 +281,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 439048}
   - 212: {fileID: 21201816}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: HoldingHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -297,7 +313,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 481928}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: GroundCheck2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -313,7 +329,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 483876}
   - 212: {fileID: 21233916}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: IdleHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -328,7 +344,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 442250}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: GroundCheck1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -345,7 +361,7 @@ GameObject:
   - 4: {fileID: 479048}
   - 61: {fileID: 6185412}
   - 114: {fileID: 11402514}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: DropHandler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -361,7 +377,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 491552}
   - 212: {fileID: 21201406}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Top Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -377,7 +393,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 469566}
   - 212: {fileID: 21228010}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -412,7 +428,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 452968}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Legs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -561,7 +577,7 @@ Transform:
   - {fileID: 442250}
   - {fileID: 481928}
   m_Father: {fileID: 482286}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!4 &466742
 Transform:
   m_ObjectHideFlags: 1
@@ -638,6 +654,18 @@ Transform:
   - {fileID: 439562}
   m_Father: {fileID: 494082}
   m_RootOrder: 1
+--- !u!4 &477400
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 105252}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 2}
+  m_LocalScale: {x: 2.2, y: 2.2, z: 1}
+  m_Children: []
+  m_Father: {fileID: 482286}
+  m_RootOrder: 2
 --- !u!4 &479048
 Transform:
   m_ObjectHideFlags: 1
@@ -686,6 +714,7 @@ Transform:
   m_Children:
   - {fileID: 410538}
   - {fileID: 408148}
+  - {fileID: 477400}
   - {fileID: 466186}
   m_Father: {fileID: 498240}
   m_RootOrder: 1
@@ -748,7 +777,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 172182}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -2}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 479048}
@@ -849,6 +878,20 @@ BoxCollider2D:
   m_Offset: {x: 0.22, y: 0.05}
   serializedVersion: 2
   m_Size: {x: 0.27, y: 1.63}
+--- !u!61 &6180458
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 105252}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0.07}
+  serializedVersion: 2
+  m_Size: {x: 0.73, y: 0.9}
 --- !u!61 &6185412
 BoxCollider2D:
   m_ObjectHideFlags: 1

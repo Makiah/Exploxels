@@ -9,7 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 434792}
   - 212: {fileID: 21240866}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -25,7 +25,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 405708}
   - 212: {fileID: 21270804}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -41,7 +41,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 414200}
   - 212: {fileID: 21224066}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: HoldingHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -57,7 +57,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 492972}
   - 212: {fileID: 21250326}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: IdleHand
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -72,7 +72,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 420758}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: GroundCheck2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -87,7 +87,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 413372}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: GroundCheck1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -102,7 +102,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 425052}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: FlippingItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -117,7 +117,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 416470}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Hands
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -133,7 +133,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 449880}
   - 212: {fileID: 21229954}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Top Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -148,7 +148,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 426564}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: HoldingItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -163,7 +163,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 482018}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: GroundChecks
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,7 +179,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 400012}
   - 95: {fileID: 9559780}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -195,7 +195,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 445808}
   - 212: {fileID: 21274372}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Bottom Leg
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -210,7 +210,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 401014}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Legs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -225,7 +225,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 451060}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: WallCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -246,7 +246,7 @@ GameObject:
   - 61: {fileID: 6195400}
   - 114: {fileID: 11404722}
   - 114: {fileID: 11450494}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Old Man
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -784,6 +784,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_UseAutoMass
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

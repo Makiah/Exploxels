@@ -60,7 +60,7 @@ public class ProjectileScript : MonoBehaviour {
 		StartCoroutine (DestroyIfDistanceFromPlayer());
 	}
 
-
+	//If the distance to the player is too large, then destroy the current game object.  
 	IEnumerator DestroyIfDistanceFromPlayer() {
 		while (true) {
 			if (Vector2.Distance (transform.position, playerObject.transform.position) >= destroyIfDistanceFromPlayer) {
@@ -71,11 +71,14 @@ public class ProjectileScript : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D (Collider2D externalTrigger) {
-
-		if (externalTrigger.gameObject.GetComponent <CharacterHealthPanelManager> () != null && notificationSent == false) {
-			externalTrigger.gameObject.GetComponent <CharacterHealthPanelManager> ().YouHaveBeenAttacked (arrowPower);
-			notificationSent = true;
-			Destroy(this.gameObject);
+		//Make sure that the second parent of the transform exists.  
+		if (externalTrigger.transform.parent != null && externalTrigger.transform.parent.parent != null) {
+			//Check to see whether it exists.  
+			if (externalTrigger.transform.parent.parent.GetComponent <CharacterHealthPanelManager> () != null && notificationSent == false) {
+				externalTrigger.transform.parent.parent.GetComponent <CharacterHealthPanelManager> ().YouHaveBeenAttacked (arrowPower);
+				notificationSent = true;
+				Destroy (this.gameObject);
+			}
 		}
 
 	}

@@ -29,6 +29,12 @@ public class ResetAttackAnimationOnExit : StateMachineBehaviour {
 
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
 	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
+
+		//Simple solution.  
+		animator.transform.parent.parent.GetComponent <CharacterBaseActionClass> ().ResetCurrentAttackAnimationState ();
+
+		//This works, but seems like overkill.  
+		/*
 		//Set the initial transform.  
 		Transform currentTransform;
 		currentTransform = animator.gameObject.transform;
@@ -50,6 +56,7 @@ public class ResetAttackAnimationOnExit : StateMachineBehaviour {
 		} else {
 			Debug.LogError ("Could not find character base action class!");
 		}
+		*/
 	}
 
 	// OnStateMove is called right after Animator.OnAnimatorMove(). Code that processes and affects root motion should be implemented here

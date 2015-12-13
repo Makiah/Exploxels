@@ -40,11 +40,12 @@ public class SpearScript : ItemBase {
 	
 	void AttackEnemyInFocus () {
 		//Used to look for health panel manager.  
+		Debug.Log("Linecasting from " + attachedCharacterInput.gameObject.name + ", ignoring hash code " + attachedCharacterInput.gameObject.GetHashCode());
 		CharacterHealthPanelManager resultingHealthPanelManager = RaycastAttackUtilities.LookForEnemyViaLinecast (attachedCharacterInput.transform.position, 
-		                                                                                                         distToEnemyLength, 
-		                                                                                                         enemyWithinAreaBounds, 
-		                                                                                                         attachedCharacterInput.GetFacingDirection (), 
-		                                                                                                          attachedCharacterInput.characterName.Equals ("Player"));
+		                                                                                                       	  distToEnemyLength, 
+		                                                                                                       	  enemyWithinAreaBounds, 
+																												  0, 
+		                                                                                                    	  attachedCharacterInput.GetFacingDirection ());
 
 		if (resultingHealthPanelManager != null) {
 			resultingHealthPanelManager.YouHaveBeenAttacked (spearPowerAttack);

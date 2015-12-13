@@ -41,9 +41,9 @@ public class SwordScript : ItemBase {
 	void AttackEnemyInFocus () {
 		CharacterHealthPanelManager resultingHealthPanelManager = RaycastAttackUtilities.LookForEnemyViaLinecast (attachedCharacterInput.transform.position, 
 		                                                                                                          distToEnemyLength, 
+																												  0, 
 		                                                                                                          enemyWithinAreaBounds, 
-		                                                                                                          attachedCharacterInput.GetFacingDirection (), 
-		                                                                                                          attachedCharacterInput.name == "Player");
+		                                                                                                          attachedCharacterInput.GetFacingDirection ());
 		
 		if (resultingHealthPanelManager != null) {
 			resultingHealthPanelManager.YouHaveBeenAttacked (swordPowerAttack);

@@ -40,8 +40,7 @@ public class MammothScript : EnemyBaseActionClass {
 		                                                                                                          distToEnemyLength, 
 		                                                                                                          yOffsetToEnemy, 
 		                                                                                                          enemyWithinAreaBounds, 
-		                                                                                                          GetFacingDirection (), 
-		                                                                                                          false);
+																												  GetFacingDirection());
 		
 		if (resultingHealthPanelManager != null) {
 			resultingHealthPanelManager.YouHaveBeenAttacked (mammothAttackPower);

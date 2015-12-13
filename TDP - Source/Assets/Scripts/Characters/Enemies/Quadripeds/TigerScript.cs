@@ -37,9 +37,9 @@ public class TigerScript : EnemyBaseActionClass {
 	void AttackEnemyInFocus () {
 		CharacterHealthPanelManager resultingHealthPanelManager = RaycastAttackUtilities.LookForEnemyViaLinecast (transform.position, 
 		                                                                                                          distToEnemyLength, 
+																												  0, 
 		                                                                                                          enemyWithinAreaBounds, 
-		                                                                                                          GetFacingDirection (), 
-		                                                                                                          false);
+		                                                                                                          GetFacingDirection ());
 		
 		if (resultingHealthPanelManager != null) {
 			resultingHealthPanelManager.YouHaveBeenAttacked (tigerAttackPower);
