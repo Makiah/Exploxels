@@ -743,7 +743,13 @@ MonoBehaviour:
   playerAttackDistance: 2
   ignorePlayerMovementThreshold: 1
   maxYValueSeparation: 3
-  tigerAttackPower: 3
+  enemyAttackingPower: 2
+  attackingLayerMask:
+    serializedVersion: 2
+    m_Bits: 10240
+  enemyWithinAreaBounds: 0.8
+  yOffsetToEnemy: 0
+  distToEnemyLength: 1.5
 --- !u!114 &11451108
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1036,6 +1042,22 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_AngularDrag
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: attackingLayerMask.m_Bits
+      value: 10240
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: enemyAttackingPower
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: enemyWithinAreaBounds
+      value: 0.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: distToEnemyLength
+      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

@@ -198,7 +198,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 476664}
   - 61: {fileID: 6126000}
-  m_Layer: 12
+  m_Layer: 13
   m_Name: CollisionChecker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -755,7 +755,13 @@ MonoBehaviour:
   playerAttackDistance: 3
   ignorePlayerMovementThreshold: 2
   maxYValueSeparation: 2
-  mammothAttackPower: 2
+  enemyAttackingPower: 2
+  attackingLayerMask:
+    serializedVersion: 2
+    m_Bits: 10240
+  enemyWithinAreaBounds: 1.6
+  yOffsetToEnemy: -1
+  distToEnemyLength: 3.2
 --- !u!114 &11463256
 MonoBehaviour:
   m_ObjectHideFlags: 1

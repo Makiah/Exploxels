@@ -24,25 +24,22 @@ public class TigerScript : EnemyBaseActionClass {
 		Debug.Log ("Tiger is attacking");
 	}
 
-	//Based off of SwordScript
-	private float enemyWithinAreaBounds = .8f;
-	private float distToEnemyLength = 1.5f;
-	
-	public float tigerAttackPower;
-
 	void AttemptToAttackAfterCompletedAnimation () {
 		ActionsAfterAnimation += AttackEnemyInFocus;
 	}
 	
 	void AttackEnemyInFocus () {
-		CharacterHealthPanelManager resultingHealthPanelManager = RaycastAttackUtilities.LookForEnemyViaLinecast (transform.position, 
-		                                                                                                          distToEnemyLength, 
-																												  0, 
-		                                                                                                          enemyWithinAreaBounds, 
-		                                                                                                          GetFacingDirection ());
+		CharacterHealthPanelManager resultingHealthPanelManager = RaycastAttackUtilities.LookForEnemyViaLinecast (
+			transform.position, 
+			distToEnemyLength, 
+			0, 
+			enemyWithinAreaBounds, 
+			GetFacingDirection (), 
+			attackingLayerMask
+		);
 		
 		if (resultingHealthPanelManager != null) {
-			resultingHealthPanelManager.YouHaveBeenAttacked (tigerAttackPower);
+			resultingHealthPanelManager.YouHaveBeenAttacked (enemyAttackingPower);
 		}
 		
 	}

@@ -35,6 +35,17 @@ public abstract class EnemyBaseActionClass : CharacterBaseActionClass {
 	//What is the maximum difference in Y values the enemies must have to attack?
 	[SerializeField] protected float maxYValueSeparation;
 
+	//Attacking power
+	[SerializeField] protected float enemyAttackingPower;
+
+	//Layers to attack on.
+	[SerializeField] protected LayerMask attackingLayerMask;
+
+	//Attacking parameters
+	[SerializeField] protected float enemyWithinAreaBounds = 0;
+	[SerializeField] protected float yOffsetToEnemy = 0;
+	[SerializeField] protected float distToEnemyLength = 0;
+
 	//The player transform
 	protected Transform player;
 

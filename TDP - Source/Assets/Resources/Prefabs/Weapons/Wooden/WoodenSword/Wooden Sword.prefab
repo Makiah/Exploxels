@@ -9,7 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 461854}
   - 212: {fileID: 21271012}
-  - 114: {fileID: 11480934}
+  - 114: {fileID: 11402114}
   m_Layer: 0
   m_Name: Wooden Sword
   m_TagString: Untagged
@@ -25,11 +25,11 @@ Transform:
   m_GameObject: {fileID: 187800}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .850000024, y: .850000024, z: 1}
+  m_LocalScale: {x: 0.85, y: 0.85, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11480934
+--- !u!114 &11402114
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -37,10 +37,17 @@ MonoBehaviour:
   m_GameObject: {fileID: 187800}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0acbee6b38af10f4aa3ddc9ad4e8b204, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e77448ee5d8f4ad8a399b1ada002071, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  swordPowerAttack: 2
+  attackingLayerMask:
+    serializedVersion: 2
+    m_Bits: 512
+  attackAfterAnimation: 1
+  enemyWithinAreaBounds: 1.2
+  distToEnemyLength: 2
+  weaponAttackPower: 2
+  attacks: []
 --- !u!212 &21271012
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -62,13 +69,15 @@ SpriteRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: .5
+  m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 794406875
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 0ffba8dd3c088a24c8ea131fbfc09454, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -116,6 +125,18 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spearPowerAttack
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: weaponAttackPower
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: attackingLayerMask.m_Bits
+      value: 512
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

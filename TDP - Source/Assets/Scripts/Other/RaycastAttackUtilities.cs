@@ -3,7 +3,7 @@ using System.Collections;
 
 public class RaycastAttackUtilities : MonoBehaviour {
 
-	public static CharacterHealthPanelManager LookForEnemyViaLinecast (Vector2 origin, float distToEnemyOffset, float yOffsetToEnemy, float enemyWithinAreaBound, int characterFacingDirection) {
+	public static CharacterHealthPanelManager LookForEnemyViaLinecast (Vector2 origin, float distToEnemyOffset, float yOffsetToEnemy, float enemyWithinAreaBound, int characterFacingDirection, LayerMask layers) {
 
 		//Pretty much all of this is calculation for the eventual linecast.  
 		Vector2 enemyWithinAreaVectorBound = new Vector3 (enemyWithinAreaBound, 0);
