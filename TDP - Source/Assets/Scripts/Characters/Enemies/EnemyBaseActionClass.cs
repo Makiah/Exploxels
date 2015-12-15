@@ -13,8 +13,9 @@
 
 using UnityEngine;
 using System.Collections;
+using System;
 
-public abstract class EnemyBaseActionClass : CharacterBaseActionClass {
+public abstract class EnemyBaseActionClass : CharacterBaseActionClass, ICombatant {
 
 	/******************************************** INITIALIZATION *******************************************/
 	
@@ -49,11 +50,16 @@ public abstract class EnemyBaseActionClass : CharacterBaseActionClass {
 	//The player transform
 	protected Transform player;
 
+	//Used for fighting.  There has to be a unique ID so that the thing does not attack itself.  
+	private string guidString = null;
+	//private const int enemyGUID;
+
 	protected override void SetReferences() {
+		guidString = Guid.NewGuid().ToString();
+		//Set required variables for the enemy to function.  
+		Debug.Log("Resulting string is " + guidString);
 		player = CurrentLevelVariableManagement.GetPlayerReference ().transform;
-
 		base.SetReferences ();
-
 		StartCoroutine (EnemyControl());
 	}
 
@@ -153,5 +159,10 @@ public abstract class EnemyBaseActionClass : CharacterBaseActionClass {
 	}
 
 	protected abstract void Attack();
+
+	//The Combatant Interface methods
+	public int GetCombatantID() {
+		return 2;
+	}
 
 }
