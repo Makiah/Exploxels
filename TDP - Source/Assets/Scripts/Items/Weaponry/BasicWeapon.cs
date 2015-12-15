@@ -5,7 +5,7 @@ using System.Collections.Generic;
 public class BasicWeapon : ItemBase {
 	//Properties of the weapon.  
 	//In the Inspector, the layers that should be attacked are set.  
-	[SerializeField] private LayerMask attackingLayerMask;
+	[SerializeField] private LayerMask layerMaskForAttacking = 0;
 
 	//In case the enemy should just attack immediately.  
 	[SerializeField] private bool attackAfterAnimation = true;
@@ -37,7 +37,7 @@ public class BasicWeapon : ItemBase {
 	}
 
 	//Unity has a weird thing that only certain ways that classes can be put together appears in the Inspector.  
-	[SerializeField] private AttackAndMove[] attacks;
+	[SerializeField] private AttackAndMove[] attacks = null;
 
 	//Just the default moves for an item, should be changed via a child script if these are not the attacks that you are looking for.  
 	public override Dictionary <string, string> GetPossibleActionsForItem () {
@@ -102,14 +102,14 @@ public class BasicWeapon : ItemBase {
 			enemyWithinAreaBounds, 
 			0, 
 			attachedCharacterInput.GetFacingDirection (),
-			attackingLayerMask
+			layerMaskForAttacking
 		);
-
-		Debug.Log ("Attacking w/ mace, health panel manager = null is ");
 
 		if (resultingHealthPanelManager != null) {
 			resultingHealthPanelManager.YouHaveBeenAttacked (weaponAttackPower);
 			Debug.Log ("Attacked " + resultingHealthPanelManager.gameObject.name);
+		} else {
+			Debug.Log (attachedCharacterInput.gameObject.name + " did not find an object to attack.  Layer mask is " + LayerMask.LayerToName(layerMaskForAttacking.value));
 		}
 	}
 

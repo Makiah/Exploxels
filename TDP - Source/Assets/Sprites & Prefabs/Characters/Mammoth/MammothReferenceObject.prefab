@@ -758,7 +758,7 @@ MonoBehaviour:
   enemyAttackingPower: 2
   attackingLayerMask:
     serializedVersion: 2
-    m_Bits: 10240
+    m_Bits: 6144
   enemyWithinAreaBounds: 1.6
   yOffsetToEnemy: -1
   distToEnemyLength: 3.2
@@ -1030,6 +1030,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: mammothAttackPower
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: attackingLayerMask.m_Bits
+      value: 6144
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

@@ -27,7 +27,7 @@ public class ZombieAction : EnemyBaseActionClass {
 		ItemBase zombieSword = characterSpriteObject.FindChild ("Hands").FindChild ("HoldingHand").FindChild ("HoldingItem").GetChild(0).GetComponent <ItemBase> ();
 		OnRefreshCurrentWeaponMoves (zombieSword);
 		zombieSword.SetAttachedCharacterInput (this);
-		zombieSword.ChangeLayerToCheckForItemsOn ("Player");
+		//zombieSword.ChangeLayerToCheckForItemsOn ("Player");
 
 		ignorePlayerMovementThreshold = Random.Range (ignorePlayerMovementThreshold - 1, ignorePlayerMovementThreshold + 2);
 

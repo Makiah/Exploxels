@@ -20,8 +20,6 @@ public abstract class ItemBase : MonoBehaviour {
 
 	protected CharacterBaseActionClass attachedCharacterInput;
 
-	protected string lookForItemsOnLayer = "Enemies";
-
 	public void SetAttachedCharacterInput(CharacterBaseActionClass ctorCharacterInput) {
 		attachedCharacterInput = ctorCharacterInput;
 	}
@@ -30,10 +28,6 @@ public abstract class ItemBase : MonoBehaviour {
 
 	public abstract Dictionary <string, string> GetPossibleActionsForItem ();
 	public abstract void InfluenceEnvironment(string actionKey);
-
-	public void ChangeLayerToCheckForItemsOn(string newLayer) {
-		lookForItemsOnLayer = newLayer;
-	}
 
 	//Just added.  
 	protected void ChangeStackOfCurrentHotbarItem(int stackToChangeBy) {

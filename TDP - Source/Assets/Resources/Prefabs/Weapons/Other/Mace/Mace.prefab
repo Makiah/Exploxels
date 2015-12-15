@@ -40,7 +40,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e77448ee5d8f4ad8a399b1ada002071, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackingLayerMask:
+  layerMaskForAttacking:
     serializedVersion: 2
     m_Bits: 12288
   attackAfterAnimation: 1
@@ -92,6 +92,22 @@ Prefab:
         type: 3}
     - target: {fileID: 0}
       propertyPath: attackingLayerMask.m_Bits
+      value: 12288
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: weaponAttackPower
+      value: 0.72
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: layerMaskForAttack.m_Bits
+      value: 12288
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: maskForLayerAttack.m_Bits
+      value: 12288
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: layerMaskForAttacking.m_Bits
       value: 12288
       objectReference: {fileID: 0}
     m_RemovedComponents: []
