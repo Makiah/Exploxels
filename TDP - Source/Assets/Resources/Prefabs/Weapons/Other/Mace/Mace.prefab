@@ -42,7 +42,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackingLayerMask:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 12288
   attackAfterAnimation: 1
   enemyWithinAreaBounds: 1.2
   distToEnemyLength: 2
@@ -90,6 +90,10 @@ Prefab:
       value: 
       objectReference: {fileID: 21300000, guid: 494576618f3db46f58853444e8e35f0f,
         type: 3}
+    - target: {fileID: 0}
+      propertyPath: attackingLayerMask.m_Bits
+      value: 12288
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 106442}

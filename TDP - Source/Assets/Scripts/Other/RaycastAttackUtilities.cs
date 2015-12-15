@@ -19,7 +19,7 @@ public class RaycastAttackUtilities : MonoBehaviour {
 		Vector2 actualEndRaycastParameter = endRaycastParameter + distToEnemyVectorLength * characterFacingDirection + yOffsetVector;
 
 		//Linecast, looking for items on the layer "Fighting"
-		RaycastHit2D[] linecastResult = Physics2D.LinecastAll (actualStartRaycastParameter, actualEndRaycastParameter, 1 << LayerMask.NameToLayer ("Fighting"));
+		RaycastHit2D[] linecastResult = Physics2D.LinecastAll (actualStartRaycastParameter, actualEndRaycastParameter, layers);
 
 		Debug.DrawLine (actualStartRaycastParameter, actualEndRaycastParameter, Color.green, 3f);
 		

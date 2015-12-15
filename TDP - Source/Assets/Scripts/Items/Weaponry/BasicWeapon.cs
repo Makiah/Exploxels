@@ -84,6 +84,7 @@ public class BasicWeapon : ItemBase {
 
 	//Called by ItemBase.
 	public override void InfluenceEnvironment(string actionKey) {
+		Debug.Log ("Got after animation");
 		if (attackAfterAnimation)
 			AttemptToAttackAfterCompletedAnimation ();
 		else
@@ -104,8 +105,11 @@ public class BasicWeapon : ItemBase {
 			attackingLayerMask
 		);
 
+		Debug.Log ("Attacking w/ mace, health panel manager = null is ");
+
 		if (resultingHealthPanelManager != null) {
 			resultingHealthPanelManager.YouHaveBeenAttacked (weaponAttackPower);
+			Debug.Log ("Attacked " + resultingHealthPanelManager.gameObject.name);
 		}
 	}
 

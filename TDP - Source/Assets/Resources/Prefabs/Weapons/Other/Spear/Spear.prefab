@@ -42,7 +42,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attackingLayerMask:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 12288
   attackAfterAnimation: 1
   enemyWithinAreaBounds: 1.2
   distToEnemyLength: 2
@@ -100,7 +100,7 @@ Prefab:
         type: 3}
     - target: {fileID: 0}
       propertyPath: attackingLayerMask.m_Bits
-      value: 512
+      value: 12288
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: spearPowerAttack
@@ -120,6 +120,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: attacks.Array.data[1].attack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
