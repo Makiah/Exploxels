@@ -32,7 +32,6 @@ public class RaycastAttackUtilities : MonoBehaviour {
 					Transform healthPanelTransform = linecastResult[i].collider.transform.parent.parent;
 					if (healthPanelTransform.GetComponent <CharacterHealthPanelManager> () != null) {
 						//Return the health panel manager if it exists.  
-						Debug.Log("Chose " + healthPanelTransform.gameObject.name);
 						return healthPanelTransform.GetComponent <CharacterHealthPanelManager> ();
 					}
 				}

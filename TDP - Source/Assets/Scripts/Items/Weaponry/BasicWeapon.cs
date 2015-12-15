@@ -105,12 +105,8 @@ public class BasicWeapon : ItemBase {
 			layerMaskForAttacking
 		);
 
-		if (resultingHealthPanelManager != null) {
+		if (resultingHealthPanelManager != null)
 			resultingHealthPanelManager.YouHaveBeenAttacked (weaponAttackPower);
-			Debug.Log ("Attacked " + resultingHealthPanelManager.gameObject.name);
-		} else {
-			Debug.Log (attachedCharacterInput.gameObject.name + " did not find an object to attack.  Layer mask is " + LayerMask.LayerToName(layerMaskForAttacking.value));
-		}
 	}
 
 }

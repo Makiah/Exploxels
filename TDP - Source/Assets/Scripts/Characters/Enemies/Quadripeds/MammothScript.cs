@@ -38,9 +38,8 @@ public class MammothScript : EnemyBaseActionClass {
 			attackingLayerMask
 		);
 		
-		if (resultingHealthPanelManager != null) {
+		if (resultingHealthPanelManager != null)
 			resultingHealthPanelManager.YouHaveBeenAttacked (enemyAttackingPower);
-		}
 		
 	}
 	
