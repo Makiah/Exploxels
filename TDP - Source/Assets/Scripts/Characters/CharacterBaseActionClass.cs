@@ -218,11 +218,22 @@ public abstract class CharacterBaseActionClass : MonoBehaviour, ICombatant {
 			//Increment time.  
 			currentTime += Time.deltaTime;
 			//Check velocity.  
-			if (rb2d.velocity.x != velocity)
-				rb2d.velocity = new Vector2(velocity, rb2d.velocity.y);
+			if (Mathf.Abs(moveForce * rb2d.velocity.x) < maxSpeed)
+				rb2d.AddForce (Vector2.right * moveForce * GetFacingDirection());
+
+			if (Mathf.Abs (rb2d.velocity.x) >= maxSpeed) 
+				rb2d.velocity = new Vector2 (GetFacingDirection() * maxSpeed, rb2d.velocity.y);
 
 			yield return new WaitForFixedUpdate();
 		}
+	}
+
+	//When knockback should be applied to the character.  
+	public void ApplyKnockbackToCharacter(Vector2 force) {
+		//Maintaining a constant velocity would interfere with this.  
+		StopCoroutine("MaintainAConstantVelocity");
+		rb2d.AddForce (force);
+		Debug.Log ("Force of " + force + " applied as knockback to " + gameObject.name);
 	}
 
 	//Combatant stuff.  

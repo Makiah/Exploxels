@@ -746,7 +746,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 5
-  moveForce: 4
+  moveForce: 4000
   jumpForce: 9.5
   wallJumpForce: 0
   groundedOffset: 0
@@ -1030,6 +1030,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: attackingLayerMask.m_Bits
       value: 6144
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: maxSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: moveForce
+      value: 4000
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

@@ -733,8 +733,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 309042124787144249a48c479fa6e56b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 5
-  moveForce: 7
+  maxSpeed: 8
+  moveForce: 2000
   jumpForce: 13
   wallJumpForce: 0
   groundedOffset: 0
@@ -1013,7 +1013,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: moveForce
-      value: 7
+      value: 2000
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: minRotation
@@ -1054,6 +1054,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: distToEnemyLength
       value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: maxSpeed
+      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

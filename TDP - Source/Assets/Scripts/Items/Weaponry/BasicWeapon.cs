@@ -12,6 +12,7 @@ public class BasicWeapon : ItemBase {
 	[SerializeField] private float distToEnemyOffset;
 
 	[SerializeField] private float attackPower;
+	[SerializeField] private Vector2 knockback;
 
 	//Attacking method classes and enumerations.  
 	[SerializeField]
@@ -103,8 +104,10 @@ public class BasicWeapon : ItemBase {
 			attachedCharacterInput.GetCombatantID()
 		);
 
-		if (resultingHealthPanelManager != null)
+		if (resultingHealthPanelManager != null) {
+			resultingHealthPanelManager.gameObject.GetComponent <CharacterBaseActionClass> ().ApplyKnockbackToCharacter (new Vector2 (knockback.x * attachedCharacterInput.GetFacingDirection (), knockback.y));
 			resultingHealthPanelManager.YouHaveBeenAttacked (attackPower);
+		}
 	}
 
 }
