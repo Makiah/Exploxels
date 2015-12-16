@@ -11,6 +11,7 @@
 
 
 using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
@@ -22,7 +23,6 @@ public class PlayerAction : CharacterBaseActionClass {
 	protected override void SetReferences() {
 		characterSpriteObject = transform.FindChild("FlippingItem").FindChild ("Player");
 		wallCheck = transform.FindChild("FlippingItem").FindChild ("WallCheck");
-		characterName = "Player";
 
 		base.SetReferences ();
 

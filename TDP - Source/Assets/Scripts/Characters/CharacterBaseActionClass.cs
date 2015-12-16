@@ -15,10 +15,11 @@
 
 
 using UnityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public abstract class CharacterBaseActionClass : MonoBehaviour {
+public abstract class CharacterBaseActionClass : MonoBehaviour, ICombatant {
 
 	/********************************************** INITIALIZATION ******************************************************/
 	
@@ -52,12 +53,12 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 	protected Animator anim;
 	protected Rigidbody2D rb2d;
 
-	//Only meant for bow script, a more elegant solution could be used later.  
-	[HideInInspector]
-	public string characterName;
+	//For combat (has to be here so that weapons can use it)
+	private readonly string characterGUID = Guid.NewGuid().ToString();
 	
 	protected virtual void SetReferences() {
 		//Get required components
+		Debug.Log(gameObject.name + " is " + GetCombatantID());
 		anim = characterSpriteObject.GetComponent <Animator> ();
 		rb2d = GetComponent <Rigidbody2D> ();
 		groundChecks = GetAllGroundChecks ();
@@ -222,6 +223,11 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 
 			yield return new WaitForFixedUpdate();
 		}
+	}
+
+	//Combatant stuff.  
+	public string GetCombatantID() {
+		return characterGUID;
 	}
 
 }

@@ -39,9 +39,6 @@ public abstract class EnemyBaseActionClass : CharacterBaseActionClass, ICombatan
 	//Attacking power
 	[SerializeField] protected float enemyAttackingPower;
 
-	//Layers to attack on.
-	[SerializeField] protected LayerMask attackingLayerMask;
-
 	//Attacking parameters
 	[SerializeField] protected float enemyWithinAreaBounds = 0;
 	[SerializeField] protected float yOffsetToEnemy = 0;
@@ -50,14 +47,8 @@ public abstract class EnemyBaseActionClass : CharacterBaseActionClass, ICombatan
 	//The player transform
 	protected Transform player;
 
-	//Used for fighting.  There has to be a unique ID so that the thing does not attack itself.  
-	private string guidString = null;
-	//private const int enemyGUID;
-
 	protected override void SetReferences() {
-		guidString = Guid.NewGuid().ToString();
 		//Set required variables for the enemy to function.  
-		Debug.Log("Resulting string is " + guidString);
 		player = CurrentLevelVariableManagement.GetPlayerReference ().transform;
 		base.SetReferences ();
 		StartCoroutine (EnemyControl());
@@ -158,11 +149,7 @@ public abstract class EnemyBaseActionClass : CharacterBaseActionClass, ICombatan
 		}
 	}
 
-	protected abstract void Attack();
-
 	//The Combatant Interface methods
-	public int GetCombatantID() {
-		return 2;
-	}
+	protected abstract void Attack();
 
 }

@@ -46,7 +46,7 @@ public class BowScript : ItemBase {
 		Vector3 positionToFireToward;
 		float accuracy;
 
-		if (attachedCharacterInput.characterName != "Player") {
+		if (true) {
 			positionToFireToward = playerObject.transform.position;
 			accuracy = 30;
 		} else {

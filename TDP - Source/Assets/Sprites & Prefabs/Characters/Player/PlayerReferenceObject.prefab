@@ -9,7 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 477400}
   - 61: {fileID: 6180458}
-  m_Layer: 11
+  m_Layer: 9
   m_Name: CollisionChecker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1058,7 +1058,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99928b598cc344b1e8dbaaf36036f356, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifePoints: 10
+  lifePoints: 15
   distanceUntilHealthBarActive: 0
 --- !u!114 &11426772
 MonoBehaviour:
@@ -1126,7 +1126,6 @@ MonoBehaviour:
   jumpForce: 10
   wallJumpForce: 30
   groundedOffset: 0.229
-  characterName: 
 --- !u!124 &12433794
 Behaviour:
   m_ObjectHideFlags: 1
@@ -1449,7 +1448,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: lifePoints
-      value: 10
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_IsActive

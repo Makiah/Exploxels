@@ -20,7 +20,6 @@ public class MammothScript : EnemyBaseActionClass {
 
 	protected override void Attack() {
 		AttemptToAttackAfterCompletedAnimation ();
-		Debug.Log ("Mammoth is attacking");
 	}
 	
 	void AttemptToAttackAfterCompletedAnimation () {
@@ -35,7 +34,7 @@ public class MammothScript : EnemyBaseActionClass {
 			yOffsetToEnemy, 
 			enemyWithinAreaBounds, 
 			GetFacingDirection(), 
-			attackingLayerMask
+			GetCombatantID()
 		);
 		
 		if (resultingHealthPanelManager != null)

@@ -1,6 +1,7 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿/*
+ * This interface is only so that any enemy or player that will be involved in fighting has a GUID so that it does not attack itself. 
+ */
 
 public interface ICombatant {
-	int GetCombatantID();
+	string GetCombatantID();
 }

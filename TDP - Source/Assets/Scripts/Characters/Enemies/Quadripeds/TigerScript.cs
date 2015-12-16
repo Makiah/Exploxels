@@ -21,7 +21,6 @@ public class TigerScript : EnemyBaseActionClass {
 	
 	protected override void Attack() {
 		AttemptToAttackAfterCompletedAnimation ();
-		Debug.Log ("Tiger is attacking");
 	}
 
 	void AttemptToAttackAfterCompletedAnimation () {
@@ -35,7 +34,7 @@ public class TigerScript : EnemyBaseActionClass {
 			0, 
 			enemyWithinAreaBounds, 
 			GetFacingDirection (), 
-			attackingLayerMask
+			GetCombatantID()
 		);
 		
 		if (resultingHealthPanelManager != null)

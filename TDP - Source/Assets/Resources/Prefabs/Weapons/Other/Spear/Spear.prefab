@@ -40,13 +40,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e77448ee5d8f4ad8a399b1ada002071, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackingLayerMask:
-    serializedVersion: 2
-    m_Bits: 12288
   attackAfterAnimation: 1
-  enemyWithinAreaBounds: 1.2
-  distToEnemyLength: 2
-  weaponAttackPower: 2
+  areaBounds: 1.2
+  distToEnemyOffset: 2
+  attackPower: 4
   attacks: []
 --- !u!212 &21276014
 SpriteRenderer:
@@ -125,6 +122,18 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: m_Layer
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: areaBounds
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: distToEnemyOffset
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: attackPower
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

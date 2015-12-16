@@ -4,17 +4,14 @@ using System.Collections.Generic;
 
 public class BasicWeapon : ItemBase {
 	//Properties of the weapon.  
-	//In the Inspector, the layers that should be attacked are set.  
-	[SerializeField] private LayerMask layerMaskForAttacking = 0;
-
 	//In case the enemy should just attack immediately.  
 	[SerializeField] private bool attackAfterAnimation = true;
 
 	//The properties for the weapon.  
-	[SerializeField] private float enemyWithinAreaBounds = 1.2f;
-	[SerializeField] private float distToEnemyLength = 2f;
+	[SerializeField] private float areaBounds;
+	[SerializeField] private float distToEnemyOffset;
 
-	[SerializeField] private float weaponAttackPower = 1f;
+	[SerializeField] private float attackPower;
 
 	//Attacking method classes and enumerations.  
 	[SerializeField]
@@ -41,6 +38,7 @@ public class BasicWeapon : ItemBase {
 
 	//Just the default moves for an item, should be changed via a child script if these are not the attacks that you are looking for.  
 	public override Dictionary <string, string> GetPossibleActionsForItem () {
+		//Define the dictionary
 		possibleMoves = new Dictionary<string, string> ();
 
 		//Add default moves.  
@@ -84,7 +82,6 @@ public class BasicWeapon : ItemBase {
 
 	//Called by ItemBase.
 	public override void InfluenceEnvironment(string actionKey) {
-		Debug.Log ("Got after animation");
 		if (attackAfterAnimation)
 			AttemptToAttackAfterCompletedAnimation ();
 		else
@@ -96,17 +93,18 @@ public class BasicWeapon : ItemBase {
 	}
 
 	void AttackEnemyInFocus () {
-		//Used to look for health panel manager.  
-		CharacterHealthPanelManager resultingHealthPanelManager = RaycastAttackUtilities.LookForEnemyViaLinecast (attachedCharacterInput.transform.position, 
-			distToEnemyLength, 
-			enemyWithinAreaBounds, 
+		//Used to look for health panel manager.  ALWAYS REMEMBER TO KEEP THE PARAMETERS IN ORDER.   
+		CharacterHealthPanelManager resultingHealthPanelManager = RaycastAttackUtilities.LookForEnemyViaLinecast (
+			attachedCharacterInput.transform.position, 
+			distToEnemyOffset, 
 			0, 
-			attachedCharacterInput.GetFacingDirection (),
-			layerMaskForAttacking
+			areaBounds, 
+			attachedCharacterInput.GetFacingDirection(), 
+			attachedCharacterInput.GetCombatantID()
 		);
 
 		if (resultingHealthPanelManager != null)
-			resultingHealthPanelManager.YouHaveBeenAttacked (weaponAttackPower);
+			resultingHealthPanelManager.YouHaveBeenAttacked (attackPower);
 	}
 
 }
