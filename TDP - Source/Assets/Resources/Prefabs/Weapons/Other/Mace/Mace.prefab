@@ -44,7 +44,7 @@ MonoBehaviour:
   areaBounds: 1.2
   distToEnemyOffset: 2
   attackPower: 3
-  knockback: {x: 3500, y: 4}
+  knockback: {x: 2700, y: 4}
   attacks: []
 --- !u!212 &21276014
 SpriteRenderer:
@@ -134,7 +134,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: knockback.x
-      value: 3500
+      value: 2700
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: knockback.y
