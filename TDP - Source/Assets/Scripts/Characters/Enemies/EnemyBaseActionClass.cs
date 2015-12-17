@@ -38,6 +38,7 @@ public abstract class EnemyBaseActionClass : CharacterBaseActionClass, ICombatan
 
 	//Attacking power
 	[SerializeField] protected float enemyAttackingPower;
+	[SerializeField] protected Vector2 enemyKnockbackPower;
 
 	//Attacking parameters
 	[SerializeField] protected float enemyWithinAreaBounds = 0;
@@ -131,7 +132,7 @@ public abstract class EnemyBaseActionClass : CharacterBaseActionClass, ICombatan
 			}
 
 			//Every frame
-			yield return new WaitForFixedUpdate();
+			//yield return new WaitForFixedUpdate();
 		}
 
 	}

@@ -37,8 +37,10 @@ public class TigerScript : EnemyBaseActionClass {
 			GetCombatantID()
 		);
 		
-		if (resultingHealthPanelManager != null)
+		if (resultingHealthPanelManager != null) {
+			resultingHealthPanelManager.gameObject.GetComponent <CharacterBaseActionClass> ().ApplyKnockbackToCharacter (new Vector2 (enemyKnockbackPower.x * GetFacingDirection (), enemyKnockbackPower.y));
 			resultingHealthPanelManager.YouHaveBeenAttacked (enemyAttackingPower);
+		}
 		
 	}
 }

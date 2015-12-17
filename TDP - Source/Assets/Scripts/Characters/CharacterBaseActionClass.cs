@@ -231,7 +231,6 @@ public abstract class CharacterBaseActionClass : MonoBehaviour, ICombatant {
 	//When knockback should be applied to the character.  
 	public void ApplyKnockbackToCharacter(Vector2 force) {
 		//Maintaining a constant velocity would interfere with this.  
-		StopCoroutine("MaintainAConstantVelocity");
 		rb2d.AddForce (force);
 		Debug.Log ("Force of " + force + " applied as knockback to " + gameObject.name);
 	}

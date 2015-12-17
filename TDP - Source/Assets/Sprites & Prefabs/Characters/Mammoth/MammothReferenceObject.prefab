@@ -755,6 +755,7 @@ MonoBehaviour:
   ignorePlayerMovementThreshold: 2
   maxYValueSeparation: 2
   enemyAttackingPower: 2
+  enemyKnockbackPower: {x: 800, y: 4}
   enemyWithinAreaBounds: 1.6
   yOffsetToEnemy: -1
   distToEnemyLength: 3.2
@@ -1038,6 +1039,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: moveForce
       value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: enemyKnockbackPower.x
+      value: 800
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: enemyKnockbackPower.y
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
