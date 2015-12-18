@@ -559,8 +559,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0e2e46360e8214600ae6bcb17d132ac5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSpeed: 7
-  moveForce: 200
+  maxSpeed: 3.5
+  moveForce: 40
   jumpForce: 9
   wallJumpForce: 0
   groundedOffset: 0
@@ -755,7 +755,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: moveForce
-      value: 200
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Material
@@ -791,7 +791,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: maxSpeed
-      value: 7
+      value: 3.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

@@ -217,13 +217,14 @@ public abstract class CharacterBaseActionClass : MonoBehaviour, ICombatant {
 		while (currentTime <= time) {
 			//Increment time.  
 			currentTime += Time.deltaTime;
-			//Check velocity.  
-			if (Mathf.Abs(moveForce * rb2d.velocity.x) < maxSpeed)
+			//Check velocity, and change accordingly.  
+			if (Mathf.Abs (rb2d.velocity.x) >= maxSpeed) 
+				//By using Mathf.Sign(rb2d.velocity.x) instead of GetFacingDirection(), the character cannot switch directions in midair.  
+				rb2d.velocity = new Vector2 (Mathf.Sign(rb2d.velocity.x) * maxSpeed, rb2d.velocity.y);
+			else
 				rb2d.AddForce (Vector2.right * moveForce * GetFacingDirection());
 
-			if (Mathf.Abs (rb2d.velocity.x) >= maxSpeed) 
-				rb2d.velocity = new Vector2 (GetFacingDirection() * maxSpeed, rb2d.velocity.y);
-
+			//Wait for the fixed update (has to be done on all physics-related coroutines).
 			yield return new WaitForFixedUpdate();
 		}
 	}

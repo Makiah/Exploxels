@@ -42,7 +42,7 @@ public abstract class NPCBaseScript : CharacterBaseActionClass {
 			//Walk in one direction
 			anim.SetFloat("Speed", 1);
 			//Yield returning a coroutine makes it wait until the coroutine is completed.  
-			yield return StartCoroutine(MaintainAConstantXVelocity(GetFacingDirection() * moveForce, 1f));
+			yield return StartCoroutine(MaintainAConstantXVelocity(GetFacingDirection() * moveForce, 4f));
 			
 			//In the event that the x velocity is very small, jump.  
 			if (Mathf.Abs(rb2d.velocity.x) < moveForce / 1000f && grounded) {
@@ -52,7 +52,7 @@ public abstract class NPCBaseScript : CharacterBaseActionClass {
 				yield return new WaitForSeconds(0.3f);
 				//Start moving forward again (mid-air).  
 				anim.SetFloat("Speed", 1);
-				yield return StartCoroutine(MaintainAConstantXVelocity(GetFacingDirection() * moveForce, 1f));
+				yield return StartCoroutine(MaintainAConstantXVelocity(GetFacingDirection() * moveForce, 4f));
 			}
 
 			//Stop walking.  

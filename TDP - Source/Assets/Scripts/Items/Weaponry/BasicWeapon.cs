@@ -8,11 +8,11 @@ public class BasicWeapon : ItemBase {
 	[SerializeField] private bool attackAfterAnimation = true;
 
 	//The properties for the weapon.  
-	[SerializeField] private float areaBounds;
-	[SerializeField] private float distToEnemyOffset;
+	[SerializeField] private float areaBounds = 0;
+	[SerializeField] private float distToEnemyOffset = 0;
 
-	[SerializeField] private float attackPower;
-	[SerializeField] private Vector2 knockback;
+	[SerializeField] private float attackPower = 0;
+	[SerializeField] private Vector2 knockback = Vector2.zero;
 
 	//Attacking method classes and enumerations.  
 	[SerializeField]
