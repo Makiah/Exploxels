@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class RaycastAttackUtilities : MonoBehaviour {
+public class LinecastingUtilities : MonoBehaviour {
 	//Looks for any component via linecast.  This can be easily used via generics.  
 	public static T FindComponentViaLinecast <T> (Vector2 origin, float distToEnemyOffset, float yOffsetToEnemy, float enemyWithinAreaBound, int characterFacingDirection, string attackingCharacterGUID) {
 		//Pretty much all of this is calculation for the eventual linecast.  

@@ -28,7 +28,7 @@ public class MammothScript : EnemyBaseActionClass {
 	
 	void AttackEnemyInFocus () {
 		//Use the RaycastAttackUtilites class.  
-		CharacterHealthPanelManager resultingHealthPanelManager = RaycastAttackUtilities.FindComponentViaLinecast <CharacterHealthPanelManager> (
+		CharacterHealthPanelManager resultingHealthPanelManager = LinecastingUtilities.FindComponentViaLinecast <CharacterHealthPanelManager> (
 			transform.position, 
 			distToEnemyLength, 
 			yOffsetToEnemy, 

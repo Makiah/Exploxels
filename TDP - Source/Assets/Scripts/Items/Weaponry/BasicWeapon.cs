@@ -48,7 +48,7 @@ public class BasicWeapon : ItemBase {
 
 	void AttackEnemyInFocus () {
 		//Used to look for health panel manager.  ALWAYS REMEMBER TO KEEP THE PARAMETERS IN ORDER.   
-		CharacterHealthPanelManager resultingHealthPanelManager = RaycastAttackUtilities.FindComponentViaLinecast <CharacterHealthPanelManager> (
+		CharacterHealthPanelManager resultingHealthPanelManager = LinecastingUtilities.FindComponentViaLinecast <CharacterHealthPanelManager> (
 			attachedCharacterInput.GetActualClass().transform.position, 
 			distToEnemyOffset, 
 			0, 

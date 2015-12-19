@@ -48,7 +48,7 @@ public class PickaxeScript : ItemBase {
 		
 		Debug.DrawLine (actualStartRaycastParameter, actualEndRaycastParameter, Color.black, 2, false);
 
-		OreScript resultingOreScript = RaycastAttackUtilities.FindComponentViaLinecast <OreScript> (
+		OreScript resultingOreScript = LinecastingUtilities.FindComponentViaLinecast <OreScript> (
 			attachedCharacterInput.GetActualClass ().transform.position,
 			distToOreBounds, 
 			0, 
