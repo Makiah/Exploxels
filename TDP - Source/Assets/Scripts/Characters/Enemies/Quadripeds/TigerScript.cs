@@ -28,7 +28,8 @@ public class TigerScript : EnemyBaseActionClass {
 	}
 	
 	void AttackEnemyInFocus () {
-		CharacterHealthPanelManager resultingHealthPanelManager = RaycastAttackUtilities.LookForEnemyViaLinecast (
+		//Used for finding the health panel manager via linecast.  
+		CharacterHealthPanelManager resultingHealthPanelManager = RaycastAttackUtilities.FindComponentViaLinecast <CharacterHealthPanelManager> (
 			transform.position, 
 			distToEnemyLength, 
 			0, 

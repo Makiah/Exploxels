@@ -19,7 +19,7 @@ public class PickaxeScript : ItemBase {
 	float distToOreBounds = 1f;
 
 	public override MovementAndMethod[] GetPossibleActionsForItem () {
-		MovementAndMethod[] possibleMoves = new MovementAndMethod[2];
+		MovementAndMethod[] possibleMoves = new MovementAndMethod[1];
 		possibleMoves [0] = new MovementAndMethod (MovementAndMethod.PossibleMovements.OverheadSlice, MovementAndMethod.PossibleTriggers.LeftMouseClick, false);
 		return possibleMoves;
 	}
@@ -47,14 +47,20 @@ public class PickaxeScript : ItemBase {
 		RaycastHit2D linecastResult = Physics2D.Linecast (actualStartRaycastParameter, actualEndRaycastParameter, 1 << LayerMask.NameToLayer ("Enemies"));
 		
 		Debug.DrawLine (actualStartRaycastParameter, actualEndRaycastParameter, Color.black, 2, false);
-		
-		if (linecastResult.collider != null) {
-			Debug.Log ("Pickaxe hit collider with name of " + linecastResult.collider.gameObject.name + ".");
-			if (linecastResult.collider.gameObject.GetComponent <OreScript> () != null) {
-				linecastResult.collider.gameObject.GetComponent <OreScript> ().OnOreChipped();
-			}
+
+		OreScript resultingOreScript = RaycastAttackUtilities.FindComponentViaLinecast <OreScript> (
+			attachedCharacterInput.GetActualClass ().transform.position,
+			distToOreBounds, 
+			0, 
+			orePickaxingBounds, 
+			attachedCharacterInput.GetActualClass ().GetFacingDirection (), 
+			attachedCharacterInput.GetCombatantID ()
+		);
+
+		if (resultingOreScript != null) {
+			resultingOreScript.OnOreChipped();
 		} else {
-			Debug.Log("Pickaxe did not hit a collider.");
+			Debug.Log("No ore found");
 		}
 		
 		attachedCharacterInput.GetActualClass().ActionsAfterAnimation -= ChopTreeInFocus;
