@@ -14,75 +14,28 @@ public class BasicWeapon : ItemBase {
 	[SerializeField] private float attackPower = 0;
 	[SerializeField] private Vector2 knockback = Vector2.zero;
 
-	//Attacking method classes and enumerations.  
-	[SerializeField]
-	public enum PossibleAttackMethods
-	{
-		LeftMouseClick, 
-		RightMouseClick
-	}
-	[SerializeField]
-	public enum PossibleAttacks 
-	{
-		OverheadSlice, 
-		Stab
-	}
-
-	[System.Serializable]
-	public class AttackAndMove {
-		public PossibleAttackMethods method;
-		public PossibleAttacks attack;
-	}
-
-	//Unity has a weird thing that only certain ways that classes can be put together appears in the Inspector.  
-	[SerializeField] private AttackAndMove[] attacks = null;
-
 	//Just the default moves for an item, should be changed via a child script if these are not the attacks that you are looking for.  
-	public override Dictionary <string, string> GetPossibleActionsForItem () {
-		//Define the dictionary
-		possibleMoves = new Dictionary<string, string> ();
-
+	public override MovementAndMethod[] GetPossibleActionsForItem () {
+		MovementAndMethod[] possibleMoves;
 		//Add default moves.  
-		if (attacks.Length == 0) {
-			possibleMoves.Add ("Stab", "MouseButtonDown0");
-			possibleMoves.Add ("OverheadSlice", "MouseButtonDown1");
+		if (movementTriggerPair == null || movementTriggerPair.Length == 0) {
+			possibleMoves = new MovementAndMethod[2];
+			possibleMoves [0] = new MovementAndMethod (MovementAndMethod.PossibleMovements.Stab, MovementAndMethod.PossibleTriggers.LeftMouseClick, false);
+			possibleMoves [1] = new MovementAndMethod (MovementAndMethod.PossibleMovements.OverheadSlice, MovementAndMethod.PossibleTriggers.RightMouseClick, false);
 		} else {
 			//Convert the array of enums into strings.  
-			for (int i = 0; i < attacks.Length; i++) {
-				possibleMoves.Add (ConvertAttackToString (attacks [i].attack), ConvertMethodToString (attacks [i].method));
-				Debug.Log ("Added " + ConvertAttackToString (attacks [i].attack) + ", " + ConvertMethodToString (attacks [i].method));
+			possibleMoves = new MovementAndMethod[movementTriggerPair.Length];
+			//Define all of the movement and trigger pair values based off of the serializable list.  
+			for (int i = 0; i < movementTriggerPair.Length; i++) {
+				possibleMoves [i] = new MovementAndMethod (movementTriggerPair [i].attack, movementTriggerPair [i].method, movementTriggerPair [i].worksMidair);
 			}
 		}
 
 		return possibleMoves;
 	}
 
-	string ConvertMethodToString (PossibleAttackMethods method) {
-		switch (method) {
-		case PossibleAttackMethods.LeftMouseClick: 
-			return "MouseButtonDown0";
-		case PossibleAttackMethods.RightMouseClick:
-			return "MouseButtonDown1";
-		default: 
-			Debug.LogError("Invalid option specified");
-			return "";
-		}
-	}
-
-	string ConvertAttackToString (PossibleAttacks method) {
-		switch (method) {
-		case PossibleAttacks.OverheadSlice: 
-			return "OverheadSlice";
-		case PossibleAttacks.Stab:
-			return "Stab";
-		default: 
-			Debug.LogError("Invalid option specified");
-			return "";
-		}
-	}
-
 	//Called by ItemBase.
-	public override void InfluenceEnvironment(string actionKey) {
+	public override void InfluenceEnvironment(MovementAndMethod.PossibleMovements actionKey) {
 		if (attackAfterAnimation)
 			AttemptToAttackAfterCompletedAnimation ();
 		else
@@ -90,22 +43,22 @@ public class BasicWeapon : ItemBase {
 	}
 
 	void AttemptToAttackAfterCompletedAnimation () {
-		attachedCharacterInput.ActionsAfterAnimation += AttackEnemyInFocus;
+		attachedCharacterInput.GetActualClass().ActionsAfterAnimation += AttackEnemyInFocus;
 	}
 
 	void AttackEnemyInFocus () {
 		//Used to look for health panel manager.  ALWAYS REMEMBER TO KEEP THE PARAMETERS IN ORDER.   
 		CharacterHealthPanelManager resultingHealthPanelManager = RaycastAttackUtilities.LookForEnemyViaLinecast (
-			attachedCharacterInput.transform.position, 
+			attachedCharacterInput.GetActualClass().transform.position, 
 			distToEnemyOffset, 
 			0, 
 			areaBounds, 
-			attachedCharacterInput.GetFacingDirection(), 
+			attachedCharacterInput.GetActualClass().GetFacingDirection(), 
 			attachedCharacterInput.GetCombatantID()
 		);
 
 		if (resultingHealthPanelManager != null) {
-			resultingHealthPanelManager.gameObject.GetComponent <CharacterBaseActionClass> ().ApplyKnockbackToCharacter (new Vector2 (knockback.x * attachedCharacterInput.GetFacingDirection (), knockback.y));
+			resultingHealthPanelManager.gameObject.GetComponent <CharacterBaseActionClass> ().ApplyKnockbackToCharacter (new Vector2 (knockback.x * attachedCharacterInput.GetActualClass().GetFacingDirection (), knockback.y));
 			resultingHealthPanelManager.YouHaveBeenAttacked (attackPower);
 		}
 	}

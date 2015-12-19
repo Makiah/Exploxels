@@ -18,28 +18,28 @@ public class PickaxeScript : ItemBase {
 	float orePickaxingBounds = .2f;
 	float distToOreBounds = 1f;
 
-	public override Dictionary <string, string> GetPossibleActionsForItem () {
-		possibleMoves = new Dictionary<string, string> ();
-		possibleMoves.Add ("OverheadSlice", "MouseButtonDown0");
+	public override MovementAndMethod[] GetPossibleActionsForItem () {
+		MovementAndMethod[] possibleMoves = new MovementAndMethod[2];
+		possibleMoves [0] = new MovementAndMethod (MovementAndMethod.PossibleMovements.OverheadSlice, MovementAndMethod.PossibleTriggers.LeftMouseClick, false);
 		return possibleMoves;
 	}
 	
-	public override void InfluenceEnvironment(string actionKey) {
+	public override void InfluenceEnvironment(MovementAndMethod.PossibleMovements actionKey) {
 		AttemptToChopATreeAfterCompletedAnimation ();
 	}
 	
 	void AttemptToChopATreeAfterCompletedAnimation () {
-		attachedCharacterInput.ActionsAfterAnimation += ChopTreeInFocus;
+		attachedCharacterInput.GetActualClass().ActionsAfterAnimation += ChopTreeInFocus;
 	}
 	
 	void ChopTreeInFocus () {
 		Vector3 treeChoppingVectorBound = new Vector3 (orePickaxingBounds, 0, 0);
 		Vector3 distToTreeVectorOffset = new Vector3 (distToOreBounds, 0, 0);
 		
-		int playerFacingDirection = attachedCharacterInput.GetFacingDirection ();
+		int playerFacingDirection = attachedCharacterInput.GetActualClass().GetFacingDirection ();
 		
-		Vector3 startRaycastParameter = attachedCharacterInput.transform.position - treeChoppingVectorBound;
-		Vector3 endRaycastParameter = attachedCharacterInput.transform.position + treeChoppingVectorBound;
+		Vector3 startRaycastParameter = attachedCharacterInput.GetActualClass().transform.position - treeChoppingVectorBound;
+		Vector3 endRaycastParameter = attachedCharacterInput.GetActualClass().transform.position + treeChoppingVectorBound;
 		
 		Vector3 actualStartRaycastParameter = startRaycastParameter + distToTreeVectorOffset * playerFacingDirection;
 		Vector3 actualEndRaycastParameter = endRaycastParameter + distToTreeVectorOffset * playerFacingDirection;
@@ -57,7 +57,7 @@ public class PickaxeScript : ItemBase {
 			Debug.Log("Pickaxe did not hit a collider.");
 		}
 		
-		attachedCharacterInput.ActionsAfterAnimation -= ChopTreeInFocus;
+		attachedCharacterInput.GetActualClass().ActionsAfterAnimation -= ChopTreeInFocus;
 	}
 
 }

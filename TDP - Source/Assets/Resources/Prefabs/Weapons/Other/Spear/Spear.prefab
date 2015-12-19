@@ -40,12 +40,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e77448ee5d8f4ad8a399b1ada002071, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementTriggerPair: []
   attackAfterAnimation: 1
   areaBounds: 1.2
   distToEnemyOffset: 2
   attackPower: 4
   knockback: {x: 1000, y: 3}
-  attacks: []
 --- !u!212 &21276014
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -89,6 +89,10 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: attacks.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.size
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 0}
@@ -143,6 +147,22 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: knockback.y
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.data[0].attack
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.data[1].method
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.data[2].attack
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.data[2].worksMidair
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

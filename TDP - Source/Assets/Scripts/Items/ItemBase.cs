@@ -18,16 +18,27 @@ using System.Collections.Generic;
 //later added, this class makes more sense.  
 public abstract class ItemBase : MonoBehaviour {
 
-	protected CharacterBaseActionClass attachedCharacterInput;
+	//Attack and move works by creating a serializable system for defining MovementAndMethod[].  
+	[System.Serializable]
+	public class AttackAndMove {
+		public MovementAndMethod.PossibleTriggers method;
+		public MovementAndMethod.PossibleMovements attack;
+		public bool worksMidair;
+	}
 
-	public void SetAttachedCharacterInput(CharacterBaseActionClass ctorCharacterInput) {
+	//Unity has a weird issue that only certain ways that classes can be put together appears in the Inspector.  
+	[SerializeField] protected AttackAndMove[] movementTriggerPair = null;
+
+	//The class methods.  
+	protected ICanHoldItems attachedCharacterInput;
+
+	public void SetAttachedCharacterInput(ICanHoldItems ctorCharacterInput) {
 		attachedCharacterInput = ctorCharacterInput;
 	}
 
-	protected Dictionary <string, string> possibleMoves;
-
-	public abstract Dictionary <string, string> GetPossibleActionsForItem ();
-	public abstract void InfluenceEnvironment(string actionKey);
+	//Called by CharacterBaseActionClass when a new item is being used.  
+	public abstract MovementAndMethod[] GetPossibleActionsForItem ();
+	public abstract void InfluenceEnvironment(MovementAndMethod.PossibleMovements actionKey);
 
 	//Just added.  
 	protected void ChangeStackOfCurrentHotbarItem(int stackToChangeBy) {

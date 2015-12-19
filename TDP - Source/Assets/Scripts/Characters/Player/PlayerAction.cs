@@ -15,7 +15,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public class PlayerAction : CharacterBaseActionClass {
+public class PlayerAction : CharacterBaseActionClass, ICanHoldItems {
 
 	private bool touchingWall;
 	private Transform wallCheck;
@@ -89,48 +89,61 @@ public class PlayerAction : CharacterBaseActionClass {
 
 		}
 	}
-	
 
-	/************************************************* ATTACKING *********************************************************/
+	/************************************************ ITEM STUFF *************************************************************/
+	//This dictionary contains the possible weapon moves for the player.  The first entry contains the required action to trigger the action, and the second
+	//includes a string of the method.  
+	private MovementAndMethod[] possibleWeaponMoves;
 
-	string[] knownAttackKeys = {"Stab", "OverheadSlice", "ShootBow", "CreatePhysicalItem"};
-	
-	//The Update() method that will check whether the dictionary requirements for some attack have been met.  The code that sets the dictionary 
+	private ItemBase itemInUseByCharacter;
+
+	//This will be called by the item management part of the costume manager script
+	public void OnRefreshCurrentWeaponMoves(ItemBase ctorItemInUseByCharacter) {
+		itemInUseByCharacter = ctorItemInUseByCharacter;
+		if (ctorItemInUseByCharacter != null) {
+			possibleWeaponMoves = itemInUseByCharacter.GetPossibleActionsForItem ();
+		} else {
+			possibleWeaponMoves = null;
+		}
+	}
+
+	//Has to be public for the interface
+	public void AttackAction(MovementAndMethod someAttack) {
+		if (!currentlyInAttackAnimation) {
+			anim.SetTrigger (someAttack.GetActionKey());
+			itemInUseByCharacter.InfluenceEnvironment (someAttack.GetActionEnum());
+			if (! (someAttack.GetActionKey().Equals("CreatePhysicalItem")))
+				currentlyInAttackAnimation = true;
+		} else {
+			Debug.Log("Was in attack animation, did not attack");
+		}
+	}
+		
+	//The coroutine method that will check whether the dictionary requirements for some attack have been met.  The code that sets the array (above) 
 	//is in the costume manager class.  
 	IEnumerator CheckForWeaponInput() {
 		//Unless the possible attack dictionary is empty,
 		while (true) {
-			if (jumpInEffect == 0 && Input.GetAxisRaw("Horizontal") == 0) {
-				if (possibleWeaponMoves != null) {
-					foreach (string attackKey in knownAttackKeys) {
-						if (possibleWeaponMoves.ContainsKey (attackKey)) {
-							string outValue;
-							possibleWeaponMoves.TryGetValue (attackKey, out outValue);
-							if (GetActionBooleanFromString (outValue)) {
-								AttackAction (attackKey);
+			if (itemInUseByCharacter != null) {
+				//Works due to short-circuiting.  
+				if (possibleWeaponMoves != null && possibleWeaponMoves.Length != 0) {
+					if (currentlyInAttackAnimation == false) {
+						for (int i = 0; i < possibleWeaponMoves.Length; i++) {
+							//If the can be used while midair is false, then it will only work while grounded is true.  Vice versa is also the case.  
+							if (possibleWeaponMoves [i].GetCanBeUsedWhileMidair () == ! grounded) {
+								if (possibleWeaponMoves [i].GetTriggerHasOccurred ()) {
+									AttackAction (possibleWeaponMoves [i]);
+								}
 							}
 						}
 					}
+				} else {
+					Debug.LogError ("Possible weapon moves of " + itemInUseByCharacter.gameObject.name + " is null");
 				}
 			}
+
 			//For every frame.  
 			yield return null;
 		}
 	}
-
-	bool GetActionBooleanFromString(string actionKey) {
-		if (grounded) {
-			switch (actionKey) {
-			case "MouseButtonDown0":
-				return Input.GetMouseButtonDown (0);
-			case "MouseButtonDown1":
-				return Input.GetMouseButtonDown (1);
-			default:
-				return false;
-			}
-		} else {
-			return false;
-		}
-	}
-
 }

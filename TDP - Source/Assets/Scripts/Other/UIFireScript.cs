@@ -7,14 +7,14 @@ public class UIFireScript : ItemBase {
 	[SerializeField] private GameObject physicalFireObject = null;
 
 	//Define the moves for the current weapon.  
-	public override Dictionary <string, string> GetPossibleActionsForItem () {
-		possibleMoves = new Dictionary<string, string> ();
-		possibleMoves.Add ("CreatePhysicalItem", "MouseButtonDown0");
+	public override MovementAndMethod[] GetPossibleActionsForItem () {
+		MovementAndMethod[] possibleMoves = new MovementAndMethod[1];
+		possibleMoves [0] = new MovementAndMethod (MovementAndMethod.PossibleMovements.CreatePhysicalItem, MovementAndMethod.PossibleTriggers.LeftMouseClick, false);
 		return possibleMoves;
 	}
 
 	//Called whenever the specified action (by the dictionary) occurs.  
-	public override void InfluenceEnvironment(string actionKey) {
+	public override void InfluenceEnvironment(MovementAndMethod.PossibleMovements actionKey) {
 		if (physicalFireObject != null) {
 			//Create the object.  
 			Vector3 physicalFireOffset = new Vector3(1, 0, 0) * CurrentLevelVariableManagement.GetPlayerReference().GetComponent <PlayerAction> ().GetFacingDirection();

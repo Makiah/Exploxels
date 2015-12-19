@@ -15,38 +15,39 @@ using System.Collections.Generic;
 
 public class BowScript : ItemBase {
 
-	public GameObject arrow;
-	public float attackPowerStrength;
+	[SerializeField] private GameObject arrow = null;
+	[SerializeField] private float attackPowerStrength = 0;
+	[SerializeField] private bool attackPlayer = false;
 
-	public override Dictionary <string, string> GetPossibleActionsForItem () {
-		possibleMoves = new Dictionary<string, string> ();
-		possibleMoves.Add ("ShootBow", "MouseButtonDown0");
+	public override MovementAndMethod[] GetPossibleActionsForItem () {
+		MovementAndMethod[] possibleMoves = new MovementAndMethod[1];
+		possibleMoves [0] = new MovementAndMethod (MovementAndMethod.PossibleMovements.ShootBow, MovementAndMethod.PossibleTriggers.LeftMouseClick, false);
 		return possibleMoves;
 	}
 
-	public override void InfluenceEnvironment(string actionKey) {
+	public override void InfluenceEnvironment(MovementAndMethod.PossibleMovements actionKey) {
 		AttemptToAttackAfterCompletedAnimation ();
 	}
 	
 	void AttemptToAttackAfterCompletedAnimation () {
-		attachedCharacterInput.ActionsAfterAnimation += ShootArrow;
+		attachedCharacterInput.GetActualClass().ActionsAfterAnimation += ShootArrow;
 	}
 
 	void ShootArrow() {
 
 		GameObject playerObject = CurrentLevelVariableManagement.GetPlayerReference ();
 
-		float preHeading = attachedCharacterInput.GetFacingDirection () == 1 ? 0 : 180;
+		float preHeading = attachedCharacterInput.GetActualClass().GetFacingDirection () == 1 ? 0 : 180;
 
 		//Apparently there is some issue with the bow's position when attached to the player object, because it is always (0, 0, 0).  This fixes it.  
-		GameObject instantiatedArrow = (GameObject)(Instantiate (arrow, attachedCharacterInput.gameObject.transform.position + new Vector3(1.2f, 0, 0) * attachedCharacterInput.GetFacingDirection(), Quaternion.identity));
+		GameObject instantiatedArrow = (GameObject)(Instantiate (arrow, attachedCharacterInput.GetActualClass().gameObject.transform.position + new Vector3(1.2f, 0, 0) * attachedCharacterInput.GetActualClass().GetFacingDirection(), Quaternion.identity));
 
 		ProjectileScript instantiatedArrowScript = instantiatedArrow.GetComponent <ProjectileScript> ();
 
 		Vector3 positionToFireToward;
 		float accuracy;
 
-		if (true) {
+		if (attackPlayer) {
 			positionToFireToward = playerObject.transform.position;
 			accuracy = 30;
 		} else {

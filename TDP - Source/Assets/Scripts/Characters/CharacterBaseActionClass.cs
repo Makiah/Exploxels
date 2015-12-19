@@ -19,7 +19,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-public abstract class CharacterBaseActionClass : MonoBehaviour, ICombatant {
+public abstract class CharacterBaseActionClass : MonoBehaviour {
 
 	/********************************************** INITIALIZATION ******************************************************/
 	
@@ -162,39 +162,12 @@ public abstract class CharacterBaseActionClass : MonoBehaviour, ICombatant {
 	
 	
 	/************************************************* ATTACKING *********************************************************/
-
-	//This dictionary contains the possible weapon moves for the player.  The first entry contains the required action to trigger the action, and the second
-	//includes a string of the method.  
-	protected Dictionary <string, string> possibleWeaponMoves;
-	
-	protected ItemBase itemInUseByCharacter;
-	
+	//Used for both the player and the enemies.  
 	protected bool currentlyInAttackAnimation = false;
 
 	//This delegate is called after the animation completes.  
 	public delegate void ActionAfterCompletedAnimation ();
 	public event ActionAfterCompletedAnimation ActionsAfterAnimation;
-	
-	//This will be called by the item management part of the costume manager script
-	public void OnRefreshCurrentWeaponMoves(ItemBase ctorItemInUseByCharacter) {
-		itemInUseByCharacter = ctorItemInUseByCharacter;
-		if (ctorItemInUseByCharacter != null) {
-			possibleWeaponMoves = itemInUseByCharacter.GetPossibleActionsForItem ();
-		} else {
-			possibleWeaponMoves = null;
-		}
-	}
-	
-	protected void AttackAction(string someAttackKey) {
-		if (!currentlyInAttackAnimation) {
-			anim.SetTrigger (someAttackKey);
-			itemInUseByCharacter.InfluenceEnvironment (someAttackKey);
-			if (! (someAttackKey.Equals("CreatePhysicalItem")))
-				currentlyInAttackAnimation = true;
-		} else {
-			Debug.Log("Was in attack animation, did not attack");
-		}
-	}
 	
 	public bool CheckCurrentAttackAnimationState() {
 		return currentlyInAttackAnimation;
@@ -239,6 +212,11 @@ public abstract class CharacterBaseActionClass : MonoBehaviour, ICombatant {
 	//Combatant stuff.  
 	public string GetCombatantID() {
 		return characterGUID;
+	}
+
+	//Used for stuff like the transform.  
+	public CharacterBaseActionClass GetActualClass() {
+		return this;
 	}
 
 }

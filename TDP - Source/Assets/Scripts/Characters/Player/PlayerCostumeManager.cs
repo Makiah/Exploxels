@@ -28,7 +28,7 @@ public class PlayerCostumeManager : MonoBehaviour {
 
 	/************************************************ COSTUME MANAGEMENT ************************************************/
 
-	private CharacterBaseActionClass mainPlayerAction;
+	private PlayerAction mainPlayerAction;
 
 	private SpriteRenderer head;
 	private SpriteRenderer body;
@@ -40,7 +40,7 @@ public class PlayerCostumeManager : MonoBehaviour {
 	private Transform holdingItem;
 
 	void InitializePlayerProfession() {
-		mainPlayerAction = transform.parent.parent.gameObject.GetComponent <CharacterBaseActionClass> ();
+		mainPlayerAction = transform.parent.parent.gameObject.GetComponent <PlayerAction> ();
 		//Just setting up the basic race costume.  
 		body = transform.FindChild("Body").GetComponent <SpriteRenderer> ();
 		head = transform.FindChild ("Head").GetComponent <SpriteRenderer> ();
