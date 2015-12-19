@@ -184,7 +184,7 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 
 	/**************** CHARACTER UTILITIES ***********************/
 	//This coroutine keeps enemies and NPCs at a constant velocity for a given duration of time (better than infinite mass).  
-	protected IEnumerator MaintainAConstantXVelocity(float velocity, float time) {
+	protected IEnumerator MaintainAConstantXVelocity(float time) {
 		//Controls the time that it runs for.  
 		float currentTime = 0;
 		while (currentTime <= time) {

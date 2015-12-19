@@ -17,13 +17,13 @@ public class BasicWeapon : ItemBase {
 	//Just the default moves for an item, should be changed via a child script if these are not the attacks that you are looking for.  
 	public override MovementAndMethod[] GetPossibleActionsForItem () {
 		MovementAndMethod[] possibleMoves;
-		//Add default moves.  
+		//Add default moves, if it is null otherwise.  
 		if (movementTriggerPair == null || movementTriggerPair.Length == 0) {
 			possibleMoves = new MovementAndMethod[2];
 			possibleMoves [0] = new MovementAndMethod (MovementAndMethod.PossibleMovements.Stab, MovementAndMethod.PossibleTriggers.LeftMouseClick, false);
 			possibleMoves [1] = new MovementAndMethod (MovementAndMethod.PossibleMovements.OverheadSlice, MovementAndMethod.PossibleTriggers.RightMouseClick, false);
 		} else {
-			//Convert the array of enums into strings.  
+			//Convert the array of enums MovementAndMethod classes.  The constructor converts everything.  
 			possibleMoves = new MovementAndMethod[movementTriggerPair.Length];
 			//Define all of the movement and trigger pair values based off of the serializable list.  
 			for (int i = 0; i < movementTriggerPair.Length; i++) {
@@ -48,7 +48,7 @@ public class BasicWeapon : ItemBase {
 
 	void AttackEnemyInFocus () {
 		//Used to look for health panel manager.  ALWAYS REMEMBER TO KEEP THE PARAMETERS IN ORDER.   
-		CharacterHealthPanelManager resultingHealthPanelManager = LinecastingUtilities.FindComponentViaLinecast <CharacterHealthPanelManager> (
+		CharacterHealthPanelManager resultingHealthPanelManager = LinecastingUtilities.FindEnemyViaLinecast (
 			attachedCharacterInput.GetActualClass().transform.position, 
 			distToEnemyOffset, 
 			0, 

@@ -57,7 +57,6 @@ public abstract class EnemyBaseActionClass : CharacterBaseActionClass, ICombatan
 
 	//This should be FixedUpdate.  
 	protected virtual IEnumerator EnemyControl() {
-
 		//Continuously
 		while (true) {
 			//Check to see whether player is within radius. 
@@ -110,7 +109,7 @@ public abstract class EnemyBaseActionClass : CharacterBaseActionClass, ICombatan
 					//Start moving toward the target safe zone (we have already flipped to the position
 					anim.SetFloat("Speed", 1);
 					//Yield returning a coroutine makes it wait until the coroutine is completed.  
-					yield return StartCoroutine(MaintainAConstantXVelocity(GetFacingDirection() * moveForce, 0.3f));
+					yield return StartCoroutine(MaintainAConstantXVelocity(0.3f));
 
 					//In the event that the x velocity is very small, jump.  
 					if (Mathf.Abs (rb2d.velocity.x) < maxSpeed / 100f && grounded) {
@@ -120,7 +119,7 @@ public abstract class EnemyBaseActionClass : CharacterBaseActionClass, ICombatan
 						yield return new WaitForSeconds(0.3f);
 						//Start moving forward again (mid-air).  
 						anim.SetFloat("Speed", 1);
-						yield return StartCoroutine(MaintainAConstantXVelocity(GetFacingDirection() * moveForce, 0.3f));
+						yield return StartCoroutine(MaintainAConstantXVelocity(0.3f));
 					}
 
 				}

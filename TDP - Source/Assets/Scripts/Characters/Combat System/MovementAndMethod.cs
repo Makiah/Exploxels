@@ -51,7 +51,7 @@ public class MovementAndMethod {
 			break;
 		}
 
-		//Define the movement.  
+		//Define the movement.  (Has to be used for animations)
 		attackEnumVal = ctorMovement;
 		switch (ctorMovement) {
 		case PossibleMovements.OverheadSlice: 
@@ -59,6 +59,12 @@ public class MovementAndMethod {
 			break;
 		case PossibleMovements.Stab: 
 			attackKey = "Stab";
+			break;
+		case PossibleMovements.ShootBow: 
+			attackKey = "ShootBow";
+			break;
+		case PossibleMovements.CreatePhysicalItem: 
+			attackKey = "CreatePhysicalItem";
 			break;
 		default: 
 			Debug.LogError ("Invalid action");
