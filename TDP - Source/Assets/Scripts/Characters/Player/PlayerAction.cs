@@ -75,7 +75,7 @@ public class PlayerAction : CharacterBaseActionClass, ICanHoldItems {
 				rb2d.velocity = new Vector2 (Mathf.Sign(rb2d.velocity.x) * maxSpeed, rb2d.velocity.y);
 			else
 				//The additional variable makes it so the player moves slower when in a jump.  
-				rb2d.AddForce (Vector2.right * moveForce * h * 1 / (0.01f * jumpInEffect + 1));
+				rb2d.AddForce (Vector2.right * moveForce * h * 1 / (2f * jumpInEffect + 1));
 
 			//Control flipping based on the arrow keys.  
 			if (h > 0 && !facingRight) 
