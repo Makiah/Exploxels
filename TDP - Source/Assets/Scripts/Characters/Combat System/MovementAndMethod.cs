@@ -7,7 +7,9 @@ public class MovementAndMethod {
 	public enum PossibleTriggers
 	{
 		LeftMouseClick, 
-		RightMouseClick
+		RightMouseClick, 
+		ShiftPlusLeftClick, 
+		ShiftPlusRightClick
 	}
 	[SerializeField]
 	public enum PossibleMovements 
@@ -15,7 +17,8 @@ public class MovementAndMethod {
 		OverheadSlice, 
 		Stab, 
 		ShootBow, 
-		CreatePhysicalItem
+		CreatePhysicalItem, 
+		GroundPound
 	}
 
 	//Specifies the required delegate.  
@@ -36,6 +39,14 @@ public class MovementAndMethod {
 		return Input.GetMouseButtonDown (1);
 	}
 
+	bool CheckShiftPlusLeftClick() {
+		return Input.GetMouseButtonDown (0) && Input.GetKey (KeyCode.LeftShift);
+	}
+
+	bool CheckShiftPlusRightClick() {
+		return Input.GetMouseButtonDown (1) && Input.GetKey (KeyCode.LeftShift);
+	}
+
 	//This constructor converts the enums into delegates.  
 	public MovementAndMethod(PossibleMovements ctorMovement, PossibleTriggers ctorTrigger, bool canBeUsedInMidair) {
 		//Define the trigger
@@ -45,6 +56,12 @@ public class MovementAndMethod {
 			break;
 		case PossibleTriggers.RightMouseClick: 
 			actionTrigger = new MethodToAction (CheckRightClick);
+			break;
+		case PossibleTriggers.ShiftPlusLeftClick: 
+			actionTrigger = new MethodToAction (CheckShiftPlusLeftClick);
+			break;
+		case PossibleTriggers.ShiftPlusRightClick: 
+			actionTrigger = new MethodToAction (CheckShiftPlusRightClick);
 			break;
 		default: 
 			Debug.LogError ("Invalid trigger");
@@ -65,6 +82,9 @@ public class MovementAndMethod {
 			break;
 		case PossibleMovements.CreatePhysicalItem: 
 			attackKey = "CreatePhysicalItem";
+			break;
+		case PossibleMovements.GroundPound: 
+			attackKey = "GroundPound";
 			break;
 		default: 
 			Debug.LogError ("Invalid action");
