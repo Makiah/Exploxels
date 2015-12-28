@@ -33,29 +33,38 @@ public class PlayerAction : CharacterBaseActionClass, ICanHoldItems {
 	//Used to check whether or not player is grounded, touching a wall, etc.  Defines movements.  
 	protected override IEnumerator CheckCharacterPhysics() {
 		while (true) {
+			//Update the grounded boolean.  
 			grounded = CheckWhetherGrounded();
 			//Debug.DrawLine(groundCheck.position + new Vector3(groundedOffset, 0, 0), groundCheck.position - new Vector3(groundedOffset, 0, 0));
 			touchingWall = Physics2D.Linecast (transform.position, wallCheck.position, 1 << LayerMask.NameToLayer ("Ground"));
 
-			if (grounded) {
-				jumpInEffect = 0;
-				anim.SetInteger ("JumpInEffect", 0);
-			} else {
+			//The ground checks should be extremely close to the player, or it appears as grounded on the next frame.  
+			if (grounded && jumpInEffect != 0) {
+				InitializeJump (0);
+				Debug.Log ("Reset to 0, grounded is " + grounded);
+			} 
+
+			//In case the player is in the air (not jumping, just falling)
+			if (grounded == false && jumpInEffect == 0) {
+				//No force should be added, so this is done manually.  
+				jumpInEffect = 1;
 				anim.SetInteger ("JumpInEffect", 1);
 			}
 
+			//When the player wants to jump.  
 			if (Input.GetButtonDown ("Jump")) {
-				if (grounded) {
+				//The order of these conditions is important.  
+				if (jumpInEffect == 0)
 					InitializeJump (1);
-				} else if (touchingWall) {
+				else if (touchingWall)
 					InitializeJump (3);
-				} else if (jumpInEffect == 1 && !touchingWall) {
+				else if (jumpInEffect == 1)
 					InitializeJump (2);
-				} else if (jumpInEffect == 0 && !grounded) {
-					InitializeJump (2);
-				}
 			}
 
+			//Debug.Log("Currently jumpInEffect = " + jumpInEffect + " and animator is " + anim.GetInteger ("JumpInEffect") + " and grounded " + grounded);
+
+			//Every frame.  
 			yield return null;
 		}
 
@@ -83,11 +92,18 @@ public class PlayerAction : CharacterBaseActionClass, ICanHoldItems {
 			else if (h < 0 && facingRight) 
 				Flip ();
 
+			//Tell the camera that the player is moving (should be changed at some point.  
 			transform.FindChild("Main Camera").FindChild("Background").FindChild("Background Tiles").GetComponent <BackgroundScroller> ().Movement(rb2d.velocity.x / maxSpeed);
 
 			yield return new WaitForFixedUpdate();
 
 		}
+	}
+
+	//Used for weapons.  
+	public void ExternalJumpAction (int num) {
+		Debug.Log ("External jumping: " + num);
+		InitializeJump (num);
 	}
 
 	/************************************************ ITEM STUFF *************************************************************/
@@ -112,7 +128,7 @@ public class PlayerAction : CharacterBaseActionClass, ICanHoldItems {
 		if (!currentlyInAttackAnimation) {
 			anim.SetTrigger (someAttack.GetActionKey());
 			itemInUseByCharacter.InfluenceEnvironment (someAttack.GetActionEnum());
-			if (! (someAttack.GetActionKey().Equals("CreatePhysicalItem")))
+			if (someAttack.GetActionEnum() != MovementAndMethod.PossibleMovements.CreatePhysicalItem)
 				currentlyInAttackAnimation = true;
 		} else {
 			Debug.Log("Was in attack animation, did not attack");

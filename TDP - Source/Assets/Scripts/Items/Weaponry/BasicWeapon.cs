@@ -36,14 +36,32 @@ public class BasicWeapon : ItemBase {
 
 	//Called by ItemBase.
 	public override void InfluenceEnvironment(MovementAndMethod.PossibleMovements actionKey) {
-		if (attackAfterAnimation)
-			AttemptToAttackAfterCompletedAnimation ();
-		else
-			AttackEnemyInFocus ();
+		if (actionKey != MovementAndMethod.PossibleMovements.GroundPound) {
+			if (attackAfterAnimation)
+				attachedCharacterInput.GetActualClass ().ActionsAfterAnimation += AttackEnemyInFocus;
+			else
+				AttackEnemyInFocus ();
+		} else {
+			attachedCharacterInput.ExternalJumpAction (4);
+			if (attackAfterAnimation)
+				attachedCharacterInput.GetActualClass ().ActionsAfterAnimation += GroundPoundEnemy;
+			else
+				GroundPoundEnemy ();
+		}
 	}
 
-	void AttemptToAttackAfterCompletedAnimation () {
-		attachedCharacterInput.GetActualClass().ActionsAfterAnimation += AttackEnemyInFocus;
+	void GroundPoundEnemy () {
+		//Used to look for health panel manager.  ALWAYS REMEMBER TO KEEP THE PARAMETERS IN ORDER.   
+		CharacterHealthPanelManager resultingHealthPanelManager = LinecastingUtilities.BasicLinecast (
+			attachedCharacterInput.GetActualClass().transform.position, 
+			new Vector2 (attachedCharacterInput.GetActualClass().transform.position.x, attachedCharacterInput.GetActualClass().transform.position.y - 3f), 
+			attachedCharacterInput.GetCombatantID()
+		);
+
+		if (resultingHealthPanelManager != null) {
+			resultingHealthPanelManager.gameObject.GetComponent <CharacterBaseActionClass> ().ApplyKnockbackToCharacter (new Vector2 (knockback.x * attachedCharacterInput.GetActualClass().GetFacingDirection (), knockback.y));
+			resultingHealthPanelManager.YouHaveBeenAttacked (attackPower);
+		}
 	}
 
 	void AttackEnemyInFocus () {

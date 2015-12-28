@@ -89,16 +89,18 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 	//Used to check grounded state.  
 	protected virtual IEnumerator CheckCharacterPhysics() {
 		while (true) {
+			//Update grounded state.  
 			grounded = CheckWhetherGrounded();
-			
-			if (grounded) {
+			//Check the required conditions to set the animation state as grounded (idle or walking).  
+			if (grounded && jumpInEffect != 0) {
 				jumpInEffect = 0;
 				anim.SetInteger ("JumpInEffect", 0);
-			} else {
+			} else if (!grounded && jumpInEffect == 0) {
+				jumpInEffect = 1;
 				anim.SetInteger ("JumpInEffect", 1);
 			}
 			
-			yield return null;
+			yield return new WaitForFixedUpdate();
 		}
 		
 	}
@@ -114,28 +116,30 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 		return false;
 	}
 	
-	protected virtual void InitializeJump(int jumpStyle) {
-		
+	protected void InitializeJump(int jumpStyle) {
+		//Jumping parameters
 		anim.SetInteger("JumpInEffect", jumpStyle);
-		
+		jumpInEffect = jumpStyle;
+
+		//Add forces based on the jump style.  
 		switch (jumpStyle) {
 		case 0: 
 			break;
 		case 1: 
 			rb2d.velocity = new Vector2 (rb2d.velocity.x, jumpForce);
-			jumpInEffect = 1;
 			break;
 		case 2: 
 			rb2d.velocity = new Vector2 (rb2d.velocity.x, jumpForce);
-			jumpInEffect = 2;
 			break;
 		case 3: 
-			rb2d.velocity = new Vector2(0, rb2d.velocity.y);
 			rb2d.velocity = new Vector2(wallJumpForce *-GetFacingDirection(), jumpForce);
 			Flip ();
-			jumpInEffect = 3;
+			break;
+		case 4: 
+			rb2d.velocity = new Vector2 (0, -5);
 			break;
 		default: 
+			Debug.LogError ("Invalid jumpStyle of " + jumpStyle + " input");
 			break;
 		}
 		
