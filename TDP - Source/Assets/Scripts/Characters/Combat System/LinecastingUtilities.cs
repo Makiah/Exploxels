@@ -115,9 +115,6 @@ public class LinecastingUtilities : MonoBehaviour {
 	}
 
 	public static CharacterHealthPanelManager BasicLinecast (Vector2 start, Vector2 end, string attackingCharacterGUID) {
-
-		Debug.Log ("Ground Pound w/ " + start.ToString() + " and " + end.ToString());
-
 		//Linecast, looking for items on the layer "Fighting"
 		RaycastHit2D[] linecastResult = Physics2D.LinecastAll (start, end, 1 << LayerMask.NameToLayer("Fighting"));
 

@@ -41,7 +41,6 @@ public class PlayerAction : CharacterBaseActionClass, ICanHoldItems {
 			//The ground checks should be extremely close to the player, or it appears as grounded on the next frame.  
 			if (grounded && jumpInEffect != 0) {
 				InitializeJump (0);
-				Debug.Log ("Reset to 0, grounded is " + grounded);
 			} 
 
 			//In case the player is in the air (not jumping, just falling)
@@ -102,7 +101,6 @@ public class PlayerAction : CharacterBaseActionClass, ICanHoldItems {
 
 	//Used for weapons.  
 	public void ExternalJumpAction (int num) {
-		Debug.Log ("External jumping: " + num);
 		InitializeJump (num);
 	}
 
