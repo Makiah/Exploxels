@@ -47,8 +47,11 @@ MonoBehaviour:
   - method: 1
     attack: 0
     worksMidair: 0
-  - method: 2
+  - method: 1
     attack: 4
+    worksMidair: 1
+  - method: 0
+    attack: 5
     worksMidair: 1
   attackAfterAnimation: 1
   areaBounds: 1.2
@@ -102,7 +105,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: movementTriggerPair.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Sprite
@@ -175,7 +178,15 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: movementTriggerPair.Array.data[2].method
-      value: 2
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.data[3].attack
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.data[3].method
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

@@ -18,7 +18,8 @@ public class MovementAndMethod {
 		Stab, 
 		ShootBow, 
 		CreatePhysicalItem, 
-		GroundPound
+		GroundPound, 
+		TripleSlash
 	}
 
 	//Specifies the required delegate.  
@@ -87,7 +88,8 @@ public class MovementAndMethod {
 			attackKey = "GroundPound";
 			break;
 		default: 
-			Debug.LogError ("Invalid action");
+			attackKey = ctorMovement.ToString ();
+			Debug.LogError ("Invalid action, changing to " + attackKey);
 			break;
 		}
 
