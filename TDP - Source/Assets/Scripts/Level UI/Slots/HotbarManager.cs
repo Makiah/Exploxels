@@ -134,7 +134,7 @@ public class HotbarManager : MonoBehaviour {
 			if (Input.GetMouseButtonDown (1) && Input.GetKey (KeyCode.LeftShift) && hotbarSlots[currentlyActiveSlot].GetCurrentlyAssigned() != null) {			
 
 				//Instantiate the item.  
-				DropUtilities.InstantiateDroppedItem (hotbarSlots [currentlyActiveSlot].GetCurrentlyAssigned (), 4 * playerObject.GetComponent <PlayerAction> ().GetFacingDirection ());
+				DropUtilities.InstantiateDroppedItem (hotbarSlots [currentlyActiveSlot].GetCurrentlyAssigned (), playerObject.transform, 15 * playerObject.GetComponent <PlayerAction> ().GetFacingDirection ());
 
 				//Used to remove the current item from the hotbar.  
 				ModifyStackOfSelectedItem (1);

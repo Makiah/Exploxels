@@ -41,9 +41,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   movementTriggerPair:
-  - method: 0
-    attack: 1
-    worksMidair: 0
   - method: 1
     attack: 0
     worksMidair: 0
@@ -53,6 +50,15 @@ MonoBehaviour:
   - method: 0
     attack: 5
     worksMidair: 1
+  - method: 2
+    attack: 6
+    worksMidair: 1
+  - method: 2
+    attack: 6
+    worksMidair: 0
+  - method: 0
+    attack: 1
+    worksMidair: 0
   attackAfterAnimation: 1
   areaBounds: 1.2
   distToEnemyOffset: 2
@@ -105,7 +111,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: movementTriggerPair.Array.size
-      value: 4
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Sprite
@@ -162,7 +168,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: movementTriggerPair.Array.data[0].attack
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: movementTriggerPair.Array.data[1].method
@@ -170,7 +176,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: movementTriggerPair.Array.data[2].attack
-      value: 4
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: movementTriggerPair.Array.data[2].worksMidair
@@ -178,14 +184,50 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: movementTriggerPair.Array.data[2].method
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: movementTriggerPair.Array.data[3].attack
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: movementTriggerPair.Array.data[3].method
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.data[4].method
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.data[4].attack
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.data[5].worksMidair
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.data[5].method
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.data[5].attack
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.data[0].method
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.data[1].attack
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.data[1].worksMidair
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.data[4].worksMidair
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

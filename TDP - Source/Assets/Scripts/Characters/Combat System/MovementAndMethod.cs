@@ -19,7 +19,8 @@ public class MovementAndMethod {
 		ShootBow, 
 		CreatePhysicalItem, 
 		GroundPound, 
-		TripleSlash
+		TripleSlash, 
+		AirSlash
 	}
 
 	//Specifies the required delegate.  
@@ -33,11 +34,11 @@ public class MovementAndMethod {
 	private bool canBeUsedWhileMidair = false;
 
 	bool CheckLeftClick() {
-		return Input.GetMouseButtonDown(0);
+		return Input.GetKey(KeyCode.LeftShift) == false && Input.GetMouseButtonDown(0);
 	}
 
 	bool CheckRightClick() {
-		return Input.GetMouseButtonDown (1);
+		return Input.GetKey(KeyCode.LeftShift) == false && Input.GetMouseButtonDown (1);
 	}
 
 	bool CheckShiftPlusLeftClick() {
@@ -71,25 +72,10 @@ public class MovementAndMethod {
 
 		//Define the movement.  (Has to be used for animations)
 		attackEnumVal = ctorMovement;
+		//Used for extraneous cases.  
 		switch (ctorMovement) {
-		case PossibleMovements.OverheadSlice: 
-			attackKey = "OverheadSlice";
-			break;
-		case PossibleMovements.Stab: 
-			attackKey = "Stab";
-			break;
-		case PossibleMovements.ShootBow: 
-			attackKey = "ShootBow";
-			break;
-		case PossibleMovements.CreatePhysicalItem: 
-			attackKey = "CreatePhysicalItem";
-			break;
-		case PossibleMovements.GroundPound: 
-			attackKey = "GroundPound";
-			break;
 		default: 
 			attackKey = ctorMovement.ToString ();
-			Debug.LogError ("Invalid action, changing to " + attackKey);
 			break;
 		}
 

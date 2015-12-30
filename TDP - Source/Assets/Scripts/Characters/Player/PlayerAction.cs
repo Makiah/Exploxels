@@ -63,6 +63,8 @@ public class PlayerAction : CharacterBaseActionClass, ICanHoldItems {
 
 			//Debug.Log("Currently jumpInEffect = " + jumpInEffect + " and animator is " + anim.GetInteger ("JumpInEffect") + " and grounded " + grounded);
 
+			Debug.Log ("Mouse Button Down is " + Input.GetMouseButtonDown (0) + " and shift is " + Input.GetKey (KeyCode.LeftShift));
+
 			//Every frame.  
 			yield return null;
 		}

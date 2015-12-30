@@ -42,7 +42,7 @@ public abstract class DropsItems : MonoBehaviour {
 				if (Random.Range (0, drops [i].probabilityToDrop) == 0) {
 					for (int q = 0; q < Random.Range(drops[i].minToDrop, drops[i].maxToDrop + 1); q++) {
 						if (drops[i].dropReference != null) {
-							DropUtilities.InstantiateDroppedItem(new UISlotContentReference(drops[i].dropReference, 1), 0);
+							DropUtilities.InstantiateDroppedItem(new UISlotContentReference(drops[i].dropReference, 1), transform, 0);
 						} else {
 							Debug.Log("DropReference was null!!! (DropsItems)");
 						}
