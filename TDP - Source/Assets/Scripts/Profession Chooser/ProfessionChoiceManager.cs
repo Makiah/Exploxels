@@ -23,10 +23,12 @@ public class ProfessionChoiceManager : MonoBehaviour {
 	Text description2;
 
 	//The professions that are defined by the method.  
-	Profession currentProfession1;
-	Profession currentProfession2;
+	private Profession currentProfession1;
+	private Profession currentProfession2;
 
-	PlayerCostumeManager mainPlayerCostumeManager;
+	private Profession chosenProfession = null;
+
+	private PlayerCostumeManager mainPlayerCostumeManager;
 
 	//Initialization
 	void InitializeProfessionChoiceComponents() {
@@ -39,7 +41,7 @@ public class ProfessionChoiceManager : MonoBehaviour {
 	}
 
 	//Used when a profession choice occurs.  
-	public void CreateProfessionChoice(string titleText, Profession profession1, string d1, Profession profession2, string d2) {
+	public IEnumerator CreateProfessionChoice(string titleText, Profession profession1, string d1, Profession profession2, string d2) {
 		//Create the panel.  
 		title.text = titleText;
 		currentProfession1 = profession1;
@@ -49,12 +51,17 @@ public class ProfessionChoiceManager : MonoBehaviour {
 		choice2.sprite = profession2.icon;
 		description2.text = d2;
 		gameObject.SetActive (true);
+
+		//Wait until the profession has been chosen.  
+		while (chosenProfession == null) {
+			yield return null;
+		}
 	}
 
 	//Used when a profession has been chosen.  
 	public void ResetProfessionChoice(int chosen) {
 		//Update player costume with new profession.
-		Profession chosenProfession = chosen == 1 ? currentProfession1 : currentProfession2;
+		Profession chosenProfessionTemp = chosen == 1 ? currentProfession1 : currentProfession2;
 		//Reset variables.  
 		currentProfession1 = null;
 		currentProfession2 = null;
@@ -64,7 +71,7 @@ public class ProfessionChoiceManager : MonoBehaviour {
 		description2.text = "";
 		gameObject.SetActive (false);
 		//Resume game.
-		CurrentLevelVariableManagement.GetMainGameControl().OnProfessionChosen (chosenProfession);
+		chosenProfession = chosenProfessionTemp;
 	}
 
 	//There is an event trigger component on each object that will call these functions.  
@@ -76,6 +83,13 @@ public class ProfessionChoiceManager : MonoBehaviour {
 	public void OnChoice2Clicked() {
 		Debug.Log ("Got choice 2");
 		ResetProfessionChoice (2);
+	}
+
+	public Profession GetChosenProfession() {
+		Profession toReturn = chosenProfession;
+		//To avoid confusion during the next level.  
+		chosenProfession = null;
+		return toReturn;
 	}
 
 }

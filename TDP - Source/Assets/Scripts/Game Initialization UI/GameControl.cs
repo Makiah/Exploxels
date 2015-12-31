@@ -45,65 +45,70 @@ public class GameControl : MonoBehaviour {
 		//Set references to existing items.
 		mainProfessionChoiceManager = GameObject.Find ("UI").transform.FindChild ("ProfessionChoice").GetComponent <ProfessionChoiceManager> ();
 		mainProfessionSpeechManager = GameObject.Find ("UI").transform.FindChild ("Speech Bubble").GetComponent <ProfessionSpeechManager> ();
+		StartCoroutine (SetProfessionDialogue ());
+	}
 
+	IEnumerator SetProfessionDialogue() {
 		switch (GetComponent <GameData> ().currentLevel) {
 		case 0:
+			//Dramatic pause
+			yield return new WaitForSeconds (5);
 			//Stone Age Speech
-			mainProfessionSpeechManager.SetSpeechDialogue (new string[] {
-				"Welcome, young wanderer, to the land of Exploxels!", 
-				"Our world is undergoing rapid change.",
-				"You will travel through many different time periods, watching the world progress.", 
-				"The person that you will become can change greatly.", 
-				"You are about to enter the beginnings of humanity, the Ice Age.", 
-				"Good luck."
-			});
+			yield return StartCoroutine(mainProfessionSpeechManager.SetSpeechDialogue (new string[] {
+				"" + GetComponent <GameData> ().specifiedPlayerName + "?", 
+				"Are you all right?", 
+				"Thank goodness you are still alive!", 
+				"But I don't think we're in the twenty-fifth century anymore...", 
+				"I am not sure how it happened, but the time machine malfunctioned.", 
+				"It shot us to a point in time I am not programmed to understand.", 
+				"You have to help me fix it.  If you can help me gather the pieces, ",
+				"I will be able to repair it.", 
+				"I don't see any other way.", 
+				"But you'll have to disguise yourself as a native of these parts, so you fit in.", 
+				"I'll let you pick who you become, then give you what you need to get going.", 
+				"...", 
+				"...I sure hope my battery lasts..."
+			}));
+
+			//For the Stone Age
+			yield return StartCoroutine(mainProfessionChoiceManager.CreateProfessionChoice ("Choose your Ice Age Profession.", 
+				ResourceDatabase.GetRaceByParameter ("Spear Fighter"), "Spear Fighter", 
+				ResourceDatabase.GetRaceByParameter ("Mace Fighter"), "Mace Fighter"
+			));
+
+			//Get the profession
+			GetComponent <GameData> ().chosenProfession = mainProfessionChoiceManager.GetChosenProfession ();
+
+			//Load the Ice Age
+			SceneManager.LoadScene("Ice Age");
+
 			break;
-		default: 
-			Debug.LogError("No profession choice exists for this level!");
+		case 1: 
+			Debug.LogError ("No real profession choice exists for this level!");
 			//Just use the default ice age thing.  
-			mainProfessionSpeechManager.SetSpeechDialogue (new string[] {
+			yield return StartCoroutine (mainProfessionSpeechManager.SetSpeechDialogue (new string[] {
 				"Nice job dealing with those cavemen!", 
 				"I have an important announcement for you.", 
 				"While mining deep underground, we have discovered a new metal.", 
 				"We call it Bronze.", 
 				"Use the new tools created by this metal to your advantage."
-			});
-			break;
-		}
-	}
+			}));
 
-	//When the player has finished speaking.  
-	public void OnSpeechHasBeenCompleted() {
-		switch (GetComponent <GameData> ().currentLevel) {
-		case 0:
-			//For the Stone Age
-			mainProfessionChoiceManager.CreateProfessionChoice ("Choose your Ice Age Profession.", 
-			                                                    ResourceDatabase.GetRaceByParameter ("Spear Fighter"), "Spear Fighter", 
-			                                                    ResourceDatabase.GetRaceByParameter ("Mace Fighter"), "Mace Fighter"
-			                                                    );
-			break;
-		default:
-			Debug.LogError("No level is specified!!!!");
 			//For the Iron Age
-			mainProfessionChoiceManager.CreateProfessionChoice ("Choose your Iron Age Profession.", 
-			                                                    ResourceDatabase.GetRaceByParameter ("Spear Fighter"), "Spear Fighter", 
-			                                                    ResourceDatabase.GetRaceByParameter ("Mace Fighter"), "Mace Fighter"
-			                                                    );
+			yield return StartCoroutine (mainProfessionChoiceManager.CreateProfessionChoice ("Choose your Iron Age Profession.", 
+				ResourceDatabase.GetRaceByParameter ("Spear Fighter"), "Spear Fighter", 
+				ResourceDatabase.GetRaceByParameter ("Mace Fighter"), "Mace Fighter"
+			));
+
+			//Get the profession
+			GetComponent <GameData> ().chosenProfession = mainProfessionChoiceManager.GetChosenProfession ();
+
+			//Load the Iron Age (when it exists)
+			SceneManager.LoadScene("Iron Age");
+
 			break;
-		}
-	}
-	
-	//Called by the ProfessionChoiceManager when the profession has been chosen.  
-	public void OnProfessionChosen(Profession chosen) {
-		GetComponent<GameData> ().chosenProfession = chosen;
-		//Load level depending on current level.  
-		switch (GetComponent <GameData> ().currentLevel) {
-		case 0:
-			SceneManager.LoadScene ("Ice Age");
-			break;
-		default:
-			Debug.LogError("No level is specified!!!!");
-			SceneManager.LoadScene ("Ice Age");
+		default: 
+			Debug.LogError ("No profession choice available for level " + GetComponent <GameData> ().currentLevel);
 			break;
 		}
 	}

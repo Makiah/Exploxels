@@ -20,7 +20,7 @@ public class SpeechControl : MonoBehaviour {
 	Text speakerName;
 	Image playerIcon;
 	bool speechBubbleActive = false;
-	bool coroutineActive;
+	bool coroutineActive = false;
 
 	//Set when the NPCPanelController
 	NPCPanelController currentlyAssignedTo;
@@ -33,36 +33,28 @@ public class SpeechControl : MonoBehaviour {
 		gameObject.SetActive (false);
 	}
 
-	//On dialogue completed.  
-	protected virtual void CompletedSpeakingToPlayer() {
-		if (currentlyAssignedTo != null) {
-			currentlyAssignedTo.OnCompletedSpeakingToPlayer ();
-		} else {
-			Debug.Log("Currently not assigned to NPCPanelController!");
-		}
-	}
-
-	//Called when something should be said.  
-	public void SaySomething(Sprite headIcon, string speaker, string[] phrasesToSay, NPCPanelController assignee) {
+	//Called when something should be said.  (Use yield return StartCoroutine() to make it wait for a while first).  
+	public IEnumerator SaySomething(Sprite headIcon, string speaker, string[] phrasesToSay) {
 		playerIcon.sprite = headIcon;
 		speakerName.text = speaker;
 		speechBubbleActive = true;
 		coroutineActive = true;
-		currentlyAssignedTo = assignee;
 		gameObject.SetActive (true);
-		StartCoroutine (SpeakInScrollingText(phrasesToSay));
+		//Wait for it to finish speaking in scrolling text.  
+		yield return StartCoroutine (SpeakInScrollingText(phrasesToSay));
 	}
 
 	//Speak in scrolling text.  
 	//For some reason, this coroutine does not work on child classes unless set as protected.  Weird.  
-
-	//Set by both coroutines.  
+	//Used in both coroutines.  
 	bool completedDialogue = false;
 
 	protected IEnumerator SpeakInScrollingText(string[] stuffToSay) {
 		//Otherwise the coroutine uses the x press used to initialize the coroutine itself.  
 		yield return null;
+		//Required variables.   
 		int currentPhraseIndex = 0;
+		//Start the initial coroutine.  
 		StartCoroutine ("ScrollText", stuffToSay [currentPhraseIndex]);
 		while (true) {
 			if (Input.GetKeyDown(KeyCode.X)) {
@@ -74,8 +66,7 @@ public class SpeechControl : MonoBehaviour {
 						StartCoroutine("ScrollText", stuffToSay[currentPhraseIndex]);
 						completedDialogue = false;
 					} else {
-						//Exit the coroutine.  
-						CompletedSpeakingToPlayer();
+						//Exit the coroutine.
 						yield break;
 				 	}
 				} else {

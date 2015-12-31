@@ -13,15 +13,10 @@ public class ProfessionSpeechManager : SpeechControl {
 	}
 
 	//Set speech dialogue: does not have assigner.  
-	public void SetSpeechDialogue(string[] stuffToSay) {
-		SaySomething (ResourceDatabase.GetRaceByParameter ("Mace Fighter").male.head, "Guide", stuffToSay, null);
-	}
-
-	//Modify what happens when the player has clicked through each message.  
-	protected override void CompletedSpeakingToPlayer() {
+	public IEnumerator SetSpeechDialogue(string[] stuffToSay) {
+		gameObject.SetActive (true);
+		yield return StartCoroutine(SaySomething (ResourceDatabase.GetRaceByParameter ("Mace Fighter").male.head, "Bertie", stuffToSay));
 		gameObject.SetActive (false);
-		//When the guide has completed speaking.  
-		CurrentLevelVariableManagement.GetMainGameControl ().OnSpeechHasBeenCompleted ();
 	}
 
 }
