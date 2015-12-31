@@ -1131,6 +1131,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dc8aeadd576b9a479c58d70adb246a4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bertieHead: {fileID: 21300000, guid: 5f2c56debcbfd4ac7b82c2a6eb0218d0, type: 3}
 --- !u!224 &1897302533
 RectTransform:
   m_ObjectHideFlags: 0

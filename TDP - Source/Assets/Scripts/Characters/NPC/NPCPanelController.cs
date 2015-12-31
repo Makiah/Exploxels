@@ -11,16 +11,16 @@ public class NPCPanelController : MonoBehaviour {
 		LevelEventManager.InitializeNPCPanelControllers -= InitializeNPCPanelController;
 	}
 
+	//Class properties
 	Transform playerTransform;
 	Sprite playerIcon;
 	SpeechControl mainSpeechControl;
-	bool speechBubbleActive = false;
-	bool alreadySpeakingToPlayer = false;
+	private bool speechBubbleActive = false;
+	private bool alreadySpeakingToPlayer = false;
 	[SerializeField] float minDistanceRequiredForInteraction = 5f;
 	InteractablePanelController mainInteractablePanelController;
 	InteractablePanelReference interactablePanel;
-
-	string[] dialogueForPlayer;
+	private string[] dialogueForPlayer;
 
 	//Set references to the playerIcon, start necessary coroutines, etc.  
 	void InitializeNPCPanelController() {
@@ -35,21 +35,25 @@ public class NPCPanelController : MonoBehaviour {
 	IEnumerator CheckForAndAttemptToSpeakToPlayer() {
 		while (true) {//Vector 3 distance includes PLAYER Z COORDINATE!!!! HOLY **** YES!!!!
 			if (Vector2.Distance(transform.position, playerTransform.position) <= minDistanceRequiredForInteraction) {
-				if (interactablePanel == null)
-					OnActivateInteractablePanel();
+				if (interactablePanel == null) {
+					interactablePanel = mainInteractablePanelController.GetAvailableInteractablePanel ();
+					if (interactablePanel != null)
+						interactablePanel.InitializePanel (playerIcon, "Press X to Interact");
+				} 
 
-				if (Input.GetKeyDown (KeyCode.X) && ! alreadySpeakingToPlayer && interactablePanel != null) {
-					if (dialogueForPlayer.Length != 0) {
-						GetComponent <NPCBaseScript> ().StopWalkingAround();
-						GetComponent <NPCBaseScript> ().FlipToFacePlayer();
-						GetComponent <NPCBaseScript> ().NPCActionBeforeSpeaking();
-						SpeakToPlayer(dialogueForPlayer, GetComponent <NPCBaseScript> ().npcName);
-						alreadySpeakingToPlayer = true;
-					}
+				if (Input.GetKeyDown (KeyCode.X) && ! alreadySpeakingToPlayer && interactablePanel != null && dialogueForPlayer.Length > 0) {
+					GetComponent <NPCBaseScript> ().StopWalkingAround();
+					GetComponent <NPCBaseScript> ().FlipToFacePlayer();
+					GetComponent <NPCBaseScript> ().NPCActionBeforeSpeaking();
+					//has to be a different coroutine so that it waits for it to finish.
+					StartCoroutine (SpeakToPlayer (dialogueForPlayer, GetComponent <NPCBaseScript> ().npcName));
+					alreadySpeakingToPlayer = true;
 				}
+
 			} else if (Vector2.Distance (transform.position, playerTransform.position) > minDistanceRequiredForInteraction) {
 				if (interactablePanel != null) {
-					ClearInteractablePanel();
+					interactablePanel.Clear ();
+					interactablePanel = null;
 				}
 				if (speechBubbleActive) {
 					ClearSpeechBubble();
@@ -65,13 +69,12 @@ public class NPCPanelController : MonoBehaviour {
 	}
 
 	//Makes a call to SpeechControl on the UI with the arguments that determine what to say and the icon that is saying it.
-	public virtual IEnumerator SpeakToPlayer(string[] toSay, string name) {
-		yield return StartCoroutine(mainSpeechControl.SaySomething (playerIcon, name, toSay));
+	private IEnumerator SpeakToPlayer(string[] toSay, string name) {
+		dialogueForPlayer = toSay;
 		speechBubbleActive = true;
-	}
-
-	public void OnCompletedSpeakingToPlayer() {
-		GetComponent <NPCBaseScript> ().NPCActionAfterSpeaking();
+		yield return StartCoroutine(mainSpeechControl.SaySomething (playerIcon, name, toSay));
+		//Do whatever action should be done for the NPC that is attached.  
+		GetComponent <NPCBaseScript> ().NPCActionAfterSpeaking ();
 	}
 
 	//Makes a call to SpeechControl on the UI with the argument that determine what to say and the icon that says it.  
@@ -79,28 +82,15 @@ public class NPCPanelController : MonoBehaviour {
 		mainSpeechControl.DeActivateSpeechBubble ();
 		speechBubbleActive = false;
 	}
-	
-	// Called when player enters radius of the character health controller.  
-	void OnActivateInteractablePanel() {
-		interactablePanel = mainInteractablePanelController.GetAvailableInteractablePanel ();
-		if (interactablePanel != null)
-			interactablePanel.InitializePanel (playerIcon, "Press X to Interact");
-	}
 
-	//Called when the object is de-activated, or on death.  
-	void ClearInteractablePanel() {
-		if (interactablePanel != null) {
-			interactablePanel.Clear ();
-			interactablePanel = null;
-		}
-	}
-
+	//Used for setting future dialogue to speak to the player.  
 	public void SetCharacterDialogue(string[] customDialogue) {
+		dialogueForPlayer = customDialogue;
+		//Otherwise, start the dialogue.  
 		if (alreadySpeakingToPlayer) {
 			ClearSpeechBubble();
 			SpeakToPlayer(customDialogue, GetComponent <NPCBaseScript> ().npcName);
 		}
-		dialogueForPlayer = customDialogue;
 	}
 
 }

@@ -20,6 +20,9 @@ public class GameControl : MonoBehaviour {
 	GameObject gameUI;
 	ProfileSwitcher profileSwitcher;
 
+	//Bertie (the icon that will be used).  
+	[SerializeField] private Sprite bertieHead;
+
 	//Defining initial level elements
 	public void DefineInitialLevelElements() {
 		DontDestroyOnLoad (this.gameObject);
@@ -54,21 +57,23 @@ public class GameControl : MonoBehaviour {
 			//Dramatic pause
 			yield return new WaitForSeconds (5);
 			//Stone Age Speech
-			yield return StartCoroutine(mainProfessionSpeechManager.SetSpeechDialogue (new string[] {
-				"" + GetComponent <GameData> ().specifiedPlayerName + "?", 
-				"Are you all right?", 
-				"Thank goodness you are still alive!", 
-				"But I don't think we're in the twenty-fifth century anymore...", 
-				"I am not sure how it happened, but the time machine malfunctioned.", 
-				"It shot us to a point in time I am not programmed to understand.", 
-				"You have to help me fix it.  If you can help me gather the pieces, ",
-				"I will be able to repair it.", 
-				"I don't see any other way.", 
-				"But you'll have to disguise yourself as a native of these parts, so you fit in.", 
-				"I'll let you pick who you become, then give you what you need to get going.", 
-				"...", 
-				"...I sure hope my battery lasts..."
-			}));
+			yield return StartCoroutine(mainProfessionSpeechManager.SetSpeechDialogue (
+				bertieHead, 
+				new string[] {
+					"" + GetComponent <GameData> ().specifiedPlayerName + "?", 
+					"Are you all right?", 
+					"Thank goodness you are still alive!", 
+					"But I don't think we're in the twenty-fifth century anymore...", 
+					"I am not sure how it happened, but the time machine malfunctioned.", 
+					"It shot us to a point in time I am not programmed to understand.", 
+					"You have to help me fix it.  If you can help me gather the pieces, I will be able to repair it.", 
+					"I don't see any other way.", 
+					"But I'll have to disguise your as a native of this period in time, so you fit in.", 
+					"I'll let you choose who you become, then give you what you need to become that person.", 
+					"...", 
+					"...I sure hope my battery lasts..."
+				}
+			));
 
 			//For the Stone Age
 			yield return StartCoroutine(mainProfessionChoiceManager.CreateProfessionChoice ("Choose your Ice Age Profession.", 
@@ -86,13 +91,16 @@ public class GameControl : MonoBehaviour {
 		case 1: 
 			Debug.LogError ("No real profession choice exists for this level!");
 			//Just use the default ice age thing.  
-			yield return StartCoroutine (mainProfessionSpeechManager.SetSpeechDialogue (new string[] {
-				"Nice job dealing with those cavemen!", 
-				"I have an important announcement for you.", 
-				"While mining deep underground, we have discovered a new metal.", 
-				"We call it Bronze.", 
-				"Use the new tools created by this metal to your advantage."
-			}));
+			yield return StartCoroutine (mainProfessionSpeechManager.SetSpeechDialogue (
+				bertieHead, 
+				new string[] {
+					"Nice job dealing with those cavemen!", 
+					"I have an important announcement for you.", 
+					"While mining deep underground, we have discovered a new metal.", 
+					"We call it Bronze.", 
+					"Use the new tools created by this metal to your advantage."
+				}
+			));
 
 			//For the Iron Age
 			yield return StartCoroutine (mainProfessionChoiceManager.CreateProfessionChoice ("Choose your Iron Age Profession.", 

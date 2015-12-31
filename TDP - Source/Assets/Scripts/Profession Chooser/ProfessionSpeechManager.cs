@@ -13,9 +13,9 @@ public class ProfessionSpeechManager : SpeechControl {
 	}
 
 	//Set speech dialogue: does not have assigner.  
-	public IEnumerator SetSpeechDialogue(string[] stuffToSay) {
+	public IEnumerator SetSpeechDialogue(Sprite icon, string[] stuffToSay) {
 		gameObject.SetActive (true);
-		yield return StartCoroutine(SaySomething (ResourceDatabase.GetRaceByParameter ("Mace Fighter").male.head, "Bertie", stuffToSay));
+		yield return StartCoroutine(SaySomething (icon, "Bertie", stuffToSay));
 		gameObject.SetActive (false);
 	}
 

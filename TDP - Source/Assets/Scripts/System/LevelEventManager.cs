@@ -90,10 +90,9 @@ public class LevelEventManager : MonoBehaviour {
 		AsyncOperation loadingOperation = SceneManager.LoadSceneAsync ("MainGameUI", LoadSceneMode.Additive);
 		while (!loadingOperation.isDone) {
 			yield return null;
-			Debug.Log ("Progress loading is " + loadingOperation.progress);
 		}
 
-		Debug.Log ("Loading complete");
+		Debug.Log ("Loading Main Game UI is complete.");
 
 		//Update the loading bar.  
 		yield return new WaitForSeconds (.1f);

@@ -25,9 +25,7 @@ public class ProfessionChoiceManager : MonoBehaviour {
 	//The professions that are defined by the method.  
 	private Profession currentProfession1;
 	private Profession currentProfession2;
-
 	private Profession chosenProfession = null;
-
 	private PlayerCostumeManager mainPlayerCostumeManager;
 
 	//Initialization
