@@ -17,12 +17,17 @@ using UnityEngine;
 using System.Collections;
 
 public class ResourceReference {
-	
+	//Used for organizational purposes.  
 	public ItemType itemType;
+	//Used to help load the character.  
 	public string itemScreenName;
+	//Description of the item.  
 	public string itemDescription;
+	//Used to get an item (not by name).  
 	public int localGroupID;
+	//The icon of the item.  
 	public Sprite itemIcon;
+	//The GameObject that is held by the player (or enemy).  
 	public GameObject playerHoldingPrefab;
 
 	//Used for organizational convenience.  
@@ -31,6 +36,7 @@ public class ResourceReference {
 		CraftingMaterial, 
 		Ore, 
 		Food, 
+		ShipPart, 
 		Other
 	}
 

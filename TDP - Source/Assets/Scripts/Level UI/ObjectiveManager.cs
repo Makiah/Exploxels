@@ -19,13 +19,19 @@ public class ObjectiveManager : MonoBehaviour {
 		public readonly Image panel;
 		public readonly Text description;
 		public bool completed = false;
+		//Constructor
 		public ObjectiveReference(Transform transformToUse) {
 			icon = transformToUse.FindChild("Icon").GetComponent <Image> ();
 			panel = transformToUse.GetComponent <Image> ();
 			description = transformToUse.FindChild("Description Panel").FindChild("Description").GetComponent <Text> ();
 		}
 
-		public void Clear() {
+		public void Completed() {
+			completed = true;
+			panel.color = Color.green;
+		}
+
+		public void Reset() {
 			icon.sprite = null;
 			panel.color = Color.red;
 			description.text = "";
@@ -44,17 +50,16 @@ public class ObjectiveManager : MonoBehaviour {
 		//Set objective references
 		for (int i = 0; i < totalNumberOfObjectives; i++) {
 			objectives[i] = new ObjectiveReference(transform.FindChild("Objective " + (i + 1)));
-			objectives [i].Clear ();
+			objectives [i].Reset ();
 		}
 		//Set the button reference.
 		continueToNextLevel = transform.FindChild ("Level Continue").FindChild("Button").GetComponent <Button> ();
 		continueToNextLevel.interactable = false;
 
-		OnObjectiveHasBeenCompleted (1);
-
 		//Set initial values.  
 		switch (CurrentLevelVariableManagement.GetMainGameData().currentLevel) {
 		case 0:
+			objectives [0].icon.sprite = ResourceDatabase.GetItemByParameter ("Subsidiary Reactor Core").itemIcon;
 			objectives [0].description.text = "Subsidiary Reactor Core";
 			break;
 		default:
@@ -75,6 +80,7 @@ public class ObjectiveManager : MonoBehaviour {
 	}
 
 	bool AllObjectivesComplete() {
+		//Go through all objectives.  
 		for (int i = 0; i < objectives.Length; i++) {
 			if (objectives[i].completed == false) {
 				return false;
@@ -94,11 +100,10 @@ public class ObjectiveManager : MonoBehaviour {
 	public void OnObjectiveHasBeenCompleted(int completedObjective) {
 		if (objectives [completedObjective - 1].completed == false) {
 			Debug.Log ("Objective " + completedObjective + " has been completed");
-			objectives [completedObjective - 1].completed = true;
-			objectives [completedObjective - 1].panel.color = Color.green;
+			objectives [completedObjective - 1].Completed ();
 			CheckWhetherAllObjectivesAreComplete();
 		} else {
-			Debug.LogError("Objective has already been completed");
+			Debug.LogError("Objective " + completedObjective + " has already been completed!");
 		}
 	}
 

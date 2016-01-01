@@ -50,6 +50,9 @@ public class ResourceDatabase : MonoBehaviour {
 		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.Food, "Apple", "A yummy snack.", 0, "Items/Food/Apple/"));
 		masterItemList.Add(new ResourceReference(ResourceReference.ItemType.Food, "Sprout", "The start of a new beginning", 1, "Items/Food/Sprout/"));
 
+		//Ship Parts
+		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.ShipPart, "Subsidiary Reactor Core", "A required part of the time machine", 0, "Items/ShipParts/"));
+
 		//Other 
 		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.Other, "ExpNodule", "", 0, "Items/Other/ExpNodule/"));
 		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.Other, "Fire", "A life changing implement of cavemen", 1, "Items/Other/Fire/"));

@@ -57,7 +57,7 @@ public class GameControl : MonoBehaviour {
 			//Dramatic pause
 			yield return new WaitForSeconds (2);
 			//Stone Age Speech
-			yield return StartCoroutine(mainProfessionSpeechManager.SetSpeechDialogue (
+			yield return StartCoroutine (mainProfessionSpeechManager.SetSpeechDialogue (
 				bertieHead, 
 				new string[] {
 					"" + GetComponent <GameData> ().specifiedPlayerName + "?", 
@@ -79,13 +79,23 @@ public class GameControl : MonoBehaviour {
 			));
 
 			//For the Stone Age
-			yield return StartCoroutine(mainProfessionChoiceManager.CreateProfessionChoice ("Choose your Ice Age Profession.", 
+			yield return StartCoroutine (mainProfessionChoiceManager.CreateProfessionChoice ("Choose your Ice Age Profession.", 
 				ResourceDatabase.GetRaceByParameter ("Spear Fighter"), "Spear Fighter", 
 				ResourceDatabase.GetRaceByParameter ("Mace Fighter"), "Mace Fighter"
 			));
 
 			//Get the profession
 			GetComponent <GameData> ().chosenProfession = mainProfessionChoiceManager.GetChosenProfession ();
+
+			//Give a bit more of an intro
+			yield return StartCoroutine (mainProfessionSpeechManager.SetSpeechDialogue (
+				bertieHead, 
+				new string[] {
+					"You'll have to figure out how to use your weapon.",
+					"The basic controls are handled by the mouse.", 
+					"Good luck!"
+				}
+			));
 
 			//Load the Ice Age
 			SceneManager.LoadScene("Ice Age");
