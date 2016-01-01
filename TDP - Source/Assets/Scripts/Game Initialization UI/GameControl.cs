@@ -55,7 +55,7 @@ public class GameControl : MonoBehaviour {
 		switch (GetComponent <GameData> ().currentLevel) {
 		case 0:
 			//Dramatic pause
-			yield return new WaitForSeconds (5);
+			yield return new WaitForSeconds (2);
 			//Stone Age Speech
 			yield return StartCoroutine(mainProfessionSpeechManager.SetSpeechDialogue (
 				bertieHead, 
@@ -66,12 +66,15 @@ public class GameControl : MonoBehaviour {
 					"But I don't think we're in the twenty-fifth century anymore...", 
 					"I am not sure how it happened, but the time machine malfunctioned.", 
 					"It shot us to a point in time I am not programmed to understand.", 
+					"Along the way, it fell apart after reaching terminal velocity, thankfully keeping us intact.", 
+					"Pieces of it are now strewn across many parts of history.",
 					"You have to help me fix it.  If you can help me gather the pieces, I will be able to repair it.", 
 					"I don't see any other way.", 
-					"But I'll have to disguise your as a native of this period in time, so you fit in.", 
+					"But I'll have to disguise you as a native of this period in time, so that you fit in.", 
 					"I'll let you choose who you become, then give you what you need to become that person.", 
+					"As we gather more pieces, I should be able to push us farther into the future.",
 					"...", 
-					"...I sure hope my battery lasts..."
+					"...I sure hope my battery lasts long enough to get us to a time period with electricity..."
 				}
 			));
 

@@ -15,44 +15,47 @@ public class ObjectiveManager : MonoBehaviour {
 
 	//Define what an objective is in the scene.  
 	class ObjectiveReference {
-		public Toggle objectiveToggle;
-		public Text name;
-		public ObjectiveReference(Transform location) {
-			objectiveToggle = location.GetComponent <Toggle> ();
-			name = location.FindChild("Label").GetComponent <Text> ();
+		public readonly Image icon;
+		public readonly Image panel;
+		public readonly Text description;
+		public bool completed = false;
+		public ObjectiveReference(Transform transformToUse) {
+			icon = transformToUse.FindChild("Icon").GetComponent <Image> ();
+			panel = transformToUse.GetComponent <Image> ();
+			description = transformToUse.FindChild("Description Panel").FindChild("Description").GetComponent <Text> ();
+		}
+
+		public void Clear() {
+			icon.sprite = null;
+			panel.color = Color.red;
+			description.text = "";
+			completed = false;
 		}
 	}
 
 	//Define objectives.  
 	ObjectiveReference[] objectives;
-
 	Button continueToNextLevel;
 
 	//Initialize Objective References
 	void InitializeObjectiveReferences() {
-		int totalNumberOfObjectives = 5;
+		int totalNumberOfObjectives = 2;
 		objectives = new ObjectiveReference[totalNumberOfObjectives];
 		//Set objective references
 		for (int i = 0; i < totalNumberOfObjectives; i++) {
 			objectives[i] = new ObjectiveReference(transform.FindChild("Objective " + (i + 1)));
-			objectives[i].objectiveToggle.isOn = false;
+			objectives [i].Clear ();
 		}
 		//Set the button reference.
-		continueToNextLevel = transform.FindChild ("Level Continue").FindChild("Yes").GetComponent <Button> ();
+		continueToNextLevel = transform.FindChild ("Level Continue").FindChild("Button").GetComponent <Button> ();
 		continueToNextLevel.interactable = false;
 
-		SetObjectiveText ();
-	}
+		OnObjectiveHasBeenCompleted (1);
 
-	//Initial objective text
-	void SetObjectiveText() {
+		//Set initial values.  
 		switch (CurrentLevelVariableManagement.GetMainGameData().currentLevel) {
 		case 0:
-			objectives [0].name.text = "Get a hatchet.";
-			objectives [1].name.text = "Chop a tree";
-			objectives [2].name.text = "Earn money.";
-			objectives [3].name.text = "Get a pickaxe.";
-			objectives [4].name.text = "Build a fire.";
+			objectives [0].description.text = "Subsidiary Reactor Core";
 			break;
 		default:
 			Debug.LogError("The current level has not been added in ObjectiveManager!");
@@ -68,12 +71,12 @@ public class ObjectiveManager : MonoBehaviour {
 
 	//Called by HunterNPCBehaviour to see whether fire has been created.  
 	public bool CheckStateOfObjective(int objectiveIndex) {
-		return objectives [objectiveIndex - 1].objectiveToggle.isOn;
+		return objectives [objectiveIndex - 1].completed;
 	}
 
 	bool AllObjectivesComplete() {
 		for (int i = 0; i < objectives.Length; i++) {
-			if (objectives[i].objectiveToggle.isOn == false) {
+			if (objectives[i].completed == false) {
 				return false;
 			}
 		}
@@ -89,9 +92,10 @@ public class ObjectiveManager : MonoBehaviour {
 
 	//When an objective is achieved
 	public void OnObjectiveHasBeenCompleted(int completedObjective) {
-		if (objectives [completedObjective - 1].objectiveToggle.isOn == false) {
+		if (objectives [completedObjective - 1].completed == false) {
 			Debug.Log ("Objective " + completedObjective + " has been completed");
-			objectives [completedObjective - 1].objectiveToggle.isOn = true;
+			objectives [completedObjective - 1].completed = true;
+			objectives [completedObjective - 1].panel.color = Color.green;
 			CheckWhetherAllObjectivesAreComplete();
 		} else {
 			Debug.LogError("Objective has already been completed");
@@ -103,20 +107,20 @@ public class ObjectiveManager : MonoBehaviour {
 		switch (CurrentLevelVariableManagement.GetMainGameData().currentLevel) {
 		case 0:
 			//Check to make sure the objective has not already been completed
-			//Wooden Hatchet Objective
-			if (objectives [0].objectiveToggle.isOn == false) {
+			//Wooden Pickaxe Objective
+			if (objectives [0].completed == false) {
 				//Check whether the player has the hatchet.  
-				if (ModifiesSlotContent.DetermineWhetherPlayerHasCertainInventoryItem (new UISlotContentReference (ResourceDatabase.GetItemByParameter ("Wooden Hatchet"), 1)) != null) {
+				if (ModifiesSlotContent.DetermineWhetherPlayerHasCertainInventoryItem (new UISlotContentReference (ResourceDatabase.GetItemByParameter ("Wooden Pickaxe"), 1)) != null) {
 					OnObjectiveHasBeenCompleted(1);
 				}
 			}
-	
-			//Wooden Sword Objective
-			if (objectives [3].objectiveToggle.isOn == false) {
-				if (ModifiesSlotContent.DetermineWhetherPlayerHasCertainInventoryItem(new UISlotContentReference(ResourceDatabase.GetItemByParameter ("Wooden Pickaxe"), 1)) != null) {
-					OnObjectiveHasBeenCompleted(4);
-				}
-			}
+//	
+//			//Wooden Sword Objective
+//			if (objectives [3].completed == false) {
+//				if (ModifiesSlotContent.DetermineWhetherPlayerHasCertainInventoryItem(new UISlotContentReference(ResourceDatabase.GetItemByParameter ("Wooden Pickaxe"), 1)) != null) {
+//					OnObjectiveHasBeenCompleted(4);
+//				}
+//			}
 			break;
 		default: 
 			Debug.LogError("Objective Manager does not have a definition for this level!");
@@ -128,9 +132,9 @@ public class ObjectiveManager : MonoBehaviour {
 	public void OnTreeChopped() {
 		switch (CurrentLevelVariableManagement.GetMainGameData ().currentLevel) {
 		case 0:
-			if (objectives [1].objectiveToggle.isOn == false) {
-				OnObjectiveHasBeenCompleted (2);
-			}
+//			if (objectives [1].completed == false) {
+//				OnObjectiveHasBeenCompleted (2);
+//			}
 			break;
 		default: 
 			Debug.LogError("Objective Manager does not have a definition for this level!");
@@ -142,11 +146,11 @@ public class ObjectiveManager : MonoBehaviour {
 	public void OnMoneyModified(int amount) {
 		switch (CurrentLevelVariableManagement.GetMainGameData ().currentLevel) {
 		case 0:
-			if (amount > 0) {
-				if (objectives[2].objectiveToggle.isOn == false) {
-					OnObjectiveHasBeenCompleted(3);
-				}
-			}
+//			if (amount > 0) {
+//				if (objectives[2].completed == false) {
+//					OnObjectiveHasBeenCompleted(3);
+//				}
+//			}
 			break;
 		default: 
 			Debug.LogError("Objective Manager does not have a definition for this level!");
@@ -158,8 +162,8 @@ public class ObjectiveManager : MonoBehaviour {
 	public void OnFireBuilt() {
 		switch (CurrentLevelVariableManagement.GetMainGameData ().currentLevel) {
 		case 0: 
-			if (objectives[4].objectiveToggle.isOn == false) 
-				OnObjectiveHasBeenCompleted(5);
+//			if (objectives[4].completed == false) 
+//				OnObjectiveHasBeenCompleted(5);
 			break;
 		}
 	}
