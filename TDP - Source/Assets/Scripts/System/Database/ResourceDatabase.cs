@@ -62,13 +62,13 @@ public class ResourceDatabase : MonoBehaviour {
 		UISlotContentReference[] maceFighterInitialItems = new UISlotContentReference[]{
 			new UISlotContentReference(ResourceDatabase.GetItemByParameter("Mace"), 1)
 		};
-		gameProfessions.Add (new Profession("Professions/MaceFighter/", "Mace Fighter", 0, maceFighterInitialItems));
+		gameProfessions.Add (new Profession("Professions/Mace Fighter/", "Mace Fighter", 0, maceFighterInitialItems));
 
 		//Hunter
 		UISlotContentReference[] spearFighterInitialItems = new UISlotContentReference[]{
 			new UISlotContentReference(GetItemByParameter("Spear"), 1)
 		};
-		gameProfessions.Add (new Profession ("Professions/SpearFighter/", "Spear Fighter", 1, spearFighterInitialItems));
+		gameProfessions.Add (new Profession ("Professions/Spear Fighter/", "Spear Fighter", 1, spearFighterInitialItems));
 
 		/******************************************* COMBINATIONS *******************************************/
 		//Wooden Sword

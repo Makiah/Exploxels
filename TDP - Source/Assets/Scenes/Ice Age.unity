@@ -214,9 +214,11 @@ MonoBehaviour:
       canBeFlipped: 1
     l2Variations: []
     l3Variations: []
-  levelLength: 7
-  useCustomTerrain: 0
-  terrainToUse: {fileID: 0}
+    endVariations:
+    - variationReference: {fileID: 159740, guid: 6241e074eed5846948862a92a968d471,
+        type: 2}
+      canBeFlipped: 0
+  levelLength: 0
 --- !u!4 &642813479
 Transform:
   m_ObjectHideFlags: 0

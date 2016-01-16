@@ -9,9 +9,9 @@
  * 
  */
 
-
 using UnityEngine;
 using System.Collections;
+
 [System.Serializable]
 public class VariationReference {
 	public GameObject variationReference;
@@ -25,46 +25,36 @@ public class TransferSegments {
 	public VariationReference[] l1Variations;
 	public VariationReference[] l2Variations;
 	public VariationReference[] l3Variations;
+	public VariationReference[] endVariations;
 }
 
 public class LevelLayout : MonoBehaviour {
 
 	/*************************** INITIALIZATION ***************************/
 	void OnEnable() {
-		LevelEventManager.InitializeTerrain += InitializationMedium;
+		LevelEventManager.InitializeTerrain += InitializeTerrain;
 	}
 	
 	void OnDisable() {
-		LevelEventManager.InitializeTerrain -= InitializationMedium;
+		LevelEventManager.InitializeTerrain -= InitializeTerrain;
 	}
 
 	/*************************** SCRIPT ***************************/
 	public TransferSegments transferSegments = new TransferSegments();
 	public int levelLength;	
 
-	[SerializeField]
-	private bool useCustomTerrain = false;
-	[SerializeField]
-	private Transform terrainToUse = null;
-
-	TerrainReferenceClass InitializationMedium() {
-		if (! useCustomTerrain) {
-			return InitializeTerrain ();
-		}
-		else {
-			CurrentLevelVariableManagement.SetLevelLengthX(GetSpriteSizeFromGameObject(terrainToUse.gameObject).x);
-			TerrainReferenceClass toReturn = new TerrainReferenceClass(1);
-			toReturn.layer1[0] = terrainToUse.transform;
-			return toReturn;
-		}
-	}
-
 	//Takes the transfer segments defined earlier and instantiates them based on sprite size.  
 	TerrainReferenceClass InitializeTerrain() {
+		//Make sure that the level length is not less than what has to be instantiated.  
+		if (levelLength < transferSegments.endVariations.Length + transferSegments.introductoryVariations.Length) {
+			Debug.Log ("The level length is not large enough to hold all of the required variations, changing to " + (transferSegments.endVariations.Length + transferSegments.introductoryVariations.Length));
+			levelLength = transferSegments.endVariations.Length + transferSegments.introductoryVariations.Length;
+		}
+
 		//This is recorded and changed as more terrain is added.  
 		float currentXPosition = 0;
 		//This will be returned once filled in.  
-		TerrainReferenceClass createdMaze = new TerrainReferenceClass(levelLength + transferSegments.introductoryVariations.Length);
+		TerrainReferenceClass createdMaze = new TerrainReferenceClass(levelLength + transferSegments.introductoryVariations.Length + transferSegments.introductoryVariations.Length);
 		//This holds the main maze part.  
 		Transform parentMaze = new GameObject ("Maze").transform;
 		parentMaze.localPosition = new Vector3 (0, 0, -8);
@@ -75,20 +65,17 @@ public class LevelLayout : MonoBehaviour {
 		currentXPosition += GetSpriteSizeFromGameObject(instantiatedStartPoint).x / 2f;
 
 		//Apparently this can be null (weird error)
-		if (transferSegments.introductoryVariations.Length > 0) {
-			//Instantiate the introductory variations in the order of the array.  
-			for (int i = 0; i < transferSegments.introductoryVariations.Length; i++) {
-				//Instantiate the next introductory variation.   
-				float halfWidth = GetSpriteSizeFromGameObject (transferSegments.introductoryVariations [i].variationReference.gameObject).x / 2f;
-				currentXPosition += halfWidth;
-				GameObject createdAsset = LayTerrainAsset (transferSegments.introductoryVariations [i].variationReference.gameObject, new Vector3 (currentXPosition, 0, 0), Quaternion.identity, parentMaze);
-				createdMaze.layer1[i] = createdAsset.transform;
-				currentXPosition += halfWidth;
-			}
+		for (int i = 0; i < transferSegments.introductoryVariations.Length; i++) {
+			//Instantiate the next introductory variation.   
+			float halfWidth = GetSpriteSizeFromGameObject (transferSegments.introductoryVariations [i].variationReference.gameObject).x / 2f;
+			currentXPosition += halfWidth;
+			GameObject createdAsset = LayTerrainAsset (transferSegments.introductoryVariations [i].variationReference.gameObject, new Vector3 (currentXPosition, 0, 0), Quaternion.identity, parentMaze);
+			createdMaze.layer1[i] = createdAsset.transform;
+			currentXPosition += halfWidth;
 		}
 
-		//For all levelLength values.  Start at the length of introductory variations and move on from there.  
-		for (int i = transferSegments.introductoryVariations.Length - 1; i < levelLength; i ++) {
+		//For all levelLength values.  Start at the length of introductory variations and move on from there to the level length minus the number of .  
+		for (int i = transferSegments.introductoryVariations.Length; i < levelLength - transferSegments.endVariations.Length; i++) {
 			//Half-Width and currentX position are used for all variations.  
 			VariationReference chosenVariationLayer1 = ScriptingUtilities.GetRandomObjectFromArray(transferSegments.l1Variations);
 			GameObject chosenObjectLayer1 = chosenVariationLayer1.variationReference;
@@ -126,18 +113,33 @@ public class LevelLayout : MonoBehaviour {
 			currentXPosition += halfWidth;
 		}
 
-		currentXPosition += GetSpriteSizeFromGameObject (transferSegments.startSegment).x / 2f;
+		//Apparently this can be null (weird error)
+		for (int i = 0; i < transferSegments.endVariations.Length; i++) {
+			//Instantiate the next introductory variation.   
+			float halfWidth = GetSpriteSizeFromGameObject (transferSegments.endVariations [i].variationReference.gameObject).x / 2f;
+			currentXPosition += halfWidth;
+			GameObject createdAsset = LayTerrainAsset (transferSegments.endVariations [i].variationReference.gameObject, new Vector3 (currentXPosition, 0, 0), Quaternion.identity, parentMaze);
+			createdMaze.layer1[i + levelLength + transferSegments.introductoryVariations.Length] = createdAsset.transform;
+			currentXPosition += halfWidth;
+		}
+
+		//Instantiate the end segment.  
+		currentXPosition += GetSpriteSizeFromGameObject(transferSegments.startSegment).x / 2f;
 		GameObject instantiatedEndPoint = LayTerrainAsset (transferSegments.startSegment, new Vector3 (currentXPosition, 0, 0), Quaternion.identity, parentMaze);
 		instantiatedEndPoint.transform.localScale = new Vector3 (-1, 1, 1);
 
 		instantiatedEndPoint.transform.localPosition = new Vector3 (instantiatedEndPoint.transform.position.x, instantiatedEndPoint.transform.position.y, 0);
 
+		//Calculate the float level length, then send it over to CurrentLevelVariableManagement.  
 		float levelLengthX = instantiatedEndPoint.transform.position.x - instantiatedStartPoint.transform.position.x;
 
+		//Set the level length (will be used for things like the particle effect).  
 		CurrentLevelVariableManagement.SetLevelLengthX (levelLengthX);
+
 		return createdMaze;
 	}
 
+	//Used as a convenient method of instantiating terrain segments.  
 	GameObject LayTerrainAsset(GameObject asset, Vector3 position, Quaternion rotation, Transform parentObj) {
 		if (asset != null) {
 			GameObject createdAsset = (GameObject)(Instantiate (asset, position, rotation));
@@ -151,6 +153,7 @@ public class LevelLayout : MonoBehaviour {
 
 	}
 
+	//Only works if the Game Object has a SpriteRenderer component.  
 	Vector2 GetSpriteSizeFromGameObject(GameObject currObject) {
 		if (currObject != null) {
 			if (currObject.GetComponent <SpriteRenderer> () != null) {

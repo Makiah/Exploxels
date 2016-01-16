@@ -61,6 +61,9 @@ public class ObjectiveManager : MonoBehaviour {
 		case 0:
 			objectives [0].icon.sprite = ResourceDatabase.GetItemByParameter ("Subsidiary Reactor Core").itemIcon;
 			objectives [0].description.text = "Subsidiary Reactor Core";
+
+			objectives [1].icon.sprite = ResourceDatabase.GetItemByParameter ("Wooden Pickaxe").itemIcon;
+			objectives [1].description.text = "Pickaxe";
 			break;
 		default:
 			Debug.LogError("The current level has not been added in ObjectiveManager!");
@@ -76,7 +79,7 @@ public class ObjectiveManager : MonoBehaviour {
 
 	//Called by HunterNPCBehaviour to see whether fire has been created.  
 	public bool CheckStateOfObjective(int objectiveIndex) {
-		return objectives [objectiveIndex - 1].completed;
+		return objectives [objectiveIndex].completed;
 	}
 
 	bool AllObjectivesComplete() {

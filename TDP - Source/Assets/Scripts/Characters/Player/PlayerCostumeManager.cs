@@ -18,28 +18,24 @@ public class PlayerCostumeManager : MonoBehaviour {
 	/************************************************** INITIALIZATION **************************************************/
 
 	void OnEnable() {
-		LevelEventManager.InitializeCostume += InitializePlayerProfession;
+		LevelEventManager.InitializeCostume += InitializeSpriteChildren;
 	}
 	
 	void OnDisable() {
-		LevelEventManager.InitializeCostume -= InitializePlayerProfession;
+		LevelEventManager.InitializeCostume -= InitializeSpriteChildren;
 	}
 
 
 	/************************************************ COSTUME MANAGEMENT ************************************************/
 
+	//Main player action
 	private PlayerAction mainPlayerAction;
-
-	private SpriteRenderer head;
-	private SpriteRenderer body;
-	private SpriteRenderer idleArm;
-	private SpriteRenderer holdingArm;
-	private SpriteRenderer topLeg;
-	private SpriteRenderer bottomLeg;
+	//SpriteRenderer child components
+	private SpriteRenderer head, body, idleArm, holdingArm, topLeg, bottomLeg;
 	//The prefab of the item will be childed to this object.  
 	private Transform holdingItem;
 
-	void InitializePlayerProfession() {
+	void InitializeSpriteChildren() {
 		mainPlayerAction = transform.parent.parent.gameObject.GetComponent <PlayerAction> ();
 		//Just setting up the basic race costume.  
 		body = transform.FindChild("Body").GetComponent <SpriteRenderer> ();
@@ -48,7 +44,7 @@ public class PlayerCostumeManager : MonoBehaviour {
 		holdingArm = transform.FindChild ("Hands").FindChild ("HoldingHand").GetComponent <SpriteRenderer> ();
 		topLeg = transform.FindChild ("Legs").FindChild ("Top Leg").GetComponent <SpriteRenderer> ();
 		bottomLeg = transform.FindChild ("Legs").FindChild("Bottom Leg").GetComponent <SpriteRenderer> ();
-		holdingItem = transform.FindChild("Hands").FindChild("HoldingHand").FindChild ("HoldingItem");
+		holdingItem = holdingArm.transform.FindChild ("HoldingItem");
 
 		Profession currentPlayerProfession = CurrentLevelVariableManagement.GetMainGameData().chosenProfession;
 		UpdatePlayerProfession (currentPlayerProfession);
@@ -56,21 +52,18 @@ public class PlayerCostumeManager : MonoBehaviour {
 
 	//Used when a player profession is changed.  
 	public void UpdatePlayerProfession(Profession profession) {
+		//Update with common gender sprites
+		body.sprite = profession.body;
+		idleArm.sprite = profession.arm;
+		holdingArm.sprite = profession.arm;
+		topLeg.sprite = profession.leg;
+		bottomLeg.sprite = profession.leg;
+
 		//Gender check.  
 		if (CurrentLevelVariableManagement.GetMainGameData().chosenGender == 0) {
-			body.sprite = profession.male.body;
-			head.sprite = profession.male.head;
-			idleArm.sprite = profession.male.arm;
-			holdingArm.sprite = profession.male.arm;
-			topLeg.sprite = profession.male.legs;
-			bottomLeg.sprite = profession.male.legs;
+			head.sprite = profession.maleHead;
 		} else {
-			body.sprite = profession.female.body;
-			head.sprite = profession.female.head;
-			idleArm.sprite = profession.female.arm;
-			holdingArm.sprite = profession.female.arm;
-			topLeg.sprite = profession.female.legs;
-			bottomLeg.sprite = profession.female.legs;
+			head.sprite = profession.femaleHead;
 		}
 
 		//Add the initial items for the profession to the inventory.  

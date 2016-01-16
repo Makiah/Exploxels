@@ -76,7 +76,7 @@ public class CreateLevelItems : MonoBehaviour {
 						Debug.Log("Did not find points upon which to instantiate enemies on increment " + i + " with variation name " + mazeSegments.layer1[i].gameObject.name);
 					}
 				} else {
-					Debug.LogError("mazeSegments.layer1[" + i + "] is null!!!!");
+					Debug.LogError("MazeSegments.layer1[" + i + "] is null!!!!");
 				}
 			}
 

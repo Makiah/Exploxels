@@ -69,9 +69,13 @@ public class PlayerAction : CharacterBaseActionClass, ICanHoldItems {
 
 	//Movement based on arrow keys
 	IEnumerator ListenForArrowMovement () { 
+		//Prevent constant boxing and unboxing.  
+		float h = 0;
+
+		//Constantly
 		while (true) {
 			//This gets the current state of the pressed keys.  
-			float h = Input.GetAxis ("Horizontal");
+			h = Input.GetAxis ("Horizontal");
 			anim.SetFloat ("Speed", Mathf.Abs (h));
 
 			//Check velocity, and change accordingly.  
