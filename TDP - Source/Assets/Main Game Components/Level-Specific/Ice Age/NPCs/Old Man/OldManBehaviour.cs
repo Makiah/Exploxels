@@ -7,8 +7,7 @@ public class OldManBehaviour : NPCBaseScript {
 	bool tookApples = false;
 	bool completedStoryRole = false;
 
-	protected override void SetReferences() {
-		base.SetReferences ();
+	protected override void InitializeNPC() {
 		npcName = "Old Man";
 		string[] dialogue = new string[] {"Oh dear.  Oh dear me...", 
 			"Why hello there, young stranger.  I don't suppose you have a moment?", 

@@ -3,8 +3,7 @@ using System.Collections;
 
 public class BukBehaviour : NPCBaseScript {
 
-	protected override void SetReferences() {
-		base.SetReferences ();
+	protected override void InitializeNPC() {
 		npcName = "Buk";
 		//Sets the initial dialogue for the player.  
 		string[] dialogue = new string[] {

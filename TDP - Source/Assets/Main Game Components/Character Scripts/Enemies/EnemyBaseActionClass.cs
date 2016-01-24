@@ -48,12 +48,16 @@ public abstract class EnemyBaseActionClass : CharacterBaseActionClass, ICombatan
 	//The player transform
 	protected Transform player;
 
-	protected override void SetReferences() {
+	protected override void InitializeCharacter() {
 		//Set required variables for the enemy to function.  
 		player = CurrentLevelVariableManagement.GetPlayerReference ().transform;
-		base.SetReferences ();
+
+		InitializeEnemy ();
+
 		StartCoroutine (EnemyControl());
 	}
+
+	protected abstract void InitializeEnemy();
 
 	//This should be FixedUpdate.  
 	protected virtual IEnumerator EnemyControl() {

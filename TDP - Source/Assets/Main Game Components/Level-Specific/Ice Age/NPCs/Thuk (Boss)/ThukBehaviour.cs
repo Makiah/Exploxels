@@ -3,8 +3,7 @@ using System.Collections;
 
 public class ThukBehaviour : NPCBaseScript {
 
-	protected override void SetReferences() {
-		base.SetReferences ();
+	protected override void InitializeNPC() {
 		npcName = "Thuk";
 		//Sets the initial dialogue for the player.  
 		string[] dialogue = new string[] {

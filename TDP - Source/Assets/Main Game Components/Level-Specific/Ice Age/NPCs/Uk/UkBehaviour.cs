@@ -3,8 +3,7 @@ using System.Collections;
 
 public class UkBehaviour : NPCBaseScript {
 
-	protected override void SetReferences() {
-		base.SetReferences ();
+	protected override void InitializeNPC() {
 		npcName = "Uk";
 		//Sets the initial dialogue for the player.  
 		string[] dialogue = new string[] {

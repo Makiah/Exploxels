@@ -231,7 +231,7 @@ GameObject:
   - 4: {fileID: 401566}
   - 95: {fileID: 9542884}
   m_Layer: 8
-  m_Name: Mammoth
+  m_Name: Character
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

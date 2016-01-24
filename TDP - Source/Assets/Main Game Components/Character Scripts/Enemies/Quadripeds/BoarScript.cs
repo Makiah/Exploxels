@@ -13,10 +13,7 @@ using System.Collections;
 
 public class BoarScript : EnemyBaseActionClass {
 
-	protected override void SetReferences() {
-		characterSpriteObject = transform.FindChild("FlippingItem").FindChild ("Boar");
-		base.SetReferences ();
-	}
+	protected override void InitializeEnemy() {}
 
 	protected override void Attack() {
 

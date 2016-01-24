@@ -14,10 +14,7 @@ using System.Collections;
 public class TigerScript : EnemyBaseActionClass {
 
 	//Initialization stuff.  
-	protected override void SetReferences() {
-		characterSpriteObject = transform.FindChild("FlippingItem").FindChild ("Tiger");
-		base.SetReferences ();
-	}
+	protected override void InitializeEnemy() {}
 	
 	protected override void Attack() {
 		AttemptToAttackAfterCompletedAnimation ();

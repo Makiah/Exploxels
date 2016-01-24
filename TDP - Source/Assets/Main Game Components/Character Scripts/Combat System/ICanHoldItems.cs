@@ -11,5 +11,4 @@ public interface ICanHoldItems : ICombatant {
 	void OnRefreshCurrentWeaponMoves(ItemBase itemInUse);
 	void AttackAction(MovementAndMethod someAttack);
 	void ExternalJumpAction (int num);
-	//IEnumerator CheckForWeaponInput();
 }

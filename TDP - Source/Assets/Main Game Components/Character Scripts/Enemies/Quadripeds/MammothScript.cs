@@ -13,10 +13,7 @@ using System.Collections;
 
 public class MammothScript : EnemyBaseActionClass {
 
-	protected override void SetReferences() {
-		characterSpriteObject = transform.FindChild("FlippingItem").FindChild ("Mammoth");
-		base.SetReferences ();
-	}
+	protected override void InitializeEnemy() {}
 
 	protected override void Attack() {
 		AttemptToAttackAfterCompletedAnimation ();

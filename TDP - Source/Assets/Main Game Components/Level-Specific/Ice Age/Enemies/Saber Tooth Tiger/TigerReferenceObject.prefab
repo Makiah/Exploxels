@@ -281,7 +281,7 @@ GameObject:
   - 95: {fileID: 9575488}
   - 61: {fileID: 6174384}
   m_Layer: 0
-  m_Name: Tiger
+  m_Name: Character
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

@@ -56,19 +56,26 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 	//For combat (has to be here so that weapons can use it)
 	private readonly string characterGUID = Guid.NewGuid().ToString();
 	
-	protected virtual void SetReferences() {
+	protected void SetReferences() {
 		//Get required components
-		Debug.Log(gameObject.name + " is " + GetCombatantID());
+		characterSpriteObject = transform.FindChild("FlippingItem").FindChild("Character");
 		anim = characterSpriteObject.GetComponent <Animator> ();
 		rb2d = GetComponent <Rigidbody2D> ();
 		groundChecks = GetAllGroundChecks ();
 
 		maxSpeedInitial = maxSpeed;
 
+		//All child classes should have this method.  
+		InitializeCharacter ();
+
 		//This changes based on the override methods.  
 		StartCoroutine (CheckCharacterPhysics());
 	}
 
+	//Abstract method.  
+	protected abstract void InitializeCharacter();
+
+	//Searches for all ground checks in the child transform.  
 	private Transform[] GetAllGroundChecks() {
 		//The transform that holds all of the ground check transforms.  
 		Transform groundCheckParent = transform.FindChild ("FlippingItem").FindChild ("GroundChecks");

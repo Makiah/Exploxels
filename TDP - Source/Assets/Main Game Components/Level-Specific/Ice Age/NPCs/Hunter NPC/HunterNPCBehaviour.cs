@@ -8,8 +8,7 @@ public class HunterNPCBehaviour : NPCBaseScript {
 	bool playerHasCreatedFire = false;
 	bool roleCompleted;
 
-	protected override void SetReferences() {
-		base.SetReferences ();
+	protected override void InitializeNPC() {
 		npcName = "Miner";
 		string[] dialogue = new string[] {
 			"Eh?  Why hello there!", 

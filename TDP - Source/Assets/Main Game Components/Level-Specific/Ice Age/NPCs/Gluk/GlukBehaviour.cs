@@ -3,8 +3,7 @@ using System.Collections;
 
 public class GlukBehaviour : NPCBaseScript {
 
-	protected override void SetReferences() {
-		base.SetReferences ();
+	protected override void InitializeNPC() {
 		npcName = "Gluk";
 		//Sets the initial dialogue for the player.  
 		string[] dialogue = new string[] {

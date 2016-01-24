@@ -21,7 +21,7 @@ public class GameControl : MonoBehaviour {
 	ProfileSwitcher profileSwitcher;
 
 	//Bertie (the icon that will be used).  
-	[SerializeField] private Sprite bertieHead;
+	[SerializeField] private Sprite bertieHead = null;
 
 	//Defining initial level elements
 	public void DefineInitialLevelElements() {

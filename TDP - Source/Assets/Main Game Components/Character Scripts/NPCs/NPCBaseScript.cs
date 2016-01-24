@@ -23,14 +23,19 @@ public abstract class NPCBaseScript : CharacterBaseActionClass {
 	//By using an actual IEnumerator object, we can selectively run and manipulate coroutines.  
 	IEnumerator walkAroundCoroutine;
 
-	protected override void SetReferences() {
-		characterSpriteObject = transform.FindChild ("FlippingItem").FindChild ("Character");
-		base.SetReferences ();
+	//Initializing the NPC
+	protected override void InitializeCharacter() {
 		playerTransform = CurrentLevelVariableManagement.GetPlayerReference ().transform;
+
+		//Initialize the NPC before starting to walk around.  
+		InitializeNPC ();
+
 		//Create and start the coroutine.  
 		walkAroundCoroutine = WalkAround ();
 		StartCoroutine (walkAroundCoroutine);
 	}
+
+	protected abstract void InitializeNPC ();
 
 	public abstract void NPCActionBeforeSpeaking();
 	public abstract void NPCActionAfterSpeaking();

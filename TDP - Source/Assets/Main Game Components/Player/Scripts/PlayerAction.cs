@@ -20,11 +20,8 @@ public class PlayerAction : CharacterBaseActionClass, ICanHoldItems {
 	private bool touchingWall;
 	private Transform wallCheck;
 
-	protected override void SetReferences() {
-		characterSpriteObject = transform.FindChild("FlippingItem").FindChild ("Player");
+	protected override void InitializeCharacter() {
 		wallCheck = transform.FindChild("FlippingItem").FindChild ("WallCheck");
-
-		base.SetReferences ();
 
 		StartCoroutine (CheckForWeaponInput());
 		StartCoroutine (ListenForArrowMovement());
