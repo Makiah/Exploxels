@@ -6,10 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/GameStartScreen.unity
+    path: Assets/Main Game Components/UI/Game Initialization UI/GameStartScreen.unity
   - enabled: 1
-    path: Assets/Scenes/MainGameUI.unity
+    path: Assets/Main Game Components/UI/Level UI/MainGameUI.unity
   - enabled: 1
-    path: Assets/Scenes/Profession Chooser.unity
+    path: Assets/Main Game Components/UI/Profession Chooser/Profession Chooser.unity
   - enabled: 1
-    path: Assets/Scenes/Ice Age.unity
+    path: Assets/Main Game Components/Level-Specific/Ice Age/Ice Age.unity
