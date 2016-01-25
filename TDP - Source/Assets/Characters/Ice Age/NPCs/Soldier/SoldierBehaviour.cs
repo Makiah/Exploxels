@@ -11,6 +11,9 @@ public class SoldierBehaviour : NPCBaseScript, ICanHoldItems {
 			"We protect great Thuk!"
 		};
 		GetComponent <NPCPanelController> ().SetCharacterDialogue (dialogue);
+
+		//Get the soldier (as a child object).  
+		//itemInUseByCharacter = transform.FindChild("
 	}
 
 	public override void NPCActionBeforeSpeaking() {}
