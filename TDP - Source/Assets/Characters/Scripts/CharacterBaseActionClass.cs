@@ -85,7 +85,7 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 
 		int i = 1; 
 		//Loop through all ground checks until one does not exist.  
-		while (groundCheckParent.FindChild("GroundCheck" + i)) {
+		while (groundCheckParent.FindChild("GroundCheck" + i) != null) {
 			groundCheckList.Add(groundCheckParent.FindChild("GroundCheck" + i));
 			i++;
 		}
