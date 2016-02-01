@@ -221,7 +221,7 @@ MonoBehaviour:
     - variationReference: {fileID: 159740, guid: 6241e074eed5846948862a92a968d471,
         type: 2}
       canBeFlipped: 0
-  levelLength: 0
+  levelLength: 2
 --- !u!4 &642813479
 Transform:
   m_ObjectHideFlags: 0
@@ -273,7 +273,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7675d7edcaa7e49709f37a30c72df075, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfSegmentsToCreatePer100: 10
+  numberOfSegmentsToCreatePer100: 25
   snowParticleEffect: {fileID: 130400, guid: 1c82b86bbd007434892f9de70e2a4209, type: 2}
 --- !u!1 &1397373983
 GameObject:

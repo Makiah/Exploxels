@@ -139,11 +139,11 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 			rb2d.velocity = new Vector2 (rb2d.velocity.x, jumpForce);
 			break;
 		case 3: 
-			rb2d.velocity = new Vector2(wallJumpForce *-GetFacingDirection(), jumpForce);
+			rb2d.velocity = new Vector2 (wallJumpForce * -GetFacingDirection (), jumpForce);
 			Flip ();
 			break;
 		case 4: 
-			rb2d.velocity = new Vector2 (0, -5);
+			rb2d.velocity = new Vector2 (0, -6);
 			break;
 		default: 
 			Debug.LogError ("Invalid jumpStyle of " + jumpStyle + " input");
@@ -202,12 +202,8 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 			//Increment time.  
 			currentTime += Time.deltaTime;
 			//Check velocity, and change accordingly.  
-			if (Mathf.Abs (rb2d.velocity.x) >= maxSpeed) 
-				//By using Mathf.Sign(rb2d.velocity.x) instead of GetFacingDirection(), the character cannot switch directions in midair.  
-				rb2d.velocity = new Vector2 (Mathf.Sign(rb2d.velocity.x) * maxSpeed, rb2d.velocity.y);
-			else
-				rb2d.AddForce (Vector2.right * moveForce * GetFacingDirection());
-
+			rb2d.AddForce (Vector2.right * moveForce * GetFacingDirection());
+			rb2d.velocity = new Vector2 (Mathf.Clamp (rb2d.velocity.x, -maxSpeed, maxSpeed), rb2d.velocity.y);
 			//Wait for the fixed update (has to be done on all physics-related coroutines).
 			yield return new WaitForFixedUpdate();
 		}

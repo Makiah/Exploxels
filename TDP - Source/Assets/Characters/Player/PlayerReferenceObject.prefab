@@ -545,7 +545,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 184622}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.293, y: -0.95, z: 0}
+  m_LocalPosition: {x: -0.293, y: -0.922, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 466186}
@@ -697,7 +697,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 181664}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.247, y: -0.95, z: 0}
+  m_LocalPosition: {x: 0.247, y: -0.922, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 466186}
@@ -827,7 +827,7 @@ Rigidbody2D:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 172182}
   m_UseAutoMass: 1
-  m_Mass: 1.7552001
+  m_Mass: 1.7930001
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 1.5
@@ -847,9 +847,9 @@ BoxCollider2D:
   m_Material: {fileID: 6200000, guid: ad9b19ef9e7aa4a5b9b77881a6607b0b, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: -0.22, y: 0.05}
+  m_Offset: {x: -0.22, y: 0.06}
   serializedVersion: 2
-  m_Size: {x: 0.27, y: 1.63}
+  m_Size: {x: 0.27, y: 1.7}
 --- !u!61 &6148060
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -875,9 +875,9 @@ BoxCollider2D:
   m_Material: {fileID: 6200000, guid: ad9b19ef9e7aa4a5b9b77881a6607b0b, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0.22, y: 0.05}
+  m_Offset: {x: 0.22, y: 0.06}
   serializedVersion: 2
-  m_Size: {x: 0.27, y: 1.63}
+  m_Size: {x: 0.27, y: 1.7}
 --- !u!61 &6180458
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -1279,7 +1279,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 794406875
   m_SortingOrder: 5
-  m_Sprite: {fileID: 21300000, guid: bceee0a1e06a64272bfe3bd99eabe724, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6bf268f31975e463bb5c885304bffc99, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

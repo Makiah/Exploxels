@@ -96,10 +96,11 @@ public class TimeIndicator : MonoBehaviour {
 			} else if (moonTransform.localPosition.y < 0 && moonlight.intensity != 0) {
 				moonlight.intensity = 0;
 			}
-
-			//Lighting calculations.  
+				
+			//Player y position manager.  
 			float desiredIntensity = 1f / (Mathf.Sqrt(Mathf.Abs (Mathf.Clamp(player.position.y / 8f, -2500, -1))));
-			mainLight.intensity = desiredIntensity * sunBrightnessCoefficient;
+			//The brightness underground (deep underground) should not be affected by the sun.  
+			mainLight.intensity = sunBrightnessCoefficient * desiredIntensity;
 
 			yield return null;
 		}

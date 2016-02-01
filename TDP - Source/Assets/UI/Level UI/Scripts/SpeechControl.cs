@@ -50,6 +50,8 @@ public class SpeechControl : MonoBehaviour {
 	bool completedDialogue = false;
 
 	protected IEnumerator SpeakInScrollingText(string[] stuffToSay) {
+		//Reset completedDialogue (modified by other threads of this coroutine.
+		completedDialogue = false;
 		//Otherwise the coroutine uses the x press used to initialize the coroutine itself.  
 		yield return null;
 		//Required variables.   
