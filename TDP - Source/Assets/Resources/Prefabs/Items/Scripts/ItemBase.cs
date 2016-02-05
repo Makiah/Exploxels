@@ -32,7 +32,7 @@ public abstract class ItemBase : MonoBehaviour {
 	//The class methods.  
 	protected ICanHoldItems attachedCharacterInput;
 
-	public void SetAttachedCharacterInput(ICanHoldItems ctorCharacterInput) {
+	public virtual void SetAttachedCharacterInput(ICanHoldItems ctorCharacterInput) {
 		attachedCharacterInput = ctorCharacterInput;
 	}
 

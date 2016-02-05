@@ -28,7 +28,7 @@ public class NPCPanelController : MonoBehaviour {
 		playerIcon = transform.FindChild ("FlippingItem").FindChild ("Character").FindChild ("Head").GetComponent <SpriteRenderer> ().sprite;
 		mainSpeechControl = CurrentLevelVariableManagement.GetLevelUIReference ().transform.FindChild ("Speech Bubble").GetComponent <SpeechControl> ();
 		mainInteractablePanelController = CurrentLevelVariableManagement.GetLevelUIReference().transform.FindChild ("InteractablePanels").gameObject.GetComponent <InteractablePanelController> (); 
-		StartCoroutine (CheckForAndAttemptToSpeakToPlayer());
+		StartCoroutine ("CheckForAndAttemptToSpeakToPlayer");
 	}
 
 	//Loops continuously and checks each frame whether or not the player is close enough to the NPC.  If so, it checks whether an interactable panel has a reference set.
@@ -90,6 +90,26 @@ public class NPCPanelController : MonoBehaviour {
 		if (alreadySpeakingToPlayer) {
 			ClearSpeechBubble();
 			SpeakToPlayer(customDialogue, GetComponent <NPCBaseScript> ().npcName);
+		}
+	}
+
+	public void Enable() {
+		StartCoroutine ("CheckForAndAttemptToSpeakToPlayer");
+	}
+
+	public void Disable() {
+		StopCoroutine ("CheckForAndAttemptToSpeakToPlayer");
+
+		if (interactablePanel != null) {
+			interactablePanel.Clear ();
+			interactablePanel = null;
+		}
+		if (speechBubbleActive) {
+			ClearSpeechBubble();
+			GetComponent <NPCBaseScript> ().ResumeWalkingAround();
+		}
+		if (alreadySpeakingToPlayer) {
+			alreadySpeakingToPlayer = false;
 		}
 	}
 

@@ -21,7 +21,7 @@ public abstract class NPCBaseScript : CharacterBaseActionClass {
 	[SerializeField] protected float minDistanceRequiredForInteraction;
 
 	//By using an actual IEnumerator object, we can selectively run and manipulate coroutines.  
-	IEnumerator walkAroundCoroutine;
+	protected IEnumerator walkAroundCoroutine;
 
 	//Initializing the NPC
 	protected override void InitializeCharacter() {

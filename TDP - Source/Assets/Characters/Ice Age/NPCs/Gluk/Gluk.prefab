@@ -24,6 +24,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 472512}
   - 95: {fileID: 9596006}
+  - 61: {fileID: 6183572}
+  - 61: {fileID: 6130792}
+  - 61: {fileID: 6127220}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -40,9 +43,6 @@ GameObject:
   m_Component:
   - 4: {fileID: 455372}
   - 50: {fileID: 5005366}
-  - 61: {fileID: 6166696}
-  - 61: {fileID: 6176206}
-  - 61: {fileID: 6158032}
   - 114: {fileID: 11461514}
   - 114: {fileID: 11484396}
   m_Layer: 0
@@ -477,12 +477,12 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &6158032
+--- !u!61 &6127220
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 115970}
+  m_GameObject: {fileID: 114734}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 6200000, guid: ad9b19ef9e7aa4a5b9b77881a6607b0b, type: 2}
@@ -491,26 +491,12 @@ BoxCollider2D:
   m_Offset: {x: -0.22, y: 0.05}
   serializedVersion: 2
   m_Size: {x: 0.27, y: 1.63}
---- !u!61 &6166696
+--- !u!61 &6130792
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 115970}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 6200000, guid: a14c4ba1eb50e49b0a7728d1c81f9a52, type: 2}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0.06}
-  serializedVersion: 2
-  m_Size: {x: 0.5, y: 1.75}
---- !u!61 &6176206
-BoxCollider2D:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 115970}
+  m_GameObject: {fileID: 114734}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 6200000, guid: ad9b19ef9e7aa4a5b9b77881a6607b0b, type: 2}
@@ -519,6 +505,20 @@ BoxCollider2D:
   m_Offset: {x: 0.22, y: 0.05}
   serializedVersion: 2
   m_Size: {x: 0.27, y: 1.63}
+--- !u!61 &6183572
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 114734}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 6200000, guid: a14c4ba1eb50e49b0a7728d1c81f9a52, type: 2}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0.06}
+  serializedVersion: 2
+  m_Size: {x: 0.5, y: 1.75}
 --- !u!95 &9596006
 Animator:
   serializedVersion: 3

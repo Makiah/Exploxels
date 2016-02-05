@@ -70,6 +70,8 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 
 		//This changes based on the override methods.  
 		StartCoroutine (CheckCharacterPhysics());
+
+		Debug.Log (gameObject.name + " is " + characterGUID);
 	}
 
 	//Abstract method.  
@@ -183,14 +185,18 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 	public bool CheckCurrentAttackAnimationState() {
 		return currentlyInAttackAnimation;
 	}
-	
+
+	//Problem: the ResetAttackOnExit is not 
+
 	//Only called by costume manager.  
 	public void ResetCurrentAttackAnimationState() {
 		if (ActionsAfterAnimation != null) {
+			Debug.Log ("Running attack after animation");
 			ActionsAfterAnimation ();
 		}
 		ActionsAfterAnimation = null;
 		currentlyInAttackAnimation = false;
+		Debug.Log("Reset attack animation for " + gameObject.name + " and currentlyInAttackAnimation is " + currentlyInAttackAnimation);
 	}
 
 	/**************** CHARACTER UTILITIES ***********************/

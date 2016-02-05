@@ -30,8 +30,8 @@ public class ResetAttackAnimationOnExit : StateMachineBehaviour {
 	// OnStateExit is called when a transition ends and the state machine finishes evaluating this state
 	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
 
-		//Simple solution.  
-		animator.transform.parent.parent.GetComponent <CharacterBaseActionClass> ().ResetCurrentAttackAnimationState ();
+		//Simple solution.  Get ICombatant mainly because of the soldier.  
+		animator.transform.parent.parent.GetComponent <ICombatant> ().ResetCurrentAttackAnimationState ();
 
 		//This works, but seems like overkill.  
 		/*

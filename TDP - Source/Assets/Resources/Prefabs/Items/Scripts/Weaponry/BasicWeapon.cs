@@ -65,7 +65,7 @@ public class BasicWeapon : ItemBase {
 		);
 
 		if (resultingHealthPanelManager != null) {
-			resultingHealthPanelManager.gameObject.GetComponent <CharacterBaseActionClass> ().ApplyKnockbackToCharacter (new Vector2 (knockback.x * attachedCharacterInput.GetActualClass().GetFacingDirection (), knockback.y));
+			resultingHealthPanelManager.gameObject.GetComponent <ICombatant> ().GetActualClass().ApplyKnockbackToCharacter (new Vector2 (knockback.x * attachedCharacterInput.GetActualClass().GetFacingDirection (), knockback.y));
 			resultingHealthPanelManager.YouHaveBeenAttacked (attackPower);
 		}
 	}
@@ -79,13 +79,15 @@ public class BasicWeapon : ItemBase {
 		);
 
 		if (resultingHealthPanelManager != null) {
-			resultingHealthPanelManager.gameObject.GetComponent <CharacterBaseActionClass> ().ApplyKnockbackToCharacter (new Vector2 (knockback.x * attachedCharacterInput.GetActualClass().GetFacingDirection (), knockback.y));
+			//Has to be GetComponent <ICombatant> ().GetActualClass() instead of GetComponent <CharacterBaseActionClass> () because otherwise the soldier gets the NPC script intead. 
+			resultingHealthPanelManager.gameObject.GetComponent <ICombatant> ().GetActualClass().ApplyKnockbackToCharacter (new Vector2 (knockback.x * attachedCharacterInput.GetActualClass().GetFacingDirection (), knockback.y));
 			resultingHealthPanelManager.YouHaveBeenAttacked (attackPower);
 		}
 	}
 
 	void AttackEnemyInFocus () {
 		//Used to look for health panel manager.  ALWAYS REMEMBER TO KEEP THE PARAMETERS IN ORDER.   
+		Debug.Log("Ignoring " + attachedCharacterInput.GetCombatantID());
 		CharacterHealthPanelManager resultingHealthPanelManager = LinecastingUtilities.FindEnemyViaLinecast (
 			attachedCharacterInput.GetActualClass().transform.position, 
 			distToEnemyOffset, 
@@ -96,7 +98,7 @@ public class BasicWeapon : ItemBase {
 		);
 
 		if (resultingHealthPanelManager != null) {
-			resultingHealthPanelManager.gameObject.GetComponent <CharacterBaseActionClass> ().ApplyKnockbackToCharacter (new Vector2 (knockback.x * attachedCharacterInput.GetActualClass().GetFacingDirection (), knockback.y));
+			resultingHealthPanelManager.gameObject.GetComponent <ICombatant> ().GetActualClass().ApplyKnockbackToCharacter (new Vector2 (knockback.x * attachedCharacterInput.GetActualClass().GetFacingDirection (), knockback.y));
 			resultingHealthPanelManager.YouHaveBeenAttacked (attackPower);
 		}
 	}

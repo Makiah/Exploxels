@@ -1,5 +1,21 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &105586
+GameObject:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 487250}
+  - 61: {fileID: 6169084}
+  m_Layer: 9
+  m_Name: CollisionChecker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &105858
 GameObject:
   m_ObjectHideFlags: 0
@@ -24,6 +40,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 472512}
   - 95: {fileID: 9596006}
+  - 61: {fileID: 6117648}
+  - 61: {fileID: 6108220}
+  - 61: {fileID: 6185134}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -40,11 +59,11 @@ GameObject:
   m_Component:
   - 4: {fileID: 455372}
   - 50: {fileID: 5005366}
-  - 61: {fileID: 6166696}
-  - 61: {fileID: 6176206}
-  - 61: {fileID: 6158032}
   - 114: {fileID: 11461514}
   - 114: {fileID: 11498622}
+  - 114: {fileID: 11493134}
+  - 114: {fileID: 11414906}
+  - 114: {fileID: 11461352}
   m_Layer: 0
   m_Name: Soldier
   m_TagString: Untagged
@@ -283,7 +302,7 @@ Transform:
   - {fileID: 462998}
   - {fileID: 430736}
   m_Father: {fileID: 427674}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!4 &424490
 Transform:
   m_ObjectHideFlags: 1
@@ -308,6 +327,7 @@ Transform:
   m_Children:
   - {fileID: 472512}
   - {fileID: 424490}
+  - {fileID: 487250}
   - {fileID: 403496}
   m_Father: {fileID: 455372}
   m_RootOrder: 0
@@ -318,7 +338,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 139788}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.313, y: -1.07, z: 0}
+  m_LocalPosition: {x: 0.313, y: -0.924, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 403496}
@@ -393,7 +413,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 115970}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 427674}
@@ -406,7 +426,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 197806}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.319, y: -1.07, z: 0}
+  m_LocalPosition: {x: -0.319, y: -0.924, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 403496}
@@ -464,6 +484,18 @@ Transform:
   - {fileID: 445676}
   m_Father: {fileID: 489036}
   m_RootOrder: 1
+--- !u!4 &487250
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 105586}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 2}
+  m_LocalScale: {x: 2.2, y: 2.2, z: 1}
+  m_Children: []
+  m_Father: {fileID: 427674}
+  m_RootOrder: 2
 --- !u!4 &489036
 Transform:
   m_ObjectHideFlags: 1
@@ -507,26 +539,26 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &6158032
+--- !u!61 &6108220
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 115970}
+  m_GameObject: {fileID: 114734}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 6200000, guid: ad9b19ef9e7aa4a5b9b77881a6607b0b, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: -0.22, y: 0.05}
+  m_Offset: {x: 0.22, y: 0.05}
   serializedVersion: 2
   m_Size: {x: 0.27, y: 1.63}
---- !u!61 &6166696
+--- !u!61 &6117648
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 115970}
+  m_GameObject: {fileID: 114734}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 6200000, guid: a14c4ba1eb50e49b0a7728d1c81f9a52, type: 2}
@@ -535,18 +567,32 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0.06}
   serializedVersion: 2
   m_Size: {x: 0.5, y: 1.75}
---- !u!61 &6176206
+--- !u!61 &6169084
 BoxCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 115970}
+  m_GameObject: {fileID: 105586}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0.01}
+  serializedVersion: 2
+  m_Size: {x: 0.73, y: 0.9}
+--- !u!61 &6185134
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 114734}
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 6200000, guid: ad9b19ef9e7aa4a5b9b77881a6607b0b, type: 2}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0.22, y: 0.05}
+  m_Offset: {x: -0.22, y: 0.05}
   serializedVersion: 2
   m_Size: {x: 0.27, y: 1.63}
 --- !u!95 &9596006
@@ -566,6 +612,31 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &11414906
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 115970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d19e9feac0aea4e5eb6843bdd41588b9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifePoints: 10
+  distanceUntilHealthBarActive: 5
+--- !u!114 &11461352
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 115970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7ceaf70bf23794906884454f081f6837, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  experienceToDrop: 5
 --- !u!114 &11461514
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -613,6 +684,31 @@ MonoBehaviour:
   distToEnemyOffset: 2
   attackPower: 4
   knockback: {x: 1000, y: 3}
+--- !u!114 &11493134
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 115970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4873b136328074a9795aa044d4cb14d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxSpeed: 4
+  moveForce: 40
+  jumpForce: 9
+  wallJumpForce: 0
+  groundedOffset: 0
+  playerViewableThreshold: 25
+  playerAttackDistance: 2
+  ignorePlayerMovementThreshold: 1
+  maxYValueSeparation: 3
+  enemyAttackingPower: 2
+  enemyKnockbackPower: {x: 40, y: 0}
+  enemyWithinAreaBounds: 0
+  yOffsetToEnemy: 2
+  distToEnemyLength: 1.5
 --- !u!114 &11498622
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -850,7 +946,7 @@ Prefab:
     m_Modifications:
     - target: {fileID: 0}
       propertyPath: maxSpeed
-      value: 3.5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: moveForce
@@ -863,6 +959,54 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: minDistanceRequiredForInteraction
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: playerViewableThreshold
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: playerAttackDistance
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: ignorePlayerMovementThreshold
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: maxYValueSeparation
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: enemyAttackingPower
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: enemyKnockbackPower.x
+      value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: yOffsetToEnemy
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: distToEnemyLength
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: lifePoints
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: distanceUntilHealthBarActive
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

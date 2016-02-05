@@ -57,7 +57,7 @@ GameObject:
   - 114: {fileID: 11421010}
   - 114: {fileID: 11463256}
   - 114: {fileID: 11462258}
-  m_Layer: 9
+  m_Layer: 0
   m_Name: MammothReferenceObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -230,7 +230,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 401566}
   - 95: {fileID: 9542884}
-  m_Layer: 8
+  m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
   m_Icon: {fileID: 0}

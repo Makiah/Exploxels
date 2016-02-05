@@ -48,13 +48,16 @@ public abstract class EnemyBaseActionClass : CharacterBaseActionClass, ICombatan
 	//The player transform
 	protected Transform player;
 
+	protected IEnumerator enemyControlCoroutine;
+
 	protected override void InitializeCharacter() {
 		//Set required variables for the enemy to function.  
 		player = CurrentLevelVariableManagement.GetPlayerReference ().transform;
 
 		InitializeEnemy ();
 
-		StartCoroutine (EnemyControl());
+		enemyControlCoroutine = EnemyControl ();
+		StartCoroutine (enemyControlCoroutine);
 	}
 
 	protected abstract void InitializeEnemy();
@@ -141,7 +144,7 @@ public abstract class EnemyBaseActionClass : CharacterBaseActionClass, ICombatan
 	}
 
 	//Used to flip to face the player.  
-	void FlipToFacePlayer() {
+	protected void FlipToFacePlayer() {
 		if (player.position.x >= transform.position.x) {
 			if (GetFacingDirection() != 1) {
 				Flip ();
