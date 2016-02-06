@@ -1058,7 +1058,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 99928b598cc344b1e8dbaaf36036f356, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lifePoints: 15
+  lifePoints: 30
   distanceUntilHealthBarActive: 0
 --- !u!114 &11426772
 MonoBehaviour:
@@ -1081,7 +1081,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 179362}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1c91c8bd26404afcbb94332504a4ddc, type: 3}
+  m_Script: {fileID: 11500000, guid: 8bbba1a0712f74713baa1bb8e6b9428d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &11440624
@@ -1448,7 +1448,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: lifePoints
-      value: 15
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_IsActive

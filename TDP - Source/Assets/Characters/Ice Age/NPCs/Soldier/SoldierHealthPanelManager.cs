@@ -8,8 +8,6 @@ public class SoldierHealthPanelManager : CharacterHealthPanelManager {
 	[SerializeField] private float reversionToNPCTime = 15;
 	[SerializeField] private float rangeOfEnrage = 15;
 
-	//The coroutine and the coroutine state.  
-	private IEnumerator revertToNPC;
 	private bool running = false;
 
 	private static List <SoldierHealthPanelManager> soldierInstances = new List <SoldierHealthPanelManager> ();
@@ -19,8 +17,6 @@ public class SoldierHealthPanelManager : CharacterHealthPanelManager {
 	//Add the current class instance to the list to be enraged later.  
 	protected override void InitializeHealthBar() {
 		base.InitializeHealthBar ();
-
-		revertToNPC = ReturnToNPCAfterSeconds (reversionToNPCTime);
 		soldierInstances.Add (this);
 	}
 
@@ -49,8 +45,7 @@ public class SoldierHealthPanelManager : CharacterHealthPanelManager {
 			timer = 0;
 		} else {
 			Debug.Log ("Started new coroutine");
-			revertToNPC = ReturnToNPCAfterSeconds (reversionToNPCTime);
-			StartCoroutine (revertToNPC);
+			StartCoroutine (ReturnToNPCAfterSeconds(reversionToNPCTime));
 		}
 
 		running = true;

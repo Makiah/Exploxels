@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TimeIndicator : MonoBehaviour {
+public class GameLightingManager : MonoBehaviour {
 	/*************** INIT ***************/
 	void OnEnable() {
 		LevelEventManager.InitializeTimeIndicator += InitializeTimeIndicationSystem;
@@ -69,7 +69,7 @@ public class TimeIndicator : MonoBehaviour {
 
 			//The sun and moon should provide a brightness of a sine wave (brightest in the afternoon, neutral at dawn and dusk, and black at midnight).
 			//This function has a period of 1.  (Period is 2pi/coefficient of x).  
-			//This function oscillates the sunPositionCoefficient between 0.2 and 1.  
+			//This function oscillates the sunBrightnessCoefficient between 0.2 and 1.  
 			sunBrightnessCoefficient = 0.4f * Mathf.Sin(2 * Mathf.PI * customTime) + .6f;
 
 			//Parametric equations for an ellipse.
@@ -98,9 +98,17 @@ public class TimeIndicator : MonoBehaviour {
 			}
 				
 			//Player y position manager.  
-			float desiredIntensity = 1f / (Mathf.Sqrt(Mathf.Abs (Mathf.Clamp(player.position.y / 8f, -2500, -1))));
+			float undergroundIntensity = 1f / (Mathf.Sqrt(Mathf.Abs (Mathf.Clamp(player.position.y, -2500, -1))));
+
+			//Works on the basis of (sunBrightness * (i-1)(undergroundIntensity))/i.  As one moves further underground, the sun oscillation is less noticeable.  
+			float actualBrightness = (sunBrightnessCoefficient + (Mathf.Abs (Mathf.Clamp (player.transform.position.y, -2500, -1))) * undergroundIntensity) / 
+				(Mathf.Abs (Mathf.Clamp (player.transform.position.y, -2500, -1)) + 1);
+
+			Debug.Log("Lighting is " + "(" + sunBrightnessCoefficient + " + " + (Mathf.Abs (Mathf.Clamp (player.transform.position.y, -2500, -1))) + "*" + undergroundIntensity + ") / " +
+				(Mathf.Abs (Mathf.Clamp (player.transform.position.y, -2500, -1)) + 1) + " so actualBrightness is " + actualBrightness);
+
 			//The brightness underground (deep underground) should not be affected by the sun.  
-			mainLight.intensity = sunBrightnessCoefficient * desiredIntensity;
+			mainLight.intensity = actualBrightness;
 
 			yield return null;
 		}
