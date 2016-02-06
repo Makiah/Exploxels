@@ -25,6 +25,7 @@ public class SoldierNPCBehaviour : NPCBaseScript {
 			Debug.Log ("Enabled NPC Behaviour");
 			npcActionsActive = true;
 			StartCoroutine (walkAroundCoroutine);
+			GetComponent <NPCPanelController> ().Enable ();
 
 			//Set facingRight based on the current facing direction
 			facingRight = transform.FindChild("FlippingItem").localScale.x > 0;
@@ -36,6 +37,7 @@ public class SoldierNPCBehaviour : NPCBaseScript {
 			Debug.Log ("Disabled NPC Behaviour");
 			npcActionsActive = false;
 			StopCoroutine (walkAroundCoroutine);
+			GetComponent <NPCPanelController> ().Disable ();
 		}
 	}
 

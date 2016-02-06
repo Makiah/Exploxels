@@ -36,7 +36,10 @@ public class PlayerHealthPanelManager : CharacterHealthPanelManager {
 	PlayerHealthPanelReference playerHealthPanelReference;
 
 	protected override void InitializeHealthBar() {
-		lifePoints = 10f;
+		if (lifePoints <= 0) {
+			Debug.Log ("Player health is " + lifePoints + " which is an invalid value.  Switching to 10.");
+			lifePoints = 10;
+		}
 		currentHealth = lifePoints;
 		//Create panel
 		uiHealthController = CurrentLevelVariableManagement.GetLevelUIReference().transform.FindChild ("Health Controller").gameObject.GetComponent <UIHealthController> (); 

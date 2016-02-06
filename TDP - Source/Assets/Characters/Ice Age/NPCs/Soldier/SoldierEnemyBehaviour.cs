@@ -31,7 +31,6 @@ public class SoldierEnemyBehaviour : EnemyBaseActionClass, ICanHoldItems {
 			Debug.Log ("Enabled enemy behaviour");
 			enemyBehaviourActive = true;
 			StartCoroutine (enemyControlCoroutine);
-			GetComponent <NPCPanelController> ().Enable ();
 
 			//Set facingRight based on the current facing direction
 			facingRight = transform.FindChild("FlippingItem").localScale.x > 0;
@@ -43,7 +42,6 @@ public class SoldierEnemyBehaviour : EnemyBaseActionClass, ICanHoldItems {
 			Debug.Log ("Disabled enemy behaviour");
 			enemyBehaviourActive = false;
 			StopCoroutine (enemyControlCoroutine);
-			GetComponent <NPCPanelController> ().Disable ();
 		}
 	}
 
