@@ -230,6 +230,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 401566}
   - 95: {fileID: 9542884}
+  - 114: {fileID: 11447626}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -734,6 +735,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifePoints: 25
   distanceUntilHealthBarActive: 5
+--- !u!114 &11447626
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 168794}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae7a1f35beb15480b98c688b116a3cf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11462258
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -104,8 +104,8 @@ public class GameLightingManager : MonoBehaviour {
 			float actualBrightness = (sunBrightnessCoefficient + (Mathf.Abs (Mathf.Clamp (player.transform.position.y, -2500, -1))) * undergroundIntensity) / 
 				(Mathf.Abs (Mathf.Clamp (player.transform.position.y, -2500, -1)) + 1);
 
-			Debug.Log("Lighting is " + "(" + sunBrightnessCoefficient + " + " + (Mathf.Abs (Mathf.Clamp (player.transform.position.y, -2500, -1))) + "*" + undergroundIntensity + ") / " +
-				(Mathf.Abs (Mathf.Clamp (player.transform.position.y, -2500, -1)) + 1) + " so actualBrightness is " + actualBrightness);
+			//Debug.Log("Lighting is " + "(" + sunBrightnessCoefficient + " + " + (Mathf.Abs (Mathf.Clamp (player.transform.position.y, -2500, -1))) + "*" + undergroundIntensity + ") / " +
+			//	(Mathf.Abs (Mathf.Clamp (player.transform.position.y, -2500, -1)) + 1) + " so actualBrightness is " + actualBrightness);
 
 			//The brightness underground (deep underground) should not be affected by the sun.  
 			mainLight.intensity = actualBrightness;

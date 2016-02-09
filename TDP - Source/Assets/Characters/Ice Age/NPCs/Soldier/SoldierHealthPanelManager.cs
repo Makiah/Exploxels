@@ -62,7 +62,7 @@ public class SoldierHealthPanelManager : CharacterHealthPanelManager {
 	//Return the enemy soldier to an NPC after some period of time.  
 	private IEnumerator ReturnToNPCAfterSeconds(float seconds) {
 		while (timer <= seconds) {
-			Debug.Log ("Reverting to NPC in " + (seconds - timer));
+			//Debug.Log ("Reverting to NPC in " + (seconds - timer));
 			timer += Time.deltaTime;
 			yield return null;
 		}

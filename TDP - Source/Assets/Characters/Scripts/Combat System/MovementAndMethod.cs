@@ -19,7 +19,7 @@ public class MovementAndMethod {
 		ShootBow, 
 		CreatePhysicalItem, 
 		GroundPound, 
-		TripleSlash, 
+		SpinningSlash, 
 		AirSlash
 	}
 
@@ -73,11 +73,7 @@ public class MovementAndMethod {
 		//Define the movement.  (Has to be used for animations)
 		attackEnumVal = ctorMovement;
 		//Used for extraneous cases.  
-		switch (ctorMovement) {
-		default: 
-			attackKey = ctorMovement.ToString ();
-			break;
-		}
+		attackKey = attackEnumVal.ToString();
 
 		//Midair thing.  
 		canBeUsedWhileMidair = canBeUsedInMidair;

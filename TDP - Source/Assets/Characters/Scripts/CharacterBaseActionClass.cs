@@ -186,15 +186,21 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 		return currentlyInAttackAnimation;
 	}
 
-	//Problem: the ResetAttackOnExit is not 
+	public void OnAttack() {
+		if (ActionsAfterAnimation != null) {
+			Debug.Log ("Running attack on " + gameObject.name);
+			ActionsAfterAnimation ();
+			ActionsAfterAnimation = null;
+		}
+	}
 
 	//Only called by costume manager.  
-	public void ResetCurrentAttackAnimationState() {
+	public void OnAttackAnimationCompleted() {
 		if (ActionsAfterAnimation != null) {
-			Debug.Log ("Running attack after animation");
+			Debug.Log ("Attack was never run on " + gameObject.name + "!");
 			ActionsAfterAnimation ();
+			ActionsAfterAnimation = null;
 		}
-		ActionsAfterAnimation = null;
 		currentlyInAttackAnimation = false;
 		Debug.Log("Reset attack animation for " + gameObject.name + " and currentlyInAttackAnimation is " + currentlyInAttackAnimation);
 	}

@@ -31,7 +31,7 @@ public class ResetAttackAnimationOnExit : StateMachineBehaviour {
 	override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex) {
 
 		//Simple solution.  Get ICombatant mainly because of the soldier.  
-		animator.transform.parent.parent.GetComponent <ICombatant> ().ResetCurrentAttackAnimationState ();
+		animator.gameObject.GetComponent <AttackAndAnimationRerouter> ().OnAttackAnimationCompleted();
 
 		//This works, but seems like overkill.  
 		/*

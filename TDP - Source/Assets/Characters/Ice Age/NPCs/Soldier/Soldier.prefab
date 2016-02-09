@@ -43,6 +43,7 @@ GameObject:
   - 61: {fileID: 6117648}
   - 61: {fileID: 6108220}
   - 61: {fileID: 6185134}
+  - 114: {fileID: 11477924}
   m_Layer: 0
   m_Name: Character
   m_TagString: Untagged
@@ -625,6 +626,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifePoints: 10
   distanceUntilHealthBarActive: 5
+  reversionToNPCTime: 15
+  rangeOfEnrage: 15
 --- !u!114 &11461352
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -684,6 +687,17 @@ MonoBehaviour:
   distToEnemyOffset: 2
   attackPower: 4
   knockback: {x: 1000, y: 3}
+--- !u!114 &11477924
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 114734}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae7a1f35beb15480b98c688b116a3cf6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11493134
 MonoBehaviour:
   m_ObjectHideFlags: 1

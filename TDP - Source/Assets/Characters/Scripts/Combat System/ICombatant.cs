@@ -7,7 +7,8 @@ using System.Collections;
 
 public interface ICombatant {
 	bool CheckCurrentAttackAnimationState();
-	void ResetCurrentAttackAnimationState ();
+	void OnAttackAnimationCompleted ();
 	string GetCombatantID();
+	void OnAttack ();
 	CharacterBaseActionClass GetActualClass();
 }
