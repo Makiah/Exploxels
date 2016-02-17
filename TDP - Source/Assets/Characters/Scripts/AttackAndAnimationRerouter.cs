@@ -15,6 +15,10 @@ public class AttackAndAnimationRerouter : MonoBehaviour {
 	}
 
 	public void OnAttackAnimationCompleted() {
+		if (character == null) {
+			character = transform.parent.parent.GetComponent <ICombatant> ();
+		}
+
 		character.OnAttackAnimationCompleted ();
 	}
 }

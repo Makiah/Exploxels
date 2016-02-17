@@ -43,7 +43,7 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 	SlotMouseInputControl mainSlotManager;
 
 	public virtual void ReferenceChildren() {
-		mainSlotManager = transform.parent.parent.GetComponent <SlotMouseInputControl> ();
+		mainSlotManager = transform.parent.GetComponent <SlotMouseInputControl> ();
 		childIcon = transform.FindChild ("Icon").GetComponent <Image> ();
 		childIcon.enabled = false;
 		tooltip = transform.FindChild ("Tooltip");

@@ -398,7 +398,7 @@ ParticleSystem:
     serializedVersion: 2
     m_Type: 0
     rate:
-      scalar: 50
+      scalar: 90
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1551,7 +1551,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: EmissionModule.rate.scalar
-      value: 50
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: CollisionModule.quality

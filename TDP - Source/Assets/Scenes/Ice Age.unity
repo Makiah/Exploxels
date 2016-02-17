@@ -221,7 +221,7 @@ MonoBehaviour:
     - variationReference: {fileID: 159740, guid: 6241e074eed5846948862a92a968d471,
         type: 2}
       canBeFlipped: 0
-  levelLength: 2
+  levelLength: 7
 --- !u!4 &642813479
 Transform:
   m_ObjectHideFlags: 0

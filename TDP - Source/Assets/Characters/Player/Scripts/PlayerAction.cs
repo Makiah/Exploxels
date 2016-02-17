@@ -86,7 +86,7 @@ public class PlayerAction : CharacterBaseActionClass, ICanHoldItems {
 				Flip ();
 
 			//Tell the camera that the player is moving (should be changed at some point.  
-			transform.FindChild("Main Camera").FindChild("Background").FindChild("Background Tiles").GetComponent <BackgroundScroller> ().Movement(rb2d.velocity.x / maxSpeed);
+			transform.FindChild("Main Camera").FindChild("Background").GetComponent <BackgroundManager> ().MoveBackground(rb2d.velocity.x / maxSpeed);
 
 			yield return new WaitForFixedUpdate();
 

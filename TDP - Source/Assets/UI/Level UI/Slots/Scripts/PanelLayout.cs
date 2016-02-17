@@ -16,18 +16,26 @@ using System.Collections;
 public class PanelLayout : MonoBehaviour {
 
 	protected virtual void OnEnable () {
-		LevelEventManager.CreateInventorySlots += InitializeSlots;
+		LevelEventManager.CreateInventorySlots += AddSlotsToSystem;
 	}
 
 	protected virtual void OnDisable () {
-		LevelEventManager.CreateInventorySlots -= InitializeSlots;
+		LevelEventManager.CreateInventorySlots -= AddSlotsToSystem;
 	}
 
 	public GameObject slotPrefab;
 
 	protected Vector2 inventoryPanelSize, slotPanelSize;
 
+	protected void AddSlotsToSystem() {
+		GetComponent <InventoryFunctions> ().AddSlotsToSystem (InitializeSlots ());
+	}
+
 	protected SlotScript[,] InitializeSlots() {
+		//Create the "Slots" parent.  Has to be used so that InventoryHideShow does not end its coroutine.  
+		Transform slots = new GameObject ("Slots").transform;
+		slots.SetParent (transform);
+		slots.transform.localPosition = Vector3.zero;
 
 		// Get sizes of the inventory panel and the slot prefab.  
 		inventoryPanelSize = GetComponent <RectTransform> ().sizeDelta;
@@ -55,7 +63,7 @@ public class PanelLayout : MonoBehaviour {
 
 				//Create the slot
 				GameObject createdSlot = (GameObject)Instantiate (slotPrefab);
-				createdSlot.transform.SetParent (this.transform, false);
+				createdSlot.transform.SetParent (slots, false);
 
 				//Determine the coordinates and offset.  Equal to the previous padding for x/y and slot panel size (x-1) and the current size.  
 				float rectTransformXCoordinate = (float)((x - 1) * (paddingPerXSlot + slotPanelSize.x) + (paddingPerXSlot + .5 * slotPanelSize.x));

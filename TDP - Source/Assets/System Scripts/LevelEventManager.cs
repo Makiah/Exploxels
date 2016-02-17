@@ -22,11 +22,8 @@ public class LevelEventManager : MonoBehaviour {
 	//Pretty much contains every event that does not require a parameter or a return type.  
 	public delegate void BaseInitialization();
 
-	//This delegate will be used for returning the final array of SlotScripts.  
-	public delegate SlotScript[,] InventorySlotInitialization ();
-
-	public static event InventorySlotInitialization CreateInventorySlots;
-	public static event InventorySlotInitialization CreateHotbarSlots;
+	public static event BaseInitialization CreateInventorySlots;
+	public static event BaseInitialization CreateHotbarSlots;
 
 	public static event BaseInitialization InitializeSlots;
 	public static event BaseInitialization InitializeHotbarManager;
@@ -50,12 +47,10 @@ public class LevelEventManager : MonoBehaviour {
 
 	public static event BaseInitialization InitializePlayer; //Use for initializing CostumeManager and PlayerAction, as well as the PlayerHealthController.  
 
-	public delegate void SlotControlSystem(SlotScript[,] inventorySlots);
-
 	public static event BaseInitialization InitializeCostume;
 
 	public static event BaseInitialization InitializeCameraFunctions;
-	public static event BaseInitialization InitializeBackgroundScroller;
+	public static event BaseInitialization InitializeBackgroundManager;
 	public static event BaseInitialization InitializeTimeIndicator;
 
 	public delegate void TerrainCreation (TerrainReferenceClass maze);
@@ -71,7 +66,6 @@ public class LevelEventManager : MonoBehaviour {
 	
 	public static event BaseInitialization InitializePurchasePanels;
 	public static event BaseInitialization InitializePurchasePanelManager;
-
 
 	//Used during initialization.  
 	LoadingProgressBar createdLoadingBar;
@@ -98,32 +92,12 @@ public class LevelEventManager : MonoBehaviour {
 		yield return new WaitForSeconds (.1f);
 		createdLoadingBar.InitializeNewAction (.15f, "Loading Inventory");
 
-		//Note: This would be a lot easier if I could figure out a way to pass an event in as a method parameter, but all attempts have not worked.  
-
-		//Inventory UI Initialization
-		SlotScript[,] createdInventorySlots = null;
-		SlotScript[,] createdHotbarSlots = null;
-		SlotScript[,] totalNumberOfInventorySlots = null;
-
 		//Initialize everything!!!
 
 		//Create slots, and define 2D array values.  
-		if (CreateInventorySlots != null) createdInventorySlots = CreateInventorySlots (); else Debug.LogError("CreateInventorySlots was null!"); // Used with PanelLayout
-		if (CreateHotbarSlots != null) createdHotbarSlots = CreateHotbarSlots (); else Debug.LogError("CreateHotbarSlots was null!"); //Used with HotbarPanelLayout (Otherwise createdUISlots gets the hotbarslots return).  
-		//BIG ARRAY - Note: This array assumes that the x dimension is the same for both arrays.  (Goes y then x).  
-		totalNumberOfInventorySlots = new SlotScript[createdInventorySlots.GetLength (0) + createdHotbarSlots.GetLength (0),createdInventorySlots.GetLength(1)];
-		//Add the inventory slots to the master array.  
-		for (int i = 0; i < createdInventorySlots.GetLength(0); i++) {
-			for (int j = 0; j < createdInventorySlots.GetLength(1); j++) {
-				totalNumberOfInventorySlots[i, j] = createdInventorySlots[i, j];
-			}
-		}
-		//Add the hotbar slots to the master array.  
-		for (int i = 0; i < createdHotbarSlots.GetLength(0); i++) {
-			for (int j = 0; j < createdHotbarSlots.GetLength(1); j++) {
-				totalNumberOfInventorySlots[i + createdInventorySlots.GetLength(0), j] = createdHotbarSlots[i, j];
-			}
-		}
+		if (CreateInventorySlots != null) CreateInventorySlots (); else Debug.LogError("CreateInventorySlots was null!"); // Used with PanelLayout
+		if (CreateHotbarSlots != null) CreateHotbarSlots (); else Debug.LogError("CreateHotbarSlots was null!"); //Used with HotbarPanelLayout (Otherwise createdUISlots gets the hotbarslots return).  
+
 		//Initialize Slots
 		if (InitializeSlots != null) InitializeSlots (); else Debug.LogError("InitializeSlots was null!"); //Used with SlotScript
 
@@ -162,13 +136,12 @@ public class LevelEventManager : MonoBehaviour {
 
 		if (InitializeHotbarManager != null) InitializeHotbarManager (); else Debug.LogError("InitializeHotbarItems was null!"); //Used for initializing the HotbarManager.  
 
-		ModifiesSlotContent.InitializeSystem (totalNumberOfInventorySlots); //Used for ModifiesSlotContent
-
 		if (InitializeCostume != null) InitializeCostume(); else Debug.LogError("InitializeCostume was null!"); //Used for PlayerCostumeManager
+		if (InitializeBackgroundManager != null) InitializeBackgroundManager (); else Debug.LogError("InitializeBackgroundScroller was null!"); //Initialize the BackgroundScroller class.  
+
 		if (InitializePlayer != null) InitializePlayer (); else Debug.LogError("InitializePlayer was null!"); //Used for initializing the HumanoidBaseReferenceClass.  
 
 		if (InitializeCameraFunctions != null) InitializeCameraFunctions (); else Debug.LogError("InitializeCameraFunctions was null!"); // Used for camera controller.  
-		if (InitializeBackgroundScroller != null) InitializeBackgroundScroller (); else Debug.LogError("InitializeBackgroundScroller was null!"); //Initialize the BackgroundScroller class.  
 		if (InitializeTimeIndicator != null) InitializeTimeIndicator(); else Debug.LogError("InitializeTimeIndicator was null!!"); //Used for TimeIndicator.  
 
 		//Initialize the enemies.  

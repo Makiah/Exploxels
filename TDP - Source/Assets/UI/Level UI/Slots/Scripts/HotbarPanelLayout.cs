@@ -4,11 +4,11 @@ using System.Collections;
 public class HotbarPanelLayout : PanelLayout {
 
 	protected override void OnEnable() {
-		LevelEventManager.CreateHotbarSlots += InitializeSlots;
+		LevelEventManager.CreateHotbarSlots += AddSlotsToSystem;
 	}
 
 	protected override void OnDisable() {
-		LevelEventManager.CreateHotbarSlots -= InitializeSlots;
+		LevelEventManager.CreateHotbarSlots -= AddSlotsToSystem;
 	}
 
 }
