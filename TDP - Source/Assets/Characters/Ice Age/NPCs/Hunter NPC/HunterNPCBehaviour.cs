@@ -52,7 +52,7 @@ public class HunterNPCBehaviour : NPCBaseScript {
 		//When the NPC has finished speaking to the player.  
 		if (talkedToPlayer == false) {
 			talkedToPlayer = true;
-			ModifiesSlotContent.AssignNewItemToBestSlot(new UISlotContentReference(ResourceDatabase.GetItemByParameter("Wooden Pickaxe"), 1));
+			playerInventory.AssignNewItemToBestSlot(new ResourceReferenceWithStack(ResourceDatabase.GetItemByParameter("Wooden Pickaxe"), 1));
 		}
 	}
 

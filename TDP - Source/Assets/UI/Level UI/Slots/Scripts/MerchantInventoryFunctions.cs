@@ -1,59 +1,66 @@
-using UnityEngine;
+﻿using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-public class ModifiesSlotContent : MonoBehaviour {
+public class MerchantInventoryFunctions : MonoBehaviour {
 
-	static SlotScript[,] slotArray;
-	static bool initialized = false;
+	private MerchantSlotScript[,] slotArray = new MerchantSlotScript[0,0];
+	private bool initialized = false;
 
 	//Used when called from LevelEventManager.  
-	public static void InitializeSystem(SlotScript[,] slots) {
-		slotArray = slots;
-		initialized = true;
+	public void AddSlotsToSystem(MerchantSlotScript[,] slots) {
 
-		//Add previously gained items
-		if (CurrentLevelVariableManagement.GetMainGameData ().currentPlayerItems != null) {
-			UISlotContentReference[] previousPlayerItems = CurrentLevelVariableManagement.GetMainGameData ().currentPlayerItems;
-			for (int i = 0; i < previousPlayerItems.Length; i++) {
-				AssignNewItemToBestSlot (previousPlayerItems [i]);
+		//Combine the two slot arrays.  
+		MerchantSlotScript[,] newSlotArray = new MerchantSlotScript[slotArray.GetLength(0) + slots.GetLength(0), slots.GetLength(1)];
+
+		//Add the old array first.  
+		for (int y = 0; y < slotArray.GetLength (0); y++) {
+			for (int x = 0; x < slotArray.GetLength (1); x++) {
+				newSlotArray [y, x] = slotArray [y, x];
 			}
 		}
+		//Add the new array last.  
+		for (int y = 0; y < slots.GetLength (0); y++) {
+			for (int x = 0; x < slots.GetLength (1); x++) {
+				newSlotArray [y + slotArray.GetLength(0), x] = slots [y, x];
+			}
+		}
+
+
+		//Set the old slot array to the new slot array.  
+		slotArray = newSlotArray;
+
+		//Make sure that it is initialized.  
+		initialized = true;
 	}
 
 	//Returns whether the script has been initialized.  
-	public static bool IsInitialized() {
+	public bool IsInitialized() {
 		return initialized;
 	}
 
 	//Assigns a new item to the best possible slot.  
-	public static bool AssignNewItemToBestSlot(UISlotContentReference item) {
+	public bool AssignNewItemToBestSlot(ResourceReferenceWithStackAndPrice item) {
 
 		//Has to be here for the return statement
 		bool successfullyAssigned = false;
 
 		//Make sure that the prerequisites are met.  
 		if (initialized && item != null) {
-			SlotScript bestAvailableSlot = FindBestAvailableSlot (item);
-		
+			MerchantSlotScript bestAvailableSlot = FindBestAvailableSlot (item);
+
 			if (bestAvailableSlot != null) {
 				//Set successfully assigned.  
 				successfullyAssigned = true;
 				//Add the new stack to the current item stack.  
-				bestAvailableSlot.ModifyCurrentItemStack (item.stack);
-				Debug.Log ("Assigned " + item.uiSlotContent.itemScreenName + " to slot with items of same type.");
-				//Check whether an objective has been completed
-				CurrentLevelVariableManagement.GetMainObjectiveManager().OnNewItemAddedToPlayerInventory();
+				bestAvailableSlot.ModifyCurrentItemStack (item.mainContentReference.stack);
+				Debug.Log ("Assigned " + item.mainContentReference.uiSlotContent.itemScreenName + " to slot with items of same type.");
 			} else {
 				Debug.Log ("Could not stack item: Attempting to add to an empty slot");
 				bestAvailableSlot = FindBestAvailableNullSlot ();
 				if (bestAvailableSlot != null) {
 					successfullyAssigned = true;
 					bestAvailableSlot.AssignNewItem (item);
-					//Update the hotbar item.
-					CurrentLevelVariableManagement.GetLevelUIReference ().transform.FindChild ("Hotbar").GetComponent <HotbarManager> ().UpdateSelectedItem ();
-					//Check whether an objective has been completed
-					CurrentLevelVariableManagement.GetMainObjectiveManager().OnNewItemAddedToPlayerInventory();
 				} else {
 					Debug.LogError("No slots are empty!");
 				}
@@ -72,31 +79,31 @@ public class ModifiesSlotContent : MonoBehaviour {
 	}
 
 	//Searches for the best available slot in the slot array.  (One that already has the specified item)
-	public static SlotScript FindBestAvailableSlot(UISlotContentReference pendingObjectToCheck) {
+	public MerchantSlotScript FindBestAvailableSlot(ResourceReferenceWithStackAndPrice pendingObjectToCheck) {
 		if (slotArray != null) {
 			for (int y = slotArray.GetLength(0) - 1; y >= 0; y--) {
 				//Check for a stackable slot.  
 				for (int x = 0; x < slotArray.GetLength(1); x++) {
 					//Define the object in the slot. 
-					UISlotContentReference objectAssigned = slotArray[y, x].GetCurrentlyAssigned();
+					ResourceReferenceWithStackAndPrice objectAssigned = slotArray[y, x].GetCurrentlyAssigned();
 					//Check to make sure objectAssigned is not null.  
 					if (objectAssigned != null)
 						//Check to make sure the item is the same.  
-						if (objectAssigned.uiSlotContent.itemType == pendingObjectToCheck.uiSlotContent.itemType)
-							if (objectAssigned.uiSlotContent.localGroupID == pendingObjectToCheck.uiSlotContent.localGroupID)
-								//Since the slot fits all requirements, return the slot.  
-								return slotArray [y, x];
+					if (objectAssigned.mainContentReference.uiSlotContent.itemType == pendingObjectToCheck.mainContentReference.uiSlotContent.itemType)
+					if (objectAssigned.mainContentReference.uiSlotContent.localGroupID == pendingObjectToCheck.mainContentReference.uiSlotContent.localGroupID)
+						//Since the slot fits all requirements, return the slot.  
+						return slotArray [y, x];
 				}
 			}
 		} else {
 			Debug.Log("Slot array is null and initialized status is " + initialized);
 		}
-		
+
 		return null;
 	}
 
 	//Find the best available empty slot.  
-	public static SlotScript FindBestAvailableNullSlot() {
+	public MerchantSlotScript FindBestAvailableNullSlot() {
 		if (slotArray != null) {
 			for (int y = slotArray.GetLength(0) - 1; y >= 0; y--) {
 				//If no stackable slot is found, choose an empty slot.  
@@ -109,41 +116,41 @@ public class ModifiesSlotContent : MonoBehaviour {
 		} else {
 			Debug.Log("Slot array is null");
 		}
-		
+
 		return null;
 	}
 
 	//Used to determine whether the player has a required item.  
-	public static SlotScript DetermineWhetherPlayerHasCertainInventoryItem(UISlotContentReference pendingObjectToCheck) {
+	public MerchantSlotScript CheckForCertainInventoryItem(ResourceReferenceWithStackAndPrice pendingObjectToCheck) {
 		if (slotArray != null) {
 			for (int y = slotArray.GetLength(0) - 1; y >= 0; y--) {
 				//Check for a stackable slot.  
 				for (int x = 0; x < slotArray.GetLength(1); x++) {
 					//Define the item that is in the specified slot.  
-					UISlotContentReference objectAssigned = slotArray[y, x].GetCurrentlyAssigned();
+					ResourceReferenceWithStackAndPrice objectAssigned = slotArray[y, x].GetCurrentlyAssigned();
 					//Check whether the assigned object is null.  
 					if (objectAssigned != null)
 						//Check to make sure the item types are the same.  
-						if (objectAssigned.uiSlotContent.itemType == pendingObjectToCheck.uiSlotContent.itemType)
-							//Check to see that the IDs are the same.  
-							if (objectAssigned.uiSlotContent.localGroupID == pendingObjectToCheck.uiSlotContent.localGroupID)
-								//Check to see that the stacks are greater or equal to one another.  
-								if (objectAssigned.stack >= pendingObjectToCheck.stack)
-									//Since the slot fits all requirements, return the slot.  
-									return slotArray [y, x];
+					if (objectAssigned.mainContentReference.uiSlotContent.itemType == pendingObjectToCheck.mainContentReference.uiSlotContent.itemType)
+						//Check to see that the IDs are the same.  
+					if (objectAssigned.mainContentReference.uiSlotContent.localGroupID == pendingObjectToCheck.mainContentReference.uiSlotContent.localGroupID)
+						//Check to see that the stacks are greater or equal to one another.  
+					if (objectAssigned.mainContentReference.stack >= pendingObjectToCheck.mainContentReference.stack)
+						//Since the slot fits all requirements, return the slot.  
+						return slotArray [y, x];
 				}
 			}
 		} else {
 			Debug.Log("Slot array is null");
 		}
-		
+
 		return null;
 	}
 
 	//Used for GameData.  
-	public static UISlotContentReference[] GetAllPlayerItems() {
+	public ResourceReferenceWithStackAndPrice[] GetAllPlayerItems() {
 		//List that will hold all player items.  
-		List <UISlotContentReference> playerItems = new List <UISlotContentReference> ();
+		List <ResourceReferenceWithStackAndPrice> playerItems = new List <ResourceReferenceWithStackAndPrice> ();
 
 		for (int y = slotArray.GetLength(0) - 1; y >= 0; y--) {
 			for (int x = 0; x < slotArray.GetLength(1); x++) {
@@ -157,6 +164,14 @@ public class ModifiesSlotContent : MonoBehaviour {
 
 		//Return the list as an array.  
 		return playerItems.ToArray ();
+	}
+
+	public void ClearInventory() {
+		for (int i = 0; i < slotArray.GetLength (0); i++) {
+			for (int j = 0; j < slotArray.GetLength (1); j++) {
+				slotArray [i, j].DeAssignItem ();
+			}
+		}
 	}
 
 }

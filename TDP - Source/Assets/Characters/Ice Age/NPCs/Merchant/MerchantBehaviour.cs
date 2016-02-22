@@ -4,61 +4,61 @@ using System.Collections;
 public class MerchantBehaviour : NPCBaseScript {
 
 	/*
-	 * This script will be used for player shopping, through each of the different ages.  This character has to have a custom slot system, that the player clicks to
-	 * add to his own library.  The slot system is initialized after the player speaks to the NPC.  
+	 * This script controls the merchant of the Ice Age (and possibly other ages at some point in the future).  The slots should be what actually adds stuff 
 	 */
 
-	bool gavePlayerInstructions = false;
-	bool tookApples = false;
-	bool completedStoryRole = false;
+	MerchantInventoryFunctions merchantInventory;
+
+	//Using two different arrays instead of an array of a class mainly because it would be irritating to change around MerchantSlotScript to work with a whole new class.  
+	ResourceReferenceWithStackAndPrice[] merchantItems;
+	int[] costOfItems;
 
 	protected override void InitializeNPC() {
-		npcName = "Old Man";
-		string[] dialogue = new string[] {"Oh dear.  Oh dear me...", 
-			"Why hello there, young stranger.  I don't suppose you have a moment?", 
-			"These trees contain apples, which I need to stock up for winter.", 
-			"But I am too old for this sort of work, and can't do it on my own.", 
-			"If you help me, I will be sure to repay you by whatever means necessary.", 
-			"I need 6 apples in total.", 
-			"Here is a hatchet.  I am sure that it will be fairly easy for you."
+		//Find and hide the inventory.  
+		merchantInventory = CurrentLevelVariableManagement.GetLevelUIReference ().transform.FindChild ("Merchant Inventory").GetComponent <MerchantInventoryFunctions> ();
+
+		//Define the UISlotContent items that will be added to the inventory.  
+		merchantItems = new ResourceReferenceWithStackAndPrice[2];
+		merchantItems [0] = new ResourceReferenceWithStackAndPrice (new ResourceReferenceWithStack (ResourceDatabase.GetItemByParameter ("Wooden Hatchet"), 1), 10);
+		merchantItems [1] = new ResourceReferenceWithStackAndPrice (new ResourceReferenceWithStack (ResourceDatabase.GetItemByParameter ("Diamond Sword"), 2), 20);
+
+		string[] dialogue = new string[] {
+			"Purchase any item you like!", 
+			"Everything is cheap at Sluk's Hardware Store!"
 		};
 		GetComponent <NPCPanelController> ().SetCharacterDialogue (dialogue);
 	}
 
 	public override void NPCActionBeforeSpeaking() {
-		if (gavePlayerInstructions && tookApples == false) {
-			SlotScript slotWithContent = ModifiesSlotContent.DetermineWhetherPlayerHasCertainInventoryItem(new UISlotContentReference(ResourceDatabase.GetItemByParameter("Apple"), 6));
-			if (slotWithContent != null) {
-				slotWithContent.ModifyCurrentItemStack(-6);
-				Debug.Log("Player had required items");
-				string[] newDialogue = new string[]{
-					"Thank you, young one!", 
-					"I appreciate your help.", 
-					"Here is a bit of money as a reward."
-				};
-				GetComponent <NPCPanelController> ().SetCharacterDialogue(newDialogue);
-				GiveMoneyToPlayer(50);
-				tookApples = true;
+		//Add the items to the inventory.  
+		for (int i = 0; i < merchantItems.Length; i++) {
+			Debug.Log ("Assigning " + merchantItems [i].mainContentReference.uiSlotContent.itemScreenName);
+			if (! (merchantInventory.AssignNewItemToBestSlot (merchantItems [i]))) {
+				Debug.LogError ("Could not assign merchant item " + merchantItems [i].mainContentReference.uiSlotContent.itemScreenName + ", either caused by too many items or an extraneous error");
 			}
 		}
+		//Set the current merchant items to nothing (they are all in the inventory now).  
+		merchantItems = new ResourceReferenceWithStackAndPrice[0];
+
+		//Show the inventory.  
+		ShowInventory();
 	}
 
 	public override void NPCActionAfterSpeaking() {
-		if (gavePlayerInstructions == false) {
-			ModifiesSlotContent.AssignNewItemToBestSlot (
-				new UISlotContentReference (ResourceDatabase.GetItemByParameter ("Wooden Hatchet"), 1)
-			);
-			gavePlayerInstructions = true;
-		}
+		//Hide the inventory
+		HideInventory();
+		//Remove the items from the inventory and add it to the array of merchant items.  
+		merchantItems = merchantInventory.GetAllPlayerItems();
+		merchantInventory.ClearInventory ();
+	}
 
-		if (tookApples && completedStoryRole == false) {
-			string[] newDialogue = new string[]{
-				"If you walk over the hills, you should see a small town.", 
-				"Use some of the money I gave you to buy some new stuff!"
-			};
-			GetComponent <NPCPanelController> ().SetCharacterDialogue(newDialogue);
-			completedStoryRole = true;
-		}
+	//Quick utilities.  Probably not really necessary, but looks simple.  
+	void ShowInventory() {
+		merchantInventory.transform.FindChild("Slots").gameObject.SetActive (true);
+	}
+
+	void HideInventory() {
+		merchantInventory.transform.FindChild("Slots").gameObject.SetActive (false);
 	}
 
 }

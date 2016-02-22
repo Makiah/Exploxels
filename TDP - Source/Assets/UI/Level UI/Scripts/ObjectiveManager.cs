@@ -121,7 +121,7 @@ public class ObjectiveManager : MonoBehaviour {
 			//Wooden Pickaxe Objective
 			if (objectives [0].completed == false) {
 				//Check whether the player has the hatchet.  
-				if (ModifiesSlotContent.DetermineWhetherPlayerHasCertainInventoryItem (new UISlotContentReference (ResourceDatabase.GetItemByParameter ("Wooden Pickaxe"), 1)) != null) {
+				if (CurrentLevelVariableManagement.GetMainInventoryReference().GetComponent <InventoryFunctions> ().CheckForCertainInventoryItem (new ResourceReferenceWithStack (ResourceDatabase.GetItemByParameter ("Wooden Pickaxe"), 1)) != null) {
 					OnObjectiveHasBeenCompleted(1);
 				}
 			}

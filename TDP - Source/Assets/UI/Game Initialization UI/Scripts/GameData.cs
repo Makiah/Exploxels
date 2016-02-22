@@ -18,7 +18,7 @@ public class GameData : MonoBehaviour {
 	[HideInInspector] public string specifiedPlayerName;
 	[HideInInspector] public Profession chosenProfession;
 	[HideInInspector] public int currentPlayerMoney;
-	[HideInInspector] public UISlotContentReference[] currentPlayerItems;
+	[HideInInspector] public ResourceReferenceWithStack[] currentPlayerItems;
 
 	//Accessed by the DistrictDisplayer and set by GameControl.  
 	[HideInInspector] public int currentLevel = 0;

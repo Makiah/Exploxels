@@ -30,6 +30,7 @@ public class CurrentLevelVariableManagement : MonoBehaviour {
 	static GameObject playerObject;
 	static GameObject mainCamera;
 	static GameObject levelUI;
+	static GameObject inventory;
 	static float levelLengthX;
 	static ObjectiveManager mainObjectiveManager;
 
@@ -38,6 +39,7 @@ public class CurrentLevelVariableManagement : MonoBehaviour {
 		mainCamera = playerObject.transform.FindChild ("Main Camera").gameObject;
 		levelUI = GameObject.Find ("UI");
 		mainObjectiveManager = GetLevelUIReference ().transform.FindChild ("Player Objectives").GetComponent <ObjectiveManager> ();
+		inventory = levelUI.transform.FindChild ("Inventory").gameObject;
 	}
 
 	public static ObjectiveManager GetMainObjectiveManager() {
@@ -48,6 +50,12 @@ public class CurrentLevelVariableManagement : MonoBehaviour {
 		if (playerObject == null) 
 			Debug.LogError ("Player reference was null!!!");
 		return playerObject;
+	}
+
+	public static GameObject GetMainInventoryReference() {
+		if (inventory == null)
+			Debug.LogError ("Player inventory reference was null!!!");
+		return inventory;
 	}
 
 	public static GameObject GetMainCameraReference() {

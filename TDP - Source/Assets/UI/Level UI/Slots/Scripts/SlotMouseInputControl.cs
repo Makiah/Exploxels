@@ -19,14 +19,14 @@ using System.Collections.Generic;
 
 public class SlotMouseInputControl : MonoBehaviour {
 
-	UISlotContentReference itemInControlByMouse = null;
+	ResourceReferenceWithStack itemInControlByMouse = null;
 
-	UISlotContentReference pendingCombinationIngredient1;
+	ResourceReferenceWithStack pendingCombinationIngredient1;
 	SlotScript assigner1;
-	UISlotContentReference pendingCombinationIngredient2;
+	ResourceReferenceWithStack pendingCombinationIngredient2;
 	SlotScript assigner2;
 
-	public void AssignItemToMouseControl(UISlotContentReference assignment) {
+	public void AssignItemToMouseControl(ResourceReferenceWithStack assignment) {
 		if (assignment.stack != 0) {
 			itemInControlByMouse = assignment;
 			SetCursorTexture (true);
@@ -35,14 +35,14 @@ public class SlotMouseInputControl : MonoBehaviour {
 		}
 	}
 
-	public UISlotContentReference DeAssignItemFromMouseControl() {
-		UISlotContentReference toReturn = itemInControlByMouse;
+	public ResourceReferenceWithStack DeAssignItemFromMouseControl() {
+		ResourceReferenceWithStack toReturn = itemInControlByMouse;
 		itemInControlByMouse = null;
 		SetCursorTexture (false);
 		return toReturn;
 	}
 
-	public void AddIngredient(UISlotContentReference ingredient, SlotScript assigner) {
+	public void AddIngredient(ResourceReferenceWithStack ingredient, SlotScript assigner) {
 		if (pendingCombinationIngredient1 == null) {
 			pendingCombinationIngredient1 = ingredient;
 			assigner1 = assigner;
@@ -112,7 +112,7 @@ public class SlotMouseInputControl : MonoBehaviour {
 						assigner2.ModifyCurrentItemStack(-1 * maxPossibleItemStack * combinationDatabaseStackRequirements[1]);
 						Debug.Log("Deducted " + maxPossibleItemStack * combinationDatabaseStackRequirements[1] + " from assigner 2, stack is now.");
 							
-						UISlotContentReference finalProduct = new UISlotContentReference(ResourceDatabase.masterItemCombinationList[i].product.uiSlotContent, ResourceDatabase.masterItemCombinationList[i].product.stack * maxPossibleItemStack);
+						ResourceReferenceWithStack finalProduct = new ResourceReferenceWithStack(ResourceDatabase.masterItemCombinationList[i].product.uiSlotContent, ResourceDatabase.masterItemCombinationList[i].product.stack * maxPossibleItemStack);
 						AssignItemToMouseControl(finalProduct);
 						ResetPendingCombinationSequence();
 					} else {
@@ -165,7 +165,7 @@ public class SlotMouseInputControl : MonoBehaviour {
 		Cursor.SetCursor(cursorTexture, cursorHotspot, CursorMode.ForceSoftware);
 	}
 
-	public UISlotContentReference GetItemInControlByMouse() {
+	public ResourceReferenceWithStack GetItemInControlByMouse() {
 		return itemInControlByMouse;
 	}
 

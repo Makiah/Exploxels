@@ -13,12 +13,12 @@
 using UnityEngine;
 using System.Collections;
 
-public class UISlotContentReference {
+public class ResourceReferenceWithStack {
 
 	public ResourceReference uiSlotContent;
 	public int stack;
 
-	public UISlotContentReference (ResourceReference ctorUISlotContent, int ctorStack) {
+	public ResourceReferenceWithStack (ResourceReference ctorUISlotContent, int ctorStack) {
 		uiSlotContent = ctorUISlotContent;
 		stack = ctorStack;
 	}

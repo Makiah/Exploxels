@@ -59,38 +59,38 @@ public class ResourceDatabase : MonoBehaviour {
 
 		/******************************************* RACES *******************************************/
 		//Gatherer
-		UISlotContentReference[] maceFighterInitialItems = new UISlotContentReference[]{
-			new UISlotContentReference(ResourceDatabase.GetItemByParameter("Mace"), 1)
+		ResourceReferenceWithStack[] maceFighterInitialItems = new ResourceReferenceWithStack[]{
+			new ResourceReferenceWithStack(ResourceDatabase.GetItemByParameter("Mace"), 1)
 		};
 		gameProfessions.Add (new Profession("Professions/Mace Fighter/", "Mace Fighter", 0, maceFighterInitialItems));
 
 		//Hunter
-		UISlotContentReference[] spearFighterInitialItems = new UISlotContentReference[]{
-			new UISlotContentReference(GetItemByParameter("Spear"), 1)
+		ResourceReferenceWithStack[] spearFighterInitialItems = new ResourceReferenceWithStack[]{
+			new ResourceReferenceWithStack(GetItemByParameter("Spear"), 1)
 		};
 		gameProfessions.Add (new Profession ("Professions/Spear Fighter/", "Spear Fighter", 1, spearFighterInitialItems));
 
 		/******************************************* COMBINATIONS *******************************************/
 		//Wooden Sword
-		masterItemCombinationList.Add(new ItemCombination (new UISlotContentReference[] {
-			new UISlotContentReference(ResourceDatabase.GetItemByParameter ("Wood"), 1),
-			new UISlotContentReference(ResourceDatabase.GetItemByParameter ("Wood"), 1)
+		masterItemCombinationList.Add(new ItemCombination (new ResourceReferenceWithStack[] {
+			new ResourceReferenceWithStack(ResourceDatabase.GetItemByParameter ("Wood"), 1),
+			new ResourceReferenceWithStack(ResourceDatabase.GetItemByParameter ("Wood"), 1)
 		}, 
-		new UISlotContentReference(ResourceDatabase.GetItemByParameter ("Wood Plank"), 1)));
+		new ResourceReferenceWithStack(ResourceDatabase.GetItemByParameter ("Wood Plank"), 1)));
 
 		//Diamond Sword
-		masterItemCombinationList.Add(new ItemCombination(new UISlotContentReference[] {
-			new UISlotContentReference(ResourceDatabase.GetItemByParameter("Wood Plank"), 3), 
-			new UISlotContentReference(ResourceDatabase.GetItemByParameter("Diamond"), 2)
+		masterItemCombinationList.Add(new ItemCombination(new ResourceReferenceWithStack[] {
+			new ResourceReferenceWithStack(ResourceDatabase.GetItemByParameter("Wood Plank"), 3), 
+			new ResourceReferenceWithStack(ResourceDatabase.GetItemByParameter("Diamond"), 2)
 		},
-		new UISlotContentReference(ResourceDatabase.GetItemByParameter("Diamond Sword"), 1)));
+		new ResourceReferenceWithStack(ResourceDatabase.GetItemByParameter("Diamond Sword"), 1)));
 
 		//Fire
-		masterItemCombinationList.Add (new ItemCombination (new UISlotContentReference[] {
-			new UISlotContentReference(ResourceDatabase.GetItemByParameter("Wood"), 5), 
-			new UISlotContentReference(ResourceDatabase.GetItemByParameter("Coal"), 2)
+		masterItemCombinationList.Add (new ItemCombination (new ResourceReferenceWithStack[] {
+			new ResourceReferenceWithStack(ResourceDatabase.GetItemByParameter("Wood"), 5), 
+			new ResourceReferenceWithStack(ResourceDatabase.GetItemByParameter("Coal"), 2)
 		}, 
-		new UISlotContentReference (ResourceDatabase.GetItemByParameter ("Fire"), 1)));
+		new ResourceReferenceWithStack (ResourceDatabase.GetItemByParameter ("Fire"), 1)));
 
 	}
 

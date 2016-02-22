@@ -17,7 +17,7 @@ using System.Collections;
 
 public class DroppedItemProperties : MonoBehaviour {
 
-	[HideInInspector] public UISlotContentReference localResourceReference;
+	[HideInInspector] public ResourceReferenceWithStack localResourceReference;
 	private Transform player;
 
 

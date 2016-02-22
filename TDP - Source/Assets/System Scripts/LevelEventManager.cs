@@ -67,6 +67,8 @@ public class LevelEventManager : MonoBehaviour {
 	public static event BaseInitialization InitializePurchasePanels;
 	public static event BaseInitialization InitializePurchasePanelManager;
 
+	public static event BaseInitialization SetInactiveObjects;
+
 	//Used during initialization.  
 	LoadingProgressBar createdLoadingBar;
 
@@ -100,6 +102,7 @@ public class LevelEventManager : MonoBehaviour {
 
 		//Initialize Slots
 		if (InitializeSlots != null) InitializeSlots (); else Debug.LogError("InitializeSlots was null!"); //Used with SlotScript
+		Debug.Log("Initialized slots");
 
 		//UI stuff.  
 		yield return new WaitForSeconds (.1f);
@@ -168,6 +171,8 @@ public class LevelEventManager : MonoBehaviour {
 		//Purchase panels
 		if (InitializePurchasePanels != null) InitializePurchasePanels(); else Debug.LogError("InitializePurchasePanels was null!");
 		if (InitializePurchasePanelManager != null) InitializePurchasePanelManager(); else Debug.LogError("InitializePurchasePanelManager is null!");
+
+		if (SetInactiveObjects != null) SetInactiveObjects (); else Debug.LogError("HideInventories is null!");
 
 		//Just mention that EventManager has been completed successfully.  
 		yield return new WaitForSeconds (.1f);

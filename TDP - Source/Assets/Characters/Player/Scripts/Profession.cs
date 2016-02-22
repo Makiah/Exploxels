@@ -20,10 +20,10 @@ public class Profession {
 	public int currentGender;
 	public string name;
 	public int professionID;
-	public UISlotContentReference[] initialObjects;
+	public ResourceReferenceWithStack[] initialObjects;
 
 	//Profession constructor
-	public Profession(string resourcesPath, string ctorName, int ctorProfessionID, UISlotContentReference[] ctorInitialObjects) {
+	public Profession(string resourcesPath, string ctorName, int ctorProfessionID, ResourceReferenceWithStack[] ctorInitialObjects) {
 		//Load sprite resources from the Resources folder.  
 		icon = Resources.Load <Sprite> (resourcesPath + "Icon");
 

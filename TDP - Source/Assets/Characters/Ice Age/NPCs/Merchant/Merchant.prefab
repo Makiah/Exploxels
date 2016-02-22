@@ -245,7 +245,7 @@ GameObject:
   - 61: {fileID: 6136364}
   - 61: {fileID: 6195400}
   - 114: {fileID: 11404722}
-  - 114: {fileID: 11450494}
+  - 114: {fileID: 11436860}
   m_Layer: 0
   m_Name: Merchant
   m_TagString: Untagged
@@ -548,7 +548,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   minDistanceRequiredForInteraction: 5
---- !u!114 &11450494
+--- !u!114 &11436860
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -556,7 +556,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 197286}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0e2e46360e8214600ae6bcb17d132ac5, type: 3}
+  m_Script: {fileID: 11500000, guid: 48a72c0f9c9ae4dbabb120c43f24a1d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 3.5
@@ -792,6 +792,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: maxSpeed
       value: 3.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: minDistanceRequiredForInteraction
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

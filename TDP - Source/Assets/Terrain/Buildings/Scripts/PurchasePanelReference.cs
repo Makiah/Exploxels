@@ -17,10 +17,11 @@ public class PurchasePanelReference : MonoBehaviour {
 	TextMesh cost;
 	
 	//The actual content of the panel.  
-	UISlotContentReference heldItem;
+	ResourceReferenceWithStack heldItem;
 
 	//Player transform
 	Transform player;
+	InventoryFunctions playerInventory;
 
 	//Done during the InitializePurchasePanels phase (no real dependencies).  
 	void InitializePurchasePanelReference() {
@@ -31,6 +32,7 @@ public class PurchasePanelReference : MonoBehaviour {
 		cost.GetComponent<MeshRenderer> ().sortingLayerName = "PPanelFront";
 		cost.GetComponent<MeshRenderer> ().sortingOrder = 0;
 		player = CurrentLevelVariableManagement.GetPlayerReference ().transform;
+		playerInventory = CurrentLevelVariableManagement.GetMainInventoryReference ().gameObject.GetComponent <InventoryFunctions> ();
 		StartCoroutine (CheckForPurchase());
 	}
 
@@ -41,7 +43,7 @@ public class PurchasePanelReference : MonoBehaviour {
 				if (Input.GetKeyDown(KeyCode.W)) {
 					if (GiveMoneyToPlayer(-1 * int.Parse(cost.text))) {
 						Debug.Log("Name of item is " + heldItem.uiSlotContent.itemScreenName);
-						ModifiesSlotContent.AssignNewItemToBestSlot(heldItem);
+						playerInventory.AssignNewItemToBestSlot(heldItem);
 						RemovePanel();
 						Debug.Log("Gave to player");
 					} else {
@@ -55,7 +57,7 @@ public class PurchasePanelReference : MonoBehaviour {
 	}
 
 	//Should be called by PurchasePanelManager.  
-	public void DefinePanelItem(UISlotContentReference item, int requiredCost) {
+	public void DefinePanelItem(ResourceReferenceWithStack item, int requiredCost) {
 		if (item != null && item.stack != 0) {
 			heldItem = item;
 			//Get sprite without pivot point.  

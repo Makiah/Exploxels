@@ -25,7 +25,7 @@ public class PurchasePanelManager : MonoBehaviour {
 
 			//Initialize purchase panel.  
 			purchasePanels [i].DefinePanelItem (
-				new UISlotContentReference (ResourceDatabase.GetItemByParameter ("Wooden Sword"), 1), //Item
+				new ResourceReferenceWithStack (ResourceDatabase.GetItemByParameter ("Wooden Sword"), 1), //Item
 				25 //Cost 
 			);
 

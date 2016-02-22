@@ -144,7 +144,7 @@ public class GameControl : MonoBehaviour {
 		Debug.Log ("Set player money to " + GetComponent <GameData> ().currentPlayerMoney);
 
 		//Get player items.
-		GetComponent <GameData> ().currentPlayerItems = ModifiesSlotContent.GetAllPlayerItems ();
+		GetComponent <GameData> ().currentPlayerItems = CurrentLevelVariableManagement.GetMainInventoryReference().GetComponent <InventoryFunctions> ().GetAllPlayerItems ();
 		Debug.Log ("Player has " + GetComponent <GameData> ().currentPlayerItems.Length + " items");
 
 		Debug.Log ("Tutorial has been completed!");

@@ -4,37 +4,34 @@ using System.Collections.Generic;
 
 public class InventoryFunctions : MonoBehaviour {
 
-	//Properties
 	private SlotScript[,] slotArray = new SlotScript[0,0];
 	private bool initialized = false;
 
 	//Used when called from LevelEventManager.  
 	public void AddSlotsToSystem(SlotScript[,] slots) {
+
 		//Combine the two slot arrays.  
-		SlotScript[,] newSlotArray = new SlotScript[slotArray.GetLength(0) + slots.GetLength(0), slotArray.GetLength(1) + slots.GetLength(1)];
-		//Add the new array first.  
-		for (int i = 0; i < slots.GetLength (0); i++) {
-			for (int j = 0; j < slots.GetLength (1); j++) {
-				newSlotArray [i, j] = slots [i, j];
+		SlotScript[,] newSlotArray = new SlotScript[slotArray.GetLength(0) + slots.GetLength(0), slots.GetLength(1)];
+
+		//Add the old array first.  
+		for (int y = 0; y < slotArray.GetLength (0); y++) {
+			for (int x = 0; x < slotArray.GetLength (1); x++) {
+				newSlotArray [y, x] = slotArray [y, x];
 			}
 		}
-		//Add the old array last.  
-		for (int i = 0; i < slotArray.GetLength (0); i++) {
-			for (int j = 0; j < slotArray.GetLength (1); j++) {
-				newSlotArray [i + slots.GetLength (0), j + slots.GetLength (1)] = slotArray [i, j];
+		//Add the new array last.  
+		for (int y = 0; y < slots.GetLength (0); y++) {
+			for (int x = 0; x < slots.GetLength (1); x++) {
+				newSlotArray [y + slotArray.GetLength(0), x] = slots [y, x];
 			}
 		}
+
+
+		//Set the old slot array to the new slot array.  
+		slotArray = newSlotArray;
 
 		//Make sure that it is initialized.  
 		initialized = true;
-
-		//Add previously gained items
-		if (CurrentLevelVariableManagement.GetMainGameData ().currentPlayerItems != null) {
-			UISlotContentReference[] previousPlayerItems = CurrentLevelVariableManagement.GetMainGameData ().currentPlayerItems;
-			for (int i = 0; i < previousPlayerItems.Length; i++) {
-				AssignNewItemToBestSlot (previousPlayerItems [i]);
-			}
-		}
 	}
 
 	//Returns whether the script has been initialized.  
@@ -43,7 +40,7 @@ public class InventoryFunctions : MonoBehaviour {
 	}
 
 	//Assigns a new item to the best possible slot.  
-	public bool AssignNewItemToBestSlot(UISlotContentReference item) {
+	public bool AssignNewItemToBestSlot(ResourceReferenceWithStack item) {
 
 		//Has to be here for the return statement
 		bool successfullyAssigned = false;
@@ -88,13 +85,13 @@ public class InventoryFunctions : MonoBehaviour {
 	}
 
 	//Searches for the best available slot in the slot array.  (One that already has the specified item)
-	public SlotScript FindBestAvailableSlot(UISlotContentReference pendingObjectToCheck) {
+	public SlotScript FindBestAvailableSlot(ResourceReferenceWithStack pendingObjectToCheck) {
 		if (slotArray != null) {
 			for (int y = slotArray.GetLength(0) - 1; y >= 0; y--) {
 				//Check for a stackable slot.  
 				for (int x = 0; x < slotArray.GetLength(1); x++) {
 					//Define the object in the slot. 
-					UISlotContentReference objectAssigned = slotArray[y, x].GetCurrentlyAssigned();
+					ResourceReferenceWithStack objectAssigned = slotArray[y, x].GetCurrentlyAssigned();
 					//Check to make sure objectAssigned is not null.  
 					if (objectAssigned != null)
 						//Check to make sure the item is the same.  
@@ -130,13 +127,13 @@ public class InventoryFunctions : MonoBehaviour {
 	}
 
 	//Used to determine whether the player has a required item.  
-	public SlotScript DetermineWhetherPlayerHasCertainInventoryItem(UISlotContentReference pendingObjectToCheck) {
+	public SlotScript CheckForCertainInventoryItem(ResourceReferenceWithStack pendingObjectToCheck) {
 		if (slotArray != null) {
 			for (int y = slotArray.GetLength(0) - 1; y >= 0; y--) {
 				//Check for a stackable slot.  
 				for (int x = 0; x < slotArray.GetLength(1); x++) {
 					//Define the item that is in the specified slot.  
-					UISlotContentReference objectAssigned = slotArray[y, x].GetCurrentlyAssigned();
+					ResourceReferenceWithStack objectAssigned = slotArray[y, x].GetCurrentlyAssigned();
 					//Check whether the assigned object is null.  
 					if (objectAssigned != null)
 						//Check to make sure the item types are the same.  
@@ -157,9 +154,9 @@ public class InventoryFunctions : MonoBehaviour {
 	}
 
 	//Used for GameData.  
-	public UISlotContentReference[] GetAllPlayerItems() {
+	public ResourceReferenceWithStack[] GetAllPlayerItems() {
 		//List that will hold all player items.  
-		List <UISlotContentReference> playerItems = new List <UISlotContentReference> ();
+		List <ResourceReferenceWithStack> playerItems = new List <ResourceReferenceWithStack> ();
 
 		for (int y = slotArray.GetLength(0) - 1; y >= 0; y--) {
 			for (int x = 0; x < slotArray.GetLength(1); x++) {
@@ -173,6 +170,14 @@ public class InventoryFunctions : MonoBehaviour {
 
 		//Return the list as an array.  
 		return playerItems.ToArray ();
+	}
+
+	public void ClearInventory() {
+		for (int i = 0; i < slotArray.GetLength (0); i++) {
+			for (int j = 0; j < slotArray.GetLength (1); j++) {
+				slotArray [i, j].DeAssignItem ();
+			}
+		}
 	}
 
 }

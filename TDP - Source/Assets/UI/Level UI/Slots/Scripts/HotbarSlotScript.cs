@@ -17,11 +17,13 @@ public class HotbarSlotScript : SlotScript {
 
 	GameObject selectionIcon;
 
+	//Assigned elsewhere
 	[HideInInspector] public HotbarManager masterHotbarManager;
 
 	public override void ReferenceChildren() {
 		base.ReferenceChildren ();
 		selectionIcon = transform.FindChild ("Hotbar Indicator").gameObject;
+		mainSlotManager = transform.parent.parent.parent.FindChild ("Inventory").GetComponent <SlotMouseInputControl> ();
 	}
 
 	public void SetSelectionActive() {
@@ -37,8 +39,8 @@ public class HotbarSlotScript : SlotScript {
 		masterHotbarManager.UpdateSelectedItem ();
 	}
 
-	public override UISlotContentReference DeAssignItem() {
-		UISlotContentReference toReturn = currentlyAssigned;
+	public override ResourceReferenceWithStack DeAssignItem() {
+		ResourceReferenceWithStack toReturn = currentlyAssigned;
 		currentlyAssigned = null;
 		childIcon.sprite = null;
 		childIcon.enabled = false;

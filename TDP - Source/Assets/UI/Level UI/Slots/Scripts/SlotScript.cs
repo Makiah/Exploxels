@@ -18,11 +18,11 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 
 	/******************************* INITIALIZATION *******************************/
 
-	void OnEnable() {
+	protected void OnEnable() {
 		LevelEventManager.InitializeSlots += ReferenceChildren;
 	}
 
-	void OnDisable() {
+	protected void OnDisable() {
 		LevelEventManager.InitializeSlots -= ReferenceChildren;
 	}
 
@@ -30,7 +30,7 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 	/******************************** SLOT SCRIPT *******************************/
 
 	// Main properties of each slot.  
-	protected UISlotContentReference currentlyAssigned;
+	protected ResourceReferenceWithStack currentlyAssigned;
 	bool thisSlotHasACombinationPending = false;
 
 	//Components
@@ -40,10 +40,11 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 	protected Text stackIndicator;
 
 	//References
-	SlotMouseInputControl mainSlotManager;
+	protected SlotMouseInputControl mainSlotManager;
 
 	public virtual void ReferenceChildren() {
-		mainSlotManager = transform.parent.GetComponent <SlotMouseInputControl> ();
+		Debug.Log ("Initialized inventory " + gameObject.name);
+		mainSlotManager = transform.parent.parent.GetComponent <SlotMouseInputControl> ();
 		childIcon = transform.FindChild ("Icon").GetComponent <Image> ();
 		childIcon.enabled = false;
 		tooltip = transform.FindChild ("Tooltip");
@@ -68,7 +69,7 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 					if (currentlyAssigned != null) {
 						int amountOfItemToAssign = (currentlyAssigned.stack - currentlyAssigned.stack % 2) / 2;
 						if (amountOfItemToAssign != 0) {
-							mainSlotManager.AssignItemToMouseControl(new UISlotContentReference(currentlyAssigned.uiSlotContent, amountOfItemToAssign));
+							mainSlotManager.AssignItemToMouseControl(new ResourceReferenceWithStack(currentlyAssigned.uiSlotContent, amountOfItemToAssign));
 						}
 						currentlyAssigned.stack -= amountOfItemToAssign;
 						UpdateStackIndicator();
@@ -79,7 +80,7 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 						if (mainSlotManager.GetItemInControlByMouse().stack == 1) {
 							AssignNewItem(mainSlotManager.DeAssignItemFromMouseControl());
 						} else {
-							AssignNewItem(new UISlotContentReference(mainSlotManager.GetItemInControlByMouse().uiSlotContent, 1));
+							AssignNewItem(new ResourceReferenceWithStack(mainSlotManager.GetItemInControlByMouse().uiSlotContent, 1));
 							mainSlotManager.ChangeStackOfItemInControlByMouse(mainSlotManager.GetItemInControlByMouse().stack - 1);
 						}
 					} else if (currentlyAssigned != null) {
@@ -127,7 +128,7 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 
 	/******************************* ASSIGNING *******************************/
 
-	public void AssignNewItem(UISlotContentReference itemToAssign) {
+	public virtual void AssignNewItem(ResourceReferenceWithStack itemToAssign) {
 		if (itemToAssign.stack != 0) {
 			Sprite itemWithoutPivotPoint = ScriptingUtilities.GetSpriteWithoutPivotPoint(itemToAssign.uiSlotContent.itemIcon);
 			childIcon.enabled = true;
@@ -139,8 +140,8 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 		}
 	}
 	
-	public virtual UISlotContentReference DeAssignItem() {
-		UISlotContentReference toReturn = currentlyAssigned;
+	public virtual ResourceReferenceWithStack DeAssignItem() {
+		ResourceReferenceWithStack toReturn = currentlyAssigned;
 		currentlyAssigned = null;
 		childIcon.sprite = null;
 		childIcon.enabled = false;
@@ -148,7 +149,7 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 		return toReturn;
 	}
 	
-	public UISlotContentReference GetCurrentlyAssigned() {
+	public ResourceReferenceWithStack GetCurrentlyAssigned() {
 		return currentlyAssigned;
 	}
 

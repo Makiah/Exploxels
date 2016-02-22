@@ -14,10 +14,10 @@ using System.Collections;
 
 public class ItemCombination {
 
-	public UISlotContentReference[] ingredients;
-	public UISlotContentReference product;
+	public ResourceReferenceWithStack[] ingredients;
+	public ResourceReferenceWithStack product;
 
-	public ItemCombination (UISlotContentReference[] ctorIngredients, UISlotContentReference ctorProduct) {
+	public ItemCombination (ResourceReferenceWithStack[] ctorIngredients, ResourceReferenceWithStack ctorProduct) {
 		ingredients = ctorIngredients;
 		product = ctorProduct;
 	}

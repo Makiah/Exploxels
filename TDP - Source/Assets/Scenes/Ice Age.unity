@@ -191,6 +191,9 @@ MonoBehaviour:
   - elementReference: {fileID: 115970, guid: 7a0de089bacb5984ea5c5b4822627987, type: 2}
     probabilityOfInstantiation: 0
     mustBeInstantiated: 1
+  - elementReference: {fileID: 197286, guid: 005f95a2cdd6f49d4861f809acea18ad, type: 2}
+    probabilityOfInstantiation: 0
+    mustBeInstantiated: 1
 --- !u!114 &642813478
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,7 +224,7 @@ MonoBehaviour:
     - variationReference: {fileID: 159740, guid: 6241e074eed5846948862a92a968d471,
         type: 2}
       canBeFlipped: 0
-  levelLength: 7
+  levelLength: 0
 --- !u!4 &642813479
 Transform:
   m_ObjectHideFlags: 0

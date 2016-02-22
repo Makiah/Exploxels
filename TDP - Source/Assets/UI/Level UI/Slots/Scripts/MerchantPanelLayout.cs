@@ -13,7 +13,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class PanelLayout : MonoBehaviour {
+public class MerchantPanelLayout : MonoBehaviour {
 
 	protected virtual void OnEnable () {
 		LevelEventManager.CreateInventorySlots += AddSlotsToSystem;
@@ -28,11 +28,11 @@ public class PanelLayout : MonoBehaviour {
 	protected Vector2 inventoryPanelSize, slotPanelSize;
 
 	protected virtual void AddSlotsToSystem() {
-		GetComponent <InventoryFunctions> ().AddSlotsToSystem (InitializeSlots ());
+		GetComponent <MerchantInventoryFunctions> ().AddSlotsToSystem (InitializeSlots ());
 		Debug.Log ("Added slots");
 	}
 
-	protected SlotScript[,] InitializeSlots() {
+	protected MerchantSlotScript[,] InitializeSlots() {
 		//Create the "Slots" parent.  Has to be used so that InventoryHideShow does not end its coroutine.  
 		Transform slots = transform.FindChild("Slots");
 		slots.SetParent (transform, false);
@@ -54,8 +54,8 @@ public class PanelLayout : MonoBehaviour {
 		float paddingPerXSlot = additionalPanelXSizeRemaining / (maxNumberOfXSlots + 1);
 		float paddingPerYSlot = additionalPanelYSizeRemaining / (maxNumberOfYSlots + 1);
 
-
-		SlotScript[,] createdUISlots = new SlotScript[maxNumberOfYSlots, maxNumberOfXSlots];
+		//MerchantSlotScript 2d array.  
+		MerchantSlotScript[,] createdUISlots = new MerchantSlotScript[maxNumberOfYSlots, maxNumberOfXSlots];
 
 		//For every column, 
 		for (int y = 1; y < maxNumberOfYSlots + 1; y++) {
@@ -76,7 +76,7 @@ public class PanelLayout : MonoBehaviour {
 
 				createdSlot.name = "Slot " + x + "." + y;
 
-				createdUISlots [y - 1, x - 1] = createdSlot.GetComponent <SlotScript> ();
+				createdUISlots [y - 1, x - 1] = createdSlot.GetComponent <MerchantSlotScript> ();
 			}
 		}
 
@@ -84,6 +84,5 @@ public class PanelLayout : MonoBehaviour {
 		return createdUISlots;
 
 	}
-
 
 }

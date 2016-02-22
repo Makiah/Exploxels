@@ -39,7 +39,7 @@ public class ScriptingUtilities : MonoBehaviour {
 	}
 
 	//Used for checking UIResourceReference classes for equality.  
-	public static bool CheckUIResourceReferencesForEquality (UISlotContentReference object1, UISlotContentReference object2) {
+	public static bool CheckUIResourceReferencesForEquality (ResourceReferenceWithStack object1, ResourceReferenceWithStack object2) {
 		if (object1.uiSlotContent.itemType == object2.uiSlotContent.itemType) {
 			if (object1.uiSlotContent.localGroupID == object2.uiSlotContent.localGroupID) {
 				return true;

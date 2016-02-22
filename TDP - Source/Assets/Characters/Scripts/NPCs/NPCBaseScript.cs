@@ -18,6 +18,7 @@ public abstract class NPCBaseScript : CharacterBaseActionClass {
 	bool walkingAround = true;
 
 	protected Transform playerTransform;
+	protected InventoryFunctions playerInventory;
 	[SerializeField] protected float minDistanceRequiredForInteraction;
 
 	//By using an actual IEnumerator object, we can selectively run and manipulate coroutines.  
@@ -25,7 +26,9 @@ public abstract class NPCBaseScript : CharacterBaseActionClass {
 
 	//Initializing the NPC
 	protected override void InitializeCharacter() {
+		//Get required components.  
 		playerTransform = CurrentLevelVariableManagement.GetPlayerReference ().transform;
+		playerInventory = CurrentLevelVariableManagement.GetMainInventoryReference().GetComponent <InventoryFunctions> ();
 
 		//Initialize the NPC before starting to walk around.  
 		InitializeNPC ();
