@@ -56,4 +56,6 @@ public class HunterNPCBehaviour : NPCBaseScript {
 		}
 	}
 
+	public override void NPCActionOnPlayerWalkAway(){
+	}
 }

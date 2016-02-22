@@ -18,4 +18,7 @@ public class ThukBehaviour : NPCBaseScript {
 	public override void NPCActionAfterSpeaking() {
 	}
 
+	public override void NPCActionOnPlayerWalkAway(){
+	}
+
 }

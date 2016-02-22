@@ -54,4 +54,7 @@ public class OldManBehaviour : NPCBaseScript {
 		}
 	}
 
+	public override void NPCActionOnPlayerWalkAway(){
+	}
+
 }

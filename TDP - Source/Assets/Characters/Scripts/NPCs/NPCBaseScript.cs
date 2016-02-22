@@ -42,6 +42,7 @@ public abstract class NPCBaseScript : CharacterBaseActionClass {
 
 	public abstract void NPCActionBeforeSpeaking();
 	public abstract void NPCActionAfterSpeaking();
+	public abstract void NPCActionOnPlayerWalkAway ();
 
 	//Walks around fairly randomly, keeping the npc at a constant velocity.  
 	protected virtual IEnumerator WalkAround() {

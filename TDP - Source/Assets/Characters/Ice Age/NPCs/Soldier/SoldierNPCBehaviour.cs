@@ -72,4 +72,8 @@ public class SoldierNPCBehaviour : NPCBaseScript {
 		}
 	}
 
+
+	public override void NPCActionOnPlayerWalkAway(){
+	}
+
 }

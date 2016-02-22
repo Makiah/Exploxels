@@ -19,5 +19,6 @@ public class GlukBehaviour : NPCBaseScript {
 
 	public override void NPCActionAfterSpeaking() {
 	}
-
+	public override void NPCActionOnPlayerWalkAway(){
+	}
 }

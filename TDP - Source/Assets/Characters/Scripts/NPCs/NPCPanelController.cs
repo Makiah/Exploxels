@@ -31,6 +31,8 @@ public class NPCPanelController : MonoBehaviour {
 		StartCoroutine ("CheckForAndAttemptToSpeakToPlayer");
 	}
 
+	private bool currentNPCState = false;
+
 	//Loops continuously and checks each frame whether or not the player is close enough to the NPC.  If so, it checks whether an interactable panel has a reference set.
 	IEnumerator CheckForAndAttemptToSpeakToPlayer() {
 		while (true) {//Vector 3 distance includes PLAYER Z COORDINATE!!!! HOLY **** YES!!!!
@@ -48,6 +50,7 @@ public class NPCPanelController : MonoBehaviour {
 					//has to be a different coroutine so that it waits for it to finish.
 					StartCoroutine (SpeakToPlayer (dialogueForPlayer, GetComponent <NPCBaseScript> ().npcName));
 					alreadySpeakingToPlayer = true;
+					currentNPCState = true;
 				}
 
 			} else if (Vector2.Distance (transform.position, playerTransform.position) > minDistanceRequiredForInteraction) {
@@ -55,12 +58,19 @@ public class NPCPanelController : MonoBehaviour {
 					interactablePanel.Clear ();
 					interactablePanel = null;
 				}
+
 				if (speechBubbleActive) {
 					ClearSpeechBubble();
 					GetComponent <NPCBaseScript> ().ResumeWalkingAround();
 				}
+
 				if (alreadySpeakingToPlayer) {
 					alreadySpeakingToPlayer = false;
+				}
+
+				if (currentNPCState == true) {
+					GetComponent <NPCBaseScript> ().NPCActionOnPlayerWalkAway ();
+					currentNPCState = false;
 				}
 			}
 

@@ -27,6 +27,8 @@ public class MerchantBehaviour : NPCBaseScript {
 			"Everything is cheap at Sluk's Hardware Store!"
 		};
 		GetComponent <NPCPanelController> ().SetCharacterDialogue (dialogue);
+
+		GiveMoneyToPlayer (200);
 	}
 
 	public override void NPCActionBeforeSpeaking() {
@@ -45,6 +47,10 @@ public class MerchantBehaviour : NPCBaseScript {
 	}
 
 	public override void NPCActionAfterSpeaking() {
+		
+	}
+
+	public override void NPCActionOnPlayerWalkAway(){
 		//Hide the inventory
 		HideInventory();
 		//Remove the items from the inventory and add it to the array of merchant items.  
