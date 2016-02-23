@@ -42,7 +42,8 @@ public class PlayerAction : CharacterBaseActionClass, ICanHoldItems {
 
 			//In case the player is in the air (not jumping, just falling)
 			if (grounded == false && jumpInEffect == 0) {
-				//No force should be added, so this is done manually.  
+				//No force should be added, so this is done manually. 
+				Debug.Log("Set jumpInEffect to 1");
 				jumpInEffect = 1;
 				anim.SetInteger ("JumpInEffect", 1);
 			}
