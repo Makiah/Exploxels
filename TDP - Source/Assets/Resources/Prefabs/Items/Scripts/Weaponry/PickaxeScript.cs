@@ -29,23 +29,34 @@ public class PickaxeScript : ItemBase {
 	}
 	
 	void AttemptToChopATreeAfterCompletedAnimation () {
-		attachedCharacterInput.GetActualClass().ActionsAfterAnimation += ChopTreeInFocus;
+		attachedCharacterInput.GetActualClass().ActionsOnAttack += ChipRockInFocus;
 	}
 	
-	void ChopTreeInFocus () {
-		OreScript resultingOreScript = LinecastingUtilities.FindComponentViaLinecast <OreScript> (
-			attachedCharacterInput.GetActualClass ().transform.position,
-			distToOreBounds, 
-			0, 
-			orePickaxingBounds, 
-			attachedCharacterInput.GetActualClass ().GetFacingDirection ()
-		);
+	void ChipRockInFocus () {
+		Vector3 treeChoppingVectorBound = new Vector3 (orePickaxingBounds, 0, 0);
+		Vector3 distToTreeVectorOffset = new Vector3 (distToOreBounds, 0, 0);
 
-		if (resultingOreScript != null) {
-			resultingOreScript.OnOreChipped();
+		int playerFacingDirection = attachedCharacterInput.GetActualClass().GetFacingDirection ();
+
+		Vector3 startRaycastParameter = attachedCharacterInput.GetActualClass().transform.position - treeChoppingVectorBound;
+		Vector3 endRaycastParameter = attachedCharacterInput.GetActualClass().transform.position + treeChoppingVectorBound;
+
+		Vector3 actualStartRaycastParameter = startRaycastParameter + distToTreeVectorOffset * playerFacingDirection;
+		Vector3 actualEndRaycastParameter = endRaycastParameter + distToTreeVectorOffset * playerFacingDirection;
+
+		RaycastHit2D linecastResult = Physics2D.Linecast (actualStartRaycastParameter, actualEndRaycastParameter, 1 << LayerMask.NameToLayer ("Fighting"));
+
+		Debug.DrawLine (actualStartRaycastParameter, actualEndRaycastParameter, Color.black, 2, false);
+
+		if (linecastResult.collider != null) {
+			Debug.Log ("Pickaxe hit collider with name of " + linecastResult.collider.gameObject.name + ".");
+			if (linecastResult.collider.gameObject.GetComponent <OreScript> () != null) {
+				linecastResult.collider.gameObject.GetComponent <OreScript> ().OnOreChipped();
+			}
 		} else {
-			Debug.Log("No ore found");
+			Debug.Log("Hatchet did not hit a collider.");
 		}
+
 	}
 
 }

@@ -31,7 +31,7 @@ public class HatchetScript : ItemBase {
 	}
 
 	void AttemptToChopATreeAfterCompletedAnimation () {
-		attachedCharacterInput.GetActualClass().ActionsAfterAnimation += ChopTreeInFocus;
+		attachedCharacterInput.GetActualClass().ActionsOnAttack += ChopTreeInFocus;
 	}
 
 	void ChopTreeInFocus () {
@@ -58,8 +58,6 @@ public class HatchetScript : ItemBase {
 		} else {
 			Debug.Log("Hatchet did not hit a collider.");
 		}
-
-		attachedCharacterInput.GetActualClass().ActionsAfterAnimation -= ChopTreeInFocus;
 	}
 
 }

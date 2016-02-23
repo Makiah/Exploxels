@@ -179,30 +179,31 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 	protected bool currentlyInAttackAnimation = false;
 
 	//This delegate is called after the animation completes.  
-	public delegate void ActionAfterCompletedAnimation ();
-	public event ActionAfterCompletedAnimation ActionsAfterAnimation;
+	public delegate void ActionAnimation ();
+	public event ActionAnimation ActionsOnAttack;
+	public event ActionAnimation ActionsAfterCompletedAnimation;
 	
 	public bool CheckCurrentAttackAnimationState() {
 		return currentlyInAttackAnimation;
 	}
 
+	//Attacking method.  
 	public void OnAttack() {
-		if (ActionsAfterAnimation != null) {
-			Debug.Log ("Running attack on " + gameObject.name);
-			ActionsAfterAnimation ();
-			ActionsAfterAnimation = null;
+		if (ActionsOnAttack != null) {
+			ActionsOnAttack ();
+			ActionsOnAttack = null;
 		}
 	}
 
 	//Only called by costume manager.  
 	public void OnAttackAnimationCompleted() {
-		if (ActionsAfterAnimation != null) {
-			Debug.Log ("Attack was never run on " + gameObject.name + "!");
-			ActionsAfterAnimation ();
-			ActionsAfterAnimation = null;
+		//Make sure that the attack animation has already been run (it will exit immediately if the delegate is already null.  
+		OnAttack();
+		if (ActionsAfterCompletedAnimation != null) {
+			ActionsAfterCompletedAnimation ();
+			ActionsAfterCompletedAnimation = null;
 		}
 		currentlyInAttackAnimation = false;
-		Debug.Log("Reset attack animation for " + gameObject.name + " and currentlyInAttackAnimation is " + currentlyInAttackAnimation);
 	}
 
 	/**************** CHARACTER UTILITIES ***********************/
@@ -225,7 +226,6 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 	public void ApplyKnockbackToCharacter(Vector2 force) {
 		//Maintaining a constant velocity would interfere with this.  
 		rb2d.AddForce (force);
-		Debug.Log ("Force of " + force + " applied as knockback to " + gameObject.name);
 	}
 
 	//Combatant stuff.  

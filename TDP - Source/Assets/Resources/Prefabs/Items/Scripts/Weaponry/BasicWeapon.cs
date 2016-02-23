@@ -40,17 +40,17 @@ public class BasicWeapon : ItemBase {
 		if (actionKey == MovementAndMethod.PossibleMovements.GroundPound) {
 			attachedCharacterInput.ExternalJumpAction (4);
 			if (attackAfterAnimation)
-				attachedCharacterInput.GetActualClass ().ActionsAfterAnimation += GroundPoundEnemy;
+				attachedCharacterInput.GetActualClass ().ActionsOnAttack += GroundPoundEnemy;
 			else
 				GroundPoundEnemy ();
 		} else if (actionKey == MovementAndMethod.PossibleMovements.AirSlash) {
 			if (attackAfterAnimation)
-				attachedCharacterInput.GetActualClass ().ActionsAfterAnimation += AirSlashEnemy;
+				attachedCharacterInput.GetActualClass ().ActionsOnAttack += AirSlashEnemy;
 			else
 				AirSlashEnemy ();
 		} else {
 			if (attackAfterAnimation)
-				attachedCharacterInput.GetActualClass ().ActionsAfterAnimation += AttackEnemyInFocus;
+				attachedCharacterInput.GetActualClass ().ActionsOnAttack += AttackEnemyInFocus;
 			else
 				AttackEnemyInFocus ();
 		}

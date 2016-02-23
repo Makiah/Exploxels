@@ -30,7 +30,7 @@ public class BowScript : ItemBase {
 	}
 	
 	void AttemptToAttackAfterCompletedAnimation () {
-		attachedCharacterInput.GetActualClass().ActionsAfterAnimation += ShootArrow;
+		attachedCharacterInput.GetActualClass().ActionsOnAttack += ShootArrow;
 	}
 
 	void ShootArrow() {

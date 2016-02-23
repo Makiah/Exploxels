@@ -20,7 +20,7 @@ public class MammothScript : EnemyBaseActionClass {
 	}
 	
 	void AttemptToAttackAfterCompletedAnimation () {
-		ActionsAfterAnimation += AttackEnemyInFocus;
+		ActionsOnAttack += AttackEnemyInFocus;
 	}
 	
 	void AttackEnemyInFocus () {

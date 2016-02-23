@@ -21,7 +21,7 @@ public class TigerScript : EnemyBaseActionClass {
 	}
 
 	void AttemptToAttackAfterCompletedAnimation () {
-		ActionsAfterAnimation += AttackEnemyInFocus;
+		ActionsOnAttack += AttackEnemyInFocus;
 	}
 	
 	void AttackEnemyInFocus () {
