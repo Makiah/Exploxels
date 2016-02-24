@@ -15,7 +15,7 @@ public class BackgroundManager : MonoBehaviour {
 	[System.Serializable] private class SpriteScrollSpeedPair {public Sprite[] backgrounds = null; public float scrollSpeed = 0;}
 	[SerializeField] private SpriteScrollSpeedPair layer1 = null, layer2 = null, clouds = null, background = null;
 
-	[SerializeField] private GameObject backgroundPanel;
+	[SerializeField] private GameObject backgroundPanel = null;
 
 	private Transform layer1Parent, layer2Parent, cloudLayerParent, backgroundParent;
 

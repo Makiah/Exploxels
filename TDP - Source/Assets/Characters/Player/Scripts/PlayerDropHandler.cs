@@ -24,7 +24,8 @@ public class PlayerDropHandler : MonoBehaviour {
 		if (playerInventory == null)
 			playerInventory = CurrentLevelVariableManagement.GetMainInventoryReference ().GetComponent <InventoryFunctions> ();
 
-		if ((externalTrigger.gameObject.GetComponent <DroppedItemProperties> () != null || externalTrigger.gameObject.CompareTag("ExpNodule")) && playerInventory.IsInitialized()) 
+		if (((externalTrigger.gameObject.GetComponent <DroppedItemProperties> () != null || externalTrigger.gameObject.CompareTag("Coin") || 
+			externalTrigger.gameObject.CompareTag("ExpNodule"))) && playerInventory.IsInitialized()) 
 			PickupItem (externalTrigger.gameObject);
 	}
 
@@ -32,16 +33,19 @@ public class PlayerDropHandler : MonoBehaviour {
 		if (playerInventory == null)
 			playerInventory = CurrentLevelVariableManagement.GetMainInventoryReference ().GetComponent <InventoryFunctions> ();
 		//This does not check the resourcereference property of the attached script as a comparison, only the tag.  Consider changing later.  
-		if (!(item.CompareTag ("ExpNodule"))) {
+		if (item.CompareTag ("ExpNodule")) {
+			transform.parent.gameObject.GetComponent <PlayerHealthPanelManager> ().OnExperienceNodulePickedUp ();
+			Destroy (item);
+		} else if (item.CompareTag ("Coin")) {
+			transform.parent.gameObject.GetComponent <PlayerHealthPanelManager> ().OnCoinPickedUp(1);
+			Destroy (item);
+		} else {
 			ResourceReferenceWithStack pendingObject = item.GetComponent <DroppedItemProperties> ().localResourceReference;
 			if (! playerInventory.AssignNewItemToBestSlot(pendingObject)) {
 				Debug.LogError("ERROR WHEN ASSIGNING OBJECT");
 			} else {
 				Destroy (item);
 			}
-		} else {
-			transform.parent.gameObject.GetComponent <PlayerHealthPanelManager> ().OnExperienceNodulePickedUp(1);
-			Destroy(item);
 		}
 	}
 

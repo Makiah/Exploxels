@@ -770,7 +770,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ceaf70bf23794906884454f081f6837, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  experienceToDrop: 8
+  experienceToDrop: 5
+  cashToDrop: 3
 --- !u!212 &21218082
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -1075,6 +1076,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: enemyKnockbackPower.x
       value: 600
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: experienceToDrop
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: cashToDrop
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

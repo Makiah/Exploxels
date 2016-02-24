@@ -155,7 +155,11 @@ public class MerchantSlotScript : MonoBehaviour, IPointerClickHandler, IPointerE
 	/******************************* PRICE MANAGER *******************************/
 	public void UpdatePriceIndicator() {
 		if (currentlyAssigned != null) {
+			priceIndicator.gameObject.SetActive (true);
 			priceIndicator.text = "" + currentlyAssigned.price;
+		} else {
+			priceIndicator.text = "";
+			priceIndicator.gameObject.SetActive (false);
 		}
 	}
 

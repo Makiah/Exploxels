@@ -56,6 +56,7 @@ public class ResourceDatabase : MonoBehaviour {
 		//Other 
 		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.Other, "ExpNodule", "", 0, "Items/Other/ExpNodule/"));
 		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.Other, "Fire", "A life changing implement of cavemen", 1, "Items/Other/Fire/"));
+		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.Other, "Coin", "", 2, "Items/Other/Coin/"));
 
 		/******************************************* RACES *******************************************/
 		//Gatherer

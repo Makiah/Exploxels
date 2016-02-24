@@ -783,6 +783,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   experienceToDrop: 8
+  cashToDrop: 5
 --- !u!212 &21205296
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -1059,6 +1060,10 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: enemyKnockbackPower.y
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: cashToDrop
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

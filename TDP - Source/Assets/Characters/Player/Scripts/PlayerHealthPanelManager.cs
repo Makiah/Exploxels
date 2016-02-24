@@ -53,10 +53,14 @@ public class PlayerHealthPanelManager : CharacterHealthPanelManager {
 	}
 
 	//Called by PlayerDropHandler.  
-	public void OnExperienceNodulePickedUp(int expValue) {
-		currentExp += expValue;
+	public void OnExperienceNodulePickedUp() {
+		currentExp ++;
 		//Done in case the experience level is incremented past the maximum.  
 		currentExp = playerHealthPanelReference.UpdateExperience (currentExp);
+	}
+
+	public void OnCoinPickedUp(int value) {
+		playerHealthPanelReference.UpdateCoinValue(value);
 	}
 
 	public override void YouHaveBeenAttacked(float lifePointDeduction) {

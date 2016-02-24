@@ -27,8 +27,6 @@ public class MerchantBehaviour : NPCBaseScript {
 			"Everything is cheap at Sluk's Hardware Store!"
 		};
 		GetComponent <NPCPanelController> ().SetCharacterDialogue (dialogue);
-
-		GiveMoneyToPlayer (200);
 	}
 
 	public override void NPCActionBeforeSpeaking() {

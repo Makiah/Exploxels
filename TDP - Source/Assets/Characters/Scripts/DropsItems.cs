@@ -27,13 +27,13 @@ public abstract class DropsItems : MonoBehaviour {
 
 	protected DropReferenceClass[] drops;
 
-	private DropReferenceClass expDrop;
+	private DropReferenceClass expDrop, coinDrop;
 
-	[SerializeField]
-	protected int experienceToDrop = 0;
+	[SerializeField] protected int experienceToDrop = 0, cashToDrop = 0;
 
 	protected virtual void MakeReferences() {
 		expDrop = new DropReferenceClass(ResourceDatabase.GetItemByParameter ("ExpNodule"), 1, 1, 1);
+		coinDrop = new DropReferenceClass (ResourceDatabase.GetItemByParameter ("Coin"), 1, 1, 1);
 	}
 
 	protected void DropItems() {
@@ -59,6 +59,17 @@ public abstract class DropsItems : MonoBehaviour {
 				expDropped.AddComponent <DroppedItemProperties> ();
 				expDropped.GetComponent <DroppedItemProperties> ().localResourceReference = new ResourceReferenceWithStack(expDrop.dropReference, 1);
 				expDropped.GetComponent <DroppedItemProperties> ().Initialize();
+			}
+		} else {
+			Debug.Log("Did not drop any experience, experience to drop was 0. (DropsItems)");
+		}
+
+		if (cashToDrop > 0) {
+			for (int i = 0; i < cashToDrop; i++) {
+				GameObject cashDropped = (GameObject) (Instantiate (coinDrop.dropReference.playerHoldingPrefab, transform.position, Quaternion.identity));
+				cashDropped.AddComponent <DroppedItemProperties> ();
+				cashDropped.GetComponent <DroppedItemProperties> ().localResourceReference = new ResourceReferenceWithStack(coinDrop.dropReference, 1);
+				cashDropped.GetComponent <DroppedItemProperties> ().Initialize();
 			}
 		} else {
 			Debug.Log("Did not drop any experience, experience to drop was 0. (DropsItems)");
