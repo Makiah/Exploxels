@@ -70,7 +70,7 @@ public class GameLightingManager : MonoBehaviour {
 			//The sun and moon should provide a brightness of a sine wave (brightest in the afternoon, neutral at dawn and dusk, and black at midnight).
 			//This function has a period of 1.  (Period is 2pi/coefficient of x).  
 			//This function oscillates the sunBrightnessCoefficient between 0.2 and 1.  
-			sunBrightnessCoefficient = 0.4f * Mathf.Sin(2 * Mathf.PI * customTime) + .6f;
+			sunBrightnessCoefficient = 0.7f * Mathf.Sin(2 * Mathf.PI * customTime) + .3f;
 
 			//Parametric equations for an ellipse.
 			//Where cameraWidth is the length of half of the ellipse, and customTime * 2pi is the period.  

@@ -39,27 +39,89 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc2c24fd2fef94be594c609a9b7ef235, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  experienceToDrop: 0
+  cashToDrop: 0
   snowTreeSprites:
-    treeBase: {fileID: 21300000, guid: 114d2d559177b49a69266e6c0a171e2e, type: 3}
-    trunk: {fileID: 21300000, guid: 7ece6ccaf06284acc8fa6d74fefa383b, type: 3}
-    leftTrunkBreak: {fileID: 21300000, guid: f31118bbc7d8045489ce59937893f6b8, type: 3}
-    rightTrunkBreak: {fileID: 21300000, guid: 0d3d4c5ec279e4396870752d9f5951d4, type: 3}
-    branch: {fileID: 21300000, guid: 747028aab7ccc4670b90e32e51bb8e2a, type: 3}
-    leftBranchEnding: {fileID: 21300000, guid: 507e49c67487c49e18c224d776472261, type: 3}
-    rightBranchEnding: {fileID: 21300000, guid: 4c422586b57c949ceb03037cb92f327a,
+    treeBase: {fileID: 21300000, guid: 5e2e57d523a5647cf869e53d7bbc8d14, type: 3}
+    trunk: {fileID: 21300000, guid: 2ca66df262f3b43b7a4875639dfac86f, type: 3}
+    leftTrunkBreak: {fileID: 21300000, guid: b4854d64b7f6145e5b14e7fb6d89d772, type: 3}
+    rightTrunkBreak: {fileID: 21300000, guid: bdb176c41a0fa49d4b3b9db77357996a, type: 3}
+    branch: {fileID: 21300000, guid: 0391c81a157b645a29a18588f8dea14c, type: 3}
+    leftBranchEnding: {fileID: 21300000, guid: e0f648532d30c44ba82936967565361f, type: 3}
+    rightBranchEnding: {fileID: 21300000, guid: d8a78bc7797104c8eaf74c194ff4244e,
       type: 3}
-    bareTreeTop: {fileID: 21300000, guid: 0e159b19d353e4324afdc1e62251e63a, type: 3}
-    leftLeafyEnd: {fileID: 21300000, guid: ee5bbdf2171c746d4ad416e0a7523385, type: 3}
-    rightLeafyEnd: {fileID: 21300000, guid: 456eb629ea48e488bba1abdf8733f4b0, type: 3}
-    leafBlock: {fileID: 21300000, guid: 754cfa947f310440a83a1f0d184ceabb, type: 3}
-    treeTop: {fileID: 21300000, guid: 9d9fd2e5839bf4b059f5fda7bbb78fbb, type: 3}
+    bareTreeTop: {fileID: 21300000, guid: b1141bf7a9fd941ae98ba26354d6c0cc, type: 3}
+    leftLeafyEnd: {fileID: 21300000, guid: 54757a4504350481781a8ea7a8f723c5, type: 3}
+    rightLeafyEnd: {fileID: 21300000, guid: 80069801189684c008582acb43dffdc4, type: 3}
+    leafBlock: {fileID: 21300000, guid: bd55d26fdded448a78821f11247b2268, type: 3}
+    treeTop: {fileID: 21300000, guid: 6ff38cd2844004c1eb1b1e8393dbe31d, type: 3}
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: snowTreeSprites.treeBase
+      value: 
+      objectReference: {fileID: 21300000, guid: 5e2e57d523a5647cf869e53d7bbc8d14,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: snowTreeSprites.trunk
+      value: 
+      objectReference: {fileID: 21300000, guid: 2ca66df262f3b43b7a4875639dfac86f,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: snowTreeSprites.leftTrunkBreak
+      value: 
+      objectReference: {fileID: 21300000, guid: b4854d64b7f6145e5b14e7fb6d89d772,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: snowTreeSprites.rightTrunkBreak
+      value: 
+      objectReference: {fileID: 21300000, guid: bdb176c41a0fa49d4b3b9db77357996a,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: snowTreeSprites.branch
+      value: 
+      objectReference: {fileID: 21300000, guid: 0391c81a157b645a29a18588f8dea14c,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: snowTreeSprites.leftBranchEnding
+      value: 
+      objectReference: {fileID: 21300000, guid: e0f648532d30c44ba82936967565361f,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: snowTreeSprites.rightBranchEnding
+      value: 
+      objectReference: {fileID: 21300000, guid: d8a78bc7797104c8eaf74c194ff4244e,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: snowTreeSprites.bareTreeTop
+      value: 
+      objectReference: {fileID: 21300000, guid: b1141bf7a9fd941ae98ba26354d6c0cc,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: snowTreeSprites.leftLeafyEnd
+      value: 
+      objectReference: {fileID: 21300000, guid: 54757a4504350481781a8ea7a8f723c5,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: snowTreeSprites.rightLeafyEnd
+      value: 
+      objectReference: {fileID: 21300000, guid: 80069801189684c008582acb43dffdc4,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: snowTreeSprites.leafBlock
+      value: 
+      objectReference: {fileID: 21300000, guid: bd55d26fdded448a78821f11247b2268,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: snowTreeSprites.treeTop
+      value: 
+      objectReference: {fileID: 21300000, guid: 6ff38cd2844004c1eb1b1e8393dbe31d,
+        type: 3}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 174630}
