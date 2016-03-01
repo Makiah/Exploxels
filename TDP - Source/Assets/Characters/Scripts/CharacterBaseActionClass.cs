@@ -55,6 +55,9 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 
 	//For combat (has to be here so that weapons can use it)
 	private readonly string characterGUID = Guid.NewGuid().ToString();
+
+	//For child classes that need to stop the coroutine.  
+	protected IEnumerator characterPhysicsCoroutine;
 	
 	protected void SetReferences() {
 		//Get required components
@@ -69,9 +72,9 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 		InitializeCharacter ();
 
 		//This changes based on the override methods.  
+		characterPhysicsCoroutine = CheckCharacterPhysics ();
 		StartCoroutine (CheckCharacterPhysics());
 
-		Debug.Log (gameObject.name + " is " + characterGUID);
 	}
 
 	//Abstract method.  
@@ -236,6 +239,68 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 	//Used for stuff like the transform.  
 	public CharacterBaseActionClass GetActualClass() {
 		return this;
+	}
+
+	/***************************************** USED FOR POINTS WHERE THE ORIGINAL BEHAVIOUR WOULD BE OVERRIDDEN BY THE STORY *****************************************/
+
+	//Actual coroutine.  Yield return this coroutine in order to get to a position successfully.  Will probably have to be called to get to a certain position.  
+	public IEnumerator SetTargetTransform(Transform target, float acceptableDistance, float yDifferenceOnEnding) {
+		while (Vector2.Distance(target.position, transform.position) < acceptableDistance) {
+			//Flip to face the target (most important part of the script).  
+			FlipToFacePosition (target.position);
+
+			//Start moving toward the target safe zone (we have already flipped to the position
+			anim.SetFloat ("Speed", 1);
+			//Yield returning a coroutine makes it wait until the coroutine is completed.  
+			yield return StartCoroutine (MaintainAConstantXVelocity (0.3f));
+
+			//In the event that the x velocity is very small, jump.  
+			if (Mathf.Abs (rb2d.velocity.x) < maxSpeed / 100f && grounded) {
+				InitializeJump (1);
+				//Wait until we are in the air.  
+				//At some point, consider calculating the time at which the jump is at it's highest point and then resuming, as opposed to some constant.  
+				yield return new WaitForSeconds (0.3f);
+				//Start moving forward again (mid-air).  
+				anim.SetFloat ("Speed", 1);
+				yield return StartCoroutine (MaintainAConstantXVelocity (0.3f));
+			}
+		}
+	}
+
+	public IEnumerator SetTargetPosition(Vector2 target, float acceptableDistance) {
+		//Continuously, until the player has been found.   (This includes both x and y, so there is no need for a change.  
+		while (Vector2.Distance(target, transform.position) < acceptableDistance) {
+			//Flip to face the target (most important part of the script).  
+			FlipToFacePosition (target);
+
+			//Start moving toward the target safe zone (we have already flipped to the position
+			anim.SetFloat ("Speed", 1);
+			//Yield returning a coroutine makes it wait until the coroutine is completed.  
+			yield return StartCoroutine (MaintainAConstantXVelocity (0.3f));
+
+			//In the event that the x velocity is very small, jump.  
+			if (Mathf.Abs (rb2d.velocity.x) < maxSpeed / 100f && grounded) {
+				InitializeJump (1);
+				//Wait until we are in the air.  
+				//At some point, consider calculating the time at which the jump is at it's highest point and then resuming, as opposed to some constant.  
+				yield return new WaitForSeconds (0.3f);
+				//Start moving forward again (mid-air).  
+				anim.SetFloat ("Speed", 1);
+				yield return StartCoroutine (MaintainAConstantXVelocity (0.3f));
+			}
+		}
+	}
+
+	void FlipToFacePosition(Vector2 position) {
+		if (position.x >= transform.position.x) {
+			if (GetFacingDirection() != 1) {
+				Flip ();
+			}
+		} else {
+			if (GetFacingDirection() != -1) {
+				Flip();
+			}
+		}
 	}
 
 }

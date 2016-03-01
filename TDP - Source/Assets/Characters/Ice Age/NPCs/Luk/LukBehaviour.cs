@@ -3,17 +3,21 @@ using System.Collections;
 
 public class LukBehaviour : NPCBaseScript {
 
-	bool gavePlayerInstructions = false;
-	bool tookApples = false;
-	bool completedStoryRole = false;
-
 	protected override void InitializeNPC() {
 		npcName = "Luk";
 		string[] dialogue = new string[] {
-			"Why hello there, young one.", 
-			"I am sorry about the rough treatment of my guards.", 
-			"They are merely paranoid of an attack by Thuk, current leader of the clan.", 
-			""
+			"Why 'lo there, young'un.", 
+			"I be sorry for rough treatment of these persons.", 
+			"My name be Luk.",
+			"They be merely paranoid of an attack by Thuk.", 
+			"Who Thuk?", 
+			"I was leader of the ice clan for 8 seasons.",
+			"Was good leader, all thought good of me.",
+			"About month ago, Thuk challenge myself to test of courage.", 
+			"I old, but I fight him anyway and lose.", 
+			"I no want to die, so run away real fast.", 
+			"I was good leader, so soldiers follow me into exile.", 
+			"Waiting until the clan rallies behind me to return to battle."
 		};
 		GetComponent <NPCPanelController> ().SetCharacterDialogue (dialogue);
 	}
@@ -22,6 +26,13 @@ public class LukBehaviour : NPCBaseScript {
 	}
 
 	public override void NPCActionAfterSpeaking() {
+		string[] dialogue = new string[] {
+			"Help?  You want to help?", 
+			"Thank you, young'un, but I refuse.", 
+			"I cannot bring you into this conflict.", 
+			"It is not meant to be."
+		};
+		GetComponent <NPCPanelController> ().SetCharacterDialogue (dialogue);
 	}
 
 	public override void NPCActionOnPlayerWalkAway(){

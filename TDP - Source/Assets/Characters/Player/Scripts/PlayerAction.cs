@@ -17,14 +17,21 @@ using System.Collections.Generic;
 
 public class PlayerAction : CharacterBaseActionClass, ICanHoldItems {
 
-	private bool touchingWall;
+	private bool touchingWall = false;
+	private bool playerCoroutinesCurrentlyActive = true;
 	private Transform wallCheck;
 
+	IEnumerator weaponInputCoroutine, arrowMovementCoroutine;
+
 	protected override void InitializeCharacter() {
+		//No other character has a wall check, so only the player uses this property.  
 		wallCheck = transform.FindChild("FlippingItem").FindChild ("WallCheck");
 
-		StartCoroutine (CheckForWeaponInput());
-		StartCoroutine (ListenForArrowMovement());
+		//Start the coroutines required for the player.  
+		weaponInputCoroutine = CheckForWeaponInput ();
+		arrowMovementCoroutine = ListenForArrowMovement ();
+		StartCoroutine (weaponInputCoroutine);
+		StartCoroutine (arrowMovementCoroutine);
 	}
 
 	//Used to check whether or not player is grounded, touching a wall, etc.  Defines movements.  
@@ -153,6 +160,31 @@ public class PlayerAction : CharacterBaseActionClass, ICanHoldItems {
 
 			//For every frame.  
 			yield return null;
+		}
+	}
+
+	/**************************************** OTHER STUFF ******************************************/
+	public void DisablePlayerActions() {
+		if (playerCoroutinesCurrentlyActive) {
+			//Disable the coroutines.  
+			StopCoroutine (arrowMovementCoroutine);
+			StopCoroutine (weaponInputCoroutine);
+			playerCoroutinesCurrentlyActive = false;
+		} else {
+			Debug.Log ("Cannot disable coroutines: Coroutines are already disabled");
+		}
+	}
+
+	public void EnablePlayerActions() {
+		if (playerCoroutinesCurrentlyActive == false) {
+			//Enable the coroutines.  
+			arrowMovementCoroutine = ListenForArrowMovement ();
+			weaponInputCoroutine = CheckForWeaponInput ();
+			StartCoroutine (arrowMovementCoroutine);
+			StartCoroutine (weaponInputCoroutine);
+			playerCoroutinesCurrentlyActive = true;
+		} else {
+			Debug.Log ("Cannot enable coroutines: Coroutines are already active.");
 		}
 	}
 }

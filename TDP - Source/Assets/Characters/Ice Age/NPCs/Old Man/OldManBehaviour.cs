@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class LukBehaviour : NPCBaseScript {
+public class OldManBehaviour : NPCBaseScript {
 
 	bool gavePlayerInstructions = false;
 	bool tookApples = false;
