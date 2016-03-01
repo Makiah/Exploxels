@@ -196,6 +196,12 @@ MonoBehaviour:
     - variationReference: {fileID: 180304, guid: 473d10f8de35a4d89b75ac1e3dd57cb6,
         type: 2}
       canBeFlipped: 0
+    - variationReference: {fileID: 153070, guid: 0b29437111e7f4220854dcaa47cd933d,
+        type: 2}
+      canBeFlipped: 1
+    - variationReference: {fileID: 143100, guid: 2ef414747d0504337b82983a5c23e4ed,
+        type: 2}
+      canBeFlipped: 0
     l1Variations:
     - variationReference: {fileID: 153070, guid: 0b29437111e7f4220854dcaa47cd933d,
         type: 2}
