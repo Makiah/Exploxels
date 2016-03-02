@@ -3,6 +3,8 @@ using System.Collections;
 
 public class LukBehaviour : NPCBaseScript {
 
+	bool allowedThePlayerToMoveAgain = false;
+
 	protected override void InitializeNPC() {
 		npcName = "Luk";
 		string[] dialogue = new string[] {
@@ -20,12 +22,17 @@ public class LukBehaviour : NPCBaseScript {
 			"Waiting until the clan rallies behind me to return to battle."
 		};
 		GetComponent <NPCPanelController> ().SetCharacterDialogue (dialogue);
+
 	}
 
 	public override void NPCActionBeforeSpeaking() {
 	}
 
 	public override void NPCActionAfterSpeaking() {
+		if (allowedThePlayerToMoveAgain == false) {
+			playerTransform.GetComponent <PlayerAction> ().EnablePlayerActions ();
+			allowedThePlayerToMoveAgain = true;
+		}
 		string[] dialogue = new string[] {
 			"Help?  You want to help?", 
 			"Thank you, young'un, but I refuse.", 
@@ -36,6 +43,11 @@ public class LukBehaviour : NPCBaseScript {
 	}
 
 	public override void NPCActionOnPlayerWalkAway(){
+	}
+
+	//The soldiers should not walk around.  
+	protected override IEnumerator WalkAround() {
+		yield return null;
 	}
 
 }

@@ -56,7 +56,7 @@ public class PlayerAction : CharacterBaseActionClass, ICanHoldItems {
 			}
 
 			//When the player wants to jump.  
-			if (Input.GetButtonDown ("Jump")) {
+			if (playerCoroutinesCurrentlyActive && Input.GetButtonDown ("Jump")) {
 				//The order of these conditions is important.  
 				if (jumpInEffect == 0)
 					InitializeJump (1);

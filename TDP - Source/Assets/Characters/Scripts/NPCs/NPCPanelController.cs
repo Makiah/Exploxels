@@ -116,7 +116,6 @@ public class NPCPanelController : MonoBehaviour {
 		}
 		if (speechBubbleActive) {
 			ClearSpeechBubble();
-			GetComponent <NPCBaseScript> ().ResumeWalkingAround();
 		}
 		if (alreadySpeakingToPlayer) {
 			alreadySpeakingToPlayer = false;

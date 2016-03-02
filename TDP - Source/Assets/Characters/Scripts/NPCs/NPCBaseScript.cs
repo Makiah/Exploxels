@@ -19,7 +19,6 @@ public abstract class NPCBaseScript : CharacterBaseActionClass {
 
 	protected Transform playerTransform;
 	protected InventoryFunctions playerInventory;
-	[SerializeField] protected float minDistanceRequiredForInteraction;
 
 	//By using an actual IEnumerator object, we can selectively run and manipulate coroutines.  
 	protected IEnumerator walkAroundCoroutine;
@@ -32,7 +31,6 @@ public abstract class NPCBaseScript : CharacterBaseActionClass {
 
 		//Initialize the NPC before starting to walk around.  
 		InitializeNPC ();
-
 		//Create and start the coroutine.  
 		walkAroundCoroutine = WalkAround ();
 		StartCoroutine (walkAroundCoroutine);
@@ -44,7 +42,7 @@ public abstract class NPCBaseScript : CharacterBaseActionClass {
 	public abstract void NPCActionAfterSpeaking();
 	public abstract void NPCActionOnPlayerWalkAway ();
 
-	//Walks around fairly randomly, keeping the npc at a constant velocity.  
+	//Walks around fairly randomly, keeping the npc at a constant velocity.  IF YOU DON'T WANT THIS TO DO ANYTHING, THEN OVERRIDE IT WITH AN EMPTY COROUTINE
 	protected virtual IEnumerator WalkAround() {
 		while (true) {
 
@@ -88,6 +86,7 @@ public abstract class NPCBaseScript : CharacterBaseActionClass {
 	
 	public void ResumeWalkingAround() {
 		if (! walkingAround) {
+			walkAroundCoroutine = WalkAround ();
 			StartCoroutine(walkAroundCoroutine);
 			walkingAround = true;
 		}

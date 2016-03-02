@@ -10,7 +10,7 @@ public class WinterTreeScript : DropsItems {
 		[SerializeField] public Sprite leftLeafyEnd = null, rightLeafyEnd = null, leafBlock = null, treeTop = null;
 	}
 
-	[SerializeField] TreeSprites snowTreeSprites;
+	[SerializeField] TreeSprites snowTreeSprites = null;
 
 	//The tree height (currently at min). 
 	int treeHeight = 4;
