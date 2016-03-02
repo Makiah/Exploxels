@@ -116,7 +116,7 @@ public class IntroductorySoldierBehaviour : NPCBaseScript {
 			}
 		}
 
-		Debug.Log ("Starting movement 4");
+		Debug.Log ("Starting movement 3");
 		for (int i = 0; i < peopleToMoveInOrder.Length; i++) {
 			//Move them to the first part of the floor.  
 			Debug.Log("Currently on step 1");
@@ -133,7 +133,7 @@ public class IntroductorySoldierBehaviour : NPCBaseScript {
 
 		//Move the player to Luk.  MISSION ACCOMPLISHED. 
 		player.ExternalJumpAction(1);
-		yield return StartCoroutine (player.SetTargetPosition (new Vector2 (387.4f, -41.6f), 1.5f, 20, 2));
+		yield return StartCoroutine (player.SetTargetPosition (new Vector2 (388f, -41.6f), 3f, 20, 2));
 
 		broughtPlayerToLuk = true;
 
