@@ -40,14 +40,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e77448ee5d8f4ad8a399b1ada002071, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  layerMaskForAttacking:
-    serializedVersion: 2
-    m_Bits: 12288
+  movementTriggerPair: []
   attackAfterAnimation: 1
-  enemyWithinAreaBounds: 1.2
-  distToEnemyLength: 2
-  weaponAttackPower: 1
-  attacks: []
+  areaBounds: 1.2
+  distToEnemyOffset: 2
+  attackPower: 3
+  knockback: {x: 1200, y: 4}
 --- !u!212 &21276014
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -109,6 +107,38 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: layerMaskForAttacking.m_Bits
       value: 12288
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: enemyWithinAreaBounds
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: enemyAreaBounds
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: distToEnemyLength
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: areaBounds
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: distToEnemyOffset
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: attackPower
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: knockback.x
+      value: 1200
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: knockback.y
+      value: 4
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}

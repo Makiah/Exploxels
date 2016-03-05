@@ -1,0 +1,128 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &174630
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 495294}
+  - 114: {fileID: 11498940}
+  m_Layer: 0
+  m_Name: Winter Tree
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &495294
+Transform:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 174630}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+--- !u!114 &11498940
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 174630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc2c24fd2fef94be594c609a9b7ef235, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  experienceToDrop: 0
+  cashToDrop: 0
+  snowTreeSprites:
+    treeBase: {fileID: 21300000, guid: 5e2e57d523a5647cf869e53d7bbc8d14, type: 3}
+    trunk: {fileID: 21300000, guid: 2ca66df262f3b43b7a4875639dfac86f, type: 3}
+    leftTrunkBreak: {fileID: 21300000, guid: b4854d64b7f6145e5b14e7fb6d89d772, type: 3}
+    rightTrunkBreak: {fileID: 21300000, guid: bdb176c41a0fa49d4b3b9db77357996a, type: 3}
+    branch: {fileID: 21300000, guid: 0391c81a157b645a29a18588f8dea14c, type: 3}
+    leftBranchEnding: {fileID: 21300000, guid: e0f648532d30c44ba82936967565361f, type: 3}
+    rightBranchEnding: {fileID: 21300000, guid: d8a78bc7797104c8eaf74c194ff4244e,
+      type: 3}
+    bareTreeTop: {fileID: 21300000, guid: b1141bf7a9fd941ae98ba26354d6c0cc, type: 3}
+    leftLeafyEnd: {fileID: 21300000, guid: 54757a4504350481781a8ea7a8f723c5, type: 3}
+    rightLeafyEnd: {fileID: 21300000, guid: 80069801189684c008582acb43dffdc4, type: 3}
+    leafBlock: {fileID: 21300000, guid: bd55d26fdded448a78821f11247b2268, type: 3}
+    treeTop: {fileID: 21300000, guid: 6ff38cd2844004c1eb1b1e8393dbe31d, type: 3}
+--- !u!1001 &100100000
+Prefab:
+  m_ObjectHideFlags: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: snowTreeSprites.treeBase
+      value: 
+      objectReference: {fileID: 21300000, guid: 5e2e57d523a5647cf869e53d7bbc8d14,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: snowTreeSprites.trunk
+      value: 
+      objectReference: {fileID: 21300000, guid: 2ca66df262f3b43b7a4875639dfac86f,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: snowTreeSprites.leftTrunkBreak
+      value: 
+      objectReference: {fileID: 21300000, guid: b4854d64b7f6145e5b14e7fb6d89d772,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: snowTreeSprites.rightTrunkBreak
+      value: 
+      objectReference: {fileID: 21300000, guid: bdb176c41a0fa49d4b3b9db77357996a,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: snowTreeSprites.branch
+      value: 
+      objectReference: {fileID: 21300000, guid: 0391c81a157b645a29a18588f8dea14c,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: snowTreeSprites.leftBranchEnding
+      value: 
+      objectReference: {fileID: 21300000, guid: e0f648532d30c44ba82936967565361f,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: snowTreeSprites.rightBranchEnding
+      value: 
+      objectReference: {fileID: 21300000, guid: d8a78bc7797104c8eaf74c194ff4244e,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: snowTreeSprites.bareTreeTop
+      value: 
+      objectReference: {fileID: 21300000, guid: b1141bf7a9fd941ae98ba26354d6c0cc,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: snowTreeSprites.leftLeafyEnd
+      value: 
+      objectReference: {fileID: 21300000, guid: 54757a4504350481781a8ea7a8f723c5,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: snowTreeSprites.rightLeafyEnd
+      value: 
+      objectReference: {fileID: 21300000, guid: 80069801189684c008582acb43dffdc4,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: snowTreeSprites.leafBlock
+      value: 
+      objectReference: {fileID: 21300000, guid: bd55d26fdded448a78821f11247b2268,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: snowTreeSprites.treeTop
+      value: 
+      objectReference: {fileID: 21300000, guid: 6ff38cd2844004c1eb1b1e8393dbe31d,
+        type: 3}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 0}
+  m_RootGameObject: {fileID: 174630}
+  m_IsPrefabParent: 1

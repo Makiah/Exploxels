@@ -147,7 +147,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerToInstantiate: {fileID: 172182, guid: c7d744bf7cde3a948aded2b45bbc2264, type: 2}
   pointToInstantiatePlayerAt: {x: 12, y: 6, z: 0}
-  probabilityToInstantiateNullElement: 6
+  probabilityToInstantiateNullElement: 2
   initialGameElements:
   - elementReference: {fileID: 185688, guid: 5924714cab1d44ef2bd7e037cffdf22f, type: 2}
     probabilityOfInstantiation: 0
@@ -155,26 +155,11 @@ MonoBehaviour:
   - elementReference: {fileID: 185688, guid: 5924714cab1d44ef2bd7e037cffdf22f, type: 2}
     probabilityOfInstantiation: 0
     mustBeInstantiated: 1
-  - elementReference: {fileID: 178818, guid: b93cc74f47786d941bc438f0f74f7171, type: 2}
-    probabilityOfInstantiation: 0
-    mustBeInstantiated: 1
-  - elementReference: {fileID: 178818, guid: b93cc74f47786d941bc438f0f74f7171, type: 2}
-    probabilityOfInstantiation: 0
-    mustBeInstantiated: 1
-  - elementReference: {fileID: 178818, guid: b93cc74f47786d941bc438f0f74f7171, type: 2}
-    probabilityOfInstantiation: 0
-    mustBeInstantiated: 1
-  - elementReference: {fileID: 178818, guid: b93cc74f47786d941bc438f0f74f7171, type: 2}
-    probabilityOfInstantiation: 0
-    mustBeInstantiated: 1
-  - elementReference: {fileID: 178818, guid: b93cc74f47786d941bc438f0f74f7171, type: 2}
-    probabilityOfInstantiation: 0
-    mustBeInstantiated: 1
   - elementReference: {fileID: 185688, guid: 5924714cab1d44ef2bd7e037cffdf22f, type: 2}
     probabilityOfInstantiation: 5
     mustBeInstantiated: 0
-  - elementReference: {fileID: 178818, guid: b93cc74f47786d941bc438f0f74f7171, type: 2}
-    probabilityOfInstantiation: 5
+  - elementReference: {fileID: 174630, guid: 78328dfffa6a44f4f82f1e73cf529ffb, type: 2}
+    probabilityOfInstantiation: 1
     mustBeInstantiated: 0
   - elementReference: {fileID: 123452, guid: 370d054f2a9e2475591478c5031ad787, type: 2}
     probabilityOfInstantiation: 7
@@ -182,10 +167,16 @@ MonoBehaviour:
   - elementReference: {fileID: 119770, guid: afa5bd1c3a9b141b1a12127ac2dd692f, type: 2}
     probabilityOfInstantiation: 7
     mustBeInstantiated: 0
-  - elementReference: {fileID: 162146, guid: 239c88de2e417429f81f5982ff17c935, type: 2}
+  - elementReference: {fileID: 115970, guid: 76e0880da6f62104eb5219010ca91a32, type: 2}
     probabilityOfInstantiation: 0
     mustBeInstantiated: 1
-  - elementReference: {fileID: 197286, guid: 631222a38be4a43e8b4491de01ba9841, type: 2}
+  - elementReference: {fileID: 115970, guid: b03167b93cd1b194393852eb5d6ca6c0, type: 2}
+    probabilityOfInstantiation: 0
+    mustBeInstantiated: 1
+  - elementReference: {fileID: 115970, guid: 7a0de089bacb5984ea5c5b4822627987, type: 2}
+    probabilityOfInstantiation: 0
+    mustBeInstantiated: 1
+  - elementReference: {fileID: 197286, guid: 005f95a2cdd6f49d4861f809acea18ad, type: 2}
     probabilityOfInstantiation: 0
     mustBeInstantiated: 1
 --- !u!114 &642813478
@@ -205,6 +196,12 @@ MonoBehaviour:
     - variationReference: {fileID: 180304, guid: 473d10f8de35a4d89b75ac1e3dd57cb6,
         type: 2}
       canBeFlipped: 0
+    - variationReference: {fileID: 153070, guid: 0b29437111e7f4220854dcaa47cd933d,
+        type: 2}
+      canBeFlipped: 1
+    - variationReference: {fileID: 143100, guid: 2ef414747d0504337b82983a5c23e4ed,
+        type: 2}
+      canBeFlipped: 0
     l1Variations:
     - variationReference: {fileID: 153070, guid: 0b29437111e7f4220854dcaa47cd933d,
         type: 2}
@@ -214,9 +211,11 @@ MonoBehaviour:
       canBeFlipped: 1
     l2Variations: []
     l3Variations: []
+    endVariations:
+    - variationReference: {fileID: 159740, guid: 6241e074eed5846948862a92a968d471,
+        type: 2}
+      canBeFlipped: 0
   levelLength: 7
-  useCustomTerrain: 0
-  terrainToUse: {fileID: 0}
 --- !u!4 &642813479
 Transform:
   m_ObjectHideFlags: 0
@@ -268,7 +267,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7675d7edcaa7e49709f37a30c72df075, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  numberOfSegmentsToCreatePer100: 10
+  numberOfSegmentsToCreatePer100: 25
   snowParticleEffect: {fileID: 130400, guid: 1c82b86bbd007434892f9de70e2a4209, type: 2}
 --- !u!1 &1397373983
 GameObject:

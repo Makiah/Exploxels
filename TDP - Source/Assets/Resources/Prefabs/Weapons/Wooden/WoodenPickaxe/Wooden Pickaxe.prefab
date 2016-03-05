@@ -25,7 +25,7 @@ Transform:
   m_GameObject: {fileID: 187576}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: .850000024, y: .850000024, z: 1}
+  m_LocalScale: {x: 0.85, y: 0.85, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -40,6 +40,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01452da20db05ac469ee400d57da5c61, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  movementTriggerPair: []
 --- !u!212 &21241008
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -61,13 +62,15 @@ SpriteRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: .5
+  m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 794406875
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 3d7920eb7f0b25043b3444f33fcfe82b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
@@ -75,6 +78,10 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Sprite
       value: 

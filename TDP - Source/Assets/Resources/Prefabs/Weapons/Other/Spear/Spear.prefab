@@ -40,14 +40,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e77448ee5d8f4ad8a399b1ada002071, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackingLayerMask:
-    serializedVersion: 2
-    m_Bits: 12288
+  movementTriggerPair:
+  - method: 1
+    attack: 0
+    worksMidair: 0
+  - method: 1
+    attack: 4
+    worksMidair: 1
+  - method: 0
+    attack: 5
+    worksMidair: 1
+  - method: 2
+    attack: 6
+    worksMidair: 1
+  - method: 2
+    attack: 6
+    worksMidair: 0
+  - method: 0
+    attack: 1
+    worksMidair: 0
   attackAfterAnimation: 1
-  enemyWithinAreaBounds: 1.2
-  distToEnemyLength: 2
-  weaponAttackPower: 2
-  attacks: []
+  areaBounds: 1.2
+  distToEnemyOffset: 2
+  attackPower: 4
+  knockback: {x: 1000, y: 3}
 --- !u!212 &21276014
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -94,6 +110,10 @@ Prefab:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: 00f2814b51ad644c7bedcda2a1c7c918,
@@ -124,6 +144,90 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 0}
       propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: areaBounds
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: distToEnemyOffset
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: attackPower
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: knockback.x
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: knockback.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.data[0].attack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.data[1].method
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.data[2].attack
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.data[2].worksMidair
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.data[2].method
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.data[3].attack
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.data[3].method
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.data[4].method
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.data[4].attack
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.data[5].worksMidair
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.data[5].method
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.data[5].attack
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.data[0].method
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.data[1].attack
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.data[1].worksMidair
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.data[4].worksMidair
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
