@@ -9,7 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 494330}
   - 212: {fileID: 21276014}
-  - 114: {fileID: 11449542}
+  - 114: {fileID: 11482372}
   m_Layer: 0
   m_Name: Spear
   m_TagString: Untagged
@@ -29,7 +29,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11449542
+--- !u!114 &11482372
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -37,10 +37,33 @@ MonoBehaviour:
   m_GameObject: {fileID: 106442}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 87cb7df74bf5c43909793a0f462ed1b5, type: 3}
+  m_Script: {fileID: 11500000, guid: 6e77448ee5d8f4ad8a399b1ada002071, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spearPowerAttack: 2
+  movementTriggerPair:
+  - method: 1
+    attack: 0
+    worksMidair: 0
+  - method: 1
+    attack: 4
+    worksMidair: 1
+  - method: 0
+    attack: 5
+    worksMidair: 1
+  - method: 2
+    attack: 6
+    worksMidair: 1
+  - method: 2
+    attack: 6
+    worksMidair: 0
+  - method: 0
+    attack: 1
+    worksMidair: 0
+  attackAfterAnimation: 1
+  areaBounds: 1.2
+  distToEnemyOffset: 2
+  attackPower: 4
+  knockback: {x: 1000, y: 3}
 --- !u!212 &21276014
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -62,20 +85,151 @@ SpriteRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: .5
+  m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 794406875
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: a761e13598d2b412d9393cacf013b954, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 00f2814b51ad644c7bedcda2a1c7c918, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
 --- !u!1001 &100100000
 Prefab:
   m_ObjectHideFlags: 1
   serializedVersion: 2
   m_Modification:
     m_TransformParent: {fileID: 0}
-    m_Modifications: []
+    m_Modifications:
+    - target: {fileID: 0}
+      propertyPath: fruits.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: attacks.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.size
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 00f2814b51ad644c7bedcda2a1c7c918,
+        type: 3}
+    - target: {fileID: 0}
+      propertyPath: attackingLayerMask.m_Bits
+      value: 12288
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: spearPowerAttack
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: weaponAttackPower
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: attacks.Array.data[0].attack
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: attacks.Array.data[1].method
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: attacks.Array.data[1].attack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: areaBounds
+      value: 1.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: distToEnemyOffset
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: attackPower
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: knockback.x
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: knockback.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.data[0].attack
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.data[1].method
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.data[2].attack
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.data[2].worksMidair
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.data[2].method
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.data[3].attack
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.data[3].method
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.data[4].method
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.data[4].attack
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.data[5].worksMidair
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.data[5].method
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.data[5].attack
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.data[0].method
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.data[1].attack
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.data[1].worksMidair
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: movementTriggerPair.Array.data[4].worksMidair
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
   m_RootGameObject: {fileID: 106442}
