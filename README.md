@@ -8,6 +8,8 @@ Three Doors is a 2D, Voxel Game made using the Unity3D game engine, and assets f
 ### GAMEPLAY SUMMARY ###
 Players in Exploxels travel through the most notable points in human history: working their way from the Ice Age up into the Stone Age, all the way to Modern Day.  Along the way, they have choices of professions, which will change the way their character appears and the tools they are allowed to use.  The different eras are all different scenes, with different enemies and terrain.  The main concept of the game remains the same, however.  The one problem that is notable is the fact that I have no freaking idea what the point for beating the game will be.  "Oh, you have to try to become the master of the universe!"  Probably not.  
 
+The story behind the game is interesting: after traveling back in time due to a time machine malfunction, the player meets deposed leaders, tyrants, intense political structures, barbarians, philosophers, all in a retro, Minecraft-y art style.  New name idea: "AGEZ"
+
 ### What is this repository for? ###
 This repository is used as a great way to keep track of code changes, new ideas, and revert unnecessary "updates, all with the power of Git.  The code is powered mainly by SmartGit, a great GUI for Windows, Mac, and (Thankfully) Linux.  
 
