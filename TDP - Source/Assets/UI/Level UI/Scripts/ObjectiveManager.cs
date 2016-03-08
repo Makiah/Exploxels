@@ -57,7 +57,7 @@ public class ObjectiveManager : MonoBehaviour {
 		continueToNextLevel.interactable = false;
 
 		//Set initial values.  
-		switch (CurrentLevelVariableManagement.GetMainGameData().currentLevel) {
+		switch (GameData.GetLevel()) {
 		case 0:
 			objectives [0].icon.sprite = ResourceDatabase.GetItemByParameter ("Subsidiary Reactor Core").itemIcon;
 			objectives [0].description.text = "Subsidiary Reactor Core";
@@ -115,7 +115,7 @@ public class ObjectiveManager : MonoBehaviour {
 
 	//When a new item is added.  
 	public void OnNewItemAddedToPlayerInventory() {
-		switch (CurrentLevelVariableManagement.GetMainGameData().currentLevel) {
+		switch (GameData.GetLevel()) {
 		case 0:
 			//Check to make sure the objective has not already been completed
 			//Wooden Pickaxe Objective
@@ -141,7 +141,7 @@ public class ObjectiveManager : MonoBehaviour {
 
 	//When a tree is chopped.  Possibly consider counting this as a stat: i.e. trees chopped during game.  
 	public void OnTreeChopped() {
-		switch (CurrentLevelVariableManagement.GetMainGameData ().currentLevel) {
+		switch (GameData.GetLevel()) {
 		case 0:
 //			if (objectives [1].completed == false) {
 //				OnObjectiveHasBeenCompleted (2);
@@ -155,7 +155,7 @@ public class ObjectiveManager : MonoBehaviour {
 
 	//When some amount of money is earned or taken.  
 	public void OnMoneyModified(int amount) {
-		switch (CurrentLevelVariableManagement.GetMainGameData ().currentLevel) {
+		switch (GameData.GetLevel()) {
 		case 0:
 //			if (amount > 0) {
 //				if (objectives[2].completed == false) {
@@ -171,7 +171,7 @@ public class ObjectiveManager : MonoBehaviour {
 	}
 
 	public void OnFireBuilt() {
-		switch (CurrentLevelVariableManagement.GetMainGameData ().currentLevel) {
+		switch (GameData.GetLevel()) {
 		case 0: 
 //			if (objectives[4].completed == false) 
 //				OnObjectiveHasBeenCompleted(5);

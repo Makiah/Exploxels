@@ -49,7 +49,7 @@ public class PlayerCostumeManager : MonoBehaviour {
 		bottomLeg = transform.FindChild ("Legs").FindChild("Bottom Leg").GetComponent <SpriteRenderer> ();
 		holdingItem = holdingArm.transform.FindChild ("HoldingItem");
 
-		Profession currentPlayerProfession = CurrentLevelVariableManagement.GetMainGameData().chosenProfession;
+		Profession currentPlayerProfession = GameData.GetPlayerProfession ();
 		UpdatePlayerProfession (currentPlayerProfession);
 	}
 
@@ -63,7 +63,7 @@ public class PlayerCostumeManager : MonoBehaviour {
 		bottomLeg.sprite = profession.leg;
 
 		//Gender check.  
-		if (CurrentLevelVariableManagement.GetMainGameData().chosenGender == 0) {
+		if (GameData.GetChosenGender() == GameData.Gender.MALE) {
 			head.sprite = profession.maleHead;
 		} else {
 			head.sprite = profession.femaleHead;

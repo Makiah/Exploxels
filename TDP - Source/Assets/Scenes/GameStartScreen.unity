@@ -1972,7 +1972,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ad8ddd42382cfa4296cbf771c0854b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chosenGender: 0
-  specifiedPlayerName: 
-  currentPlayerMoney: 0
-  currentLevel: 0

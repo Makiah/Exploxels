@@ -49,7 +49,7 @@ public class PlayerHealthPanelManager : CharacterHealthPanelManager {
 		playerHealthPanelReference.InitializePanel (characterHeadSprite, lifePoints, currentHealth);
 
 		//Give player money obtained previously.  
-		GiveMoneyToPlayer (CurrentLevelVariableManagement.GetMainGameData ().currentPlayerMoney);
+		GiveMoneyToPlayer (GameData.GetPlayerMoney());
 	}
 
 	//Called by PlayerDropHandler.  

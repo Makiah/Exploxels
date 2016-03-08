@@ -32,6 +32,7 @@ public class ResourceDatabase : MonoBehaviour {
 		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.GameTool, "Diamond Sword", "A strong monster-chopping sword.", 4, "Weapons/Diamond/DiamondSword/"));
 		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.GameTool, "Spear", "A tough caveman implement", 5, "Weapons/Other/Spear/"));
 		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.GameTool, "Mace", "A weapon that strikes fear into the hearts of all", 6, "Weapons/Other/Mace/"));
+		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.GameTool, "Shaman Staff", "A tough magic weapon", 7, "Weapons/Other/ShamanStaff/"));
 
 		//Crafting materials
 		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.CraftingMaterial, "Wood", "A vital material for any player", 0, "Items/Wood/"));
@@ -59,17 +60,23 @@ public class ResourceDatabase : MonoBehaviour {
 		masterItemList.Add (new ResourceReference (ResourceReference.ItemType.Other, "Coin", "", 2, "Items/Other/Coin/"));
 
 		/******************************************* RACES *******************************************/
-		//Gatherer
+		//Mace Fighter
 		ResourceReferenceWithStack[] maceFighterInitialItems = new ResourceReferenceWithStack[]{
 			new ResourceReferenceWithStack(ResourceDatabase.GetItemByParameter("Mace"), 1)
 		};
 		gameProfessions.Add (new Profession("Professions/Mace Fighter/", "Mace Fighter", 0, maceFighterInitialItems));
 
-		//Hunter
+		//Spear fighter
 		ResourceReferenceWithStack[] spearFighterInitialItems = new ResourceReferenceWithStack[]{
 			new ResourceReferenceWithStack(GetItemByParameter("Spear"), 1)
 		};
 		gameProfessions.Add (new Profession ("Professions/Spear Fighter/", "Spear Fighter", 1, spearFighterInitialItems));
+
+		//Cave Shaman
+		ResourceReferenceWithStack[] caveShamanInitialItems = new ResourceReferenceWithStack[] {
+			new ResourceReferenceWithStack(ResourceDatabase.GetItemByParameter("Shaman Staff"), 1)
+		};
+		gameProfessions.Add (new Profession ("Professions/Cave Shaman/", "Cave Shaman", 2, caveShamanInitialItems));
 
 		/******************************************* COMBINATIONS *******************************************/
 		//Wooden Sword

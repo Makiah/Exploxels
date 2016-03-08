@@ -17,7 +17,6 @@ public class Profession {
 	//Components that do not depend on gender.
 	public Sprite icon;
 	public readonly Sprite maleHead, femaleHead, body, arm, leg;
-	public int currentGender;
 	public string name;
 	public int professionID;
 	public ResourceReferenceWithStack[] initialObjects;
@@ -34,9 +33,6 @@ public class Profession {
 		leg = Resources.Load <Sprite> (resourcesPath + "Leg");
 		arm = Resources.Load <Sprite> (resourcesPath + "Arm");
 
-		//Define initial gender.  
-		currentGender = 0;
-
 		//ID requirements
 		professionID = ctorProfessionID;
 		name = ctorName;
@@ -45,11 +41,6 @@ public class Profession {
 		if (ctorInitialObjects != null) {
 			initialObjects = ctorInitialObjects;
 		}
-	}
-
-	//Define gender.  
-	public void SetGender(int ctorGender) {
-		currentGender = ctorGender;
 	}
 
 }

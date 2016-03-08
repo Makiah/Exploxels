@@ -32,8 +32,8 @@ public class GameControl : MonoBehaviour {
 	
 	public void OnLevelLoadButtonPress() {
 		//Gather data from the initial screen.  
-		GetComponent <GameData> ().chosenGender = profileSwitcher.currentGender;
-		GetComponent <GameData> ().specifiedPlayerName = gameUI.transform.FindChild ("NameField").GetComponent <InputField> ().text;
+		GameData.SetChosenGender(profileSwitcher.currentGender == 0 ? GameData.Gender.MALE : GameData.Gender.FEMALE);
+		GameData.SetPlayerName(gameUI.transform.FindChild ("NameField").GetComponent <InputField> ().text);
 		//Load Profession Chooser level
 		SceneManager.LoadScene ("Profession Chooser");
 	}
@@ -52,7 +52,7 @@ public class GameControl : MonoBehaviour {
 	}
 
 	IEnumerator SetProfessionDialogue() {
-		switch (GetComponent <GameData> ().currentLevel) {
+		switch (GameData.GetLevel()) {
 		case 0:
 			//Dramatic pause
 			yield return new WaitForSeconds (2);
@@ -60,7 +60,7 @@ public class GameControl : MonoBehaviour {
 			yield return StartCoroutine (mainProfessionSpeechManager.SetSpeechDialogue (
 				bertieHead, 
 				new string[] {
-					"" + GetComponent <GameData> ().specifiedPlayerName + "?", 
+					"" + GameData.GetPlayerName() + "?", 
 					"Are you all right?", 
 					"Thank goodness you are still alive!", 
 					"But I don't think we're in the twenty-fifth century anymore...", 
@@ -81,11 +81,11 @@ public class GameControl : MonoBehaviour {
 			//For the Stone Age
 			yield return StartCoroutine (mainProfessionChoiceManager.CreateProfessionChoice ("Choose your Ice Age Profession.", 
 				ResourceDatabase.GetRaceByParameter ("Spear Fighter"), "Spear Fighter", 
-				ResourceDatabase.GetRaceByParameter ("Mace Fighter"), "Mace Fighter"
+				ResourceDatabase.GetRaceByParameter ("Cave Shaman"), "Cave Shaman"
 			));
 
 			//Get the profession
-			GetComponent <GameData> ().chosenProfession = mainProfessionChoiceManager.GetChosenProfession ();
+			GameData.SetPlayerProfession(mainProfessionChoiceManager.GetChosenProfession ());
 
 			//Give a bit more of an intro
 			yield return StartCoroutine (mainProfessionSpeechManager.SetSpeechDialogue (
@@ -122,14 +122,14 @@ public class GameControl : MonoBehaviour {
 			));
 
 			//Get the profession
-			GetComponent <GameData> ().chosenProfession = mainProfessionChoiceManager.GetChosenProfession ();
+			GameData.SetPlayerProfession(mainProfessionChoiceManager.GetChosenProfession ());
 
 			//Load the Iron Age (when it exists)
 			SceneManager.LoadScene("Iron Age");
 
 			break;
 		default: 
-			Debug.LogError ("No profession choice available for level " + GetComponent <GameData> ().currentLevel);
+			Debug.LogError ("No profession choice available for level " + GameData.GetLevel());
 			break;
 		}
 	}
@@ -140,16 +140,16 @@ public class GameControl : MonoBehaviour {
 		Debug.Log ("Gathering player data...");
 
 		//Get player money.  
-		GetComponent <GameData> ().currentPlayerMoney = CurrentLevelVariableManagement.GetPlayerReference ().GetComponent <PlayerHealthPanelManager> ().GetPlayerMoney();
-		Debug.Log ("Set player money to " + GetComponent <GameData> ().currentPlayerMoney);
+		GameData.SetPlayerMoney(CurrentLevelVariableManagement.GetPlayerReference ().GetComponent <PlayerHealthPanelManager> ().GetPlayerMoney());
+		Debug.Log ("Set player money to " + GameData.GetPlayerMoney());
 
 		//Get player items.
-		GetComponent <GameData> ().currentPlayerItems = CurrentLevelVariableManagement.GetMainInventoryReference().GetComponent <InventoryFunctions> ().GetAllPlayerItems ();
-		Debug.Log ("Player has " + GetComponent <GameData> ().currentPlayerItems.Length + " items");
+		GameData.SetPlayerItems(CurrentLevelVariableManagement.GetMainInventoryReference().GetComponent <InventoryFunctions> ().GetAllPlayerItems ());
+		Debug.Log ("Player has " + GameData.GetPlayerItems().Length + " items");
 
 		Debug.Log ("Tutorial has been completed!");
 		//Increment the current level.  
-		GetComponent <GameData> ().currentLevel += 1;
+		GameData.SetLevel(GameData.GetLevel() + 1);
 		//Load the Profession Chooser for the next level
 		SceneManager.LoadScene ("Profession Chooser");
 	}

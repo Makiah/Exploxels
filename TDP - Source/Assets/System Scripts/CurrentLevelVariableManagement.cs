@@ -8,15 +8,7 @@ public class CurrentLevelVariableManagement : MonoBehaviour {
 	static GameControl mainGameControl;
 
 	public static void SetGameUIReferences() {
-		mainGameData = GameObject.Find ("Game Controller").GetComponent <GameData> ();
 		mainGameControl = GameObject.Find ("Game Controller").GetComponent <GameControl> ();
-	}
-	
-	public static GameData GetMainGameData() {
-		if (mainGameData == null) {
-			Debug.LogError("GameData was null!");
-		}
-		return mainGameData;
 	}
 	
 	public static GameControl GetMainGameControl() {

@@ -21,10 +21,10 @@ public class PlayerHealthPanelReference : HealthPanelReference {
 
 		//Name of player
 		playerName = transform.FindChild ("Name").gameObject.GetComponent <Text> (); 
-		playerName.text = CurrentLevelVariableManagement.GetMainGameData().specifiedPlayerName;
+		playerName.text = GameData.GetPlayerName();
 		//Experience components.  
 		currentPlayerProfession = transform.FindChild ("Experience").FindChild ("ProfessionName").gameObject.GetComponent <Text> ();
-		currentPlayerProfession.text = CurrentLevelVariableManagement.GetMainGameData().chosenProfession.name;
+		currentPlayerProfession.text = GameData.GetPlayerProfession().name;
 		experienceSlider = transform.FindChild ("Experience").FindChild ("Experience Indicator").gameObject.GetComponent <Slider> ();
 		playerLevel = transform.FindChild ("Experience").FindChild ("PlayerLevel").gameObject.GetComponent <Text> ();
 		experienceSlider.maxValue = maxExpValue;

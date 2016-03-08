@@ -26,7 +26,7 @@ public class DistrictDisplayer : MonoBehaviour {
 		gameObject.SetActive (true);
 
 		//Define the level that will be used locally by checking the current level in the GameData.  
-		int levelToUse = CurrentLevelVariableManagement.GetMainGameData ().currentLevel;
+		int levelToUse = GameData.GetLevel();
 
 		if (levelToUse + 1 <= levels.Length) {
 

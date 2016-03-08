@@ -19,7 +19,7 @@ public class CreateSystemWideParticleEffect : MonoBehaviour {
 	//Actual script
 	void InitializeSystemWideParticleEffect() {
 		//Check to make sure that this is the Ice Age.  
-		if (CurrentLevelVariableManagement.GetMainGameData ().currentLevel == 0) {
+		if (GameData.GetLevel() == 0) {
 			//Create the particle effect thing.  
 			GameObject createdParticleEffectParent = new GameObject("Level Particle Effect");
 			createdParticleEffectParent.transform.SetParent (GameObject.Find ("Maze").transform);
