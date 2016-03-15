@@ -18,16 +18,17 @@ using System.Collections;
 
 public class ProjectileScript : MonoBehaviour {
 
-	private Rigidbody2D rb2d;
-	public float destroyIfDistanceFromPlayer = 20f;
+	protected Rigidbody2D rb2d;
+
+	[SerializeField] protected float destroyIfDistanceFromPlayer = 20f;
 	
 	private bool notificationSent = false;
 
-	private float arrowPower;
+	protected float power;
 
 	GameObject playerObject;
 
-	public void InitializeProjectileWithThresholdAndDeviation(Vector3 positionToFireToward, float velocity, float currentHeading, float headingThreshold, float maxRandomDeviation, float ctorArrowPower) {
+	public virtual void InitializeProjectileWithThresholdAndDeviation(Vector3 positionToFireToward, float velocity, float currentHeading, float headingThreshold, float maxRandomDeviation, float ctorArrowPower) {
 		playerObject = CurrentLevelVariableManagement.GetPlayerReference ();
 
 		//Set physics of the projectile.  
@@ -54,7 +55,7 @@ public class ProjectileScript : MonoBehaviour {
 		transform.localRotation = Quaternion.Euler(new Vector3 (0, 0, degreeAngleToTarget));
 		rb2d.velocity = new Vector2 (velocity * Mathf.Cos (ScriptingUtilities.DegreesToRadians(degreeAngleToTarget)), velocity * Mathf.Sin (ScriptingUtilities.DegreesToRadians(degreeAngleToTarget)));
 
-		arrowPower = ctorArrowPower;
+		power = ctorArrowPower;
 
 		//Start the coroutine that checks when the arrow should be destroyed (takes up memory space)
 		StartCoroutine (DestroyIfDistanceFromPlayer());
@@ -75,7 +76,7 @@ public class ProjectileScript : MonoBehaviour {
 		if (externalTrigger.transform.parent != null && externalTrigger.transform.parent.parent != null) {
 			//Check to see whether it exists.  
 			if (externalTrigger.transform.parent.parent.GetComponent <CharacterHealthPanelManager> () != null && notificationSent == false) {
-				externalTrigger.transform.parent.parent.GetComponent <CharacterHealthPanelManager> ().YouHaveBeenAttacked (arrowPower);
+				externalTrigger.transform.parent.parent.GetComponent <CharacterHealthPanelManager> ().YouHaveBeenAttacked (power);
 				notificationSent = true;
 				Destroy (this.gameObject);
 			}

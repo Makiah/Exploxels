@@ -5,15 +5,17 @@ using UnityEngine.UI;
 public class PlayerHealthPanelReference : HealthPanelReference {
 
 	//Experience components
-	Text currentPlayerProfession;
-	Slider experienceSlider;
-	Text playerLevel;
-	int maxExpValue = 10;
-	int currentLevel = 1;
+	private Text currentPlayerProfession;
+	private Slider experienceSlider;
+	private Text playerLevel;
+	private int maxExpValue = 10;
+	private int currentLevel = 1;
 	//Other components
-	Text playerName;
+	private Text playerName;
 	//Coin stuff
-	Text coinValue;
+	private Text coinValue;
+	//Mana
+	private Slider manaSlider;
 
 	//The method that initializes the values of the health panel.  
 	protected override void InitializeHealthPanelReference() {
@@ -32,6 +34,7 @@ public class PlayerHealthPanelReference : HealthPanelReference {
 		//Coin Values
 		coinValue = transform.FindChild("Cash").FindChild("Value").GetComponent <Text> ();
 		coinValue.text = "0";
+		//Mana values
 	}
 
 	public string GetPlayerName() {

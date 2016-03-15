@@ -18,6 +18,9 @@ using System.Collections.Generic;
 //later added, this class makes more sense.  
 public abstract class ItemBase : MonoBehaviour {
 
+	//Used for base classes.  
+	protected bool heldByPlayer = false;
+
 	//Attack and move works by creating a serializable system for defining MovementAndMethod[].  
 	[System.Serializable]
 	public class AttackAndMove {
@@ -34,6 +37,9 @@ public abstract class ItemBase : MonoBehaviour {
 
 	public virtual void SetAttachedCharacterInput(ICanHoldItems ctorCharacterInput) {
 		attachedCharacterInput = ctorCharacterInput;
+		//Similar to Java's instanceof operator.  
+		Debug.Log(attachedCharacterInput.GetActualClass().gameObject.name + " is " + (attachedCharacterInput.GetActualClass() is PlayerAction ? "" : "not") + " the player");
+		heldByPlayer = attachedCharacterInput.GetActualClass () is PlayerAction;
 	}
 
 	//Called by CharacterBaseActionClass when a new item is being used.  

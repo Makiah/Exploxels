@@ -9,7 +9,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 494330}
   - 212: {fileID: 21276014}
-  - 114: {fileID: 11481156}
+  - 114: {fileID: 11446472}
   m_Layer: 0
   m_Name: Shaman Staff
   m_TagString: Untagged
@@ -29,7 +29,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
---- !u!114 &11481156
+--- !u!114 &11446472
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -37,15 +37,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 106442}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6e77448ee5d8f4ad8a399b1ada002071, type: 3}
+  m_Script: {fileID: 11500000, guid: 70f31aa44756142bdb4343b176b56ab9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   movementTriggerPair: []
-  attackAfterAnimation: 1
-  areaBounds: 1.2
-  distToEnemyOffset: 2
-  attackPower: 3
-  knockback: {x: 1200, y: 4}
+  arrow: {fileID: 136198, guid: 35667d66ebcd0453fbe07f72c3459dd2, type: 2}
+  attackPowerStrength: 2
 --- !u!212 &21276014
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -139,6 +136,14 @@ Prefab:
     - target: {fileID: 0}
       propertyPath: knockback.y
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 0}
+      propertyPath: arrow
+      value: 
+      objectReference: {fileID: 136198, guid: 35667d66ebcd0453fbe07f72c3459dd2, type: 2}
+    - target: {fileID: 0}
+      propertyPath: attackPowerStrength
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 0}
