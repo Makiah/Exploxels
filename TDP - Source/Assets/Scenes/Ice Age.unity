@@ -212,10 +212,10 @@ MonoBehaviour:
     l2Variations: []
     l3Variations: []
     endVariations:
-    - variationReference: {fileID: 159740, guid: 6241e074eed5846948862a92a968d471,
+    - variationReference: {fileID: 173402, guid: df5526fc9c08d4e2f86480d392729ff5,
         type: 2}
       canBeFlipped: 0
-  levelLength: 7
+  levelLength: 0
 --- !u!4 &642813479
 Transform:
   m_ObjectHideFlags: 0
