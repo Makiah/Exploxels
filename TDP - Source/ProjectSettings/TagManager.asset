@@ -7,6 +7,7 @@ TagManager:
   - Arrow
   - ExpNodule
   - Coin
+  - Door
   layers:
   - Default
   - TransparentFX

@@ -45,16 +45,10 @@ public class LevelLayout : MonoBehaviour {
 
 	//Takes the transfer segments defined earlier and instantiates them based on sprite size.  
 	TerrainReferenceClass InitializeTerrain() {
-		//Make sure that the level length is not less than what has to be instantiated.  
-		if (levelLength < transferSegments.endVariations.Length + transferSegments.introductoryVariations.Length) {
-			Debug.Log ("The level length is not large enough to hold all of the required variations, changing to " + (transferSegments.endVariations.Length + transferSegments.introductoryVariations.Length));
-			levelLength = transferSegments.endVariations.Length + transferSegments.introductoryVariations.Length;
-		}
-
 		//This is recorded and changed as more terrain is added.  
 		float currentXPosition = 0;
 		//This will be returned once filled in.  
-		TerrainReferenceClass createdMaze = new TerrainReferenceClass(levelLength + transferSegments.introductoryVariations.Length + transferSegments.introductoryVariations.Length);
+		TerrainReferenceClass createdMaze = new TerrainReferenceClass(levelLength + transferSegments.introductoryVariations.Length + transferSegments.endVariations.Length);
 		//This holds the main maze part.  
 		Transform parentMaze = new GameObject ("Maze").transform;
 		parentMaze.localPosition = new Vector3 (0, 0, -8);

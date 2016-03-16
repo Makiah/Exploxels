@@ -67,6 +67,8 @@ public class LevelEventManager : MonoBehaviour {
 	public static event BaseInitialization InitializePurchasePanels;
 	public static event BaseInitialization InitializePurchasePanelManager;
 
+	public static event BaseInitialization InitializeDoors;
+
 	public static event BaseInitialization SetInactiveObjects;
 
 	//Used during initialization.  
@@ -173,6 +175,7 @@ public class LevelEventManager : MonoBehaviour {
 		if (InitializePurchasePanelManager != null) InitializePurchasePanelManager(); else Debug.LogError("InitializePurchasePanelManager is null!");
 
 		if (SetInactiveObjects != null) SetInactiveObjects (); else Debug.LogError("HideInventories is null!");
+		if (InitializeDoors != null) InitializeDoors (); else Debug.LogError("InitializeDoors was null!");
 
 		//Just mention that EventManager has been completed successfully.  
 		yield return new WaitForSeconds (.1f);
