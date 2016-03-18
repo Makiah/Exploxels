@@ -64,14 +64,11 @@ public class DoorScript : MonoBehaviour {
 				yield return null;
 
 			if (distance < 2f) {
-				Debug.Log ("Player within range");
 				if (Input.GetKeyDown (KeyCode.W)) {
 					player.transform.position = otherDoor.transform.position;
 					Debug.Log ("Player teleported");
 				}
 			}
-
-			Debug.Log ("Player not in range");
 		}
 	}
 

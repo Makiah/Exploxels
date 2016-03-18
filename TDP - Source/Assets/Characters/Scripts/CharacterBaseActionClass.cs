@@ -240,7 +240,7 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 	}
 
 	//When knockback should be applied to the character.  
-	public void ApplyKnockbackToCharacter(Vector2 force) {
+	public void ApplyKnockback(Vector2 force) {
 		//Maintaining a constant velocity would interfere with this.  
 		rb2d.AddForce (force);
 	}
@@ -320,7 +320,7 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 			//Start moving toward the target safe zone (we have already flipped to the position
 			anim.SetFloat ("Speed", 1);
 			//Yield returning a coroutine makes it wait until the coroutine is completed.  
-			yield return StartCoroutine (MaintainAConstantXVelocity (1f, movingForce, maximumSpeed));
+			yield return StartCoroutine (MaintainAConstantXVelocity (.3f, movingForce, maximumSpeed));
 
 			//In the event that the x velocity is very small, jump.  
 			if (Mathf.Abs (rb2d.velocity.x) < maximumSpeed / 100f && grounded) {
@@ -335,6 +335,7 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 		}
 
 		anim.SetFloat ("Speed", 0);
+		rb2d.velocity = Vector2.zero;
 	}
 
 	void FlipToFacePosition(Vector2 position) {

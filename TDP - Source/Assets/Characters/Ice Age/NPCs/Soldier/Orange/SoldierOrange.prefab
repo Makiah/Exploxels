@@ -630,7 +630,6 @@ MonoBehaviour:
   wallJumpForce: 0
   groundedOffset: 0
   npcName: NPC
-  minDistanceRequiredForInteraction: 5
 --- !u!114 &11423558
 MonoBehaviour:
   m_ObjectHideFlags: 1

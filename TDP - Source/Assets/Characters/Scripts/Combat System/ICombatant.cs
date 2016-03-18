@@ -11,4 +11,5 @@ public interface ICombatant {
 	string GetCombatantID();
 	void OnAttack ();
 	CharacterBaseActionClass GetActualClass();
+	void ApplyKnockback(Vector2 force);
 }

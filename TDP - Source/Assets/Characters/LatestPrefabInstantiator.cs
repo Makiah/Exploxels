@@ -4,7 +4,7 @@ using System.Collections;
 public class LatestPrefabInstantiator : MonoBehaviour {
 
 	//The object.  
-	[SerializeField] private GameObject prefab;
+	[SerializeField] private GameObject prefab = null;
 
 	//Start at the Start() method.  
 	void Start() {
@@ -14,8 +14,10 @@ public class LatestPrefabInstantiator : MonoBehaviour {
 			if (transform.parent != null)
 				instantiatedPrefab.transform.SetParent (transform.parent);
 			instantiatedPrefab.transform.localPosition = transform.localPosition;
-			instantiatedPrefab.transform.localRotation = transform.localRotation;
-			instantiatedPrefab.transform.localScale = transform.localScale;
+
+			//Set the scale and rotation of the object to the prefab's properties.  
+			instantiatedPrefab.transform.localRotation = prefab.transform.localRotation;
+			instantiatedPrefab.transform.localScale = prefab.transform.localScale;
 			//Get rid of the instantiator.  
 			Destroy (gameObject);
 		} else {

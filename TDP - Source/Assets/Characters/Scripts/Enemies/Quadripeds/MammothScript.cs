@@ -35,7 +35,7 @@ public class MammothScript : EnemyBaseActionClass {
 		);
 
 		if (resultingHealthPanelManager != null) {
-			resultingHealthPanelManager.gameObject.GetComponent <CharacterBaseActionClass> ().ApplyKnockbackToCharacter (new Vector2 (enemyKnockbackPower.x * GetFacingDirection (), enemyKnockbackPower.y));
+			resultingHealthPanelManager.gameObject.GetComponent <CharacterBaseActionClass> ().ApplyKnockback (new Vector2 (enemyKnockbackPower.x * GetFacingDirection (), enemyKnockbackPower.y));
 			resultingHealthPanelManager.YouHaveBeenAttacked (enemyAttackingPower);
 		}
 

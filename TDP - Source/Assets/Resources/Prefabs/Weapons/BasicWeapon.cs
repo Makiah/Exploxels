@@ -65,7 +65,7 @@ public class BasicWeapon : ItemBase {
 		);
 
 		if (resultingHealthPanelManager != null) {
-			resultingHealthPanelManager.gameObject.GetComponent <ICombatant> ().GetActualClass().ApplyKnockbackToCharacter (new Vector2 (knockback.x * attachedCharacterInput.GetActualClass().GetFacingDirection (), knockback.y));
+			resultingHealthPanelManager.gameObject.GetComponent <ICombatant> ().GetActualClass().ApplyKnockback (new Vector2 (knockback.x * attachedCharacterInput.GetActualClass().GetFacingDirection (), knockback.y));
 			resultingHealthPanelManager.YouHaveBeenAttacked (attackPower);
 		}
 	}
@@ -80,7 +80,7 @@ public class BasicWeapon : ItemBase {
 
 		if (resultingHealthPanelManager != null) {
 			//Has to be GetComponent <ICombatant> ().GetActualClass() instead of GetComponent <CharacterBaseActionClass> () because otherwise the soldier gets the NPC script intead. 
-			resultingHealthPanelManager.gameObject.GetComponent <ICombatant> ().GetActualClass().ApplyKnockbackToCharacter (new Vector2 (knockback.x * attachedCharacterInput.GetActualClass().GetFacingDirection (), knockback.y));
+			resultingHealthPanelManager.gameObject.GetComponent <ICombatant> ().GetActualClass().ApplyKnockback (new Vector2 (knockback.x * attachedCharacterInput.GetActualClass().GetFacingDirection (), knockback.y));
 			resultingHealthPanelManager.YouHaveBeenAttacked (attackPower);
 		}
 	}
@@ -98,7 +98,7 @@ public class BasicWeapon : ItemBase {
 		);
 
 		if (resultingHealthPanelManager != null) {
-			resultingHealthPanelManager.gameObject.GetComponent <ICombatant> ().GetActualClass().ApplyKnockbackToCharacter (new Vector2 (knockback.x * attachedCharacterInput.GetActualClass().GetFacingDirection (), knockback.y));
+			resultingHealthPanelManager.gameObject.GetComponent <ICombatant> ().GetActualClass().ApplyKnockback (new Vector2 (knockback.x * attachedCharacterInput.GetActualClass().GetFacingDirection (), knockback.y));
 			resultingHealthPanelManager.YouHaveBeenAttacked (attackPower);
 		}
 	}
