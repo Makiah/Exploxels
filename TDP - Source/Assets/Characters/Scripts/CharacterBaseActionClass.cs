@@ -293,7 +293,7 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 			//Start moving toward the target safe zone (we have already flipped to the position
 			anim.SetFloat ("Speed", 1);
 			//Yield returning a coroutine makes it wait until the coroutine is completed.  
-			yield return StartCoroutine (MaintainAConstantXVelocity (1f, moveForce, maxSpeed));
+			yield return StartCoroutine (MaintainAConstantXVelocity (.3f, moveForce, maxSpeed));
 
 			//In the event that the x velocity is very small, jump.  
 			if (Mathf.Abs (rb2d.velocity.x) < maxSpeed / 100f && grounded) {

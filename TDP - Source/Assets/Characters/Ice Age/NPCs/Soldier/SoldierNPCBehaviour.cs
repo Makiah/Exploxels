@@ -36,7 +36,8 @@ public class SoldierNPCBehaviour : NPCBaseScript {
 		if (npcActionsActive == true) {
 			Debug.Log ("Disabled NPC Behaviour");
 			npcActionsActive = false;
-			StopCoroutine (walkAroundCoroutine);
+			if (walkAroundCoroutine != null) 
+				StopCoroutine (walkAroundCoroutine);
 			GetComponent <NPCPanelController> ().Disable ();
 		}
 	}

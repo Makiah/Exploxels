@@ -31,20 +31,17 @@ public class SnowballThrowerScript : NPCBaseScript {
 	//The main coroutines that drops snowballs onto the player.  
 	IEnumerator DropSnowballs() {
 		while (true) {
-			Debug.Log ("Walking to cache");
 			//Walk to the snowball cache.  
 			yield return StartCoroutine(SetTargetPosition(initialPosition + new Vector2(1.8f, 0), .3f, 20, 1));
 			//Place the item in the hand.  
 			item.sprite = snowballHeld;
 			yield return new WaitForSeconds (1f);
 
-			Debug.Log ("Walking to ledge");
 			//Make the snowball thrower walk to the end of the ledge.  
 			yield return StartCoroutine (SetTargetPosition (initialPosition - new Vector2(2f, 0), .3f, 20, 1));
 			rb2d.velocity = Vector2.zero;
 			yield return new WaitForSeconds (1f);
 
-			Debug.Log("Dropping snowball");
 			//Bend over and drop the snowball.  
 			//anim.SetTrigger("Drop");
 			GameObject droppedSnowball = (GameObject)(Instantiate (snowball, transform.position + new Vector3 (1f, 0, 0) * GetFacingDirection (), Quaternion.identity));

@@ -170,6 +170,7 @@ public class PlayerAction : CharacterBaseActionClass, ICanHoldItems {
 			StopCoroutine (arrowMovementCoroutine);
 			StopCoroutine (weaponInputCoroutine);
 			playerCoroutinesCurrentlyActive = false;
+			anim.SetFloat ("Speed", 0);
 		} else {
 			Debug.Log ("Cannot disable coroutines: Coroutines are already disabled");
 		}

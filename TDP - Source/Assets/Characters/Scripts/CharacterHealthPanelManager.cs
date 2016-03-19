@@ -44,7 +44,8 @@ public class CharacterHealthPanelManager : MonoBehaviour {
 	[SerializeField] float distanceUntilHealthBarActive = 0;
 
 	//Look into initializing this once the player comes into activation distance.  
-	protected virtual void InitializeHealthBar() {
+	//Has to be public for Thuk Guards.  Could be extended though.  
+	public virtual void InitializeHealthBar() {
 		player = CurrentLevelVariableManagement.GetPlayerReference ().transform;
 		currentHealth = lifePoints;
 		//Create panel
@@ -108,7 +109,10 @@ public class CharacterHealthPanelManager : MonoBehaviour {
 	protected virtual void OnDeath() {
 		StopCoroutine ("ControlHealthBarState");
 		OnThisEnemyDeActivated();
-		GetComponent <EnemyExpDropper> ().OnEnemyDeath ();
+		if (GetComponent <EnemyExpDropper> () != null)
+			GetComponent <EnemyExpDropper> ().OnEnemyDeath ();
+		else
+			Debug.Log (gameObject.name + " does not drop any EXP.");
 		Destroy (this.gameObject);
 	}
 

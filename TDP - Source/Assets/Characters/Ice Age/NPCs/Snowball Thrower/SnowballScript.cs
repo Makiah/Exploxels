@@ -11,7 +11,6 @@ public class SnowballScript : MonoBehaviour {
 		playerObject = CurrentLevelVariableManagement.GetPlayerReference ();
 		GetComponent <Rigidbody2D> ().AddForce (force);
 		StartCoroutine (DestroyAfterTime (22));
-		Debug.Log ("Initialized Snowball");
 	}
 
 	//If the distance to the player is too large, then destroy the current game object.  

@@ -15,7 +15,7 @@ public class SoldierHealthPanelManager : CharacterHealthPanelManager {
 	private float timer = 0;
 
 	//Add the current class instance to the list to be enraged later.  
-	protected override void InitializeHealthBar() {
+	public override void InitializeHealthBar() {
 		base.InitializeHealthBar ();
 		soldierInstances.Add (this);
 	}

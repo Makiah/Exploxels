@@ -35,7 +35,8 @@ public class NPCPanelController : MonoBehaviour {
 
 	//Loops continuously and checks each frame whether or not the player is close enough to the NPC.  If so, it checks whether an interactable panel has a reference set.
 	IEnumerator CheckForAndAttemptToSpeakToPlayer() {
-		while (true) {//Vector 3 distance includes PLAYER Z COORDINATE!!!! HOLY **** YES!!!!
+		while (true) {
+			//Vector 3 distance includes PLAYER Z COORDINATE!!!! HOLY **** YES!!!!
 			if (Vector2.Distance(transform.position, playerTransform.position) <= minDistanceRequiredForInteraction) {
 				if (interactablePanel == null) {
 					interactablePanel = mainInteractablePanelController.GetAvailableInteractablePanel ();
@@ -48,7 +49,7 @@ public class NPCPanelController : MonoBehaviour {
 					GetComponent <NPCBaseScript> ().FlipToFacePlayer();
 					GetComponent <NPCBaseScript> ().NPCActionBeforeSpeaking();
 					//has to be a different coroutine so that it waits for it to finish.
-					StartCoroutine (SpeakToPlayer (dialogueForPlayer, GetComponent <NPCBaseScript> ().npcName));
+					StartCoroutine (SpeakToPlayer (dialogueForPlayer));
 					alreadySpeakingToPlayer = true;
 					currentNPCState = true;
 				}
@@ -78,11 +79,20 @@ public class NPCPanelController : MonoBehaviour {
 		}
 	}
 
-	//Makes a call to SpeechControl on the UI with the arguments that determine what to say and the icon that is saying it.
-	private IEnumerator SpeakToPlayer(string[] toSay, string name) {
+	//ALWAYS Disable() beforehand.  
+	public IEnumerator ForceSpeechToPlayer(string[] toSay) {
+		Disable ();
 		dialogueForPlayer = toSay;
 		speechBubbleActive = true;
-		yield return StartCoroutine(mainSpeechControl.SaySomething (playerIcon, name, toSay));
+		yield return StartCoroutine(mainSpeechControl.SaySomething (playerIcon, GetComponent <NPCBaseScript> ().npcName, toSay));
+		ClearSpeechBubble ();
+	}
+
+	//Makes a call to SpeechControl on the UI with the arguments that determine what to say and the icon that is saying it.
+	private IEnumerator SpeakToPlayer(string[] toSay) {
+		dialogueForPlayer = toSay;
+		speechBubbleActive = true;
+		yield return StartCoroutine(mainSpeechControl.SaySomething (playerIcon, GetComponent <NPCBaseScript> ().npcName, toSay));
 		//Do whatever action should be done for the NPC that is attached.  
 		GetComponent <NPCBaseScript> ().NPCActionAfterSpeaking ();
 	}
@@ -99,7 +109,7 @@ public class NPCPanelController : MonoBehaviour {
 		//Otherwise, start the dialogue.  
 		if (alreadySpeakingToPlayer) {
 			ClearSpeechBubble();
-			SpeakToPlayer(customDialogue, GetComponent <NPCBaseScript> ().npcName);
+			SpeakToPlayer(customDialogue);
 		}
 	}
 

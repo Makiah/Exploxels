@@ -14,7 +14,7 @@ public class DoorScript : MonoBehaviour {
 
 	[SerializeField] public int doorID;
 
-	public string doorGUID = Guid.NewGuid().ToString();
+	[HideInInspector] public string doorGUID = Guid.NewGuid().ToString();
 
 	private Transform player;
 
