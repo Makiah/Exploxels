@@ -128,7 +128,7 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 		return false;
 	}
 	
-	protected void InitializeJump(int jumpStyle) {
+	protected virtual void InitializeJump(int jumpStyle) {
 		//Jumping parameters
 		anim.SetInteger("JumpInEffect", jumpStyle);
 		jumpInEffect = jumpStyle;

@@ -21,6 +21,9 @@ public class PlayerAction : CharacterBaseActionClass, ICanHoldItems {
 	private bool playerCoroutinesCurrentlyActive = true;
 	private Transform wallCheck;
 
+	//Used so when the player is in between two close walls, he/she automatically goes up by just pressing the up arrow.  
+	private bool lastJumpWasWallJump = false;
+
 	IEnumerator weaponInputCoroutine, arrowMovementCoroutine;
 
 	protected override void InitializeCharacter() {
@@ -50,7 +53,6 @@ public class PlayerAction : CharacterBaseActionClass, ICanHoldItems {
 			//In case the player is in the air (not jumping, just falling)
 			if (grounded == false && jumpInEffect == 0) {
 				//No force should be added, so this is done manually. 
-				Debug.Log("Set jumpInEffect to 1");
 				jumpInEffect = 1;
 				anim.SetInteger ("JumpInEffect", 1);
 			}
@@ -60,7 +62,8 @@ public class PlayerAction : CharacterBaseActionClass, ICanHoldItems {
 				//The order of these conditions is important.  
 				if (jumpInEffect == 0)
 					InitializeJump (1);
-				else if (touchingWall)
+				else if (touchingWall && (lastJumpWasWallJump || (Input.GetAxis("Horizontal") != 0 && Mathf.Sign(Input.GetAxis("Horizontal")) == GetFacingDirection())))
+					//Make sure that the player is trying to wall jump before actually wall jumping.  
 					InitializeJump (3);
 				else if (jumpInEffect == 1)
 					InitializeJump (2);
@@ -68,6 +71,39 @@ public class PlayerAction : CharacterBaseActionClass, ICanHoldItems {
 
 			//Every frame.  
 			yield return null;
+		}
+
+	}
+
+	protected override void InitializeJump(int jumpStyle) {
+		//Jumping parameters
+		anim.SetInteger("JumpInEffect", jumpStyle);
+		jumpInEffect = jumpStyle;
+
+		//Add forces based on the jump style.  
+		switch (jumpStyle) {
+		case 0: 
+			break;
+		case 1: 
+			rb2d.velocity = new Vector2 (rb2d.velocity.x, jumpForce);
+			lastJumpWasWallJump = false;
+			break;
+		case 2: 
+			rb2d.velocity = new Vector2 (rb2d.velocity.x, jumpForce);
+			lastJumpWasWallJump = false;
+			break;
+		case 3: 
+			rb2d.velocity = new Vector2 (wallJumpForce * -GetFacingDirection (), jumpForce);
+			lastJumpWasWallJump = true;
+			Flip ();
+			break;
+		case 4: 
+			rb2d.velocity = new Vector2 (0, -6);
+			lastJumpWasWallJump = false;
+			break;
+		default: 
+			Debug.LogError ("Invalid jumpStyle of " + jumpStyle + " input");
+			break;
 		}
 
 	}
