@@ -64,7 +64,7 @@ public class InventoryFunctions : MonoBehaviour {
 					successfullyAssigned = true;
 					bestAvailableSlot.AssignNewItem (item);
 					//Update the hotbar item.
-					CurrentLevelVariableManagement.GetLevelUIReference ().transform.FindChild ("Hotbar").GetComponent <HotbarManager> ().UpdateSelectedItem ();
+					CurrentLevelVariableManagement.GetLevelUIReference ().transform.Find ("Hotbar").GetComponent <HotbarManager> ().UpdateSelectedItem ();
 					//Check whether an objective has been completed
 					CurrentLevelVariableManagement.GetMainObjectiveManager().OnNewItemAddedToPlayerInventory();
 				} else {

@@ -61,8 +61,8 @@ public class CreateLevelItems : MonoBehaviour {
 			for (int i = 0; i < mazeSegments.layer1.Length; i++) {
 				//Preventing future errors.  
 				if (mazeSegments.layer1[i] != null) {
-					if (mazeSegments.layer1[i].FindChild("Points") != null) {
-						Transform enemyItemsTransform = mazeSegments.layer1[i].FindChild ("Points").FindChild ("EnemyItems");
+					if (mazeSegments.layer1[i].Find("Points") != null) {
+						Transform enemyItemsTransform = mazeSegments.layer1[i].Find ("Points").Find ("EnemyItems");
 						//Check to make sure enemy item points exist.  
 						if (enemyItemsTransform != null) {
 							//Find the points

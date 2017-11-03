@@ -15,7 +15,7 @@ public class InteractablePanelController : MonoBehaviour {
 
 	//Reference the Interactable Panel References.  
 	void InitializeInteractablePanelController() {
-		interactablePanel1 = transform.FindChild ("InteractablePanel1").GetComponent <InteractablePanelReference> ();
+		interactablePanel1 = transform.Find ("InteractablePanel1").GetComponent <InteractablePanelReference> ();
 	}
 
 	public InteractablePanelReference GetAvailableInteractablePanel() {

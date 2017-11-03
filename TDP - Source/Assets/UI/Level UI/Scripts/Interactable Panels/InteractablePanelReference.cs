@@ -21,8 +21,8 @@ public class InteractablePanelReference : MonoBehaviour {
 	//Initialize required components of child objects.  
 	void InitializeInteractablePanel() {
 		panel = gameObject;
-		headIcon = transform.FindChild ("Icon").GetComponent <Image> ();
-		message = transform.FindChild ("Message").GetComponent <Text> ();
+		headIcon = transform.Find ("Icon").GetComponent <Image> ();
+		message = transform.Find ("Message").GetComponent <Text> ();
 		Clear ();
 	}
 

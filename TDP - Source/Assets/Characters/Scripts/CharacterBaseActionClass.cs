@@ -61,7 +61,7 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 	
 	protected void SetReferences() {
 		//Get required components
-		characterSpriteObject = transform.FindChild("FlippingItem").FindChild("Character");
+		characterSpriteObject = transform.Find("FlippingItem").Find("Character");
 		anim = characterSpriteObject.GetComponent <Animator> ();
 		rb2d = GetComponent <Rigidbody2D> ();
 		groundChecks = GetAllGroundChecks ();
@@ -83,15 +83,15 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 	//Searches for all ground checks in the child transform.  
 	private Transform[] GetAllGroundChecks() {
 		//The transform that holds all of the ground check transforms.  
-		Transform groundCheckParent = transform.FindChild ("FlippingItem").FindChild ("GroundChecks");
+		Transform groundCheckParent = transform.Find ("FlippingItem").Find ("GroundChecks");
 
 		//Will contain all of the ground checks.  
 		List <Transform> groundCheckList = new List<Transform>();
 
 		int i = 1; 
 		//Loop through all ground checks until one does not exist.  
-		while (groundCheckParent.FindChild("GroundCheck" + i) != null) {
-			groundCheckList.Add(groundCheckParent.FindChild("GroundCheck" + i));
+		while (groundCheckParent.Find("GroundCheck" + i) != null) {
+			groundCheckList.Add(groundCheckParent.Find("GroundCheck" + i));
 			i++;
 		}
 
@@ -160,9 +160,9 @@ public abstract class CharacterBaseActionClass : MonoBehaviour {
 	//Changes the scale of FlippingItem
 	protected void Flip() {
 		facingRight = !facingRight;
-		Vector3 theScale = transform.FindChild("FlippingItem").localScale;
+		Vector3 theScale = transform.Find("FlippingItem").localScale;
 		theScale.x *= -1;
-		transform.FindChild ("FlippingItem").localScale = theScale;
+		transform.Find ("FlippingItem").localScale = theScale;
 	}
 	
 	//Called by HatchetScript for reversing the linecast.  

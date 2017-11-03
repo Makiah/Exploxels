@@ -30,11 +30,11 @@ public class ProfessionChoiceManager : MonoBehaviour {
 
 	//Initialization
 	void InitializeProfessionChoiceComponents() {
-		title = transform.FindChild ("Title").GetComponent <Text> ();
-		choice1 = transform.FindChild ("Choice 1").FindChild("Icon").GetComponent <Image> ();
-		description1 = transform.FindChild("Choice 1").FindChild ("Description").GetComponent <Text> ();
-		choice2 = transform.FindChild ("Choice 2").FindChild("Icon").GetComponent <Image> ();
-		description2 = transform.FindChild("Choice 2").FindChild ("Description").GetComponent <Text> ();
+		title = transform.Find ("Title").GetComponent <Text> ();
+		choice1 = transform.Find ("Choice 1").Find("Icon").GetComponent <Image> ();
+		description1 = transform.Find("Choice 1").Find ("Description").GetComponent <Text> ();
+		choice2 = transform.Find ("Choice 2").Find("Icon").GetComponent <Image> ();
+		description2 = transform.Find("Choice 2").Find ("Description").GetComponent <Text> ();
 		gameObject.SetActive (false);
 	}
 

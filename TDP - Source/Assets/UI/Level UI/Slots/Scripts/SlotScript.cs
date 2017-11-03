@@ -45,11 +45,11 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 	public virtual void ReferenceChildren() {
 		Debug.Log ("Initialized inventory " + gameObject.name);
 		mainSlotManager = transform.parent.parent.GetComponent <SlotMouseInputControl> ();
-		childIcon = transform.FindChild ("Icon").GetComponent <Image> ();
+		childIcon = transform.Find ("Icon").GetComponent <Image> ();
 		childIcon.enabled = false;
-		tooltip = transform.FindChild ("Tooltip");
-		selectionIndicator = transform.FindChild ("Selection Indicator").GetComponent <RectTransform> ();
-		stackIndicator = transform.FindChild ("Stack Indicator").GetComponent <Text> ();
+		tooltip = transform.Find ("Tooltip");
+		selectionIndicator = transform.Find ("Selection Indicator").GetComponent <RectTransform> ();
+		stackIndicator = transform.Find ("Stack Indicator").GetComponent <Text> ();
 		UpdateStackIndicator ();
 	}
 
@@ -204,8 +204,8 @@ public class SlotScript : MonoBehaviour, IPointerClickHandler, IPointerEnterHand
 
 	void ShowTooltip() {
 		tooltip.gameObject.SetActive (true);
-		tooltip.FindChild ("Title").GetComponent <Text> ().text = currentlyAssigned.uiSlotContent.itemScreenName;
-		tooltip.FindChild ("Description").GetComponent <Text> ().text = currentlyAssigned.uiSlotContent.itemDescription;
+		tooltip.Find ("Title").GetComponent <Text> ().text = currentlyAssigned.uiSlotContent.itemScreenName;
+		tooltip.Find ("Description").GetComponent <Text> ().text = currentlyAssigned.uiSlotContent.itemDescription;
 
 		//Otherwise this panel is not visible.  
 		transform.SetAsLastSibling();

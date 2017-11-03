@@ -18,7 +18,7 @@ public class SoldierEnemyBehaviour : EnemyBaseActionClass, ICanHoldItems {
 	//Initialization stuff.  
 	protected override void InitializeEnemy() {
 		//Get the spear for the soldier.  
-		ItemBase spear = characterSpriteObject.FindChild("Hands").FindChild("HoldingHand").FindChild("HoldingItem").GetChild(0).GetComponent <ItemBase> ();
+		ItemBase spear = characterSpriteObject.Find("Hands").Find("HoldingHand").Find("HoldingItem").GetChild(0).GetComponent <ItemBase> ();
 		spear.SetAttachedCharacterInput (this);
 		OnRefreshCurrentWeaponMoves(spear);
 
@@ -33,7 +33,7 @@ public class SoldierEnemyBehaviour : EnemyBaseActionClass, ICanHoldItems {
 			StartCoroutine (enemyControlCoroutine);
 
 			//Set facingRight based on the current facing direction
-			facingRight = transform.FindChild("FlippingItem").localScale.x > 0;
+			facingRight = transform.Find("FlippingItem").localScale.x > 0;
 		}
 	}
 

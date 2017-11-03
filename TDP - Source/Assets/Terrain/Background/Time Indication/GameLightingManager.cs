@@ -38,12 +38,12 @@ public class GameLightingManager : MonoBehaviour {
 		//Get main directional light.  
 		mainLight = GetComponent <Light> ();
 		//Get sun  
-		sunTransform = transform.FindChild ("Sun");
-		sunlight = sunTransform.FindChild ("Sunlight").GetComponent <Light> ();
+		sunTransform = transform.Find ("Sun");
+		sunlight = sunTransform.Find ("Sunlight").GetComponent <Light> ();
 		initialSunlightIntensity = sunlight.intensity;
 		//Get moon
-		moonTransform = transform.FindChild ("Moon");
-		moonlight = moonTransform.FindChild ("Moonlight").GetComponent <Light> ();
+		moonTransform = transform.Find ("Moon");
+		moonlight = moonTransform.Find ("Moonlight").GetComponent <Light> ();
 		initialMoonlightIntensity = moonlight.intensity;
 
 		StartCoroutine("ControlSunAndMoonLighting");

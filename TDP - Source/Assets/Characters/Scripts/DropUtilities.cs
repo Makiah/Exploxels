@@ -12,7 +12,7 @@ public class DropUtilities : MonoBehaviour {
 			initialPosition.position, 
 			Quaternion.identity));
 		//Give the object the spriterenderer.  
-		createdObject.transform.FindChild("SpriteAnimation").GetComponent <SpriteRenderer> ().sprite = itemReference.uiSlotContent.itemIcon;
+		createdObject.transform.Find("SpriteAnimation").GetComponent <SpriteRenderer> ().sprite = itemReference.uiSlotContent.itemIcon;
 		//Add the object info to the created object.  
 		createdObject.AddComponent <DroppedItemProperties> ();
 		//Drop one of the items.  

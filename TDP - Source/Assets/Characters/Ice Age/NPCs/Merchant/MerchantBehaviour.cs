@@ -15,7 +15,7 @@ public class MerchantBehaviour : NPCBaseScript {
 
 	protected override void InitializeNPC() {
 		//Find and hide the inventory.  
-		merchantInventory = CurrentLevelVariableManagement.GetLevelUIReference ().transform.FindChild ("Merchant Inventory").GetComponent <MerchantInventoryFunctions> ();
+		merchantInventory = CurrentLevelVariableManagement.GetLevelUIReference ().transform.Find ("Merchant Inventory").GetComponent <MerchantInventoryFunctions> ();
 
 		//Define the UISlotContent items that will be added to the inventory.  
 		merchantItems = new ResourceReferenceWithStackAndPrice[2];
@@ -58,11 +58,11 @@ public class MerchantBehaviour : NPCBaseScript {
 
 	//Quick utilities.  Probably not really necessary, but looks simple.  
 	void ShowInventory() {
-		merchantInventory.transform.FindChild("Slots").gameObject.SetActive (true);
+		merchantInventory.transform.Find("Slots").gameObject.SetActive (true);
 	}
 
 	void HideInventory() {
-		merchantInventory.transform.FindChild("Slots").gameObject.SetActive (false);
+		merchantInventory.transform.Find("Slots").gameObject.SetActive (false);
 	}
 
 }

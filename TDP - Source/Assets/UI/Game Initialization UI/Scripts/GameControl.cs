@@ -27,13 +27,13 @@ public class GameControl : MonoBehaviour {
 	public void DefineInitialLevelElements() {
 		DontDestroyOnLoad (this.gameObject);
 		gameUI = GameObject.Find ("Game Initialization UI");
-		profileSwitcher = gameUI.transform.FindChild ("Profile Switcher").gameObject.GetComponent <ProfileSwitcher> ();
+		profileSwitcher = gameUI.transform.Find ("Profile Switcher").gameObject.GetComponent <ProfileSwitcher> ();
 	}
 	
 	public void OnLevelLoadButtonPress() {
 		//Gather data from the initial screen.  
 		GetComponent <GameData> ().chosenGender = profileSwitcher.currentGender;
-		GetComponent <GameData> ().specifiedPlayerName = gameUI.transform.FindChild ("NameField").GetComponent <InputField> ().text;
+		GetComponent <GameData> ().specifiedPlayerName = gameUI.transform.Find ("NameField").GetComponent <InputField> ().text;
 		//Load Profession Chooser level
 		SceneManager.LoadScene ("Profession Chooser");
 	}
@@ -46,8 +46,8 @@ public class GameControl : MonoBehaviour {
 	//Defines the elements required to get data.  
 	public void InitializeProfessionObjects() {
 		//Set references to existing items.
-		mainProfessionChoiceManager = GameObject.Find ("UI").transform.FindChild ("ProfessionChoice").GetComponent <ProfessionChoiceManager> ();
-		mainProfessionSpeechManager = GameObject.Find ("UI").transform.FindChild ("Speech Bubble").GetComponent <ProfessionSpeechManager> ();
+		mainProfessionChoiceManager = GameObject.Find ("UI").transform.Find ("ProfessionChoice").GetComponent <ProfessionChoiceManager> ();
+		mainProfessionSpeechManager = GameObject.Find ("UI").transform.Find ("Speech Bubble").GetComponent <ProfessionSpeechManager> ();
 		StartCoroutine (SetProfessionDialogue ());
 	}
 

@@ -37,12 +37,12 @@ public class TreeScript : DropsItems {
 		DropReferenceClass sproutDrop = new DropReferenceClass (ResourceDatabase.GetItemByParameter ("Sprout"), 1, 1, 4);
 		drops = new DropReferenceClass[]{woodDrop, appleDrop, sproutDrop};
 
-		top = transform.FindChild ("Top").GetComponent <SpriteRenderer> ();
-		segment1 = transform.FindChild ("Segment 1").GetComponent <SpriteRenderer> ();
-		segment2 = transform.FindChild ("Segment 2").GetComponent <SpriteRenderer> ();
-		segment3 = transform.FindChild ("Segment 3").GetComponent <SpriteRenderer> ();
-		segment4 = transform.FindChild ("Segment 4").GetComponent <SpriteRenderer> ();
-		segment5 = transform.FindChild ("Segment 5").GetComponent <SpriteRenderer> ();
+		top = transform.Find ("Top").GetComponent <SpriteRenderer> ();
+		segment1 = transform.Find ("Segment 1").GetComponent <SpriteRenderer> ();
+		segment2 = transform.Find ("Segment 2").GetComponent <SpriteRenderer> ();
+		segment3 = transform.Find ("Segment 3").GetComponent <SpriteRenderer> ();
+		segment4 = transform.Find ("Segment 4").GetComponent <SpriteRenderer> ();
+		segment5 = transform.Find ("Segment 5").GetComponent <SpriteRenderer> ();
 
 		currentlyActiveSegments = Random.Range (1, 6);
 

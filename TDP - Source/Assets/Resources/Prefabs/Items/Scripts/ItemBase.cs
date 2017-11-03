@@ -42,7 +42,7 @@ public abstract class ItemBase : MonoBehaviour {
 
 	//Just added.  
 	protected void ChangeStackOfCurrentHotbarItem(int stackToChangeBy) {
-		CurrentLevelVariableManagement.GetLevelUIReference ().transform.FindChild ("Hotbar").GetComponent <HotbarManager> ().ModifyStackOfSelectedItem (1);
+		CurrentLevelVariableManagement.GetLevelUIReference ().transform.Find ("Hotbar").GetComponent <HotbarManager> ().ModifyStackOfSelectedItem (1);
 	}
 
 }

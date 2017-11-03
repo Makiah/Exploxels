@@ -22,8 +22,8 @@ public class HotbarSlotScript : SlotScript {
 
 	public override void ReferenceChildren() {
 		base.ReferenceChildren ();
-		selectionIcon = transform.FindChild ("Hotbar Indicator").gameObject;
-		mainSlotManager = transform.parent.parent.parent.FindChild ("Inventory").GetComponent <SlotMouseInputControl> ();
+		selectionIcon = transform.Find ("Hotbar Indicator").gameObject;
+		mainSlotManager = transform.parent.parent.parent.Find ("Inventory").GetComponent <SlotMouseInputControl> ();
 	}
 
 	public void SetSelectionActive() {

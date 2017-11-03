@@ -48,9 +48,9 @@ public class CharacterHealthPanelManager : MonoBehaviour {
 		player = CurrentLevelVariableManagement.GetPlayerReference ().transform;
 		currentHealth = lifePoints;
 		//Create panel
-		uiHealthController = CurrentLevelVariableManagement.GetLevelUIReference().transform.FindChild ("Health Controller").gameObject.GetComponent <UIHealthController> (); 
+		uiHealthController = CurrentLevelVariableManagement.GetLevelUIReference().transform.Find ("Health Controller").gameObject.GetComponent <UIHealthController> (); 
 		//Initialize icon
-		characterHeadSprite = transform.GetChild (0).GetChild (0).FindChild ("Head").GetComponent <SpriteRenderer> ().sprite;
+		characterHeadSprite = transform.GetChild (0).GetChild (0).Find ("Head").GetComponent <SpriteRenderer> ().sprite;
 		//Start the coroutine that manages the active state of the health bar item.  
 		StartCoroutine (ControlHealthBarState());
 	}

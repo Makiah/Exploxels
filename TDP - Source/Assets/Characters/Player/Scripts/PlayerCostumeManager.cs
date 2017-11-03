@@ -41,13 +41,13 @@ public class PlayerCostumeManager : MonoBehaviour {
 		mainPlayerAction = transform.parent.parent.gameObject.GetComponent <PlayerAction> ();
 		playerInventory = CurrentLevelVariableManagement.GetMainInventoryReference ().GetComponent <InventoryFunctions> ();
 		//Just setting up the basic race costume.  
-		body = transform.FindChild("Body").GetComponent <SpriteRenderer> ();
-		head = transform.FindChild ("Head").GetComponent <SpriteRenderer> ();
-		idleArm = transform.FindChild ("Hands").FindChild ("IdleHand").GetComponent <SpriteRenderer> ();
-		holdingArm = transform.FindChild ("Hands").FindChild ("HoldingHand").GetComponent <SpriteRenderer> ();
-		topLeg = transform.FindChild ("Legs").FindChild ("Top Leg").GetComponent <SpriteRenderer> ();
-		bottomLeg = transform.FindChild ("Legs").FindChild("Bottom Leg").GetComponent <SpriteRenderer> ();
-		holdingItem = holdingArm.transform.FindChild ("HoldingItem");
+		body = transform.Find("Body").GetComponent <SpriteRenderer> ();
+		head = transform.Find ("Head").GetComponent <SpriteRenderer> ();
+		idleArm = transform.Find ("Hands").Find ("IdleHand").GetComponent <SpriteRenderer> ();
+		holdingArm = transform.Find ("Hands").Find ("HoldingHand").GetComponent <SpriteRenderer> ();
+		topLeg = transform.Find ("Legs").Find ("Top Leg").GetComponent <SpriteRenderer> ();
+		bottomLeg = transform.Find ("Legs").Find("Bottom Leg").GetComponent <SpriteRenderer> ();
+		holdingItem = holdingArm.transform.Find ("HoldingItem");
 
 		Profession currentPlayerProfession = CurrentLevelVariableManagement.GetMainGameData().chosenProfession;
 		UpdatePlayerProfession (currentPlayerProfession);

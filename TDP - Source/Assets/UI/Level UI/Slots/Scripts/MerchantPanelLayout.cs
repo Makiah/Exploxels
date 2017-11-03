@@ -34,7 +34,7 @@ public class MerchantPanelLayout : MonoBehaviour {
 
 	protected MerchantSlotScript[,] InitializeSlots() {
 		//Create the "Slots" parent.  Has to be used so that InventoryHideShow does not end its coroutine.  
-		Transform slots = transform.FindChild("Slots");
+		Transform slots = transform.Find("Slots");
 		slots.SetParent (transform, false);
 		slots.transform.localPosition = Vector3.zero;
 

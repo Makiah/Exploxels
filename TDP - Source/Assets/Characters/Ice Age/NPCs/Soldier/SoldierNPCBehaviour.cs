@@ -28,7 +28,7 @@ public class SoldierNPCBehaviour : NPCBaseScript {
 			GetComponent <NPCPanelController> ().Enable ();
 
 			//Set facingRight based on the current facing direction
-			facingRight = transform.FindChild("FlippingItem").localScale.x > 0;
+			facingRight = transform.Find("FlippingItem").localScale.x > 0;
 		}
 	}
 

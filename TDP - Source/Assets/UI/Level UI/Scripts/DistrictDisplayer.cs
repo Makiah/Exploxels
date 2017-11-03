@@ -35,11 +35,11 @@ public class DistrictDisplayer : MonoBehaviour {
 				
 			//Set the text or image.  
 			if (levelDisplayToUse.useImageInsteadOfText) {
-				transform.FindChild ("Image").gameObject.SetActive (true);
-				transform.FindChild ("Image").GetComponent <Image> ().sprite = levelDisplayToUse.image;
+				transform.Find ("Image").gameObject.SetActive (true);
+				transform.Find ("Image").GetComponent <Image> ().sprite = levelDisplayToUse.image;
 			} else {
-				transform.FindChild ("Text").gameObject.SetActive (true);
-				transform.FindChild ("Text").GetComponent <Text> ().text = levelDisplayToUse.text;
+				transform.Find ("Text").gameObject.SetActive (true);
+				transform.Find ("Text").GetComponent <Text> ().text = levelDisplayToUse.text;
 			}
 
 			StartCoroutine (DistrictDisplayingTimer());

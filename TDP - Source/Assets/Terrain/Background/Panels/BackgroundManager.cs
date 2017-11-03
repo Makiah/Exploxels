@@ -22,7 +22,7 @@ public class BackgroundManager : MonoBehaviour {
 	void CreateBackground() {
 		float terrainXLength = CurrentLevelVariableManagement.GetLevelLengthX ();
 		//Layer 1
-		layer1Parent = transform.FindChild("Hill Layer 1");
+		layer1Parent = transform.Find("Hill Layer 1");
 		int layer1SegmentsToCreate = (int) (terrainXLength * layer1.scrollSpeed) + 4;
 		//Instantiate the segments.  
 		float currentXValue = -layer1.backgrounds[0].bounds.size.x * 2;
@@ -41,7 +41,7 @@ public class BackgroundManager : MonoBehaviour {
 		}
 
 		//Layer 2
-		layer2Parent = transform.FindChild("Hill Layer 2");
+		layer2Parent = transform.Find("Hill Layer 2");
 		int layer2SegmentsToCreate = (int) (terrainXLength * layer2.scrollSpeed) + 4;
 		//Instantiate the segments.  
 		currentXValue = -layer2.backgrounds[0].bounds.size.x * 2;
@@ -60,7 +60,7 @@ public class BackgroundManager : MonoBehaviour {
 		}
 
 		//Clouds
-		cloudLayerParent = transform.FindChild("Clouds");
+		cloudLayerParent = transform.Find("Clouds");
 		int cloudLayerSegmentsToCreate = (int) (terrainXLength * clouds.scrollSpeed) + 4;
 		//Instantiate the segments.  
 		currentXValue = -clouds.backgrounds[0].bounds.size.x * 2;
@@ -79,7 +79,7 @@ public class BackgroundManager : MonoBehaviour {
 		}
 
 		//Background Sky
-		backgroundParent = transform.FindChild("Background");
+		backgroundParent = transform.Find("Background");
 		int backgroundSegmentsToCreate = (int) (terrainXLength * background.scrollSpeed) + 8;
 		//Instantiate the segments.  
 		currentXValue = -background.backgrounds[0].bounds.size.x * 2;

@@ -18,8 +18,8 @@ public class LoadingProgressBar : MonoBehaviour {
 	void CheckInitializationState() {
 		//They are either both initialized, or both not initialized.  
 		if (progress == null && description == null) {
-			progress = transform.FindChild ("Progress").GetComponent <Slider> ();
-			description = transform.FindChild ("Description").GetComponent <Text> ();
+			progress = transform.Find ("Progress").GetComponent <Slider> ();
+			description = transform.Find ("Description").GetComponent <Text> ();
 		}
 	}
 }

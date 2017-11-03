@@ -42,10 +42,10 @@ public class PlayerHealthPanelManager : CharacterHealthPanelManager {
 		}
 		currentHealth = lifePoints;
 		//Create panel
-		uiHealthController = CurrentLevelVariableManagement.GetLevelUIReference().transform.FindChild ("Health Controller").gameObject.GetComponent <UIHealthController> (); 
+		uiHealthController = CurrentLevelVariableManagement.GetLevelUIReference().transform.Find ("Health Controller").gameObject.GetComponent <UIHealthController> (); 
 		playerHealthPanelReference = uiHealthController.GetPlayerHealthPanelReference ();
 		//Initialize icon
-		characterHeadSprite = transform.FindChild ("FlippingItem").GetChild (0).FindChild ("Head").GetComponent <SpriteRenderer> ().sprite;
+		characterHeadSprite = transform.Find ("FlippingItem").GetChild (0).Find ("Head").GetComponent <SpriteRenderer> ().sprite;
 		playerHealthPanelReference.InitializePanel (characterHeadSprite, lifePoints, currentHealth);
 
 		//Give player money obtained previously.  

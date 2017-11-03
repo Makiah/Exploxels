@@ -18,7 +18,7 @@ public class ProfileSwitcher : MonoBehaviour {
 	Image currentProfile;
 
 	void InitializeProfileSwitcher() {
-		currentProfile = transform.FindChild ("Current Profile").GetComponent <Image> ();
+		currentProfile = transform.Find ("Current Profile").GetComponent <Image> ();
 		UpdateProfileSprite();
 	}
 

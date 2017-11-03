@@ -27,9 +27,9 @@ public class SpeechControl : MonoBehaviour {
 
 	//Initial initialization.  Overriden by ProfessionSpeechManager.  
 	protected void InitializeSpeechControl() {
-		textSpeechBox = transform.FindChild ("Speech").GetComponent <Text> ();
-		speakerName = transform.FindChild ("NamePanel").FindChild ("SpeakerName").GetComponent <Text> ();
-		playerIcon = transform.FindChild ("PlayerIcon").GetComponent <Image> ();
+		textSpeechBox = transform.Find ("Speech").GetComponent <Text> ();
+		speakerName = transform.Find ("NamePanel").Find ("SpeakerName").GetComponent <Text> ();
+		playerIcon = transform.Find ("PlayerIcon").GetComponent <Image> ();
 		gameObject.SetActive (false);
 	}
 

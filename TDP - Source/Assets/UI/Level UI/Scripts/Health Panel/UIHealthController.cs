@@ -32,10 +32,10 @@ public class UIHealthController : MonoBehaviour {
 
 	//Set references to the health panel references.  
 	void InitializeUIHealthController() {
-		playerHealthPanel = transform.FindChild ("Player Health Controller").FindChild ("HealthPanelPlayer").GetComponent <PlayerHealthPanelReference> ();
-		enemyHealthPanel1 = transform.FindChild ("Enemy Health Controller").FindChild ("HealthPanel1").GetComponent <HealthPanelReference> ();
-		enemyHealthPanel2 = transform.FindChild("Enemy Health Controller").FindChild("HealthPanel2").GetComponent <HealthPanelReference> ();
-		enemyHealthPanel3 = transform.FindChild ("Enemy Health Controller").FindChild ("HealthPanel3").GetComponent <HealthPanelReference> ();	
+		playerHealthPanel = transform.Find ("Player Health Controller").Find ("HealthPanelPlayer").GetComponent <PlayerHealthPanelReference> ();
+		enemyHealthPanel1 = transform.Find ("Enemy Health Controller").Find ("HealthPanel1").GetComponent <HealthPanelReference> ();
+		enemyHealthPanel2 = transform.Find("Enemy Health Controller").Find("HealthPanel2").GetComponent <HealthPanelReference> ();
+		enemyHealthPanel3 = transform.Find ("Enemy Health Controller").Find ("HealthPanel3").GetComponent <HealthPanelReference> ();	
 	}
 	
 	public HealthPanelReference GetEnemyHealthPanelReference() {

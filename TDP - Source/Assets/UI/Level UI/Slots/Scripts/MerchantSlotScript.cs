@@ -43,11 +43,11 @@ public class MerchantSlotScript : MonoBehaviour, IPointerClickHandler, IPointerE
 
 	public void ReferenceChildren() {
 		Debug.Log ("Initialized merchant inventory " + gameObject.name);
-		childIcon = transform.FindChild ("Icon").GetComponent <Image> ();
+		childIcon = transform.Find ("Icon").GetComponent <Image> ();
 		childIcon.enabled = false;
-		tooltip = transform.FindChild ("Tooltip");
-		stackIndicator = transform.FindChild ("Stack Indicator").GetComponent <Text> ();
-		priceIndicator = transform.FindChild ("Price Indicator").GetComponent <Text> ();
+		tooltip = transform.Find ("Tooltip");
+		stackIndicator = transform.Find ("Stack Indicator").GetComponent <Text> ();
+		priceIndicator = transform.Find ("Price Indicator").GetComponent <Text> ();
 		UpdateStackIndicator ();
 		UpdatePriceIndicator ();
 	}
@@ -114,8 +114,8 @@ public class MerchantSlotScript : MonoBehaviour, IPointerClickHandler, IPointerE
 
 	void ShowTooltip() {
 		tooltip.gameObject.SetActive (true);
-		tooltip.FindChild ("Title").GetComponent <Text> ().text = currentlyAssigned.mainContentReference.uiSlotContent.itemScreenName;
-		tooltip.FindChild ("Description").GetComponent <Text> ().text = currentlyAssigned.mainContentReference.uiSlotContent.itemDescription;
+		tooltip.Find ("Title").GetComponent <Text> ().text = currentlyAssigned.mainContentReference.uiSlotContent.itemScreenName;
+		tooltip.Find ("Description").GetComponent <Text> ().text = currentlyAssigned.mainContentReference.uiSlotContent.itemDescription;
 
 		//Otherwise this panel is not visible.  
 		transform.SetAsLastSibling();

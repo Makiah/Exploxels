@@ -21,9 +21,9 @@ public class ObjectiveManager : MonoBehaviour {
 		public bool completed = false;
 		//Constructor
 		public ObjectiveReference(Transform transformToUse) {
-			icon = transformToUse.FindChild("Icon").GetComponent <Image> ();
+			icon = transformToUse.Find("Icon").GetComponent <Image> ();
 			panel = transformToUse.GetComponent <Image> ();
-			description = transformToUse.FindChild("Description Panel").FindChild("Description").GetComponent <Text> ();
+			description = transformToUse.Find("Description Panel").Find("Description").GetComponent <Text> ();
 		}
 
 		public void Completed() {
@@ -49,11 +49,11 @@ public class ObjectiveManager : MonoBehaviour {
 		objectives = new ObjectiveReference[totalNumberOfObjectives];
 		//Set objective references
 		for (int i = 0; i < totalNumberOfObjectives; i++) {
-			objectives[i] = new ObjectiveReference(transform.FindChild("Objective " + (i + 1)));
+			objectives[i] = new ObjectiveReference(transform.Find("Objective " + (i + 1)));
 			objectives [i].Reset ();
 		}
 		//Set the button reference.
-		continueToNextLevel = transform.FindChild ("Level Continue").FindChild("Button").GetComponent <Button> ();
+		continueToNextLevel = transform.Find ("Level Continue").Find("Button").GetComponent <Button> ();
 		continueToNextLevel.interactable = false;
 
 		//Set initial values.  

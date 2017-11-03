@@ -26,8 +26,8 @@ public class PurchasePanelReference : MonoBehaviour {
 	//Done during the InitializePurchasePanels phase (no real dependencies).  
 	void InitializePurchasePanelReference() {
 		//Define required components.  
-		currentItemIcon = transform.FindChild ("Animation Controller").FindChild ("Item Icon").GetComponent <SpriteRenderer> ();
-		cost = transform.FindChild ("Animation Controller").FindChild ("Value").FindChild ("Cost").GetComponent <TextMesh> ();
+		currentItemIcon = transform.Find ("Animation Controller").Find ("Item Icon").GetComponent <SpriteRenderer> ();
+		cost = transform.Find ("Animation Controller").Find ("Value").Find ("Cost").GetComponent <TextMesh> ();
 		//Not accessible in the editor, but can be modified via code.  (Looks weird otherwise).  
 		cost.GetComponent<MeshRenderer> ().sortingLayerName = "PPanelFront";
 		cost.GetComponent<MeshRenderer> ().sortingOrder = 0;

@@ -25,7 +25,7 @@ public class PlayerAction : CharacterBaseActionClass, ICanHoldItems {
 
 	protected override void InitializeCharacter() {
 		//No other character has a wall check, so only the player uses this property.  
-		wallCheck = transform.FindChild("FlippingItem").FindChild ("WallCheck");
+		wallCheck = transform.Find("FlippingItem").Find ("WallCheck");
 
 		//Start the coroutines required for the player.  
 		weaponInputCoroutine = CheckForWeaponInput ();
@@ -94,7 +94,7 @@ public class PlayerAction : CharacterBaseActionClass, ICanHoldItems {
 				Flip ();
 
 			//Tell the camera that the player is moving (should be changed at some point.  
-			transform.FindChild("Main Camera").FindChild("Background").GetComponent <BackgroundManager> ().MoveBackground(rb2d.velocity.x / maxSpeed);
+			transform.Find("Main Camera").Find("Background").GetComponent <BackgroundManager> ().MoveBackground(rb2d.velocity.x / maxSpeed);
 
 			yield return new WaitForFixedUpdate();
 
